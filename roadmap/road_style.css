@@ -1,0 +1,111 @@
+body {
+    font-family: Verdana, Geneva, sans-serif;
+}
+
+.page-title {
+    text-align: center;
+}
+
+#main-wrapper {
+    width: 855px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 25px 0 25px;
+}
+
+/* GRID */
+.row {
+    width: 900px;
+    padding-left: 25px;
+    margin: 20px 0 20px 0;
+    display: inline-block;
+}
+
+.col {
+    width: 180px;
+    float:left;
+    margin-right: 25px;
+}
+
+.task-single, .task-all {
+    padding: 10px;
+    font-size: 12pt;
+    
+    margin-bottom: 10px;
+    outline: 1px solid black;
+}
+
+.task-single {
+    width: 160px;
+}
+
+.task-all{
+    width: 775px;
+}
+
+.title {
+    text-align: center;
+    font-size: 16pt;
+    width: 160px;
+    
+    padding: 10px;
+    margin-right: 25px;
+    
+    float: left;
+}
+
+.empty {
+    outline: none;
+    background: none;
+    display: inline-block;
+}
+
+/* STATUS */
+
+.pending {
+    background-color: #fecaab;
+}
+
+.done {
+    background-color: #c8ff91;
+}
+
+.urgent {
+    background-color: red;
+}
+
+.important {
+    background-color: #840000;
+    color: white;
+    text-align: center;
+}
+
+.delayed {
+    background-color: #dddddd;
+    color: #b6b6b6;
+}
+
+.not-allocated {
+    text-align: center;
+    background-color: #b3e7ff; 
+}
+
+.date {
+    font-size: 14pt;
+    text-align: center;
+    outline: none;
+}
+
+/* STRUCTURES */
+
+.due-date {
+    width: 855px;
+    display: inline-block;
+    border-bottom: solid 2px black;
+}
+.task-single .task-heading, .task-all .task-heading {
+    border-bottom: solid 1px black;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+

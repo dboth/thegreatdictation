@@ -1,9 +1,15 @@
 body {
-    font-family: Verdana, Geneva, sans-serif;
+    font-family: "Courier New", Courier, monospace;
 }
 
 .page-title {
     text-align: center;
+	margin-top: 50px;
+}
+
+h4.page-title {
+    text-align: center;
+	margin-top: -15px;
 }
 
 #main-wrapper {
@@ -11,6 +17,7 @@ body {
     height: 100%;
     margin: 0 auto;
     padding: 0 25px 0 25px;
+	margin-bottom: 200px;
 }
 
 /* GRID */
@@ -19,6 +26,10 @@ body {
     padding-left: 25px;
     margin: 20px 0 20px 0;
     display: inline-block;
+}
+
+.row.title-row {
+	margin-top: 50px;
 }
 
 .col {
@@ -75,7 +86,7 @@ body {
 }
 
 .important {
-    background-color: #840000;
+    background-color: #D74824;
     color: white;
     text-align: center;
 }
@@ -87,7 +98,7 @@ body {
 
 .not-allocated {
     text-align: center;
-    background-color: #b3e7ff; 
+    background-color: #5A9BE0; 
 }
 
 .date {
@@ -102,10 +113,29 @@ body {
     width: 855px;
     display: inline-block;
     border-bottom: solid 2px black;
+	margin-top: 10px;
 }
+
+.legend {
+    width: 855px;
+    display: inline-block;
+	margin-top: 10px;
+}
+
 .task-single .task-heading, .task-all .task-heading {
     border-bottom: solid 1px black;
     font-weight: bold;
     margin-bottom: 10px;
 }
 
+.collapse {
+    display:block;    
+}
+
+button.collapse-button {
+	float: right;
+	border: none;
+	background-color: inherit;
+	cursor: pointer;
+	outline:none;
+}

@@ -4,8 +4,15 @@
     <head>
         <meta charset="utf-8" />
         <title> The Great Dictation - RoadMap </title>
-        <link rel="stylesheet" href="road_style.css" />
-    </head>
+    
+	    <link rel="stylesheet" href="road_style.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="collapse.js"></script>
+		<script src="insertions.js"></script>
+		
+	</head>
 
     <body>
         
@@ -13,29 +20,36 @@
             
             <h2 class="page-title">The Great Dictation</h2>
             <h4 class="page-title">Roadmap</h4>
-            
+			
+			
+			
+			            
             <!-- The Names -->
-            <div class="row">
+            <div class="row title-row">
                 <div class="col">
                     <div class="title">
+						<i class="fa fa-child"></i> 
                         Dominik
                     </div>
                 </div>
                 
                 <div class="col">
                     <div class="title">
+						<i class="fa fa-female"></i> 
                         Svenja
                     </div>
                 </div>
                 
                 <div class="col">
                     <div class="title">
+						<i class="fa fa-male"></i> 
                         Tobias
                     </div>
                 </div>
                 
                 <div class="col">
                     <div class="title">
+						<i class="fa fa-male"></i> 
                         Tonio
                     </div>
                 </div>
@@ -43,130 +57,188 @@
             </div>
             
             <!-- The Tasks -->
-            <div class="due-date">Mittwoch, 11.11.2015</div>
+			<div class="collapse">
+				<div class="due-date active">
+					Wednesday, 11.11.2015
+					<button class="collapse-button"><i class="fa fa-chevron-down"></i></button>
+				</div>
+				
+				<!-- New Week -->
+				<div class="row collapse-content">
+					<div class="col">
+						<div class="task-single pending">
+							<div class="task-heading">Django/Python</div>
+							Read up on Python-BackEnd Integration/Django
+						</div>
+					</div>
+					
+					<div class="col">
+						<div class="task-single pending">
+							<div class="task-heading">Research</div>
+							Research on didactic fundamentals about dictation
+						</div>
+					</div>
+					
+					<div class="col">
+						<div class="task-single pending">
+							<div class="task-heading">Spelling-Mistakes</div>
+							Find first concepts about spelling-mistake patterns
+						</div>
+					</div>
+					
+					<div class="col">
+						<div class="task-single done">
+							<div class="task-heading">"Roadmap"</div>
+							Develop Roadmap with integrated task distribution
+						</div>
+						
+						<div class="task-single pending">
+							<div class="task-heading">DB-Model</div>
+							 Rough draft as ER-Model 
+						</div>
+					</div>
+				</div>
+			</div>
             
-            <!-- New Week -->
             <div class="row">
-                <div class="col">
-                    <div class="task-single pending">
-						<div class="task-heading">Django/Python</div>
-                        Einlesen in Python-BackEnd Integration/Django
+					<div class="task-all date">
+                        Meeting 11.11.2015 14.30 o'clock
                     </div>
-                </div>
-                
-                <div class="col">
-                    <div class="task-single pending">
-                        <div class="task-heading">Recherche</div>
-                        Recherche zu didaktischen Grundlagen von Diktaten
-                    </div>
-                </div>
-                
-                <div class="col">
-                    <div class="task-single pending">
-                        <div class="task-heading">Spelling-Mistakes</div>
-                        Erste abstrakte Ideen zu typischen Spelling-Mistakes entwickeln
-                    </div>
-                </div>
-                
-                <div class="col">
-                    <div class="task-single done">
-                        <div class="task-heading">"Roadmap"</div>
-                        Roadmap konzipieren und umsetzen inklusive Aufgabenverteilung
-                    </div>
-                    
-                    <div class="task-single pending">
-                        <div class="task-heading">DB-Entwurf</div>
-                        Erster Entwurf als ER-Model 
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row">
+					
                     <div class="task-all date">
-                        Meeting 11.11.2015 18.00 Uhr
+                        Meeting 11.11.2015 18.00 o'clock
                     </div>
+					
             </div>     
             
-            <div class="due-date">Mittwoch, 18.11.2015</div>
+			<div class="collapse">
+				<div class="due-date">
+					Wednesday, 18.11.2015
+					<button class="collapse-button"><i class="fa fa-chevron-down"></i></button>
+				</div>
+				
+				<!-- New Week -->
+				<div class="row collapse-content">
+					<div class="task-all not-allocated">
+						Front-End Integration Version 0.0
+					</div>
+					
+					<div class="task-all not-allocated">
+						Back-End Integration User System (simple)
+					</div>
+					
+					<div class="task-all not-allocated">
+						Server Setup (Django and DB System)
+					</div>
+					
+					<div class="task-all not-allocated">
+						Implementation Levenshtein-Algorithm in Python
+					</div>
+					
+					<div class="task-all not-allocated">
+						Project Plan: Goal/Solving
+					</div>
+					
+					<div class="task-all not-allocated">
+						Clear Plan: Which elements (of analysis) should V0.0 contain?
+					</div>
+				</div>
+			</div>
             
-            <!-- New Week -->
-            <div class="row">
-                <div class="task-all not-allocated">
-                    Front-End Integration Version 0.0
-                </div>
-                
-                <div class="task-all not-allocated">
-                    Back-End Integration User System (simple)
-                </div>
-                
-                <div class="task-all not-allocated">
-                    Server Setup mit Django und DB System
-                </div>
-                
-                <div class="task-all not-allocated">
-                    Implementation Levenshtein-Distanz in Python für grobe Analyse
-                </div>
-                
-                <div class="task-all not-allocated">
-                    Project Plan: Goal/Solving
-                </div>
-                
-                <div class="task-all not-allocated">
-                    Klarer Plan: Welche Analyse Elemente enthält Version 0?
-                </div>
-            </div>
+			<div class="collapse">
+				<div class="due-date">
+					Wednesday, 25.11.2015
+					<button class="collapse-button"><i class="fa fa-chevron-down"></i></button>
+				</div>
+				
+				<!-- New Week -->
+				<div class="row collapse-content">
+					<div class="task-all not-allocated">
+						Front-End Integration Feedback
+					</div>
+					
+					<div class="task-all not-allocated">
+						Back-End Integration Analysis/Feedback Version 0
+					</div>
+					
+					<div class="task-all not-allocated">
+						First Feature-List for Version 1
+					</div>  
+					
+					<div class="task-all not-allocated">
+						Project Plan: Finish to review by group!
+					</div>  
+				</div>
+			</div>
             
-            <div class="due-date">Mittwoch, 25.11.2015</div>
+			<div class="collapse">
+				<div class="due-date">
+					Tuesday, 1.12.2015
+					<button class="collapse-button"><i class="fa fa-chevron-down"></i></button>
+				</div>
+				
+				<!-- New Week -->
+				<div class="row collapse-content">
+					<div class="task-all not-allocated">
+						Version 0 - finish to be used for data collection
+					</div>
+					
+					<div class="task-all important">
+						Project Plan: Finished!!!
+					</div>  
+				</div>
+			</div>
             
-            <!-- New Week -->
-            <div class="row">
-                <div class="task-all not-allocated">
-                    Front-End Integration Feedback
-                </div>
-                
-                <div class="task-all not-allocated">
-                    Back-End Integration Analyse/Feedback für Version 0
-                </div>
-                
-                <div class="task-all not-allocated">
-                    Erste Feature-Liste für Version 1
-                </div>  
-                
-                <div class="task-all not-allocated">
-                    Project Plan: Fertigstellen zur Durchsicht!
-                </div>  
-            </div>
-            
-            <div class="due-date">Dienstag, 1.12.2015</div>
-            
-            <!-- New Week -->
-            <div class="row">
-                <div class="task-all not-allocated">
-                    Version 0 für Datensammlung anwendbar machen 
-                </div>
-                
-                <div class="task-all important">
-                    Project Plan: Abgabebereit!!!
-                </div>  
-            </div>
-            
-            <div class="due-date">Dienstag, 8.12.2015</div>
-            
-            <!-- New Week -->
-            <div class="row">
-                <div class="task-all not-allocated">
-                    Ersten Schwall für Datensammlung rekrutiert und erste Daten gesammelt
-                </div>
-                
-                <div class="task-all important">
-                    Specification Presentation
-                </div>  
-                
-                <div class="task-all important">
-                    Abgabebereite Version 0!!!
-                </div>  
-            </div>
-            
+			<div class="collapse">
+				<div class="due-date">
+					Tuesday, 8.12.2015
+					<button class="collapse-button"><i class="fa fa-chevron-down"></i></button>
+				</div>
+				
+				<!-- New Week -->
+				<div class="row collapse-content">
+					<div class="task-all not-allocated">
+						Recruit a core group of people for data collection and let them use the system
+					</div>
+					
+					<div class="task-all important">
+						Specification Presentation
+					</div>  
+					
+					<div class="task-all important">
+						Finished Version 0!!!
+					</div>  
+				</div>
+			</div>
+			
+			
+            <!-- The Legend -->
+			<div class="collapse">
+				<div class="legend">
+					<i class="fa fa-question-circle"></i> Legend (<- due-date)
+					<button class="collapse-button"><i class="fa fa-chevron-right"></i></button>
+				</div>
+				
+				<div class="row collapse-content" style="display: none;">
+					<div class="col">
+						<div class="task-single pending">pending</div>
+						<div class="task-single important">important</div>
+					</div>
+					
+					<div class="col">
+						<div class="task-single done">done</div>
+						<div class="task-single not-allocated">not allocated</div>
+					</div>
+					
+					<div class="col">
+						<div class="task-single delayed">delayed</div>
+					</div>
+					
+					<div class="col">
+						<div class="task-single urgent">urgent</div>
+					</div>
+				</div>
+			</div>
         </div>
         
     </body>

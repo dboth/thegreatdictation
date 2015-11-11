@@ -10,10 +10,11 @@ class TemplateGenerator{
         $this->translator = new TranslationEngine();
         //pageMarkup contains the webpages html
         $this->pageMarkup = "";
-        //this applies the base template
-        $this->applyTemplate("template.html");
+        
         //get the right page by post or get variables
         $page = $this->getPage();
+        //this applies the base template
+        $this->applyTemplate($page);
         //apply the page template to the base template
         $this->applyPage($page);
         
@@ -33,16 +34,17 @@ class TemplateGenerator{
                         "analysispath"=>"analysis/webconnector.py/analyze"
                         ),
                     //the page template (inside frontend/pages)
-                    "body"=>"test.html"
+                    "body"=>"test.html",
+                    "template"=>"template.html"
                 );
         }
     }
     public function printPage(){
         echo $this->pageMarkup;
     }
-    protected function applyTemplate($template){
+    protected function applyTemplate($page){
         //applies the base template
-        $this->pageMarkup = file_get_contents($GLOBALS["base_path"]."/frontend/".$template);
+        $this->pageMarkup = file_get_contents($GLOBALS["base_path"]."/frontend/".$page["template"]);
     }
     protected function applyPage($page){
         //applies the page template

@@ -10,6 +10,12 @@ uni (--at--) dboth.de
 
 uni (--at--) tonioweidler.de
 
+###requirements (until now)
+- server
+- php >= 5.3
+- python2
+- apache user (normally www-data) able to execute python scripts in code/analysis
+
 ### explanation of what i just did in code/
 
 Created a little backend gerüst. 

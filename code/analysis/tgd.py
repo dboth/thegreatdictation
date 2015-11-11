@@ -1,3 +1,5 @@
+import sys
+
 class TheGreatDictation():
     '''Main analysis class'''
     def __init__(self, parameter):
@@ -8,5 +10,9 @@ class TheGreatDictation():
         
     def returnJSON(self):
         '''returns the analysis as a json string to be processed by the frontend.'''
-        output = "Processed by python: "+self.parameter
+        output = "This string was touched by python: "+self.parameter
         return output
+
+if __name__ == "__main__":
+    tgd = TheGreatDictation(sys.argv[1])
+    print tgd.returnJSON()

@@ -31,7 +31,7 @@ class TemplateGenerator{
                     //inside a template all occurences of <tgd_varname> get replace by the value of vars[varname] in this array. do not use the variables "body" or "trans", as they are reserved.
                     "vars" => array(
                         "title"=>"Testseite",
-                        "analysispath"=>"analysis/webconnector.py/analyze"
+                        "analysispath"=> "analysis/index.php"
                         ),
                     //the page template (inside frontend/pages)
                     "body"=>"test.html",
@@ -44,11 +44,11 @@ class TemplateGenerator{
     }
     protected function applyTemplate($page){
         //applies the base template
-        $this->pageMarkup = file_get_contents($GLOBALS["base_path"]."/frontend/".$page["template"]);
+        $this->pageMarkup = file_get_contents($GLOBALS["conf"]["base_path"]."/frontend/".$page["template"]);
     }
     protected function applyPage($page){
         //applies the page template
-        $page_body = file_get_contents($GLOBALS["base_path"]."/frontend/pages/".$page["body"]);
+        $page_body = file_get_contents($GLOBALS["conf"]["base_path"]."/frontend/pages/".$page["body"]);
         $this->pageMarkup = str_replace("<tgd_body>",$page_body,$this->pageMarkup);
     }
     protected function applyTranslation(){

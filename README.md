@@ -31,7 +31,7 @@ So the workflow would be: Create and design the website in a template. Create a 
 
 For the title of a page or for other variables that should not be hardcoded in the page (like action urls of forms etc.) variables can be created in the vars array. Each occurence of `<tgd_varname>` gets replaced by vars[varname]. (Todo: expand this also to javascripts, to use varnames in ajax calls etc)
 
-At least there is a translation engine. If strings that should be translated are used in a page or template, use the translate tag like the following: `<tgd_translate>Text to be translated</tgd_translate>`
+At least there is a translation engine. If strings that should be translated are used in a page or template, use the translate tag like the following: `<_>Text to be translated</_>`
 
 ~~The python part only works with mod_python installed, there is a `webconnector.py` that gets the requests~~ There is a index.php that takes requests adds metadata and just gives them to the `TheGreatDictator` class which later should contain the analysis. This should word on every testsystem if `tgd.py` is executable.
 

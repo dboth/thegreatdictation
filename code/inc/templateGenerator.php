@@ -53,7 +53,7 @@ class TemplateGenerator{
     }
     protected function applyTranslation(){
         //replaces every occurence of <tgd_trans>WORD</tgd_trans> with the translation of word using the in the constructor specified translators translate method.
-        $this->pageMarkup = preg_replace("/<tgd_trans>(.*?)<\/tgd_trans>/e", '$this->translator->translate("$1")', $this->pageMarkup);
+        $this->pageMarkup = preg_replace("/<_>(.*?)<\/_>/e", '$this->translator->translate("$1")', $this->pageMarkup);
     }
     protected function applyVars($page){
         //replace every occurence of <tgd_varname> with the value of vars[varname]

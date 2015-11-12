@@ -52,6 +52,7 @@ h4.page-title {
 
 .task-all{
     width: 775px;
+	float: left;
 }
 
 .title {

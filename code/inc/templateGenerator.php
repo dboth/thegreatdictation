@@ -26,16 +26,17 @@ class TemplateGenerator{
         //first page switcher only works with get.
         switch(@$_GET["p"]){
             //add other pages here. example.org/?p=pagename results in a switch here. "pagename" would be the case.
+
             default:
                 return array(
                     //inside a template all occurences of <tgd_varname> get replace by the value of vars[varname] in this array. do not use the variables "body" or "trans", as they are reserved.
                     "vars" => array(
-                        "title"=>"Testseite",
+                        "title"=>"The Great Dictation",
                         "analysispath"=> "analysis/index.php"
                         ),
                     //the page template (inside frontend/pages)
-                    "body"=>"test.html",
-                    "template"=>"template.html"
+                    "body"=>"main.html",
+                    "template"=>"default.html"
                 );
         }
     }

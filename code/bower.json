@@ -1,0 +1,32 @@
+{
+  "name": "The Great Dictation",
+  "homepage": "https://github.com/dboth/thegreatdictation",
+  "authors": [
+    "Dominik Both",
+    "Tobias Göbel",
+    "Svenja Lohse",
+    "Tonio weidler"
+  ],
+  "description": "Dictation Platform",
+  "main": "",
+  "moduleType": [],
+  "keywords": [
+    "tgd",
+    "the",
+    "great",
+    "dictation"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-sass": "~3.3.5",
+    "font-awesome": "~4.4.0"
+  }
+}

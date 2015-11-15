@@ -16,6 +16,12 @@ uni (--at--) tonioweidler.de
 - python2
 - apache user (normally www-data) able to execute python scripts in code/analysis
 
+###some cheaty git hints
+
+- on windows file path length is restricted, use 
+  ```git config core.longpaths true```
+  to solve the problem
+
 ### explanation of what i just did in code/
 
 Created a little backend gerüst. 

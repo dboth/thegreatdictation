@@ -45,4 +45,3 @@ $command = __DIR__."/tgd.py $argument";
 
 //execute the command (system() prints the output)
 system($command); 
-echo $_POST["data"];

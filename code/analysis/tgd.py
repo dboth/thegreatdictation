@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 
-import sys
+import sys, json
 
 class TheGreatDictation():
     '''Main analysis class'''
@@ -13,9 +13,8 @@ class TheGreatDictation():
     def returnJSON(self):
         '''returns the analysis as a json string to be processed by the frontend.'''
         output = "This string was touched by python: "+self.parameter
-        return output
+        return json.dumps([output])
 
 if __name__ == "__main__":
-    print ("hi");
     tgd = TheGreatDictation(sys.argv[1])
     print (tgd.returnJSON())

@@ -15,9 +15,11 @@ $(document).ready(function () {
         $.ajax({
             url: action,
             data: {data: JSON.stringify(field_data)},
-            type: method,
-            error: function (a,b,c){console.log(a,b,c);},
-            complete: function (res){console.log(res);}
+            type: method
+        }).fail(function (a,b,c){
+            console.log(a,b,c);
+        }).done(function (res){
+            console.log(res);
         });
     });
 });

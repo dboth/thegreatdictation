@@ -2,7 +2,7 @@
 
 ### contacts
 
-lohse (--at--) cl.uni-heidelberg.de
+S.Lohse (--at--) stud.uni-heidelberg.de
 
 tobygoebel (--at--) web.de
 

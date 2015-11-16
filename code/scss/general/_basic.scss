@@ -11,6 +11,10 @@ body {
     @include row-margin;
 }
 
+.col-content {
+    @include col-margin;
+}
+
 /* NAVIGATION */
 
 .navbar {    

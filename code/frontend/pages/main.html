@@ -10,8 +10,8 @@
 
     <div class="row row-content">
         
-        <label for="dictation-id" class="control-label col-xs-3 col-sm-1">Choose</label>
-        <div class="col-xs-9 col-sm-3">
+        <label for="dictation-id" class="control-label col-xs-3 col-sm-1 col-content">Choose</label>
+        <div class="col-xs-9 col-sm-3 col-content">
             <select class="form-control" id="dictation-id" name="subject">
                 <option selected disabled></option>
                 <option value="id_a">Text A</option>
@@ -19,8 +19,12 @@
                 <option value="id_c">Text C</option>
             </select>
         </div>
+
+        <div class="col-xs-12 col-sm-2 text-center col-content">
+            <button class="btn btn-primary" id="select-text-button" disabled>Select this text</button>
+        </div>
         
-        <div class="col-xs-12 col-sm-8">
+        <div class="col-xs-12 col-sm-6 text-center col-content" id="audio-player">
             AUDIO PLAYER GOES HERE
         </div>
     
@@ -32,10 +36,11 @@
                 
             <div class="form-group">
                 <label for="data">What you understand</label>
-                <textarea  class="form-control" rows="10" placeholder="Enter the text you hear here" id="dictation-text" name="data"></textarea>
+                <textarea  class="form-control" rows="10" placeholder="Choose a text first!" id="dictation-text" name="data" disabled></textarea>
             </div>
+            
             <div class="text-center">
-                <button type="submit" class="btn btn-primary" id="dictation-submit">Finish Dictation</button>
+                <button type="submit" class="btn btn-primary" id="dictation-submit" disabled>Finish Dictation</button>
             </div> 
             
         </div>

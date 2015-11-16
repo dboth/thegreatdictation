@@ -8736,34 +8736,40 @@ body {
   margin-top: 25px;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Weidler\/CloudStation\/git\/GitHub\/thegreatdictation\/code\/scss\/general\/_basic\.scss}line{font-family:\0000314}}
+.col-content {
+  margin-top: 6.25px;
+  margin-bottom: 6.25px;
+}
+
 /* NAVIGATION */
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Weidler\/CloudStation\/git\/GitHub\/thegreatdictation\/code\/scss\/general\/_basic\.scss}line{font-family:\0000318}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Weidler\/CloudStation\/git\/GitHub\/thegreatdictation\/code\/scss\/general\/_basic\.scss}line{font-family:\0000322}}
 .navbar .navbar-brand img {
   margin-top: -8px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Weidler\/CloudStation\/git\/GitHub\/thegreatdictation\/code\/scss\/general\/_basic\.scss}line{font-family:\0000325}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Weidler\/CloudStation\/git\/GitHub\/thegreatdictation\/code\/scss\/general\/_basic\.scss}line{font-family:\0000329}}
 .navbar .nav li:hover {
   background-color: #eeeeee;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Weidler\/CloudStation\/git\/GitHub\/thegreatdictation\/code\/scss\/general\/_basic\.scss}line{font-family:\0000332}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Weidler\/CloudStation\/git\/GitHub\/thegreatdictation\/code\/scss\/general\/_basic\.scss}line{font-family:\0000336}}
 a {
   outline: none !important;
 }
 
 /* FORMS */
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Weidler\/CloudStation\/git\/GitHub\/thegreatdictation\/code\/scss\/general\/_basic\.scss}line{font-family:\0000338}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Weidler\/CloudStation\/git\/GitHub\/thegreatdictation\/code\/scss\/general\/_basic\.scss}line{font-family:\0000342}}
 textarea {
   resize: none;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Weidler\/CloudStation\/git\/GitHub\/thegreatdictation\/code\/scss\/general\/_basic\.scss}line{font-family:\0000344}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Weidler\/CloudStation\/git\/GitHub\/thegreatdictation\/code\/scss\/general\/_basic\.scss}line{font-family:\0000348}}
 select option[disabled] {
   color: #eeeeee;
 }
 
 /* STYLING */
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Weidler\/CloudStation\/git\/GitHub\/thegreatdictation\/code\/scss\/general\/_basic\.scss}line{font-family:\0000352}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Weidler\/CloudStation\/git\/GitHub\/thegreatdictation\/code\/scss\/general\/_basic\.scss}line{font-family:\0000356}}
 .info {
   margin-top: 12.5px;
   margin-bottom: 25px;

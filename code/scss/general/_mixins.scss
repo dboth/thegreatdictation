@@ -3,12 +3,17 @@
     padding-right:      $tgd-horizontal-gap;
 }
 
+@mixin top-bottom-margin {
+    margin-top:         $tgd-vertical-gap/2;
+    margin-bottom:      $tgd-vertical-gap;
+}
+
 @mixin row-margin {
     @include left-right-margin;
     margin-top:         $tgd-vertical-gap;
 }
 
-@mixin top-bottom-margin {
-    margin-top:         $tgd-vertical-gap/2;
-    margin-bottom:      $tgd-vertical-gap;
+@mixin col-margin {
+    margin-top:         $tgd-vertical-gap/4;
+    margin-bottom:      $tgd-vertical-gap/4;
 }

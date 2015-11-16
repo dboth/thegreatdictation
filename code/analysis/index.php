@@ -5,9 +5,13 @@ require_once __DIR__."/../inc/config.php";
 //set the output to json
 header('Content-Type: application/json');
 
+
+
 //check if there was data sent
 if (empty($_POST["data"]))
     die("no data"); //todo handle error -> no data, should return a json error object
+
+
 
 //try to decode the data. data must be in json
 $data = json_decode($_POST["data"], true);
@@ -41,3 +45,4 @@ $command = __DIR__."/tgd.py $argument";
 
 //execute the command (system() prints the output)
 system($command); 
+echo $_POST["data"];

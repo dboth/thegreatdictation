@@ -16,5 +16,6 @@ class TheGreatDictation():
         return output
 
 if __name__ == "__main__":
+    print ("hi");
     tgd = TheGreatDictation(sys.argv[1])
-    print tgd.returnJSON()
+    print (tgd.returnJSON())

@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#!/usr/bin/python
 
 import sys, json
 
@@ -12,7 +12,7 @@ class TheGreatDictation():
         
     def returnJSON(self):
         '''returns the analysis as a json string to be processed by the frontend.'''
-        output = "This string was touched by python: "+self.parameter
+        output = self.parameter
         return json.dumps([output])
 
 if __name__ == "__main__":

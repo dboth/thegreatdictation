@@ -3,7 +3,7 @@
 require_once __DIR__."/../inc/config.php";
 
 //set the output to json
-header('Content-Type: application/json');
+//header('Content-Type: application/json');
 
 
 
@@ -42,6 +42,8 @@ if (DIRECTORY_SEPARATOR == '\\' && $GLOBALS["conf"]["testing"]){
 }
 //create the command
 $command = __DIR__."/tgd.py $argument";
+
+var_dump($command);
 
 //execute the command (system() prints the output)
 system($command); 

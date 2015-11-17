@@ -8720,8 +8720,8 @@ button.close {
     display: none !important;
   }
 }
+/* COLORS */
 /* GRID */
-/* NAVIGATION */
 /* DOCUMENT */
 @media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Weidler\/CloudStation\/git\/GitHub\/thegreatdictation\/code\/scss\/general\/_basic\.scss}line{font-family:\000033}}
 body {
@@ -8776,4 +8776,9 @@ select option[disabled] {
   padding-left: 15px;
   padding-right: 15px;
   font-weight: bold;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Weidler\/CloudStation\/git\/GitHub\/thegreatdictation\/code\/scss\/general\/_basic\.scss}line{font-family:\0000363}}
+.jumbotron.title-jumbo {
+  background-color: lightblue;
 }

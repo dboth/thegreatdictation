@@ -58,3 +58,9 @@ select {
     @include left-right-margin;
     font-weight: bold;
 }
+
+.jumbotron {
+    &.title-jumbo {
+        background-color: $tgd-secondary-color;
+    }
+}

@@ -27,6 +27,18 @@ class TemplateGenerator{
         switch(@$_GET["p"]){
             //add other pages here. example.org/?p=pagename results in a switch here. "pagename" would be the case.
             
+            case "dictation":
+                return array(
+                   
+                    "vars" => array(
+                        "title"=>"The Great Dictation",
+                        "analysispath"=> "analysis/index.php"
+                        ),
+
+                    "body"=>"dictation.html",
+                    "template"=>"default.html"
+                );
+            
             case "getstarted":
                 return array(
                     //inside a template all occurences of <tgd_varname> get replace by the value of vars[varname] in this array. do not use the variables "body" or "trans", as they are reserved.
@@ -54,10 +66,9 @@ class TemplateGenerator{
                     //inside a template all occurences of <tgd_varname> get replace by the value of vars[varname] in this array. do not use the variables "body" or "trans", as they are reserved.
                     "vars" => array(
                         "title"=>"The Great Dictation",
-                        "analysispath"=> "analysis/index.php"
                         ),
                     //the page template (inside frontend/pages)
-                    "body"=>"main.html",
+                    "body"=>"home.html",
                     "template"=>"default.html"
                 );
         }

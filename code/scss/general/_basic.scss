@@ -64,3 +64,13 @@ select {
         background-color: $tgd-secondary-color;
     }
 }
+
+.spelling {
+    padding: 5px;
+    &.sp-wrong {
+        background-color: $tgd-wrong-color;
+    }
+    &.sp-correct {
+        background-color: $tgd-correct-color;
+    }
+}

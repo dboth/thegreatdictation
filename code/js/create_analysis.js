@@ -21,9 +21,25 @@ function createAnalysis(res) {
     //CREATE INPUT INFO
     var input_info = $("#input-info");
     console.log(data["input"]);
-    var input_data_html = data["input"].replace(/\n/g, "<br>");
-    console.log(input_data_html);
-    input_info.find(".well").html(input_data_html);
+    var input_data_html = data["input"].replace(/\n/g, "").split(" ");
+    var diff_map = data["diff_map"]
+    
+    var marked_input = "";
+    for (word = 0; word < input_data_html.length; word++) {
+        if (diff_map[word] === false) {
+            marked_input += "<span class='spelling sp-wrong'>" + input_data_html[word] + "</span> ";
+        } else {
+            marked_input += "<span class='spelling sp-correct'>" + input_data_html[word] + "</span> ";
+        }
+    }
+    
+    input_info.find(".well").html(marked_input);
+    
+    //CREATE TARGET INFO
+    var target_info = $("#target-info");
+    console.log(data["target"]);
+    var target_data_html = data["target"].replace(/\n/g, "<br>");
+    target_info.find(".well").html(target_data_html);
     
 }
 
@@ -52,7 +68,7 @@ $(document).ready(function () {
         var data = {
             input: $("#dictation-text").val(),
             text_id: $("#dictation-id").val(),
-            target: "Rosen sind rot"
+            target: "Rosen sind rot und Veilchen sind blau, ich mag gerne Brot, dass ich mir oft klau"
         };
         
         var action = $(this).attr("action");

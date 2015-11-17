@@ -8782,3 +8782,16 @@ select option[disabled] {
 .jumbotron.title-jumbo {
   background-color: lightblue;
 }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Weidler\/CloudStation\/git\/GitHub\/thegreatdictation\/code\/scss\/general\/_basic\.scss}line{font-family:\0000368}}
+.spelling {
+  padding: 5px;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Weidler\/CloudStation\/git\/GitHub\/thegreatdictation\/code\/scss\/general\/_basic\.scss}line{font-family:\0000370}}
+.spelling.sp-wrong {
+  background-color: salmon;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Weidler\/CloudStation\/git\/GitHub\/thegreatdictation\/code\/scss\/general\/_basic\.scss}line{font-family:\0000373}}
+.spelling.sp-correct {
+  background-color: lightgreen;
+}

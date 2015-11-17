@@ -38,9 +38,9 @@ class TheGreatDictation():
         
         for i, inp, tar in zip(range(len(input_data)), self.parseTextToList(input_data)[0], self.parseTextToList(target_data)[0]):
             if inp != tar:
-                diff_map.update({i : 0})
+                diff_map.update({i : False})
             else:
-                diff_map.update({i : 1})
+                diff_map.update({i : True})
         
         return diff_map
     
@@ -69,8 +69,8 @@ class TheGreatDictation():
         return json.dumps([self.output_json])
 
 if __name__ == "__main__":
-    tgd = TheGreatDictation('{"data" : {"input" : "Roosen sint rot", "target" : "Rosen sind rot", "text_id" : 4}}')
-    #tgd = TheGreatDictation(sys.argv[1])
+    #tgd = TheGreatDictation('{"data" : {"input" : "Roosen sint rot", "target" : "Rosen sind rot", "text_id" : 4}}')
+    tgd = TheGreatDictation(sys.argv[1])
     print (tgd.returnJSON())
     
     

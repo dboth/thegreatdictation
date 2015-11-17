@@ -4,10 +4,13 @@ function createAnalysis(res) {
      * for the user.
      */
     
+    console.log(res);
+    
     //PARSING input
-    var res_object = $.parseJSON(res);
-    var data = res_object["data"];
-    var meta = res_object["meta"];
+    var data = res[0]["data"];
+    var meta = res[0]["meta"];
+    
+    console.log(data);
     
     //CREATE HEADER
     var header = $("#analysis-container .page-header");
@@ -48,7 +51,8 @@ $(document).ready(function () {
 
         var data = {
             input: $("#dictation-text").val(),
-            text_id: $("#dictation-id").val()
+            text_id: $("#dictation-id").val(),
+            target: "Rosen sind rot"
         };
         
         var action = $(this).attr("action");
@@ -60,10 +64,9 @@ $(document).ready(function () {
             data: {data: JSON.stringify(data)},
             type: method
         }).fail(function (a,b,c){
+            console.log("hi");
             console.log(a,b,c);
-        }).done(function (res){
-            console.log("Received data: " + res);
-            
+        }).done(function (res){           
             createAnalysis(res);
             revealAnalysis();
             

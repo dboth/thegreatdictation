@@ -40,6 +40,9 @@ if (DIRECTORY_SEPARATOR == '\\' && $GLOBALS["conf"]["testing"]){
     //on linux everythings fine
     $argument = escapeshellarg(json_encode($new_json));    
 }
+
+//var_dump($argument);
+
 //create the command
 $command = "python ". __DIR__ ."/tgd.py $argument";
 

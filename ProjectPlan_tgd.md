@@ -1,14 +1,13 @@
-Software project WiSe 2015/16
-Institute of Computational Linguistics
-Heidelberg University, Germany
+Software project WiSe 2015/16  
+Institute of Computational Linguistics  
+Heidelberg University, Germany  
 
 The Great Dictation
 ----
-project plan
 
-Authors: Dominik Both, Tobias Göbel, Svenja Lohse, Tonio Weidler 
-
-Advisor: Magdalena Wolska 
+*Project plan*  
+Authors: Dominik Both, Tobias Göbel, Svenja Lohse, Tonio Weidler  
+Advisor: Magdalena Wolska  
 
 About the Task
 ------

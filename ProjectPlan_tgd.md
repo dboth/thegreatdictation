@@ -4,7 +4,7 @@ Heidelberg University, Germany
 
 The Great Dictation
 ----
-- project plan -
+project plan
 Authors: Dominik Both, Tobias Göbel, Svenja Lohse, Tonio Weidler
 Advisor: Magdalena Wolska
 

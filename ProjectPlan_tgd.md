@@ -3,7 +3,7 @@ Institute of Computational Linguistics
 Heidelberg University, Germany
 ----
 **The Great Dictation**
-Project plan
+- project plan -
 Authors: Dominik Both, Tobias Göbel, Svenja Lohse, Tonio Weidler
 Advisor: Magdalena Wolska
 ----

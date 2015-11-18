@@ -29,7 +29,21 @@ von Folie übernommen...tbc
 
 Schedule and concrete Distribution of Tasks
 ----
-von Folie übernommen...tbc  
+tbc...  
+
+**task distribution**:  
+*Dominik*: backend, database, server, user system, integration  
+*Tobias*: analysis algorithms, kind of mistakes  
+*Svenja*: didatic, background dictation/listening comprehension and feedback/result  
+*Tonio*: frontend, design, integration, boss  
+
+**schedule**:  
+-> *roadmap*  
+01.12.15 v0 and project plan finished  
+08.12.15 start of data collection  
+- analysis features, result feedback, platform design, fancy stuff    
+02.02.16  version with features finished, final presentation  
+ca. 12.03. final submission of code and documentation  
 
 Specifikation of System architecture and Data format(s)
 ----

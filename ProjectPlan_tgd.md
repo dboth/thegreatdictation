@@ -41,7 +41,7 @@ tbc...
 -> *roadmap*  
 01.12.15 v0 and project plan finished  
 08.12.15 start of data collection  
-- analysis features, result feedback, platform design, fancy stuff    
+...analysis features, result feedback, platform design, fancy stuff  
 02.02.16  version with features finished, final presentation  
 ca. 12.03. final submission of code and documentation  
 

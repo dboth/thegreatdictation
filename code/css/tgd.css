@@ -8795,3 +8795,7 @@ select option[disabled] {
 .spelling.sp-correct {
   background-color: lightgreen;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Weidler\/CloudStation\/git\/GitHub\/thegreatdictation\/code\/scss\/general\/_basic\.scss}line{font-family:\0000376}}
+.spelling.sp-unlabeled {
+  background-color: gray;
+}

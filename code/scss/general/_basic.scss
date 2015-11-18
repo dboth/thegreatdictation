@@ -73,4 +73,7 @@ select {
     &.sp-correct {
         background-color: $tgd-correct-color;
     }
+    &.sp-unlabeled {
+        background-color: $tgd-unlabeled-color;
+    }
 }

@@ -24,12 +24,14 @@ function createAnalysis(res) {
     var input_data_html = data["input"].replace(/\n/g, "").split(" ");
     var diff_map = data["diff_map"]
     
-    var marked_input = "";
+    var marked_input = ""; //stores the entered text labeled with wrong/correct/unknown
     for (word = 0; word < input_data_html.length; word++) {
         if (diff_map[word] === false) {
             marked_input += "<span class='spelling sp-wrong'>" + input_data_html[word] + "</span> ";
-        } else {
+        } else if (diff_map[word] === true) {
             marked_input += "<span class='spelling sp-correct'>" + input_data_html[word] + "</span> ";
+        } else {
+            marked_input += "<span class='spelling sp-unlabeled'>" + input_data_html[word] + "</span> ";
         }
     }
     

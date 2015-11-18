@@ -96,7 +96,7 @@
 // Where all modal content resides (sibling of .modal-header and .modal-footer)
 .modal-body {
   position: relative;
-  padding: $modal-inner-padding;
+  padding: $modal-inner-padding-sm;
 }
 
 // Footer (for actions)
@@ -131,8 +131,32 @@
 }
 
 // Scale up the modal
+
+@media (min-width: $screen-xs-min) {
+  // Automatically set modal's width for larger viewports
+  .modal-body {
+    position: relative;
+    padding: $modal-inner-padding-sm;
+  }
+  
+  .modal-dialog {
+    width: $modal-md;
+    margin: 30px auto;
+  }
+  .modal-content {
+    @include box-shadow(0 5px 15px rgba(0,0,0,.5));
+  }
+
+  // Modal sizes
+  .modal-sm { width: $modal-sm; }
+}
+
 @media (min-width: $screen-sm-min) {
   // Automatically set modal's width for larger viewports
+  .modal-body {
+    position: relative;
+    padding: $modal-inner-padding-md;
+  }
   .modal-dialog {
     width: $modal-md;
     margin: 30px auto;

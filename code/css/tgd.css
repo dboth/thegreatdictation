@@ -7790,25 +7790,54 @@ button.close {
   overflow: scroll;
 }
 
-@media (min-width: 768px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Weidler\/CloudStation\/git\/GitHub\/thegreatdictation\/code\/bootstrap\/stylesheets\/bootstrap\/_modals\.scss}line{font-family:\00003136}}
+@media (min-width: 480px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Weidler\/CloudStation\/git\/GitHub\/thegreatdictation\/code\/bootstrap\/stylesheets\/bootstrap\/_modals\.scss}line{font-family:\00003137}}
+  .modal-body {
+    position: relative;
+    padding: 15px;
+  }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Weidler\/CloudStation\/git\/GitHub\/thegreatdictation\/code\/bootstrap\/stylesheets\/bootstrap\/_modals\.scss}line{font-family:\00003142}}
   .modal-dialog {
-    width: 600px;
+    width: 700px;
     margin: 30px auto;
   }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Weidler\/CloudStation\/git\/GitHub\/thegreatdictation\/code\/bootstrap\/stylesheets\/bootstrap\/_modals\.scss}line{font-family:\00003140}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Weidler\/CloudStation\/git\/GitHub\/thegreatdictation\/code\/bootstrap\/stylesheets\/bootstrap\/_modals\.scss}line{font-family:\00003146}}
   .modal-content {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
   }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Weidler\/CloudStation\/git\/GitHub\/thegreatdictation\/code\/bootstrap\/stylesheets\/bootstrap\/_modals\.scss}line{font-family:\00003145}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Weidler\/CloudStation\/git\/GitHub\/thegreatdictation\/code\/bootstrap\/stylesheets\/bootstrap\/_modals\.scss}line{font-family:\00003151}}
+  .modal-sm {
+    width: 300px;
+  }
+}
+@media (min-width: 768px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Weidler\/CloudStation\/git\/GitHub\/thegreatdictation\/code\/bootstrap\/stylesheets\/bootstrap\/_modals\.scss}line{font-family:\00003156}}
+  .modal-body {
+    position: relative;
+    padding: 50px;
+  }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Weidler\/CloudStation\/git\/GitHub\/thegreatdictation\/code\/bootstrap\/stylesheets\/bootstrap\/_modals\.scss}line{font-family:\00003160}}
+  .modal-dialog {
+    width: 700px;
+    margin: 30px auto;
+  }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Weidler\/CloudStation\/git\/GitHub\/thegreatdictation\/code\/bootstrap\/stylesheets\/bootstrap\/_modals\.scss}line{font-family:\00003164}}
+  .modal-content {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Weidler\/CloudStation\/git\/GitHub\/thegreatdictation\/code\/bootstrap\/stylesheets\/bootstrap\/_modals\.scss}line{font-family:\00003169}}
   .modal-sm {
     width: 300px;
   }
 }
 @media (min-width: 992px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Weidler\/CloudStation\/git\/GitHub\/thegreatdictation\/code\/bootstrap\/stylesheets\/bootstrap\/_modals\.scss}line{font-family:\00003149}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Weidler\/CloudStation\/git\/GitHub\/thegreatdictation\/code\/bootstrap\/stylesheets\/bootstrap\/_modals\.scss}line{font-family:\00003173}}
   .modal-lg {
     width: 900px;
   }

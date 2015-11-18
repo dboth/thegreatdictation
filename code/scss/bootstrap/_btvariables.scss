@@ -593,7 +593,8 @@ $label-link-hover-color:      #fff !default;
 //##
 
 //** Padding applied to the modal body
-$modal-inner-padding:         15px !default;
+$modal-inner-padding-md:         50px;
+$modal-inner-padding-sm:         15px;
 
 //** Padding applied to the modal title
 $modal-title-padding:         15px !default;
@@ -617,7 +618,7 @@ $modal-header-border-color:   #e5e5e5 !default;
 $modal-footer-border-color:   $modal-header-border-color !default;
 
 $modal-lg:                    900px !default;
-$modal-md:                    600px !default;
+$modal-md:                    700px;
 $modal-sm:                    300px !default;
 
 

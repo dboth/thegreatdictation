@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import sys, json
+import Levenshtein_original_11
 
 class TheGreatDictation():
     '''Main analysis class'''
@@ -16,6 +17,9 @@ class TheGreatDictation():
         
         #calculated data
         self.diff_map = self.calcSimpleDiff(self.input_data, self.target_data)
+        
+        #levenshtein data
+        self.levenshtein = self.calcLevenshteinDiff(self.input_data, self.target_data)
         
         #output
         self.output_json = self.buildOutputJSON()
@@ -46,6 +50,9 @@ class TheGreatDictation():
     
     #CONTROL METHODS
     
+    def calcLevenshteinDiff(self, input_data, target_data):
+        return Levenshtein_original_11.levenshtein(input_data, target_data)
+    
     def buildOutputJSON(self):
         """
         Build the JSON / DICT that is ment to be send back to the client by
@@ -60,7 +67,7 @@ class TheGreatDictation():
         output_json["data"].update({"target" : self.target_data})
         
         output_json["data"].update({"diff_map" : self.diff_map})
-        
+        output_json["data"].update({"levenshtein" : self.levenshtein})
         return output_json
         
     def returnJSON(self):

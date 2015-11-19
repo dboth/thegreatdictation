@@ -70,7 +70,7 @@ $(document).ready(function () {
         var data = {
             input: $("#dictation-text").val(),
             text_id: $("#dictation-id").val(),
-            target: "Rosen sind rot und Veilchen sind blau, ich mag gerne Brot, dass ich mir oft klau"
+            target: "Rosen sind rot und Veilchen sind blau, ich mag gerne Brot, das ich mir oft klau"
         };
         
         var action = $(this).attr("action");

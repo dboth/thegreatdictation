@@ -44,7 +44,6 @@ class TheGreatDictation():
         
         return diff_map
     
-    
     #CONTROL METHODS
     
     def buildOutputJSON(self):
@@ -72,9 +71,3 @@ if __name__ == "__main__":
     #tgd = TheGreatDictation('{"data" : {"input" : "Roosen sint rot", "target" : "Rosen sind rot", "text_id" : 4}}')
     tgd = TheGreatDictation(sys.argv[1])
     print (tgd.returnJSON())
-    
-    
-    
-    
-    
-    

@@ -31,11 +31,13 @@ Schedule and concrete Distribution of Tasks
 ----
 tbc...  
 
-**task distribution**:  
-*Dominik*: backend, database, server, user system, integration  
-*Tobias*: analysis algorithms, kind of mistakes  
-*Svenja*: didatic, background dictation/listening comprehension and feedback/result  
-*Tonio*: frontend, design, integration, boss  
+**Main Responsibilities**:  
+*Dominik*: Backend-Development, Database Management
+*Tobias*: Analysing-Algorithms, kind of mistakes  
+*Svenja*: Didatic background of dictation/listening comprehension and feedback/result (research)  
+*Tonio*: Frontend-Development, Database Management, Project Management
+Although everybody participates in each section for minor tasks.
+
 
 **schedule**:  
 -> *roadmap*  

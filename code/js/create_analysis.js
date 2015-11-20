@@ -43,6 +43,8 @@ function createAnalysis(res) {
     var target_data_html = data["target"].replace(/\n/g, "<br>");
     target_info.find(".well").html(target_data_html);
     
+    console.log(data["levenshtein"]);
+    
 }
 
 function revealAnalysis() {

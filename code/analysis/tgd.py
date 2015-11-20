@@ -48,10 +48,10 @@ class TheGreatDictation():
         
         return diff_map
     
-    #CONTROL METHODS
-    
     def calcLevenshteinDiff(self, input_data, target_data):
         return Levenshtein_original_11.levenshtein(input_data, target_data)
+    
+    #CONTROL METHODS
     
     def buildOutputJSON(self):
         """

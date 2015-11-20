@@ -17,13 +17,11 @@ def levenshtein(string1, string2):
     #first line of the matrix is filled
     for i in range(len(string1)):
         matrix[i+1][0] = i+1
-        i+=1
         
     
     #first column of the matrix is filled
     for i in range(len(string2)):
         matrix[0][i+1] = i+1
-        i+=1
         
     #calculating matches
     for i in range(len(string1)):

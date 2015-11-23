@@ -13,22 +13,22 @@
 def levenshtein(string1, string2):
     #matrix is initialized for the algorithm with one additional line and column for the starting values from 1 to n (when n is the length of the line resp. column)
     matrix = [[0 for x in range(len(string2)+1)] for x in range(len(string1)+1)]
-    
+
     #first line of the matrix is filled
     for i in range(len(string1)):
         matrix[i+1][0] = i+1
-        
-    
+
+
     #first column of the matrix is filled
     for i in range(len(string2)):
         matrix[0][i+1] = i+1
-        
+
     #calculating matches
     for i in range(len(string1)):
         for j in range(len(string2)):
             if string1[i]==string2[j]:
-                matrix[i+1][j+1] = 1 
-                
+                matrix[i+1][j+1] = 1
+
     #rest of the matrix is filled
     print string2
     for line in matrix:
@@ -40,10 +40,10 @@ def levenshtein(string1, string2):
                 matrix[i+1][j+1] = min(matrix[i][j], matrix[i+1][j], matrix[i][j+1])+1
             else:
                 matrix[i+1][j+1] = min(matrix[i][j], matrix[i+1][j]+1, matrix[i][j+1]+1)
-    
+
     # for line in matrix:
         # print line
-    
+
     #calculate path
     path = []   #Path is given as list of points it walks on
     pathDescr = []  #Path is given as list of operations Insertion("I"), Deletion("D"), Substitution("S") and Match("M")
@@ -78,12 +78,12 @@ def levenshtein(string1, string2):
             else:
                 pathDescr.insert(0,"S")
     path.insert(0,(0,0))
-        
-    print startString
-    print endString
+
+    print (startString)
+    print (endString)
     return (path, pathDescr, startString, endString)
+
     
-    
-    
+
 if "__main__" == "__name__":
     levenshtein("hallo", "du")

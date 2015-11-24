@@ -4,65 +4,62 @@
     <head>
         <meta charset="utf-8" />
         <title> The Great Dictation - RoadMap </title>
-    
+
 	    <link rel="stylesheet" href="road_style.css" />
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-		
+
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script src="collapse.js"></script>
 		<script src="insertions.js"></script>
-		
+
 	</head>
 
     <body>
-        
+
         <div id="main-wrapper">
-            
+
             <h2 class="page-title">The Great Dictation</h2>
             <h4 class="page-title">Roadmap</h4>
-			
-			
-			
-			            
+
             <!-- The Names -->
             <div class="row title-row">
                 <div class="col">
                     <div class="title">
-						<i class="fa fa-diamond"></i> 
+						<i class="fa fa-diamond"></i>
                         Dominik
                     </div>
                 </div>
-                
+
                 <div class="col">
                     <div class="title">
-						<i class="fa fa-female"></i> 
+						<i class="fa fa-female"></i>
                         Svenja
                     </div>
                 </div>
-                
+
                 <div class="col">
                     <div class="title">
-						<i class="fa fa-male"></i> 
+						<i class="fa fa-male"></i>
                         Tobias
                     </div>
                 </div>
-                
+
                 <div class="col">
                     <div class="title">
-						<i class="fa fa-bug fa-spin"></i> 
+						<i class="fa fa-bug fa-spin"></i>
                         Tonio
                     </div>
                 </div>
-                
+
             </div>
-            
+
             <!-- The Tasks -->
 			<div class="collapse">
 				<div class="due-date active">
 					Wednesday, 11.11.2015
 					<button class="collapse-button"><i class="fa fa-chevron-down"></i></button>
 				</div>
-				
+
 				<!-- New Week -->
 				<div class="row collapse-content">
 					<div class="col">
@@ -71,249 +68,259 @@
 							Read up on Python-BackEnd Integration/Django
 						</div>
 					</div>
-					
+
 					<div class="col">
 						<div class="task-single done">
 							<div class="task-heading">Research</div>
 							Research on didactic fundamentals about dictation
 						</div>
 					</div>
-					
+
 					<div class="col">
 						<div class="task-single done">
 							<div class="task-heading">Spelling-Mistakes</div>
 							Find first concepts about spelling-mistake patterns
 						</div>
 					</div>
-					
+
 					<div class="col">
 						<div class="task-single done">
 							<div class="task-heading">"Roadmap"</div>
 							Develop Roadmap with integrated task distribution
 						</div>
-						
+
 						<div class="task-single done">
 							<div class="task-heading">DB-Model</div>
-							 Rough draft as ER-Model 
+							 Rough draft as ER-Model
 						</div>
 					</div>
 				</div>
 			</div>
-            
+
             <div class="row">
 					<div class="task-all date">
                         Meeting 11.11.2015 14.30 o'clock
                     </div>
-					
+
                     <div class="task-all date">
                         Meeting 11.11.2015 18.00 o'clock
                     </div>
-					
-            </div>     
-            
+
+            </div>
+
 			<div class="collapse">
 				<div class="due-date">
 					Wednesday, 18.11.2015
 					<button class="collapse-button"><i class="fa fa-chevron-down"></i></button>
 				</div>
-				
+
 				<!-- New Week -->
 				<div class="row collapse-content">
-					
+
 					<div class="col" name="dominik">
 						<div class="task-single done">
 							<div class="task-heading">Backend frame</div>
 							Integrate a backend system to handle pages and python backend
 						</div>
-						
+
 						<div class="task-single delayed">
 							<div class="task-heading">User System</div>
 							Integrate a simple user system in php, allowing to register, login, logout. No fancy stuff reguiered yet.
 							(Seriously, we will talk about and agree on fancy stuff later!)
 						</div>
 					</div>
-					
+
 					<div class="col" name="svenja">
 						<div class="task-single done">
 							<div class="task-heading">Project Plan</div>
 							Write the first part of the project plan including Goals and Solving
 						</div>
 					</div>
-					
+
 					<div class="col" name="tobias">
 						<div class="task-single done">
 							<div class="task-heading">Levenshtein</div>
 							Integrate Levenshtein in Python in backend
 						</div>
 					</div>
-					
+
 					<div class="col" name="tonio">
 						<div class="task-single done">
 							<div class="task-heading">Frontend Main Template</div>
 							Frontend Integration of main template for version 0
-						</div>						
-						
+						</div>
+
 						<div class="task-single done">
 							<div class="task-heading">Frontend Dictation Page</div>
 							Frontend Integration of dictation page
 						</div>
 					</div>
-					
+
 					<div class="task-all not-allocated">
 						Clear Plan: Which elements (of analysis) should V0.0 contain?
 					</div>
 				</div>
-				
+
 				<div class="row">
 					<div class="task-all date">
                         Meeting 17.11.2015 18.00 o'clock
                     </div>
-					
+
 					<div class="task-all date">
                         Meeting 18.11.2015 14.30 o'clock
-                    </div>                   
-				</div>     
-				
+                    </div>
+				</div>
+
 			</div>
-            
+
 			<div class="collapse">
 				<div class="due-date">
 					Wednesday, 25.11.2015
 					<button class="collapse-button"><i class="fa fa-chevron-down"></i></button>
 				</div>
-				
+
 				<!-- New Week -->
 				<div class="row collapse-content">
-					
+
 					<div class="col" name="dominik">
 						<div class="task-single pending">
 							<div class="task-heading">DB Communication System</div>
 							Integrate a backend system to communicate with the database
 							And write general SQL statements
 						</div>
-						
+
 						<div class="task-single pending">
 							<div class="task-heading">DB Design</div>
 							Develop/Optimize DB Design
 							<strong>COLLABORATOR: Tonio</strong>
 						</div>
 					</div>
-					
+
 					<div class="col" name="svenja">
 						<div class="task-single pending">
 							<div class="task-heading">Project Plan</div>
 							Work on Project Plan
 						</div>
-						
-						<div class="task-single pending">
+
+						<div class="task-single done">
 							<div class="task-heading">Why Dictation?</div>
 							Write "Why Dictation?" Page
 						</div>
 					</div>
-					
+
 					<div class="col" name="tobias">
 						<div class="task-single pending">
 							<div class="task-heading">Alignment Algortihms</div>
 							Write Python Algorithm to align user input to meant target words
 						</div>
 					</div>
-					
+
 					<div class="col" name="tonio">
 						<div class="task-single pending">
 							<div class="task-heading">Frontend Representation of Levenshtein</div>
 							Process data of levenshtein for visual representation
-						</div>						
-						
+						</div>
+
 						<div class="task-single pending">
 							<div class="task-heading">DB Design</div>
 							Develop/Optimize DB Design
 							<strong>COLLABORATOR: Dominik</strong>
 						</div>
 					</div>
-					
-					
+
+
 				</div>
-				
+
 				<div class="row">
-					
+
                     <div class="task-all date">
                         Meeting 24.11.2015 18.00 o'clock
 					</div>
-				
+
 				</div>
-			
+
 			</div>
-            
+
 			<div class="collapse">
 				<div class="due-date">
 					Tuesday, 1.12.2015
 					<button class="collapse-button"><i class="fa fa-chevron-down"></i></button>
 				</div>
-				
+
 				<!-- New Week -->
 				<div class="row collapse-content">
 					<div class="task-all not-allocated">
 						Version 0 - finish to be used for data collection
 					</div>
-					
+
 					<div class="task-all important">
 						Project Plan: Finished!!!
-					</div>  
+					</div>
+				</div>
+
+                <div class="row">
+
+                    <div class="task-all date">
+                        Meeting 01.12.2015 18.00 o'clock
+					</div>
+
 				</div>
 			</div>
-            
+
 			<div class="collapse">
 				<div class="due-date">
 					Tuesday, 8.12.2015
 					<button class="collapse-button"><i class="fa fa-chevron-down"></i></button>
 				</div>
-				
+
 				<!-- New Week -->
 				<div class="row collapse-content">
 					<div class="task-all not-allocated">
 						Recruit a core group of people for data collection and let them use the system
 					</div>
-					
+
 					<div class="task-all important">
 						Specification Presentation
-					</div>  
-					
+					</div>
+
 					<div class="task-all important">
 						Finished Version 0!!!
-					</div>  
+					</div>
 				</div>
+
+
 			</div>
-			
-			
+
+
             <!-- The Legend -->
 			<div class="collapse">
 				<div class="legend">
 					<i class="fa fa-question-circle"></i> Legend (<- due-date)
 					<button class="collapse-button"><i class="fa fa-chevron-right"></i></button>
 				</div>
-				
+
 				<div class="row collapse-content" style="display: none;">
 					<div class="col">
 						<div class="task-single pending">pending</div>
 						<div class="task-single important">important</div>
 					</div>
-					
+
 					<div class="col">
 						<div class="task-single done">done</div>
 						<div class="task-single not-allocated">not allocated</div>
 					</div>
-					
+
 					<div class="col">
 						<div class="task-single delayed">delayed</div>
 					</div>
-					
+
 					<div class="col">
 						<div class="task-single urgent">urgent</div>
 					</div>
 				</div>
 			</div>
         </div>
-        
+
     </body>
-    
+
 </html>

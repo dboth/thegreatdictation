@@ -16,11 +16,9 @@ from collections import namedtuple
 	
 
 def levenshtein(string1, string2, debug):    
-    #fault weights    
-    switch = 1					#two letter exchanged. caution: goes over 2 fields
-    capitalLetters = 0.5			#false lower or upper, but correct letter
-    listOfPunctuations = [".", "!", ";", ":"]
-    punctuationPenalty = 0.2
+    #fault weights
+    switch = 1					#caution: goes over 2 fields
+    capitalLetters = 0.5				
     
     #matrix is initialized for the algorithm with one additional line and column for the starting values from 1 to n (when n is the length of the line resp. column)
     matrix = [[[0] for x in range(len(string2)+1)] for x in range(len(string1)+1)]
@@ -47,71 +45,46 @@ def levenshtein(string1, string2, debug):
     
     
     #get other long range information here as appended lists in the target field of the matrix in the form [y-value start field, x-value start field, cost to get from start field to target field]
+   
     
-    #switched letters penalty
+    #get switched letters
     for i in range(1,len(string1)):
         for j in range(len(string2)-1):
             if string1[i] == string2[j]:
                 if string1[i-1] == string2[j+1]:
                     matrix[i+1][j+2].append(matrix_field(i-1,j,switch,"switch"))
     
-    #capital letters penalty
-    for i in range(len(string1)):
-	for j in range(len(string2)):
+    #capital letters
+    for in in range(1,len(string1)):
+	for j in range(len(string2)-1):
 	    if string1[i] !=string2[j]:
 		if string1[i] == string2[j].lower() or string1[i] == string2[j].upper():
-		    matrix[i+1][j+1].append(matrix_field(i,j,capitalLetters, "capitalization"))
-    
-    #punctuation penalty
-    for i in range(len(string1)):
-	for j in range(len(string2)):
-	    if string1[i] in listOfPunctuations:
-		if string1[i] != string2[j]:
-		    if string2[j] in listOfPunctuations:
-			matrix[i+1][j+1].append(matrix_field(i,j, punctuationPenalty, "punctuation"))
-    
-    if debug == True:			
-	for line in matrix:
-	    for el in line:
-		print el
-	    print "\n"   
-			
+		    matrix[i+1][j+1].append(matrix_field(i,j,capitalLetters, "capitalized")
+	  
+                    
     #rest of the matrix is filled
     for x in range(1,len(string1)+1):				#in this loop, we calculate field x,y of the matrix
         for y in range(1,len(string2)+1):
-            if debug == True:
-		print "x,y:"
-		print x,y
             poss = []						#contains all possible lists for each starting field from where this target field can be accessed
             ad = []           					
             for i in range(1,len(matrix[x][y])):   		#only triggers if additional entries exist in the field (for example a "switch" entry)            
-                poss=poss+[matrix[x][y][i]]
+                poss=poss+[matrix[x][y][i]]	
             if matrix[x][y][0] == 1:   											#match
                 ad = [matrix_field(x-1,y-1,0, "M"), matrix_field(x,y-1,1, "I"), matrix_field(x-1,y,1, "D")]		
             else:													#no match
                 ad = [matrix_field(x-1,y-1,1, "S"), matrix_field(x,y-1,1, "I"), matrix_field(x-1,y,1, "D")]		
             poss = poss+ad     												#now all possible direct ways from other fields to this field are in poss
-            if debug == True:
-		print "poss:"
-		print poss
             minim = matrix_field(poss[0][0], poss[0][1], matrix[poss[0][0]][poss[0][1]][2]+ poss[0][2], poss[0][3])	#minim starts as first element in poss
-            if debug == True:
-		print "minim:"
-		print minim
-            for i in range(1,len(poss)):										#now minim is exchanged whenever a shorter way is found
+            for i in range(len(poss)-1):										#now minim is exchanged whenever a shorter way is found
 		minim = min(minim, matrix_field(poss[i][0], poss[i][1], matrix[poss[i][0]][poss[i][1]][2] +poss[i][2], poss[i][3]), key=itemgetter(2))
-	    if debug == True:
-		print "minim:"
-		print minim
 	    matrix[x][y] = minim
     
-
-    if debug == True:			
-	for line in matrix:
-	    for el in line:
-		print el.cost
-	    print "\n"
-	    
+    #remove prints if debug is false
+    #if debug == True:			
+	#for line in matrix:
+	    #print line
+	#print "\n"   
+    
     #calculate path
     path = []
     i= len(string1)

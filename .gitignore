@@ -23,7 +23,7 @@ var/
 .installed.cfg
 *.egg
 
-#SASS
+# SASS
 .sass-cache/
 
 # PyInstaller
@@ -58,3 +58,6 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# Building Stuff
+tags

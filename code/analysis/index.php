@@ -22,7 +22,7 @@ if ($data === null)
 
 //create a new data object with meta data
 $new_json = array(
-    "data"=>$data, 
+    "data"=>$data,
     "meta"=>array(
         //todo: add serverside information
     )
@@ -38,13 +38,13 @@ if (DIRECTORY_SEPARATOR == '\\' && $GLOBALS["conf"]["testing"]){
     $argument = shitty_escapeshellarg(json_encode($new_json));
 } else {
     //on linux everythings fine
-    $argument = escapeshellarg(json_encode($new_json));    
+    $argument = escapeshellarg(json_encode($new_json));
 }
 
 //var_dump($argument);
 
 //create the command
-$command = "python ". __DIR__ ."/tgd.py $argument";
+$command = "python ". __DIR__ ."/analyse.py $argument";
 
 //execute the command (system() prints the output)
-system($command); 
+system($command);

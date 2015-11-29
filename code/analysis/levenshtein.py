@@ -19,7 +19,7 @@ from operator import itemgetter
 from collections import namedtuple
 
 
-def levenshtein(string1, string2, debug):
+def levenshtein(string1, string2, debug=False):
     #fault weights
     switch = 1					#two letter exchanged. caution: goes over 2 fields
     capitalLetters = 0.5			#false lower or upper, but correct letter
@@ -127,5 +127,5 @@ def levenshtein(string1, string2, debug):
 
     return path
 
-if "__main__" == "__name__":
+if __name__ == "__main__":
     print(levenshtein("hallo", "du"))

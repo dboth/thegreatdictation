@@ -8,22 +8,22 @@ function createAnalysis(res) {
     console.log(res);
 
     //PARSING input
-    var data = res[0]["data"];
-    var meta = res[0]["meta"];
+    var data = res[0].data;
+    var meta = res[0].meta;
 
     console.log(data);
 
     //CREATE HEADER
     var header = $("#analysis-container .page-header");
     var text_id = $("<small>");
-    text_id.html("<br>For Text " + data["text_id"]); //actually want to look up real name from DB
+    text_id.html("<br>For Text " + data.text_id); //actually want to look up real name from DB
     header.find("h3").append(text_id);
 
     //CREATE INPUT INFO
     var input_info = $("#input-info");
-    console.log(data["input"]);
-    var input_data_html = data["input"].replace(/\n/g, "").split(" ");
-    var diff_map = data["diff_map"]
+    console.log(data.input);
+    var input_data_html = data.input.replace(/\n/g, "").split(" ");
+    var diff_map = data.diff_map;
 
     var marked_input = ""; //stores the entered text labeled with wrong/correct/unknown
     for (word = 0; word < input_data_html.length; word++) {
@@ -40,11 +40,11 @@ function createAnalysis(res) {
 
     //CREATE TARGET INFO
     var target_info = $("#target-info");
-    console.log(data["target"]);
-    var target_data_html = data["target"].replace(/\n/g, "<br>");
+    console.log(data.target);
+    var target_data_html = data.target.replace(/\n/g, "<br>");
     target_info.find(".well").html(target_data_html);
 
-    console.log(data["levenshtein"]);
+    console.log(data.levenshtein);
 
 }
 
@@ -85,12 +85,12 @@ $(document).ready(function () {
             data: {data: JSON.stringify(data)},
             type: method
         }).fail(function (a,b,c){
-            console.log("hi");
+            console.log("ERROR IN AJAX");
             console.log(a,b,c);
         }).done(function (res){
+            console.log("SUCCESS");
             createAnalysis(res);
             revealAnalysis();
-
         });
     });
 });

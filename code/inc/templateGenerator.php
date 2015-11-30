@@ -61,6 +61,16 @@ class TemplateGenerator{
                     "template"=>"default.html"
                 );
             
+			case "aboutus":
+                return array(
+                    //inside a template all occurences of <tgd_varname> get replace by the value of vars[varname] in this array. do not use the variables "body" or "trans", as they are reserved.
+                    "vars" => array(
+                        "title"=>"The Great Dictation - About Us",
+                        ),
+                    //the page template (inside frontend/pages)
+                    "body"=>"aboutus.html",
+                    "template"=>"default.html"
+                );
             default:
                 return array(
                     //inside a template all occurences of <tgd_varname> get replace by the value of vars[varname] in this array. do not use the variables "body" or "trans", as they are reserved.

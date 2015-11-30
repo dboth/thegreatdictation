@@ -74,19 +74,24 @@ select {
 
 .spelling {
     float: left;
-    border-radius: 5px;
-    padding: 0 5px 0 5px;
-    margin-left: 3px;
+    border-radius: 10px;
+    padding: 2px 7px 2px 7px;
+    margin: 3px 0 3px 5px;
+    //border: 1px solid white;
 
     &.wrong {
         background-color: $tgd-wrong-color;
+        //border-color: $tgd-wrong-color;
+        //@include box-shadow(0 0 2px #858585);
     }
 
     &.minor-mistake {
         background-color: $tgd-minor-mistake-color;
+        //border-color: $tgd-minor-mistake-color;
     }
 
     &.correct {
         background-color: none;
+        border: none;
     }
 }

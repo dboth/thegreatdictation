@@ -105,19 +105,25 @@ Result.prototype.calcLevenshteinWordErrors = function () {
 Result.prototype.createLevenshteinDiffInfo = function (target_id) {
 	// TARGET ID OF FORM "#id"
 	var words = this.calcLevenshteinWordErrors();
-	console.log(words);
+
 	for (var w = 0; w < words.length; w++) {
-		if (words[w][3] > 0) {
-			word_box = $("<span>");
-			word_box.addClass("spelling wrong");
-			word_box.html(words[w][0]);
-			$(target_id).append(word_box);
-			word_box.css("background-color", tinycolor(word_box.css("background-color")).brighten(50-words[w][3]*10).toString() );
-		} else {
-			word_box = $("<span>").addClass("spelling correct");
-			word_box.html(words[w][0]);
+		if (words[w][3] >= 1) {
+			word_box = $("<span>")
+				.addClass("spelling wrong")
+				.html(words[w][0]);
+		} else if (words[w][3] > 0) {
+			word_box = $("<span>")
+				.addClass("spelling minor-mistake")
+				.html(words[w][0]);
+		}else {
+			word_box = $("<span>")
+				.addClass("spelling correct")
+				.html(words[w][0]);
 			$(target_id).append(word_box);
 		}
+
+		$(target_id).append(word_box);
+		word_box.css("background-color", tinycolor(word_box.css("background-color")).brighten(50-words[w][3]*10).toString() );
 	}
 
 };

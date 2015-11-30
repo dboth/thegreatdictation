@@ -68,19 +68,22 @@ select {
 .well {
     &#error-indication {
         font-size: 14pt;
-        overflow:auto;
+        overflow: auto;
     }
 }
 
 .spelling {
     float: left;
-    font-size: 14pt;
     border-radius: 5px;
     padding: 0 5px 0 5px;
     margin-left: 3px;
 
     &.wrong {
         background-color: $tgd-wrong-color;
+    }
+
+    &.minor-mistake {
+        background-color: $tgd-minor-mistake-color;
     }
 
     &.correct {

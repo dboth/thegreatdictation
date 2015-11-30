@@ -8812,19 +8812,25 @@ select option[disabled] {
   background-color: lightblue;
 }
 
-/* line 68, ../scss/general/_basic.scss */
+/* line 69, ../scss/general/_basic.scss */
+.well#error-indication {
+  font-size: 14pt;
+  overflow: auto;
+}
+
+/* line 75, ../scss/general/_basic.scss */
 .spelling {
-  padding: 5px;
+  float: left;
+  font-size: 14pt;
+  border-radius: 5px;
+  padding: 0 5px 0 5px;
+  margin-left: 3px;
 }
-/* line 70, ../scss/general/_basic.scss */
-.spelling.sp-wrong {
-  background-color: salmon;
+/* line 82, ../scss/general/_basic.scss */
+.spelling.wrong {
+  background-color: #ff3333;
 }
-/* line 73, ../scss/general/_basic.scss */
-.spelling.sp-correct {
-  background-color: lightgreen;
-}
-/* line 76, ../scss/general/_basic.scss */
-.spelling.sp-unlabeled {
-  background-color: gray;
+/* line 86, ../scss/general/_basic.scss */
+.spelling.correct {
+  background-color: none;
 }

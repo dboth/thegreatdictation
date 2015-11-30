@@ -17,13 +17,13 @@ body {
 
 /* NAVIGATION */
 
-.navbar {    
+.navbar {
     .navbar-brand {
         img {
             margin-top: -8px;
         }
     }
-    
+
     .nav {
         li {
             &:hover {
@@ -65,15 +65,25 @@ select {
     }
 }
 
+.well {
+    &#error-indication {
+        font-size: 14pt;
+        overflow:auto;
+    }
+}
+
 .spelling {
-    padding: 5px;
-    &.sp-wrong {
+    float: left;
+    font-size: 14pt;
+    border-radius: 5px;
+    padding: 0 5px 0 5px;
+    margin-left: 3px;
+
+    &.wrong {
         background-color: $tgd-wrong-color;
     }
-    &.sp-correct {
-        background-color: $tgd-correct-color;
-    }
-    &.sp-unlabeled {
-        background-color: $tgd-unlabeled-color;
+
+    &.correct {
+        background-color: none;
     }
 }

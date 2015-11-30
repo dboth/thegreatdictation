@@ -74,14 +74,14 @@ select {
 
 .spelling {
     float: left;
-    border-radius: 10px;
+    border-radius: 6px;
     padding: 2px 7px 2px 7px;
     margin: 3px 0 3px 5px;
-    //border: 1px solid white;
+    border: 1px solid transparent;
 
     &.wrong {
         background-color: $tgd-wrong-color;
-        //border-color: $tgd-wrong-color;
+        //border-color: darken($tgd-wrong-color, 30);
         //@include box-shadow(0 0 2px #858585);
     }
 
@@ -94,4 +94,9 @@ select {
         background-color: none;
         border: none;
     }
+}
+
+.huge-fonticon {
+    font-size: 30em;
+    text-align: center;
 }

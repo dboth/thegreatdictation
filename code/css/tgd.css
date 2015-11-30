@@ -8821,19 +8821,27 @@ select option[disabled] {
 /* line 75, ../scss/general/_basic.scss */
 .spelling {
   float: left;
-  border-radius: 5px;
-  padding: 0 5px 0 5px;
-  margin-left: 3px;
+  border-radius: 6px;
+  padding: 2px 7px 2px 7px;
+  margin: 3px 0 3px 5px;
+  border: 1px solid transparent;
 }
-/* line 81, ../scss/general/_basic.scss */
+/* line 82, ../scss/general/_basic.scss */
 .spelling.wrong {
   background-color: #ff3333;
 }
-/* line 85, ../scss/general/_basic.scss */
+/* line 88, ../scss/general/_basic.scss */
 .spelling.minor-mistake {
-  background-color: #1076d4;
+  background-color: #f2510c;
 }
-/* line 89, ../scss/general/_basic.scss */
+/* line 93, ../scss/general/_basic.scss */
 .spelling.correct {
   background-color: none;
+  border: none;
+}
+
+/* line 99, ../scss/general/_basic.scss */
+.huge-fonticon {
+  font-size: 30em;
+  text-align: center;
 }

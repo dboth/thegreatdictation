@@ -25,7 +25,11 @@ To that end we have to *filter, sort, group and analyse* the mistakes, consisten
 
 System architecture and modules
 ----
-With the former in mind the composition of said system has to be constructed to fullfil the needed requirements. In web development an application is normally parted in two modules: The server side back end and the client side front end. The back end serves as the main controller of the application and functions as a connector between the database and the application. The frontend officiates as the viewpoint of the user and as the interface between human and computer. This general model can be utilised for our application as well. However, we decided to bisect the back end to separate the standard backend - comprising page generation and user administration system - from the analysis back end containing the computational lingustic analysis itself. Thus we can dispose of different programming languages for each section of the back end, allowing us to combine the time efficience of PHP in building web application backends and the effectivity of Python in linguistic analysis.
+With the former in mind the composition of said system has to be constructed to fullfil the needed requirements. 
+
+In web development an application is normally parted in two modules: The server side back end and the client side front end. The back end serves as the main controller of the application and functions as a connector between the database and the application. The frontend officiates as the viewpoint of the user and as the interface between human and computer. 
+
+This general model can be utilised for our application as well. However, we decided to bisect the back end to separate the standard backend - comprising page generation and user administration system - from the analysis back end containing the computational lingustic analysis itself. Thus we can dispose of different programming languages for each section of the back end, allowing us to combine the time efficience of PHP in building web application backends and the effectivity of Python in linguistic analysis.
 
 In conclusion there are three components:
 * Front end

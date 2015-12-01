@@ -23,30 +23,44 @@ With dictation they do not only learn vocabulary, they also learn grammar while 
 
 To that end we have to *filter, sort, group and analyse* the mistakes, consistently *refine our algorithm* with given data, find a way to give positive and *motivating result feedback*, on the one hand build the whole platform on a *solid, extensible database* and on the other hand make it *interesting and user friendly* in design and use.
 
-Data Representations/Formats and System Components/Modules
+System architecture and modules
 ----
-With the former in mind the composition of said system has to be constructed to fullfil the needed requirements. In web development an application is normally parted in two modules, the server side back end and the client side front end. The back end, serving the main controller of the application and functioning as a connector between database and the application, and the frontend, officiating as the viewpoint of the user and the interface between human and computer. This general model can be utilised for our application as well. However, we decided to bisect the back end to separate the standard backend comprising page generation and user administration system from the analysis back end containing the computational lingustic analysis itself. Thus we can dispose of different programming languages for each section of the back end. Availing ourself of this possibility allows us to combine the time efficience of PHP in building web application backends and the effectivity of Python in linguistic analysis. 
+With the former in mind the composition of said system has to be constructed to fullfil the needed requirements. 
+
+In web development an application is normally parted in two modules: The server side back end and the client side front end. The back end serves as the main controller of the application and functions as a connector between the database and the application. The frontend officiates as the viewpoint of the user and as the interface between human and computer. 
+
+This general model can be utilised for our application as well. However, we decided to bisect the back end to separate the standard backend - comprising page generation and user administration system - from the analysis back end containing the computational lingustic analysis itself. Thus we can dispose of different programming languages for each section of the back end, allowing us to combine the time efficience of PHP in building web application backends and the effectivity of Python in linguistic analysis.
+
+In conclusion there are three components:
+* Front end
+* Management back end
+* Analysis back end
+
+Data
+----
+It is in the nature of our task, that there is no data available upfront. Therefore we need to collect the data ourselves. To that end our system is designed to collect data while it expands its features. To provide an incentive, the version zero already contains a small analysis that is to be expanded using the data it collects.
 
 Schedule and concrete Distribution of Tasks
 ----
-tbc...  
+We divided the accrued tasks according to the special skills each of us brings in.
 
 **Main Responsibilities**:  
 *Dominik*: Backend-Development, Database Management
+
 *Tobias*: Analysing-Algorithms, kind of mistakes  
+
 *Svenja*: Didatic background of dictation/listening comprehension and feedback/result (research)  
+
 *Tonio*: Frontend-Development, Database Management, Project Management
+
 Although everybody participates in each section for minor tasks.
 
 
-**schedule**:  
--> *roadmap*  
+**Schedule**:  
+-> See a much more detailed version of the schedule in the folder *roadmap*  
 01.12.15 v0 and project plan finished  
 08.12.15 start of data collection  
 ...analysis features, result feedback, platform design, fancy stuff  
 02.02.16  version with features finished, final presentation  
 ca. 12.03. final submission of code and documentation  
 
-Specifikation of System architecture and Data format(s)
-----
-von Folie übernommen...tbc  

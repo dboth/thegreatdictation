@@ -3,15 +3,10 @@
 
         <div class="row row-content">
             <div class="text-center page-header">
-                <h3>Start the Dictation</h3>
+                <h3>Do the Dictation</h3>
             </div>
         </div>
-		<div class="text-center">
-			<p style="font-family:Times, cursive; font-size:1.2em">
-			<i><b>"Success is not final, failure is not fatal: it is the courage to continue that counts"</b> <br>Winston Churchill, former british prime minister and 'Nobel Prize' winner</i>
-			</p>
-		</div>
-		<hr/>
+
         <div class="row row-content">
             <div class="col-xs-12 explanation">
                 <label>How to</label>
@@ -29,14 +24,15 @@
             <label for="dictation-id" class="control-label col-xs-3 col-sm-1 col-content">Choose</label>
             <div class="col-xs-9 col-sm-3 col-content">
                 <select class="form-control" id="dictation-id" name="subject">
-                    <option selected value="id_a">Text A</option>
+                    <option selected disabled></option>
+                    <option value="id_a">Text A</option>
                     <option value="id_b">Text B</option>
                     <option value="id_c">Text C</option>
                 </select>
             </div>
 
             <div class="col-xs-12 col-sm-2 text-center col-content">
-                <button class="btn btn-primary" id="select-text-button">Select this text</button>
+                <button class="btn btn-primary" id="select-text-button" disabled>Select this text</button>
             </div>
 
             <div class="col-xs-12 col-sm-6 text-center col-content" id="audio-player">
@@ -51,7 +47,8 @@
 
                 <div class="form-group">
                     <label for="data">What you understand</label>
-                    <textarea  class="form-control" rows="10" placeholder="Choose a text first!" id="dictation-text" name="data" disabled>Ich bin ein Elefant</textarea>
+                    <textarea  class="form-control" rows="10" placeholder="Choose a text first!" id="dictation-text" name="data" disabled>Rosen Sind rod und Wylchen snd plau, mak gerne brot, dass ich mia oft klau
+</textarea>
                 </div>
 
                 <div class="text-center">

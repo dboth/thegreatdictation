@@ -66,7 +66,8 @@ Although everybody participates in each section for minor tasks.
 **02.02.16**  version with features finished, final presentation    
 ca.**12.03.16** final submission of code and documentation  
 
-### Contacts
+Contacts
+----
 
 S.Lohse (--at--) stud.uni-heidelberg.de
 
@@ -76,7 +77,8 @@ uni (--at--) dboth.de
 
 uni (--at--) tonioweidler.de
 
-###Requirements (until now)
+Requirements (until now)
+----
 - Server
 - PHP >= 5.3
 - Python 2 or 3

@@ -49,7 +49,7 @@ We divided the accrued tasks according to the special skills each of us brings i
 **Main Responsibilities**:  
 *Dominik*: Backend-Development, Database Management
 
-*Tobias*: Analysing-Algorithms, kind of mistakes  
+*Tobias*: Analysing-Algorithms, kinds of mistakes  
 
 *Svenja*: Didatic background of dictation/listening comprehension and feedback/result (research)  
 

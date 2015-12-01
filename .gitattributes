@@ -3,3 +3,6 @@ code/css/* linguist-vendored
 code/fonts/* linguist-vendored
 code/js/jquery/* linguist-vendored
 code/js/libs/* linguist-vendored
+roadmap/* linguist-documentation
+materials/* linguist-documentation
+lecture/* linguist-documentation

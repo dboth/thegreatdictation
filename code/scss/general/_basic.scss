@@ -79,10 +79,15 @@ select {
     float: left;
     margin: 3px;
     text-align: center;
+    display: inline-block;
+    height: 100px;
+
+    &.no-margin {
+        margin: 0;
+    }
 
     .arrow {
         padding: 3px 5px 3px 5px;
-        clear: both;
         display: block;
         border-radius: 10px;
         margin: 0 auto;
@@ -90,7 +95,6 @@ select {
 
     .target {
         padding: 3px 5px 3px 5px;
-        clear: both;
         display: block;
         border-radius: 10px;
         margin: 0 auto;
@@ -98,12 +102,12 @@ select {
 
     .input {
         padding: 3px 5px 3px 5px;
-        clear: both;
+        display: block;
         border-radius: 10px;
         margin: 0 auto;
 
         &.match {
-            padding: none;
+            padding: 3px 0px 3px 0px;
         }
 
         &.substitution {
@@ -123,12 +127,12 @@ select {
 
         &.capitalization {
             background-color: $tgd-capitalization-color;
-        color: $tgd-font-contrast-color;
+            color: $tgd-font-contrast-color;
         }
 
         &.punctuation {
-        background-color: $tgd-punctuation-color;
-        color: $tgd-font-contrast-color;
+            background-color: $tgd-punctuation-color;
+            color: $tgd-font-contrast-color;
         }
 
         &.switch {

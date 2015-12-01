@@ -184,16 +184,17 @@ Result.prototype.createLevenshteinDiffInfo = function (target_id) {
 		var target_pos = position[1];
 		var errortype = position[3];
 
-		var container = $("<span>");
+		var container = $("<div>");
 		container.addClass("error-container");
 
 		var input = $("<span>");
-		input.addClass("input");
+		input.addClass("input").html("&nbsp");
 
 		var target = $("<span>");
-		target.addClass("target");
+		target.addClass("target").html("&nbsp");;
 
 		if (errortype === "M") {
+			container.addClass("no-margin");
 			input.addClass("match")
 				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
 
@@ -285,11 +286,16 @@ Result.prototype.createOverallScoreInfo = function (target_id) {
 	var time = 100;
 	function add() {
 		if (cur_score < score) {
-			cur_score += 0.1;
-			score_display.html(Math.round(cur_score*100)/100);
-			clearInterval(score_int);
-			time--
-			score_int = setInterval(add, time);
+			if (cur_score >= 100 && score === Infinity) {
+				score_display.html(score);
+				clearInterval(score_int);
+			} else {
+				cur_score += 0.1;
+				score_display.html(Math.round(cur_score*100)/100);
+				clearInterval(score_int);
+				time--;
+				score_int = setInterval(add, time);
+			}
 		} else {
 			clearInterval(score_int);
 		}

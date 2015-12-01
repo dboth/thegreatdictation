@@ -60,7 +60,7 @@ Although everybody participates in each section for minor tasks.
 -> See a much more detailed version of the schedule in the folder *roadmap*  
 **01.12.15** v0 and project plan finished  
 **08.12.15** start of data collection  
-*...analysis features, result feedback, platform design, fancy stuff* 
-**02.02.16**  version with features finished, final presentation  
+*...analysis features, result feedback, platform design, fancy stuff*   
+**02.02.16**  version with features finished, final presentation    
 ca.**12.03.16** final submission of code and documentation  
 

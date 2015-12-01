@@ -1,5 +1,3 @@
-* linguist-documentation
-code/ linguist-documentation=false
 code/scss/bootstrap/* linguist-vendored
 code/css/* linguist-vendored
 code/fonts/* linguist-vendored

@@ -66,11 +66,13 @@ Result.prototype.convertStringToPositionMap = function (str, target) {
 				// is meant to be new word
 
 				target_word = this.target.slice(Math.max.apply(null, this.getTargetPathInfo(start_index)),
-												Math.max.apply(null, this.getTargetPathInfo(cur_end_pos-1)));
+												Math.min.apply(null, this.getTargetPathInfo(cur_end_pos)));
 				console.log(target_word, cur_end_pos, this.getTargetPathInfo(cur_end_pos));
 				pos_map.push([cur_word, start_index, cur_end_pos-1, 0, target_word]);
 
-				target_word = this.target.slice(this.getTargetPathInfo(cur_end_pos+1)+1, this.getTargetPathInfo(cur_end_pos+2));
+				console.log(cur_end_pos);
+				target_word = this.target.slice(Math.min.apply(null, this.getTargetPathInfo(cur_end_pos))+1, // +1 da Insert vor Leerzeichen beginnt
+												Math.max.apply(null, this.getTargetPathInfo(cur_end_pos)));
 				console.log(target_word);
 				pos_map.push([" __ ", cur_end_pos, cur_end_pos, 0, target_word]);
 				cur_word = "";
@@ -78,6 +80,14 @@ Result.prototype.convertStringToPositionMap = function (str, target) {
 				cur_end_pos = start_index;
 
 			}
+
+		} else if (i+1 === input_letters.length) {
+			// is at end of input
+			cur_word += input_letters[i];
+			cur_end_pos++;
+
+			target_word = this.target.slice(this.getTargetPathInfo(start_index)[0], this.getTargetPathInfo(cur_end_pos)[0]);
+			pos_map.push([cur_word, start_index, cur_end_pos-1, 0, target_word]);
 
 		} else if ( [".",",","!","?",":",";"].indexOf(input_letters[i]) >= 0 ) {
 			// is Punctuation
@@ -150,15 +160,88 @@ Result.prototype.calcLevenshteinWordErrors = function () {
 
 
 // PRODUCERS
-Result.prototype.createHeader = function () {
+Result.prototype.createHeader = function (target_id) {
 	//Creates the header information of a result
-	var header = $("#analysis-container .page-header");
+	var header = $(target_id);
     var text_id = $("<small>");
     text_id.html("<br>For Text " + this.text_id); //actually want to look up real name from DB
     header.find("h3").append(text_id);
 };
 
 Result.prototype.createLevenshteinDiffInfo = function (target_id) {
+
+	/*
+		creates an untokenized char-by-char visual representation of the levenshtein path
+	*/
+
+	var lev = this.levenshtein;
+
+	var parent = $(target_id);
+
+	for (var step = 0; step < lev.length; step++){
+		var position = lev[step][2];
+		var input_pos = position[0];
+		var target_pos = position[1];
+		var errortype = position[3];
+
+		var container = $("<span>");
+		container.addClass("error-container");
+
+		var input = $("<span>");
+		input.addClass("input");
+
+		var target = $("<span>");
+		target.addClass("target");
+
+		if (errortype === "M") {
+			input.addClass("match")
+				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
+
+		} else if (errortype === "I") {
+			input.addClass("insertion")
+				.html("_");
+			target.addClass("insertion")
+				.html(this.target[target_pos].replace(/\s/g, "&nbsp"));
+		} else if (errortype === "D") {
+			input.addClass("deletion")
+				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
+			target.addClass("deletion")
+				.html("&nbsp;");
+		} else if (errortype === "S") {
+			input.addClass("substitution")
+				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
+			target.addClass("substitution")
+				.html(this.target[target_pos].replace(/\s/g, "&nbsp"));
+		} else if (errortype === "capitalization") {
+			input.addClass("capitalization")
+				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
+			target.addClass("capitalization")
+				.html(this.target[target_pos].replace(/\s/g, "&nbsp"));
+		} else if (errortype === "switch") {
+			input.addClass("switch")
+				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
+			target.addClass("switch")
+				.html(this.target[target_pos].replace(/\s/g, "&nbsp"));
+		} else if (errortype === "punctuation") {
+			input.addClass("punctuation")
+				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
+			target.addClass("punctuation")
+				.html(this.target[target_pos].replace(/\s/g, "&nbsp"));
+		}
+
+		container.append(input);
+		if (errortype !== "M" && errortype !== "D") {
+			var arrow = $("<i>").addClass("fa fa-long-arrow-down arrow");
+			container.append(arrow);
+		}
+		container.append(target);
+		parent.append(container);
+
+	}
+
+};
+
+Result.prototype.createAlignmentInfo = function (target_id) {
 	// TARGET ID OF FORM "#id"
 	var words = this.calcLevenshteinWordErrors();
 
@@ -181,5 +264,51 @@ Result.prototype.createLevenshteinDiffInfo = function (target_id) {
 		$(target_id).append(word_box);
 		word_box.css("background-color", tinycolor(word_box.css("background-color")).brighten(50-words[w][3]*10).toString() );
 	}
+
+};
+
+Result.prototype.createOverallScoreInfo = function (target_id) {
+	var parent = $(target_id);
+
+	var total_cost = this.levenshtein[this.levenshtein.length-1][2][2];
+	var total_chars = this.levenshtein.length;
+
+	var total_errors = 0;
+	for (var i = 0; i < total_chars; i++) {if (this.levenshtein[i][2][3] !== "M") {total_errors++;} }
+
+	var score = Math.round(total_chars / total_cost * 100)/100;
+
+	var ratio_display = $(target_id+" .ratio").html(total_chars - total_errors + "/" + total_chars);
+	var score_display = $(target_id+" .score").html("0");
+
+
+	var time = 100;
+	function add() {
+		if (cur_score < score) {
+			cur_score += 0.1;
+			score_display.html(Math.round(cur_score*100)/100);
+			clearInterval(score_int);
+			time--
+			score_int = setInterval(add, time);
+		} else {
+			clearInterval(score_int);
+		}
+	}
+
+	var cur_score = 0;
+	var score_int = setInterval(add, time);
+
+	var color_ratio = total_errors / total_chars;
+	if (color_ratio >= 0.8) {
+		ratio_display.css("color", "red");
+	} else if (color_ratio >= 0.5) {
+		ratio_display.css("color", "orange");
+	} else if (color_ratio >= 0.3) {
+		ratio_display.css("color", "palegreen");
+	} else if (color_ratio >= 0.1) {
+		ratio_display.css("color", "green");
+	}
+
+	//parent.append(ratio_display).append(score_display);
 
 };

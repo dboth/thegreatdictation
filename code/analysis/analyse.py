@@ -3,7 +3,7 @@
 import sys
 import json
 import levenshtein
-
+import word_aligner
 
 class TheGreatDictation():
     '''Main analysis class'''
@@ -19,9 +19,8 @@ class TheGreatDictation():
 
         #calculated data
         self.diff_map = self.calcSimpleDiff(self.input_data, self.target_data)
-
-        #levenshtein data
         self.levenshtein = self.calcLevenshteinDiff(self.input_data, self.target_data)
+        self.alignment = self.calcAlignment(self.levenshtein, self.input_data, self.target_data)
 
         #output
         self.output_json = self.buildOutputJSON()
@@ -53,6 +52,10 @@ class TheGreatDictation():
     def calcLevenshteinDiff(self, input_data, target_data):
         return levenshtein.levenshtein(input_data, target_data, False)
 
+    def calcAlignment(self, lev, input_data, target_data):
+        wa = word_aligner.WordAligner(lev, input_data, target_data)
+        return wa.finalize()
+
     #CONTROL METHODS
 
     def buildOutputJSON(self):
@@ -70,6 +73,7 @@ class TheGreatDictation():
 
         output_json["data"].update({"diff_map": self.diff_map})
         output_json["data"].update({"levenshtein": self.levenshtein})
+        output_json["data"].update({"alignment": self.alignment})
         return output_json
 
     def returnJSON(self):

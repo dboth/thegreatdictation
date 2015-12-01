@@ -1,11 +1,25 @@
 /* COLORS */
 
+// DESIGN COLORS
 $tgd-main-color:        blue;
 $tgd-secondary-color:   lightblue;
 
+$tgd-font-color: black;
+$tgd-font-contrast-color: white;
+
+// ALIGNMENT COLORS
 $tgd-correct-color:     #90ee90;
 $tgd-wrong-color:       #ff3333;
 $tgd-minor-mistake-color: #f2510c;
+
+// LEVENSHTEIN COLORS
+$tgd-match-color: none;
+$tgd-insert-color: #e93d17;
+$tgd-deletion-color: #e0590d;
+$tgd-sub-color: #ee1313;
+$tgd-punctuation-color: #6cd3ff;
+$tgd-capitalization-color: #ffe145;
+$tgd-switch-color: #ffbe4f;
 
 /* GRID */
 

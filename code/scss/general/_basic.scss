@@ -72,6 +72,74 @@ select {
     }
 }
 
+
+// LEVENSHTEIN
+
+.error-container {
+    float: left;
+    margin: 3px;
+    text-align: center;
+
+    .arrow {
+        padding: 3px 5px 3px 5px;
+        clear: both;
+        display: block;
+        border-radius: 10px;
+        margin: 0 auto;
+    }
+
+    .target {
+        padding: 3px 5px 3px 5px;
+        clear: both;
+        display: block;
+        border-radius: 10px;
+        margin: 0 auto;
+    }
+
+    .input {
+        padding: 3px 5px 3px 5px;
+        clear: both;
+        border-radius: 10px;
+        margin: 0 auto;
+
+        &.match {
+            padding: none;
+        }
+
+        &.substitution {
+            background-color: $tgd-sub-color;
+            color: $tgd-font-contrast-color;
+        }
+
+        &.deletion {
+            background-color: $tgd-deletion-color;
+            color: $tgd-font-contrast-color;
+        }
+
+        &.insertion {
+            background-color: $tgd-insert-color;
+            color: $tgd-font-contrast-color;
+        }
+
+        &.capitalization {
+            background-color: $tgd-capitalization-color;
+        color: $tgd-font-contrast-color;
+        }
+
+        &.punctuation {
+        background-color: $tgd-punctuation-color;
+        color: $tgd-font-contrast-color;
+        }
+
+        &.switch {
+            background-color: $tgd-switch-color;
+            color: $tgd-font-contrast-color;
+        }
+    }
+
+}
+
+// ALIGNMENT
 .spelling {
     float: left;
     border-radius: 6px;
@@ -93,6 +161,25 @@ select {
     &.correct {
         background-color: none;
         border: none;
+    }
+}
+
+// SCORE
+
+#score-info {
+    font-size: 28pt;
+    text-align: center;
+
+    .score {
+        font-weight: bold;
+        font-size: 45pt;
+        color: lightblue;
+    }
+
+    .ratio {
+        font-weight: bold;
+        font-size: 45pt;
+        color: green;
     }
 }
 

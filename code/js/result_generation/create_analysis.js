@@ -7,8 +7,9 @@ function createAnalysis(res) {
 
     var result_object = new Result(res[0]);
 
-    result_object.createHeader();
+    result_object.createHeader("#analysis-container .page-header");
     result_object.createLevenshteinDiffInfo("#error-indication");
+    result_object.createOverallScoreInfo("#score-info");
 
     var target_info = $("#target-info");
 	target_info.find(".well").html(convertStringToHTML(result_object.target));
@@ -17,7 +18,7 @@ function createAnalysis(res) {
 function revealAnalysis() {
 
     /*
-     * Function to control the toggling between dictation form and analysis
+    * Function to control the toggling between dictation form and analysis
     */
 
     $("#dictation-container").fadeOut("fast", function () {

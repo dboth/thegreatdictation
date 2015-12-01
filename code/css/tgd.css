@@ -8818,7 +8818,71 @@ select option[disabled] {
   overflow: auto;
 }
 
-/* line 75, ../scss/general/_basic.scss */
+/* line 78, ../scss/general/_basic.scss */
+.error-container {
+  float: left;
+  margin: 3px;
+  text-align: center;
+}
+/* line 83, ../scss/general/_basic.scss */
+.error-container .arrow {
+  padding: 3px 5px 3px 5px;
+  clear: both;
+  display: block;
+  border-radius: 10px;
+  margin: 0 auto;
+}
+/* line 91, ../scss/general/_basic.scss */
+.error-container .target {
+  padding: 3px 5px 3px 5px;
+  clear: both;
+  display: block;
+  border-radius: 10px;
+  margin: 0 auto;
+}
+/* line 99, ../scss/general/_basic.scss */
+.error-container .input {
+  padding: 3px 5px 3px 5px;
+  clear: both;
+  border-radius: 10px;
+  margin: 0 auto;
+}
+/* line 105, ../scss/general/_basic.scss */
+.error-container .input.match {
+  padding: none;
+}
+/* line 109, ../scss/general/_basic.scss */
+.error-container .input.substitution {
+  background-color: #ee1313;
+  color: white;
+}
+/* line 114, ../scss/general/_basic.scss */
+.error-container .input.deletion {
+  background-color: #e0590d;
+  color: white;
+}
+/* line 119, ../scss/general/_basic.scss */
+.error-container .input.insertion {
+  background-color: #e93d17;
+  color: white;
+}
+/* line 124, ../scss/general/_basic.scss */
+.error-container .input.capitalization {
+  background-color: #ffe145;
+  color: white;
+}
+/* line 129, ../scss/general/_basic.scss */
+.error-container .input.punctuation {
+  background-color: #6cd3ff;
+  color: white;
+}
+/* line 134, ../scss/general/_basic.scss */
+.error-container .input.switch {
+  background-color: #ffbe4f;
+  color: white;
+}
+
+/* line 143, ../scss/general/_basic.scss */
 .spelling {
   float: left;
   border-radius: 6px;
@@ -8826,21 +8890,39 @@ select option[disabled] {
   margin: 3px 0 3px 5px;
   border: 1px solid transparent;
 }
-/* line 82, ../scss/general/_basic.scss */
+/* line 150, ../scss/general/_basic.scss */
 .spelling.wrong {
   background-color: #ff3333;
 }
-/* line 88, ../scss/general/_basic.scss */
+/* line 156, ../scss/general/_basic.scss */
 .spelling.minor-mistake {
   background-color: #f2510c;
 }
-/* line 93, ../scss/general/_basic.scss */
+/* line 161, ../scss/general/_basic.scss */
 .spelling.correct {
   background-color: none;
   border: none;
 }
 
-/* line 99, ../scss/general/_basic.scss */
+/* line 169, ../scss/general/_basic.scss */
+#score-info {
+  font-size: 28pt;
+  text-align: center;
+}
+/* line 173, ../scss/general/_basic.scss */
+#score-info .score {
+  font-weight: bold;
+  font-size: 45pt;
+  color: lightblue;
+}
+/* line 179, ../scss/general/_basic.scss */
+#score-info .ratio {
+  font-weight: bold;
+  font-size: 45pt;
+  color: green;
+}
+
+/* line 186, ../scss/general/_basic.scss */
 .huge-fonticon {
   font-size: 30em;
   text-align: center;

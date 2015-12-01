@@ -128,4 +128,4 @@ def levenshtein(string1, string2, debug=False):
     return path
 
 if __name__ == "__main__":
-    print(levenshtein("hallo", "du"))
+    print(levenshtein("Ich bin Elefant", "Ich bin ein Elefant"))

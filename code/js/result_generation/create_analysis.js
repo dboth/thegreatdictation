@@ -10,10 +10,8 @@ function createAnalysis(res) {
     result_object.createHeader();
     result_object.createLevenshteinDiffInfo("#error-indication");
 
-    var simple_diff = result_object.createSimpleDiffInfo();
-
     var target_info = $("#target-info");
-	target_info.find(".well").html(simple_diff[1]);
+	target_info.find(".well").html(convertStringToHTML(result_object.target));
 }
 
 function revealAnalysis() {
@@ -39,10 +37,12 @@ $(document).ready(function () {
     $("#dictation-form").submit(function (event) {
         event.preventDefault();
 
+        var tests = ["Rosen sind rot und Veilchen sind blau, ich mag gerne Brot, das ich mir oft klau", "Ich bin ein Elefant"];
+
         var data = {
-            input: $("#dictation-text").val(),
+            input: $("#dictation-text").val().replace(/\s$/, ""),
             text_id: $("#dictation-id").val(),
-            target: "Rosen sind rot und Veilchen sind blau, ich mag gerne Brot, das ich mir oft klau"
+            target: tests[1]
         };
 
         var action = $(this).attr("action");

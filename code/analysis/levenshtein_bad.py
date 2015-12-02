@@ -24,8 +24,7 @@ def levenshtein(string1, string2, debug=False):
     switch = 1					#two letter exchanged. caution: goes over 2 fields
     capitalLetters = 0.5			#false lower or upper, but correct letter
     listOfPunctuations = [".", "!", ";", ":"]
-    punctuationWeight = 0.2
-    dontSplitWords = 0.9
+    punctuationPenalty = 0.2
 
     #matrix is initialized for the algorithm with one additional line
     #and column for the starting values from 1 to n (when n is the length of the line resp. column)
@@ -52,52 +51,40 @@ def levenshtein(string1, string2, debug=False):
     # get other long range information here as appended lists in the target field of the matrix
     # in the form [y-value start field, x-value start field, cost to get from start field to target field]
 
-    #switched letters weight
+    #switched letters penalty
     for i in range(1, len(string1)):
         for j in range(len(string2)-1):
             if string1[i] == string2[j]:
                 if string1[i-1] == string2[j+1]:
                     matrix[i+1][j+2].append(matrix_field(i-1, j, switch, "switch"))
 
-    #capital letters weight
+    #capital letters penalty
     for i in range(len(string1)):
         for j in range(len(string2)):
             if string1[i] != string2[j]:
                 if string1[i] == string2[j].lower() or string1[i] == string2[j].upper():
                     matrix[i+1][j+1].append(matrix_field(i, j, capitalLetters, "capitalization"))
 
-    #punctuation weight
+    #punctuation penalty
     for i in range(len(string1)):
         for j in range(len(string2)):
             if string1[i] in listOfPunctuations:
                 if string1[i] != string2[j]:
                     if string2[j] in listOfPunctuations:
-                        matrix[i+1][j+1].append(matrix_field(i, j, punctuationWeight, "punctuation"))
-                        
-    #'don't split words' weight
-    for i in range(len(string1)):										#space in string1
-	if string1[i] == " ":
-	    for j in range(len(string2)):
-		if string1[i-1] == string2[j]:									#match before space
-		    matrix[i+1][j+1].append(matrix_field(i-1,j, dontSplitWords, "dontSplitWords1"))
-		if string1[i+1] == string2[j]:									#match after space
-		    matrix[i+2][j+1].append(matrix_field(i,j, dontSplitWords, "dontSplitWords2"))	
-    for j in range(1,len(string2)):										#space in string2
-	if string2[j] == " ":
-	    for i in range(1,len(string1)):									
-		if string2[j-1] == string1[i]:
-		    if j>1:
-			matrix[i+1][j+1].append(matrix_field(i, j-1, dontSplitWords, "dontSplitWords3"))	#match before space
-		if string2[j+1] == string1[i]:
-		    matrix[i+1][j+2].append(matrix_field(i,j, dontSplitWords, "dontSplitWords4"))		#match after space
+                        matrix[i+1][j+1].append(matrix_field(i, j, punctuationPenalty, "punctuation"))
 
-		
-		
-   
+    if debug:
+        for line in matrix:
+            for el in line:
+                print(el)
+                print("\n")
 
     #rest of the matrix is filled
     for x in range(1, len(string1)+1):				#in this loop, we calculate field x,y of the matrix
         for y in range(1, len(string2)+1):
+            if debug:
+                print("x,y:")
+                print(x, y)
             poss = []						#contains all possible lists for each starting field from where this target field can be accessed
             ad = []
             for i in range(1, len(matrix[x][y])):   		#only triggers if additional entries exist in the field (for example a "switch" entry)
@@ -107,11 +94,25 @@ def levenshtein(string1, string2, debug=False):
             else:													#no match
                 ad = [matrix_field(x-1, y-1, 1, "S"), matrix_field(x, y-1, 1, "I"), matrix_field(x-1, y, 1, "D")]
             poss = poss+ad     												#now all possible direct ways from other fields to this field are in poss
+            if debug:
+                print("poss:")
+                print(poss)
             minim = matrix_field(poss[0][0], poss[0][1], matrix[poss[0][0]][poss[0][1]][2] + poss[0][2], poss[0][3])    #minim starts as first element in poss
+            if debug:
+                print("minim:")
+                print(minim)
             for i in range(1, len(poss)):										#now minim is exchanged whenever a shorter way is found
                 minim = min(minim, matrix_field(poss[i][0], poss[i][1], matrix[poss[i][0]][poss[i][1]][2] + poss[i][2], poss[i][3]), key=itemgetter(2))
+                if debug:
+                    print("minim:")
+                    print(minim)
                 matrix[x][y] = minim
 
+    if debug:
+        for line in matrix:
+            for el in line:
+                print(el.cost)
+                print("\n")
 
     #calculate path
     path = []
@@ -121,8 +122,10 @@ def levenshtein(string1, string2, debug=False):
         path.append([i, j, matrix[i][j]])
         i, j, _, _ = matrix[i][j]
 
-    
+    #if debug == True:
+        #print path
+
     return path
 
 if __name__ == "__main__":
-    print(levenshtein("hallo", "du"))
+    print(levenshtein("Ich bin Elefant", "Ich bin ein Elefant"))

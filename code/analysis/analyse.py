@@ -2,7 +2,7 @@
 
 import sys
 import json
-import levenshtein
+import levenshtein_bad as levenshtein
 import word_aligner
 
 class TheGreatDictation():

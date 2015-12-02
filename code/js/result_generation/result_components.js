@@ -10,7 +10,6 @@ function Result (analysis) {
 
 	this.diff_map = this.data.diff_map;
 	this.levenshtein = this.data.levenshtein.reverse();
-	console.log(this.levenshtein);
 }
 
 // PREPROCESSORS
@@ -161,7 +160,11 @@ Result.prototype.calcLevenshteinWordErrors = function () {
 
 // PRODUCERS
 Result.prototype.createHeader = function (target_id) {
-	//Creates the header information of a result
+
+	/*
+		Creates the header information of a result
+	*/
+
 	var header = $(target_id);
     var text_id = $("<small>");
     text_id.html("<br>For Text " + this.text_id); //actually want to look up real name from DB
@@ -191,7 +194,7 @@ Result.prototype.createLevenshteinDiffInfo = function (target_id) {
 		input.addClass("input").html("&nbsp");
 
 		var target = $("<span>");
-		target.addClass("target").html("&nbsp");;
+		target.addClass("target").html("&nbsp");
 
 		if (errortype === "M") {
 			container.addClass("no-margin");
@@ -243,6 +246,11 @@ Result.prototype.createLevenshteinDiffInfo = function (target_id) {
 };
 
 Result.prototype.createAlignmentInfo = function (target_id) {
+
+	/*
+		Creates Alignment Info based on Map
+	*/
+
 	// TARGET ID OF FORM "#id"
 	var words = this.calcLevenshteinWordErrors();
 
@@ -269,6 +277,11 @@ Result.prototype.createAlignmentInfo = function (target_id) {
 };
 
 Result.prototype.createOverallScoreInfo = function (target_id) {
+
+	/*
+		Calcs and creates Info about Score
+	*/
+
 	var parent = $(target_id);
 
 	var total_cost = this.levenshtein[this.levenshtein.length-1][2][2];

@@ -1,10 +1,36 @@
 /* DOCUMENT */
-
-body {
-    //save content from navbar
-    padding:            50px 0 0 0;
+html {
+    height: 100%;
 }
 
+body {
+    padding: 50px 0 0 0; //save content from navbar
+    height: 100%;
+    margin: 0;
+}
+
+#wrapper {
+    min-height: 100%;
+    position: relative;
+
+    #content {
+        padding-bottom: $tgd-footer-height + 100px;
+    }
+
+    footer {
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        width: 100%;
+        box-shadow: 0 0 0 1px white, 0 0 0 2px rgb(223, 223, 223);
+
+        &.page-footer {
+            height: $tgd-footer-height;
+            background-color: #f8f8f8;
+        }
+    }
+
+}
 /* GRID */
 
 .row-content {

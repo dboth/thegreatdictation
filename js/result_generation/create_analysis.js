@@ -43,7 +43,7 @@ $(document).ready(function () {
         var data = {
             input: $("#dictation-text").val().replace(/\s$/, ""),
             text_id: $("#dictation-id").val(),
-            target: tests[0]
+            target: tests[1]
         };
 
         var action = $(this).attr("action");

@@ -46,7 +46,7 @@
 						<li><a href="?p=dictation">Dictation</a></li>
 						<li><a href="?p=why">Why Dictation?</a></li>
 						<li><a href="?p=aboutus">About Us...</a></li>
-						<li><a href="../roadmap/roadmap.html">Roadmap</a></li>
+						<li><a href="documents/roadmap/roadmap.html">Roadmap</a></li>
                     </ul>
 
 					<ul class="nav navbar-nav navbar-right">
@@ -61,67 +61,7 @@
 	<!-- END: NAVIGATION BAR -->
 
 	<!-- BEGIN: MODALS -->
-		<div class="modal fade" id="feedback-modal" tabindex="-1" role="dialog" aria-labelledby="feedback-modal-title">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h3 class="modal-title text-center" id="feedback-modal-title"><i class="fa fa-edit"></i> Send Us Feedback</h3>
-					</div>
-
-					<div class="modal-body">
-
-						<div class="row">
-							<div class="col-xs-12">
-								<p class="info">If you want to send us Feedback you can do this here. We do not collect any data about you, this is completely anonymous.</p>
-							</div>
-						</div>
-
-						<form class="form-horizontal" action="someAjaxSend()">
-
-							<div class="form-group row">
-								<label for="feedback-title" class="control-label col-xs-12 col-sm-3">Give it a title</label>
-								<div class="col-xs-12 col-sm-9">
-									<input type="text" class="form-control" id="feedback-title" name="title" placeholder="e.g. I don't like the color of the buttons!">
-								</div>
-							</div>
-
-							<div class="form-group row">
-								<label for="feedback-subject" class="control-label col-xs-12 col-sm-3">And a subject</label>
-								<div class="col-xs-12 col-sm-9">
-									<select class="form-control" id="feedback-subject" name="subject">
-										<option selected disabled></option>
-										<option value="praise">Laudation</option>
-										<option value="request">Feature Request</option>
-										<option value="suggestion">Suggestion</option>
-										<option value="none">None of the above</option>
-									</select>
-								</div>
-							</div>
-
-							<div class="form-group row">
-								<label for="feedback-message" class="control-label col-xs-12 col-sm-3">Now talk to us!</label>
-								<div class="col-xs-12 col-sm-9">
-									<textarea class="form-control" rows="6" id="feedback-message" name="message" placeholder="e.g. I am childish and want to complain about the design!"></textarea>
-								</div>
-							</div>
-
-							<div class="form-group row">
-								<div class="col-xs-12 col-sm-3"></div>
-								<div class="col-xs-12 col-sm-9">
-									<button type="submit" class="btn btn-primary">Send</button>
-									<button type="button" class="btn btn-default" data-dismiss="modal">Close without sending</button>
-								</div>
-							</div>
-
-						</form>
-
-					</div>
-
-				</div>
-			</div>
-		</div>
+		<tgd_page>feedback_modal.html</tgd_page>
 
 		<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modal-title">
 			<div class="modal-dialog" role="document">

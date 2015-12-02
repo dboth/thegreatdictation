@@ -1,8 +1,6 @@
-code/scss/bootstrap/* linguist-vendored
-code/css/* linguist-vendored
-code/fonts/* linguist-vendored
-code/js/jquery/* linguist-vendored
-code/js/libs/* linguist-vendored
-roadmap/* linguist-documentation
-materials/* linguist-documentation
-lecture/* linguist-documentation
+scss/bootstrap/* linguist-vendored
+css/* linguist-vendored
+fonts/* linguist-vendored
+js/jquery/* linguist-vendored
+js/libs/* linguist-vendored
+documents/* linguist-documentation

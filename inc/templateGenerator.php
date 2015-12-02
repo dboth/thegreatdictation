@@ -17,7 +17,7 @@ class TemplateGenerator{
         $this->applyTemplate($page);
         //apply the page template to the base template
         $this->applyPage($page);
-        
+        $this->applyViews();
         $this->applyTranslation();
         $this->applyVars($page);
     }
@@ -94,6 +94,14 @@ class TemplateGenerator{
         //applies the page template
         $page_body = file_get_contents($GLOBALS["conf"]["base_path"]."/frontend/pages/".$page["body"]);
         $this->pageMarkup = str_replace("<tgd_body>",$page_body,$this->pageMarkup);
+    }
+    protected function applyViews(){
+        //replaces every occurence of <tgd_page>page</tgd_page> with the translation of word using the in the constructor specified translators translate method.
+        $this->pageMarkup = preg_replace("/<tgd_page>(.*?)<\/tgd_page>/e", '$this->getView("$1")', $this->pageMarkup);
+    }
+    protected function getView($html){
+        if (file_exists($GLOBALS["conf"]["base_path"]."/frontend/pages/".$html)){
+        return file_get_contents($GLOBALS["conf"]["base_path"]."/frontend/pages/".$html);} else return "";
     }
     protected function applyTranslation(){
         //replaces every occurence of <tgd_trans>WORD</tgd_trans> with the translation of word using the in the constructor specified translators translate method.

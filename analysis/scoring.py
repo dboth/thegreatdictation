@@ -14,7 +14,8 @@ class AlignmentScoring(Scoring):
         lenAvg = (len(aWord) + len(bWord)) / 2
         distortion = abs(self.aIDs.index(aID)-self.bIDs.index(bID))
         weight = int(round((lenAvg+1)/(med+1)*100/(0.3*(distortion+1)))) #die formel hier ist völlig aus dem bauch. hier viele weitere features möglich: anfangsbuchstabe, typische buchstabenfehler....
-        print aWord, bWord, weight
+        if med > lenAvg: #malus weil med größer als wort lang ist. das ist unwahrscheinlich das überhaupt nichts stimmt.
+            weight = int(round(weight/4))
         return weight #je größere Werte zurückgegeben werden desto wahrscheinlicher ist ein alignment
     
     def levenshtein (self, s1, s2):

@@ -11,7 +11,7 @@ class TheGreatDictation():
         '''do everything.
         parameter should be a json string the frontend sent. no preprocessing done til here.'''
         #do analysis here
-        self.parameter = parameter
+        self.parameter = json.loads(parameter)
         #received data
         self.input_data = self.getValueFromJSON("input")
         self.target_data = self.getValueFromJSON("target")
@@ -28,7 +28,7 @@ class TheGreatDictation():
     #DATA HANDLING METHODS
 
     def getValueFromJSON(self, key):
-        return json.loads(self.parameter)["data"][key]
+        return self.parameter["data"][key]
 
     def parseTextToList(self, text):
         out = [sentence.split(" ") for sentence in text.split("\n")]

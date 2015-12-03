@@ -1,6 +1,7 @@
 /* DOCUMENT */
 html {
     height: 100%;
+    //overflow-y: scroll;
 }
 
 body {
@@ -102,11 +103,9 @@ select {
 // LEVENSHTEIN
 
 .error-container {
-    float: left;
     margin: 3px;
     text-align: center;
     display: inline-block;
-    height: 100px;
 
     &.no-margin {
         margin: 0;

@@ -1,4 +1,4 @@
-﻿ # -*- coding: utf-8 -*-
+ # -*- coding: utf-8 -*-
 from __future__ import division
 from alignment.sequence import Sequence
 from alignment.vocabulary import Vocabulary
@@ -66,7 +66,7 @@ class TGDAligner(object):
         return self.output
         
 if __name__ == "__main__":
-    original,input = "Ich bin ein Elefant.", "Ik ben Olo Fant."
+    original,input = "Ich bin ein Elefant.", "Ik bin bin ein Fant."
     print original,input
     tgd = TGDAligner(original, input)
     print tgd.returnOutput()

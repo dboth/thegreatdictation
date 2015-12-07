@@ -10,7 +10,7 @@ class TemplateGenerator{
         $this->translator = new TranslationEngine();
         //pageMarkup contains the webpages html
         $this->pageMarkup = "";
-        
+
         //get the right page by post or get variables
         $page = $this->getPage();
         //this applies the base template
@@ -21,15 +21,15 @@ class TemplateGenerator{
         $this->applyTranslation();
         $this->applyVars($page);
     }
-    
+
     protected function getPage(){
         //first page switcher only works with get.
         switch(@$_GET["p"]){
             //add other pages here. example.org/?p=pagename results in a switch here. "pagename" would be the case.
-            
+
             case "dictation":
                 return array(
-                   
+
                     "vars" => array(
                         "title"=>"The Great Dictation",
                         "analysispath"=> "analysis/index.php"
@@ -38,7 +38,7 @@ class TemplateGenerator{
                     "body"=>"dictation.html",
                     "template"=>"default.html"
                 );
-            
+
             case "getstarted":
                 return array(
                     //inside a template all occurences of <tgd_varname> get replace by the value of vars[varname] in this array. do not use the variables "body" or "trans", as they are reserved.
@@ -49,7 +49,7 @@ class TemplateGenerator{
                     "body"=>"getstarted.html",
                     "template"=>"default.html"
                 );
-            
+
             case "why":
                 return array(
                     //inside a template all occurences of <tgd_varname> get replace by the value of vars[varname] in this array. do not use the variables "body" or "trans", as they are reserved.
@@ -60,7 +60,7 @@ class TemplateGenerator{
                     "body"=>"why.html",
                     "template"=>"default.html"
                 );
-            
+
 			case "aboutus":
                 return array(
                     //inside a template all occurences of <tgd_varname> get replace by the value of vars[varname] in this array. do not use the variables "body" or "trans", as they are reserved.
@@ -97,7 +97,7 @@ class TemplateGenerator{
     }
     protected function applyViews(){
         //replaces every occurence of <tgd_page>page</tgd_page> with the translation of word using the in the constructor specified translators translate method.
-        $this->pageMarkup = preg_replace("/<tgd_page>(.*?)<\/tgd_page>/e", '$this->getView("$1")', $this->pageMarkup);
+        $this->pageMarkup = preg_replace("/<tgd_page>(.*?)<\/tgd_page>/e", '$this->getView("../components/$1")', $this->pageMarkup);
     }
     protected function getView($html){
         if (file_exists($GLOBALS["conf"]["base_path"]."/frontend/pages/".$html)){

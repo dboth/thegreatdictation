@@ -1,21 +1,26 @@
 /*
 CSS for pages from Svenja
 */
-#intro{
+#intro {
 	font-size:1.5em;
-	}
+	margin: 30px 0 30px 0;
+}
+
 .pointout{
 	font-size:1.2em;
-	}
-.justify{
+}
+
+.justify {
 	font-family:Times;
 	text-align:justify;
-	}
-.quote{
-	font-family:Times; 
+}
+
+.quote {
+	font-family:Times;
 	font-size:1.2em;
-	}
-.general-page{
-	font-family:Times; 
+}
+
+.general-page {
+	font-family:Times;
 	font-size:22em";
-	}
+}

@@ -7250,7 +7250,7 @@ body {
     /* line 28, ../scss/general/_basic.scss */
     #wrapper footer.page-footer {
       height: 150px;
-      background-color: #f8f8f8; }
+      background-color: #37374b; }
 
 /* GRID */
 /* line 37, ../scss/general/_basic.scss */
@@ -7268,25 +7268,30 @@ body {
 /* line 49, ../scss/general/_basic.scss */
 .navbar .navbar-brand img {
   margin-top: -8px; }
-/* line 56, ../scss/general/_basic.scss */
-.navbar .nav li:hover {
-  background-color: #eeeeee; }
+/* line 55, ../scss/general/_basic.scss */
+.navbar .nav li {
+  -webkit-transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.3s, color 0.3s; }
+  /* line 58, ../scss/general/_basic.scss */
+  .navbar .nav li:hover {
+    background-color: #eeeeee;
+    color: black; }
 
-/* line 63, ../scss/general/_basic.scss */
+/* line 66, ../scss/general/_basic.scss */
 a {
   outline: none !important; }
 
 /* FORMS */
-/* line 69, ../scss/general/_basic.scss */
+/* line 72, ../scss/general/_basic.scss */
 textarea {
   resize: none; }
 
-/* line 75, ../scss/general/_basic.scss */
+/* line 78, ../scss/general/_basic.scss */
 select option[disabled] {
   color: #eeeeee; }
 
 /* STYLING */
-/* line 83, ../scss/general/_basic.scss */
+/* line 86, ../scss/general/_basic.scss */
 .info {
   margin-top: 12.5px;
   margin-bottom: 25px;
@@ -7294,103 +7299,103 @@ select option[disabled] {
   padding-right: 15px;
   font-weight: bold; }
 
-/* line 90, ../scss/general/_basic.scss */
+/* line 93, ../scss/general/_basic.scss */
 .jumbotron.title-jumbo {
   background-color: lightblue; }
 
-/* line 96, ../scss/general/_basic.scss */
+/* line 99, ../scss/general/_basic.scss */
 .well#error-indication {
   font-size: 14pt;
   overflow: auto; }
 
-/* line 105, ../scss/general/_basic.scss */
+/* line 108, ../scss/general/_basic.scss */
 .error-container {
   margin: 3px;
   text-align: center;
   display: inline-block; }
-  /* line 110, ../scss/general/_basic.scss */
+  /* line 113, ../scss/general/_basic.scss */
   .error-container.no-margin {
     margin: 0; }
-  /* line 114, ../scss/general/_basic.scss */
+  /* line 117, ../scss/general/_basic.scss */
   .error-container .arrow {
     padding: 3px 5px 3px 5px;
     display: block;
     border-radius: 10px;
     margin: 0 auto; }
-  /* line 121, ../scss/general/_basic.scss */
+  /* line 124, ../scss/general/_basic.scss */
   .error-container .target {
     padding: 3px 5px 3px 5px;
     display: block;
     border-radius: 10px;
     margin: 0 auto; }
-  /* line 128, ../scss/general/_basic.scss */
+  /* line 131, ../scss/general/_basic.scss */
   .error-container .input {
     padding: 3px 5px 3px 5px;
     display: block;
     border-radius: 10px;
     margin: 0 auto; }
-    /* line 134, ../scss/general/_basic.scss */
+    /* line 137, ../scss/general/_basic.scss */
     .error-container .input.match {
       padding: 3px 0px 3px 0px; }
-    /* line 138, ../scss/general/_basic.scss */
+    /* line 141, ../scss/general/_basic.scss */
     .error-container .input.substitution {
       background-color: #ee1313;
       color: white; }
-    /* line 143, ../scss/general/_basic.scss */
+    /* line 146, ../scss/general/_basic.scss */
     .error-container .input.deletion {
       background-color: #e0590d;
       color: white; }
-    /* line 148, ../scss/general/_basic.scss */
+    /* line 151, ../scss/general/_basic.scss */
     .error-container .input.insertion {
       background-color: #e93d17;
       color: white; }
-    /* line 153, ../scss/general/_basic.scss */
+    /* line 156, ../scss/general/_basic.scss */
     .error-container .input.capitalization {
       background-color: #ffe145;
       color: white; }
-    /* line 158, ../scss/general/_basic.scss */
+    /* line 161, ../scss/general/_basic.scss */
     .error-container .input.punctuation {
       background-color: #6cd3ff;
       color: white; }
-    /* line 163, ../scss/general/_basic.scss */
+    /* line 166, ../scss/general/_basic.scss */
     .error-container .input.switch {
       background-color: #ffbe4f;
       color: white; }
 
-/* line 172, ../scss/general/_basic.scss */
+/* line 175, ../scss/general/_basic.scss */
 .spelling {
   float: left;
   border-radius: 6px;
   padding: 2px 6px 2px 6px;
   margin: 3px 0 3px 5px;
   border: 1px solid transparent; }
-  /* line 179, ../scss/general/_basic.scss */
+  /* line 182, ../scss/general/_basic.scss */
   .spelling.wrong {
     background-color: #ff3333; }
-  /* line 185, ../scss/general/_basic.scss */
+  /* line 188, ../scss/general/_basic.scss */
   .spelling.minor-mistake {
     background-color: #f2510c; }
-  /* line 190, ../scss/general/_basic.scss */
+  /* line 193, ../scss/general/_basic.scss */
   .spelling.correct {
     background-color: none;
     border: none; }
 
-/* line 198, ../scss/general/_basic.scss */
+/* line 201, ../scss/general/_basic.scss */
 #score-info {
   font-size: 28pt;
   text-align: center; }
-  /* line 202, ../scss/general/_basic.scss */
+  /* line 205, ../scss/general/_basic.scss */
   #score-info .score {
     font-weight: bold;
     font-size: 45pt;
     color: lightblue; }
-  /* line 208, ../scss/general/_basic.scss */
+  /* line 211, ../scss/general/_basic.scss */
   #score-info .ratio {
     font-weight: bold;
     font-size: 45pt;
     color: green; }
 
-/* line 215, ../scss/general/_basic.scss */
+/* line 218, ../scss/general/_basic.scss */
 .huge-fonticon {
   font-size: 30em;
   text-align: center; }

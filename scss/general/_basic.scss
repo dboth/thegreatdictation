@@ -27,7 +27,7 @@ body {
 
         &.page-footer {
             height: $tgd-footer-height;
-            background-color: #f8f8f8;
+            background-color: $tgd-primary-color;
         }
     }
 
@@ -53,8 +53,11 @@ body {
 
     .nav {
         li {
+            -webkit-transition: background-color 0.3s, color 0.3s;
+            transition: background-color 0.3s, color 0.3s;
             &:hover {
                 background-color: $gray-lighter;
+                color: $tgd-font-color;
             }
         }
     }

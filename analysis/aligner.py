@@ -105,17 +105,17 @@ class Aligner(object):
             if self.target[i] == " ":
                 for j in range(len(self.input)):
                     if self.target[i-1] == self.input[j]:  #match before space
-                        self.matrix[i+1][j+1].append(self.matrix_field(i-1, j, self.prefWordBound, "dontSplitWords1"))
+                        self.matrix[i+1][j+1].append(self.matrix_field(i-1, j, self.prefWordBound, "M"))
                     if self.target[i+1] == self.input[j]:  #match after space
-                        self.matrix[i+2][j+1].append(self.matrix_field(i, j, self.prefWordBound, "dontSplitWords2"))
+                        self.matrix[i+2][j+1].append(self.matrix_field(i, j, self.prefWordBound, "M"))
         for j in range(1, len(self.input)):	  #space in self.input
             if self.input[j] == " ":
                 for i in range(1, len(self.target)):
                     if self.input[j - 1] == self.target[i]:
                         if j > 1:
-                            self.matrix[i + 1][j + 1].append(self.matrix_field(i, j - 1, self.prefWordBound, "dontSplitWords3"))  #match before space
+                            self.matrix[i + 1][j + 1].append(self.matrix_field(i, j - 1, self.prefWordBound, "M"))  #match before space
                             if self.input[j+1] == self.target[i]:
-                                self.matrix[i+1][j+2].append(self.matrix_field(i, j, self.prefWordBound, "dontSplitWords4"))  #match after space
+                                self.matrix[i+1][j+2].append(self.matrix_field(i, j, self.prefWordBound, "M"))  #match after space
 
     def createPath(self):
         row = len(self.target)

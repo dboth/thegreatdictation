@@ -2,7 +2,8 @@
 
 import sys
 import json
-import levenshtein_bad as levenshtein
+import aligner
+
 
 class TheGreatDictation():
     '''Main analysis class'''
@@ -18,7 +19,7 @@ class TheGreatDictation():
 
         #calculated data
         self.diff_map = self.calcSimpleDiff(self.input_data, self.target_data)
-        self.levenshtein = self.calcLevenshteinDiff(self.input_data, self.target_data)
+        self.alignment = self.calcAlignmentDiff(self.target_data, self.input_data)
 
         #output
         self.output_json = self.buildOutputJSON()
@@ -47,8 +48,8 @@ class TheGreatDictation():
 
         return diff_map
 
-    def calcLevenshteinDiff(self, input_data, target_data):
-        return levenshtein.levenshtein(input_data, target_data, False)
+    def calcAlignmentDiff(self, input_data, target_data):
+        return aligner.Aligner(input_data, target_data, False).finalize()
 
     #CONTROL METHODS
 
@@ -66,7 +67,7 @@ class TheGreatDictation():
         output_json["data"].update({"target": self.target_data})
 
         output_json["data"].update({"diff_map": self.diff_map})
-        output_json["data"].update({"levenshtein": self.levenshtein})
+        output_json["data"].update({"levenshtein": self.alignment})
         return output_json
 
     def returnJSON(self):
@@ -74,6 +75,6 @@ class TheGreatDictation():
         return json.dumps([self.output_json])
 
 if __name__ == "__main__":
-    #tgd = TheGreatDictation('{"data" : {"input" : "Roosen sint rot", "target" : "Rosen sind rot", "text_id" : 4}}')
-    tgd = TheGreatDictation(sys.argv[1])
+    tgd = TheGreatDictation('{"data" : {"input" : "Ich bin Elefant", "target" : "Ich bin ein Elefant", "text_id" : 4}}')
+    #tgd = TheGreatDictation(sys.argv[1])
     print(tgd.returnJSON())

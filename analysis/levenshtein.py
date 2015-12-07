@@ -36,7 +36,7 @@ def levenshtein(string1, string2, debug=False):
     PunctuationWeight = 0.5
 
     dontSplitWords = 0.9
-    umlautsDict = {"Ä": "Ae", "Ö": "Oe", "Ü": "Ue", "\xe4": "ae", "ü": "oe", "ü": "ue"} 
+    umlautsDict = {"Ä": "Ae", "Ö": "Oe", "Ü": "Ue", "\xe4": "ae", "ü": "oe", "ü": "ue"}
     umlautWeight = 0
 
 
@@ -95,7 +95,7 @@ def levenshtein(string1, string2, debug=False):
                     if string2[j] in Punctuations:
                         matrix[i+1][j+1].append(matrix_field(i, j, PunctuationWeight, "punctuation"))
 
-                        
+
     #'don't split words' weight
     for i in range(len(string1)):										#space in string1
 	if string1[i] == " ":
@@ -103,10 +103,10 @@ def levenshtein(string1, string2, debug=False):
 		if string1[i-1] == string2[j]:									#match before space
 		    matrix[i+1][j+1].append(matrix_field(i-1,j, dontSplitWords, "dontSplitWords1"))
 		if string1[i+1] == string2[j]:									#match after space
-		    matrix[i+2][j+1].append(matrix_field(i,j, dontSplitWords, "dontSplitWords2"))	
+		    matrix[i+2][j+1].append(matrix_field(i,j, dontSplitWords, "dontSplitWords2"))
     for j in range(1,len(string2)):										#space in string2
 	if string2[j] == " ":
-	    for i in range(1,len(string1)):									
+	    for i in range(1,len(string1)):
 		if string2[j-1] == string1[i]:
 		    if j>1:
 			matrix[i+1][j+1].append(matrix_field(i, j-1, dontSplitWords, "dontSplitWords3"))	#match before space
@@ -122,7 +122,7 @@ def levenshtein(string1, string2, debug=False):
                 if string2[j:j+2] == umlautsDict[string1[i]]:
                     matrix[i+1][j+2].append(matrix_field(i, j, umlautWeight, "Umlaut"))
     """
-   
+
 
     #rest of the matrix is filled
     for x in range(1, len(string1)+1):				#in this loop, we calculate field x,y of the matrix
@@ -150,11 +150,8 @@ def levenshtein(string1, string2, debug=False):
         path.append([i, j, matrix[i][j]])
         i, j, _, _ = matrix[i][j]
 
-    
+
     return path
 
 if __name__ == "__main__":
     print(levenshtein("hallo", "du"))
-
-
-

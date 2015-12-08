@@ -7316,7 +7316,7 @@ select option[disabled] {
   vertical-align: top; }
   /* line 114, ../scss/general/_basic.scss */
   .error-container.no-margin {
-    margin: 0; }
+    margin: 3px 0 3px 0; }
   /* line 118, ../scss/general/_basic.scss */
   .error-container .arrow {
     padding: 3px 5px 3px 5px;
@@ -7393,7 +7393,7 @@ select option[disabled] {
   /* line 208, ../scss/general/_basic.scss */
   .legend .element.switch {
     background-color: #ffa100;
-    color: black; }
+    color: white; }
 
 /* line 216, ../scss/general/_basic.scss */
 .spelling {

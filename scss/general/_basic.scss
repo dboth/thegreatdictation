@@ -112,7 +112,7 @@ select {
     vertical-align: top;
 
     &.no-margin {
-        margin: 0;
+        margin: 3px 0 3px 0;
     }
 
     .arrow {
@@ -207,7 +207,7 @@ select {
 
         &.switch {
             background-color: $tgd-switch-color;
-            color: $tgd-font-color;
+            color: $tgd-font-contrast-color;
         }
     }
 }

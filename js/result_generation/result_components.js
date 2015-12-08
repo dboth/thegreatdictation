@@ -196,11 +196,21 @@ Result.prototype.createLevenshteinDiffInfo = function (target_id) {
 		var target = $("<span>");
 		target.addClass("target").html("&nbsp");
 
+		var add_space_necessary = false;
+
 		if (errortype === "M") {
 			container.addClass("no-margin");
 			input.addClass("match")
 				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
 		} else if (errortype === "M+") {
+			add_space_necessary = true;
+			container.addClass("no-margin");
+			input.addClass("match")
+				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
+		} else if (errortype === "+M") {
+			var add_space = $("<div>").addClass("error-container").html("&nbsp");
+			parent.append(add_space);
+
 			container.addClass("no-margin");
 			input.addClass("match")
 				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
@@ -237,12 +247,17 @@ Result.prototype.createLevenshteinDiffInfo = function (target_id) {
 		}
 
 		container.append(input);
-		if (errortype !== "M" && errortype !== "D") {
+		if (errortype !== "M" && errortype !== "D" && errortype !== "M+" && errortype !== "+M") {
 			var arrow = $("<i>").addClass("fa fa-long-arrow-down arrow");
 			container.append(arrow);
 		}
 		container.append(target);
+
 		parent.append(container);
+		if (add_space_necessary) {
+			var add_space = $("<div>").addClass("error-container").html("&nbsp");
+			parent.append(add_space);
+		}
 
 	}
 

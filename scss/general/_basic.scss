@@ -197,17 +197,17 @@ select {
 
         &.capitalization {
             background-color: $tgd-capitalization-color;
-            color: $tgd-font-contrast-color;
+            color: $tgd-font-color;
         }
 
         &.punctuation {
             background-color: $tgd-punctuation-color;
-            color: $tgd-font-contrast-color;
+            color: $tgd-font-color;
         }
 
         &.switch {
             background-color: $tgd-switch-color;
-            color: $tgd-font-contrast-color;
+            color: $tgd-font-color;
         }
     }
 }

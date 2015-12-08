@@ -7340,15 +7340,15 @@ select option[disabled] {
       padding: 3px 0px 3px 0px; }
     /* line 142, ../scss/general/_basic.scss */
     .error-container .input.substitution {
-      background-color: #ee1313;
+      background-color: #b40000;
       color: white; }
     /* line 147, ../scss/general/_basic.scss */
     .error-container .input.deletion {
-      background-color: #e0590d;
+      background-color: #e00dde;
       color: white; }
     /* line 152, ../scss/general/_basic.scss */
     .error-container .input.insertion {
-      background-color: #e93d17;
+      background-color: #ff5b28;
       color: white; }
     /* line 157, ../scss/general/_basic.scss */
     .error-container .input.capitalization {
@@ -7360,7 +7360,7 @@ select option[disabled] {
       color: white; }
     /* line 167, ../scss/general/_basic.scss */
     .error-container .input.switch {
-      background-color: #ffbe4f;
+      background-color: #ffa100;
       color: white; }
 
 /* line 176, ../scss/general/_basic.scss */
@@ -7372,28 +7372,28 @@ select option[disabled] {
   border: 1px solid transparent; }
   /* line 183, ../scss/general/_basic.scss */
   .legend .element.substitution {
-    background-color: #ee1313;
+    background-color: #b40000;
     color: white; }
   /* line 188, ../scss/general/_basic.scss */
   .legend .element.deletion {
-    background-color: #e0590d;
+    background-color: #e00dde;
     color: white; }
   /* line 193, ../scss/general/_basic.scss */
   .legend .element.insertion {
-    background-color: #e93d17;
+    background-color: #ff5b28;
     color: white; }
   /* line 198, ../scss/general/_basic.scss */
   .legend .element.capitalization {
     background-color: #ffe145;
-    color: white; }
+    color: black; }
   /* line 203, ../scss/general/_basic.scss */
   .legend .element.punctuation {
     background-color: #6cd3ff;
-    color: white; }
+    color: black; }
   /* line 208, ../scss/general/_basic.scss */
   .legend .element.switch {
-    background-color: #ffbe4f;
-    color: white; }
+    background-color: #ffa100;
+    color: black; }
 
 /* line 216, ../scss/general/_basic.scss */
 .spelling {

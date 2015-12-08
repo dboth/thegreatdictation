@@ -99,7 +99,6 @@ select {
     &#error-indication {
         font-size: 14pt;
         overflow: auto;
-        vertical-align: top;
     }
 }
 
@@ -110,7 +109,8 @@ select {
     margin: 3px;
     text-align: center;
     display: inline-block;
-
+    vertical-align: top;
+    
     &.no-margin {
         margin: 0;
     }

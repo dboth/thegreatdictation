@@ -110,7 +110,7 @@ select {
     text-align: center;
     display: inline-block;
     vertical-align: top;
-    
+
     &.no-margin {
         margin: 0;
     }
@@ -170,6 +170,46 @@ select {
         }
     }
 
+}
+
+.legend {
+    .element {
+        display: inline-block;
+        border-radius: 6px;
+        padding: 2px 6px 2px 6px;
+        margin: 3px 0 3px 5px;
+        border: 1px solid transparent;
+
+        &.substitution {
+            background-color: $tgd-sub-color;
+            color: $tgd-font-contrast-color;
+        }
+
+        &.deletion {
+            background-color: $tgd-deletion-color;
+            color: $tgd-font-contrast-color;
+        }
+
+        &.insertion {
+            background-color: $tgd-insert-color;
+            color: $tgd-font-contrast-color;
+        }
+
+        &.capitalization {
+            background-color: $tgd-capitalization-color;
+            color: $tgd-font-contrast-color;
+        }
+
+        &.punctuation {
+            background-color: $tgd-punctuation-color;
+            color: $tgd-font-contrast-color;
+        }
+
+        &.switch {
+            background-color: $tgd-switch-color;
+            color: $tgd-font-contrast-color;
+        }
+    }
 }
 
 // WORDALIGNMENT

@@ -109,7 +109,8 @@ select {
     margin: 3px;
     text-align: center;
     display: inline-block;
-
+    vertical-align: top;
+    
     &.no-margin {
         margin: 0;
     }
@@ -171,7 +172,7 @@ select {
 
 }
 
-// ALIGNMENT
+// WORDALIGNMENT
 .spelling {
     float: left;
     border-radius: 6px;
@@ -197,7 +198,6 @@ select {
 }
 
 // SCORE
-
 #score-info {
     font-size: 28pt;
     text-align: center;

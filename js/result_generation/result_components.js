@@ -200,7 +200,10 @@ Result.prototype.createLevenshteinDiffInfo = function (target_id) {
 			container.addClass("no-margin");
 			input.addClass("match")
 				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
-
+		} else if (errortype === "M+") {
+			container.addClass("no-margin");
+			input.addClass("match")
+				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
 		} else if (errortype === "I") {
 			input.addClass("insertion")
 				.html("_");

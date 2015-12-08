@@ -75,6 +75,6 @@ class TheGreatDictation():
         return json.dumps([self.output_json])
 
 if __name__ == "__main__":
-    tgd = TheGreatDictation('{"data" : {"input" : "Ich bin Elefant", "target" : "Ich bin ein Elefant", "text_id" : 4}}')
-    #tgd = TheGreatDictation(sys.argv[1])
+    #tgd = TheGreatDictation('{"data" : {"input" : "Ich bin Elefant", "target" : "Ich bin ein Elefant", "text_id" : 4}}')
+    tgd = TheGreatDictation(sys.argv[1])
     print(tgd.returnJSON())

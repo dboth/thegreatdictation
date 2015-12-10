@@ -47,13 +47,13 @@ Schedule and concrete Distribution of Tasks
 We divided the accrued tasks according to the special skills each of us brings in.
 
 **Main Responsibilities**:  
-*Dominik*: Backend development, database management
+*Dominik*: Backend-Development, Database Management
 
-*Tobias*: Analysing algorithms, kinds of mistakes  
+*Tobias*: Analysing-Algorithms, kind of mistakes  
 
 *Svenja*: Didatic background of dictation/listening comprehension and feedback/result (research)  
 
-*Tonio*: Frontend development, database management, project management
+*Tonio*: Frontend-Development, Database Management, Project Management
 
 Although everybody participates in each section for minor tasks.
 
@@ -66,21 +66,3 @@ Although everybody participates in each section for minor tasks.
 **02.02.16**  version with features finished, final presentation    
 ca.**12.03.16** final submission of code and documentation  
 
-Contacts
-----
-
-S.Lohse (--at--) stud.uni-heidelberg.de
-
-tobygoebel (--at--) web.de
-
-uni (--at--) dboth.de
-
-uni (--at--) tonioweidler.de
-
-Requirements (until now)
-----
-- Server
-- PHP >= 5.3
-- Python 2 or 3
-- Apache user (normally www-data) able to execute Python scripts in code/analysis
-- MySQL database

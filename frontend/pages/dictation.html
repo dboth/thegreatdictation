@@ -1,0 +1,137 @@
+<div class="container" id="dictation-container">
+    <form action="<tgd_analysispath>" method="POST" id="dictation-form">
+
+        <div class="row row-content; general-page">
+            <div class="text-center page-header">
+                <h3>Start the Dictation</h3>
+            </div>
+        </div>
+		<div class="text-center">
+			<p class="quote">
+			<i><b>"Success is not final, failure is not fatal: it is the courage to continue that counts"</b> <br>Winston Churchill, former british prime minister and 'Nobel Prize' winner</i>
+			</p>
+		</div>
+		<hr/>
+        <div class="row row-content">
+            <div class="col-xs-12 explanation">
+                <label>How to</label>
+                <ul>
+                    <li>Choose a text to start</li>
+                    <li>Listen to the whole audio and Write down all sentences</li>
+                    <li>Seperate Sentences by line breaks</li>
+                    <li>Testing with: <ol>
+                        <li>"Rosen sind rot und Veilchen sind blau, ich mag gerne Brot, das ich mir oft klau"</li>
+                        <li>"Ich bin ein Elefant"</li>
+                        <li>"Dieses Projekt übersteigt alles in Awesomenesshaftigkeit"</li>
+                    </ol></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row row-content">
+
+            <label for="dictation-id" class="control-label col-xs-3 col-sm-1 col-content">Choose</label>
+            <div class="col-xs-9 col-sm-3 col-content">
+                <select class="form-control" id="dictation-id" name="subject">
+                    <option selected value="0">Text I</option>
+                    <option value="1">Text II</option>
+                    <option value="2">Text III</option>
+                </select>
+            </div>
+
+            <div class="col-xs-12 col-sm-2 text-center col-content">
+                <button class="btn btn-primary" id="select-text-button">Select this text</button>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 text-center col-content" id="audio-player">
+                AUDIO PLAYER GOES HERE
+            </div>
+
+        </div>
+
+        <div class="row row-content">
+
+            <div class="col-xs-12">
+
+                <div class="form-group">
+                    <label for="data">What you understand</label>
+                    <textarea  class="form-control" rows="10" placeholder="Choose a text first!" id="dictation-text" name="data" disabled>Ich bin ein Elefant</textarea>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary" id="dictation-submit" disabled>Finish Dictation</button>
+                </div>
+
+            </div>
+
+        </div>
+    </form>
+</div>
+
+<div class="container" id="analysis-container" hidden>
+    <div class="row row-content">
+        <div class="text-center page-header">
+            <h3>Your Results</h3>
+        </div>
+    </div>
+
+    <div class="row row-content" id="input-info">
+        <div class="col-xs-12">
+            <label>You entered</label>
+            <div class="well" id="error-indication">
+                &nbsp;
+            </div>
+        </div>
+    </div>
+
+    <div class="row row-content" id="input-info">
+        <div class="col-xs-12 text-center">
+            <div class="legend">
+                <div class="element substitution">
+                    Wrong Letter
+                </div>
+                <div class="element insertion">
+                    Missing Letter
+                </div>
+                <div class="element deletion">
+                    Waste Letter
+                </div>
+                <div class="element punctuation">
+                    Punctuation Mistake
+                </div>
+                <div class="element switch">
+                    Switched Letters
+                </div>
+                <div class="element capitalization">
+                    Capitalization Mistake
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row row-content" id="target-info">
+        <div class="col-xs-12">
+            <label>You heard</label>
+            <div class="well">
+                Target will go here
+            </div>
+        </div>
+    </div>
+
+    <div class="row row-content" id="score-info">
+        <div class="col-xs-12 col-sm-6">
+            <label>Correct characters</label>
+            <div class="ratio">
+                Target will go here
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6">
+            <label>Your score</label>
+            <div class="score">
+                Target will go here
+            </div>
+        </div>
+    </div>
+
+</div>

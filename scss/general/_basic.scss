@@ -1,0 +1,261 @@
+/* DOCUMENT */
+html {
+    height: 100%;
+    //overflow-y: scroll;
+}
+
+body {
+    padding: 50px 0 0 0; //save content from navbar
+    height: 100%;
+    margin: 0;
+}
+
+#wrapper {
+    min-height: 100%;
+    position: relative;
+
+    #content {
+        padding-bottom: $tgd-footer-height + 100px;
+    }
+
+    footer {
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        width: 100%;
+        box-shadow: 0 0 0 1px white, 0 0 0 2px rgb(223, 223, 223);
+
+        &.page-footer {
+            height: $tgd-footer-height;
+            background-color: $tgd-primary-color;
+        }
+    }
+
+}
+/* GRID */
+
+.row-content {
+    @include row-margin;
+}
+
+.col-content {
+    @include col-margin;
+}
+
+/* NAVIGATION */
+
+.navbar {
+    .navbar-brand {
+        img {
+            margin-top: -8px;
+        }
+    }
+
+    .nav {
+        li {
+            -webkit-transition: background-color 0.3s, color 0.3s;
+            transition: background-color 0.3s, color 0.3s;
+            &:hover {
+                background-color: $gray-lighter;
+                color: $tgd-font-color;
+            }
+        }
+    }
+}
+
+a {
+    outline:            none !important;
+}
+
+/* FORMS */
+
+textarea {
+    resize:     none;
+}
+
+select {
+    option {
+        &[disabled] {
+            color:  $gray-lighter;
+        }
+    }
+}
+
+/* STYLING */
+
+.info {
+    @include top-bottom-margin;
+    @include left-right-margin;
+    font-weight: bold;
+}
+
+.jumbotron {
+    &.title-jumbo {
+        background-color: $tgd-secondary-color;
+    }
+}
+
+.well {
+    &#error-indication {
+        font-size: 14pt;
+        overflow: auto;
+    }
+}
+
+
+// LEVENSHTEIN
+
+.error-container {
+    margin: 3px;
+    text-align: center;
+    display: inline-block;
+    vertical-align: top;
+
+    &.no-margin {
+        margin: 3px 0 3px 0;
+    }
+
+    .arrow {
+        padding: 3px 5px 3px 5px;
+        display: block;
+        border-radius: 10px;
+        margin: 0 auto;
+    }
+
+    .target {
+        padding: 3px 5px 3px 5px;
+        display: block;
+        border-radius: 10px;
+        margin: 0 auto;
+    }
+
+    .input {
+        padding: 3px 5px 3px 5px;
+        display: block;
+        border-radius: 10px;
+        margin: 0 auto;
+
+        &.match {
+            padding: 3px 0px 3px 0px;
+        }
+
+        &.substitution {
+            background-color: $tgd-sub-color;
+            color: $tgd-font-contrast-color;
+        }
+
+        &.deletion {
+            background-color: $tgd-deletion-color;
+            color: $tgd-font-contrast-color;
+        }
+
+        &.insertion {
+            background-color: $tgd-insert-color;
+            color: $tgd-font-contrast-color;
+        }
+
+        &.capitalization {
+            background-color: $tgd-capitalization-color;
+            color: $tgd-font-contrast-color;
+        }
+
+        &.punctuation {
+            background-color: $tgd-punctuation-color;
+            color: $tgd-font-contrast-color;
+        }
+
+        &.switch {
+            background-color: $tgd-switch-color;
+            color: $tgd-font-contrast-color;
+        }
+    }
+
+}
+
+.legend {
+    .element {
+        display: inline-block;
+        border-radius: 6px;
+        padding: 2px 6px 2px 6px;
+        margin: 3px 0 3px 5px;
+        border: 1px solid transparent;
+
+        &.substitution {
+            background-color: $tgd-sub-color;
+            color: $tgd-font-contrast-color;
+        }
+
+        &.deletion {
+            background-color: $tgd-deletion-color;
+            color: $tgd-font-contrast-color;
+        }
+
+        &.insertion {
+            background-color: $tgd-insert-color;
+            color: $tgd-font-contrast-color;
+        }
+
+        &.capitalization {
+            background-color: $tgd-capitalization-color;
+            color: $tgd-font-color;
+        }
+
+        &.punctuation {
+            background-color: $tgd-punctuation-color;
+            color: $tgd-font-color;
+        }
+
+        &.switch {
+            background-color: $tgd-switch-color;
+            color: $tgd-font-contrast-color;
+        }
+    }
+}
+
+// WORDALIGNMENT
+.spelling {
+    float: left;
+    border-radius: 6px;
+    padding: 2px 6px 2px 6px;
+    margin: 3px 0 3px 5px;
+    border: 1px solid transparent;
+
+    &.wrong {
+        background-color: $tgd-wrong-color;
+        //border-color: darken($tgd-wrong-color, 30);
+        //@include box-shadow(0 0 2px #858585);
+    }
+
+    &.minor-mistake {
+        background-color: $tgd-minor-mistake-color;
+        //border-color: $tgd-minor-mistake-color;
+    }
+
+    &.correct {
+        background-color: none;
+        border: none;
+    }
+}
+
+// SCORE
+#score-info {
+    font-size: 28pt;
+    text-align: center;
+
+    .score {
+        font-weight: bold;
+        font-size: 45pt;
+        color: lightblue;
+    }
+
+    .ratio {
+        font-weight: bold;
+        font-size: 45pt;
+        color: green;
+    }
+}
+
+.huge-fonticon {
+    font-size: 30em;
+    text-align: center;
+}

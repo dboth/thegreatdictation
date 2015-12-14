@@ -5,10 +5,9 @@ $tgd-bg-color: white;
 $tgd-primary-color: #354459;
 $tgd-secondary-color: lightblue;
 
-
-$tgd-navfont-color: white;
 $tgd-font-color: black;
 $tgd-font-contrast-color: white;
+$tgd-navfont-color: $tgd-font-contrast-color;
 
 // ALIGNMENT COLORS
 $tgd-correct-color:     #90ee90;
@@ -17,9 +16,9 @@ $tgd-minor-mistake-color: #f2510c;
 
 // LEVENSHTEIN COLORS
 $tgd-match-color: none;
+$tgd-sub-color: #b40000;
 $tgd-insert-color: #ff5b28;
 $tgd-deletion-color: #e00dde;
-$tgd-sub-color: #b40000;
 $tgd-punctuation-color: #6cd3ff;
 $tgd-capitalization-color: #ffe145;
 $tgd-switch-color: #ffa100;

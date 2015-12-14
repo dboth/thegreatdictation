@@ -5,7 +5,7 @@ import json
 import aligner
 
 
-class TheGreatDictation():
+class Result():
     '''Main analysis class'''
     def __init__(self, parameter):
         '''do everything.
@@ -75,6 +75,6 @@ class TheGreatDictation():
         return json.dumps([self.output_json])
 
 if __name__ == "__main__":
-    #tgd = TheGreatDictation('{"data" : {"input" : "Ich bin Elefant", "target" : "Ich bin ein Elefant", "text_id" : 4}}')
-    tgd = TheGreatDictation(sys.argv[1])
+    #tgd = Result('{"data" : {"input" : "Ich bin Elefant", "target" : "Ich bin ein Elefant", "text_id" : 4}}')
+    tgd = Result(sys.argv[1])
     print(tgd.returnJSON())

@@ -26,7 +26,7 @@ class Aligner(object):
         self.prefWordBound = prefWordBound
         self.umlauts = umlauts
         self.wordSwitch = wordSwitch
-        
+
         #BOOLEANS
         self.switcher = switcher
 
@@ -121,7 +121,7 @@ class Aligner(object):
                             if self.input[j+1] == self.target[i]:
                                 self.matrix[i+1][j+2].append(self.matrix_field(i, j, self.prefWordBound, "+M"))  #match after space
 
-    def indexSplit(self, inputString): #neccessary for wordSwitch							
+    def indexSplit(self, inputString):  #neccessary for wordSwitch
         result = []
         counter = 0
         for letter_iter in range(len(inputString)):
@@ -132,6 +132,7 @@ class Aligner(object):
                 result.append([inputString[counter:letter_iter+1], counter, letter_iter+1])
         return result
 
+<<<<<<< HEAD
     def considerUmlauts(self):
         for i in range(len(self.target)):
             if self.target[i] in self.umlaut_bag:
@@ -139,15 +140,22 @@ class Aligner(object):
                     if self.input[j:j+2] == self.umlaut_bag[self.target[i]]:
                         self.matrix[i+1][j+2].append(self.matrix_field(i, j, self.umlauts, "Umlaut"))
                 
+=======
+>>>>>>> 250d5a993d053621b5d1722beb1b677205a5f190
     def switchWords(self):
         input_words = self.indexSplit(self.input)
         target_words = self.indexSplit(self.target)
         for input_iter in range(len(input_words)-1):
-            for target_iter in range(len(target_words)-1):                
+            for target_iter in range(len(target_words)-1):
                 switcher = Aligner(input_words[input_iter+1][0] + " " + input_words[input_iter][0], target_words[target_iter][0] + " " + target_words[target_iter+1][0], match=self.match, sub=self.sub, insert=self.insert, delete=self.delete, switch=self.switch, capitals=self.capitals, simPunct=self.simPunct, punct=self.punct, prefWordBound=self.prefWordBound, umlauts=self.umlauts, wordSwitch = self.wordSwitch, switcher = True)
                 switcher.finalize()
                 self.matrix[target_words[target_iter+1][2]][input_words[input_iter+1][2]].append([input_words[input_iter][1],target_words[target_iter][1], switcher.path[0][2][2]+self.wordSwitch, "wordSwitch"])
+<<<<<<< HEAD
  
+=======
+
+
+>>>>>>> 250d5a993d053621b5d1722beb1b677205a5f190
     def createPath(self):
         row = len(self.target)
         col = len(self.input)

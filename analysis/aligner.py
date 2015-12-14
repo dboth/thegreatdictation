@@ -5,7 +5,7 @@ from collections import namedtuple
 import frames
 
 class Aligner(object):
-    def __init__(self, input_str, target_str, match=0, sub=1, insert=1, delete=1, switch=1, capitals=0.5, simPunct=0.2, punct=0.5, prefWordBound=0.9, umlauts=0):
+    def __init__(self, input_str, target_str, match=0, sub=1, insert=1, delete=1, switch=1, capitals=0.5, simPunct=0.2, punct=0.5, prefWordBound=0.9, umlauts=0, wordSwitch = 0.1, switcher = False):
         #DEBUGGER DONT TOUCH
         self.d = frames.Debugger()
         self.debug = self.d.debug
@@ -25,6 +25,10 @@ class Aligner(object):
         self.punct = punct
         self.prefWordBound = prefWordBound
         self.umlauts = umlauts
+        self.wordSwitch = wordSwitch
+        
+        #BOOLEANS
+        self.switcher = switcher
 
         #BAGS
         self.simPunctBag = [".", "!", ";", ":"]
@@ -117,6 +121,35 @@ class Aligner(object):
                             if self.input[j+1] == self.target[i]:
                                 self.matrix[i+1][j+2].append(self.matrix_field(i, j, self.prefWordBound, "+M"))  #match after space
 
+    def indexSplit(self, inputString): #neccessary for wordSwitch							
+        result = []
+        counter = 0
+        for letter_iter in range(len(inputString)):
+            if inputString[letter_iter] == " ":
+                result.append([inputString[counter:letter_iter], counter, letter_iter])
+                counter = letter_iter+1
+            if letter_iter == len(inputString)-1:
+                result.append([inputString[counter:letter_iter+1], counter, letter_iter+1])
+        return result
+		
+    def switchWords(self):
+        input_words = self.indexSplit(self.input)
+        target_words = self.indexSplit(self.target)
+        print self.matrix[len(self.target)][len(self.input)]
+        print "\n"
+        print input_words
+        print target_words
+        print "\n\n"
+        for input_iter in range(len(input_words)-1):
+            for target_iter in range(len(target_words)-1):                
+                switcher = Aligner(input_words[input_iter+1][0] + " " + input_words[input_iter][0], target_words[target_iter][0] + " " + target_words[target_iter+1][0], match=self.match, sub=self.sub, insert=self.insert, delete=self.delete, switch=self.switch, capitals=self.capitals, simPunct=self.simPunct, punct=self.punct, prefWordBound=self.prefWordBound, umlauts=self.umlauts, wordSwitch = self.wordSwitch, switcher = True)
+                switcher.finalize()
+                print input_iter
+                print target_iter
+                print "\n"
+                self.matrix[target_words[target_iter+1][2]][input_words[input_iter+1][2]].append([input_words[input_iter][1],target_words[target_iter][1], switcher.path[0][2][2]+self.wordSwitch, "wordSwitch"])
+ 
+
     def createPath(self):
         row = len(self.target)
         col = len(self.input)
@@ -130,13 +163,15 @@ class Aligner(object):
         self.applyCapitals()
         self.applyPunctuation()
         self.applyPrefWordBound()
+        if self.switcher == False:
+            self.switchWords()
         self.fillMatrix()
         self.createPath()
 
         return self.path
 
 if __name__ == "__main__":
-    a = Aligner("Ich bin ein Elefant", "Ich bin Elefant")
+    a = Aligner("Ich bin ein Elefant", "Ich ein bin Elefant")
     a.d.set_debug(True)
 
     print(a.finalize())

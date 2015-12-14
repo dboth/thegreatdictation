@@ -21,10 +21,6 @@ class FaultPenalizer(object):
     def plugInFaultValues(self):
         output = []
         for el in self.__dict__.iteritems():
-            print el
-        print "\n"
-        for field in self.inputList: 
-            print field
             test = False
             for fault in self.__dict__.iteritems():                           
                 if field[2][3] in ["M+", "+M"]:
@@ -32,7 +28,5 @@ class FaultPenalizer(object):
                 elif field[2][3] == fault[0]:
                     output.append([field[0], field[1], (field[2][0], field[2][1], fault[1], field[2][3])])
                     test = True
-            if test == False:
-                    print "error in FaultPenalizer: fault type does not exist"
 
         return output

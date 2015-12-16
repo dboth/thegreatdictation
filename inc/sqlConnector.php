@@ -41,5 +41,16 @@ class SqlConnector {
         $stmt->bind("ss",$input,$output);
         $stmt->execute();
     }
+    
+    public function saveFeedback($title, $subject, $text){
+        //feedback table sollte dann auch eine time spalte haben, die automatisch den timestamp erhält
+        if (!($stmt = $this->db->prepare("INSERT INTO feedback (title, subject, text) VALUES(?, ?, ?)"))) {
+            echo "TODO: return an error";
+            return false;
+            }
+        $stmt->bind("sss",$title, $subject, $text);
+        $stmt->execute();
+        return true;
+    }
 
 }

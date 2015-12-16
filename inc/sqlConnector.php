@@ -11,7 +11,7 @@ class SqlConnector {
     
     public function __construct($live = false) {
 
-            $this->verbindung = new mysqli($this->mysql_host, $this->mysql_user, $this->mysql_passwort, $this->mysql_db);
+            $this->verbindung = new mysqli($this->mysql_host, $this->mysql_user, $this->mysql_passwort, $this->mysql_db) or echo "TODO: return an error";
 
     }
 
@@ -34,6 +34,12 @@ class SqlConnector {
 
     public function esc($str) {
         return $this->verbindung->escape_string($str);
+    }
+    
+    public function saveAnalysisResult($input, $output){
+        if (!($stmt = $this->db->prepare("INSERT INTO results (input, output) VALUES(?, ?)"))) echo "TODO: return an error";
+        $stmt->bind("ss",$input,$output);
+        $stmt->execute();
     }
 
 }

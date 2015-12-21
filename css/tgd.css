@@ -7267,31 +7267,33 @@ body {
 /* NAVIGATION */
 /* line 49, ../scss/general/_basic.scss */
 .navbar .navbar-brand img {
-  margin-top: -8px; }
-/* line 55, ../scss/general/_basic.scss */
+  margin-top: -8px;
+  -webkit-filter: invert(100%);
+          filter: invert(100%); }
+/* line 56, ../scss/general/_basic.scss */
 .navbar .nav li {
   -webkit-transition: background-color 0.3s, color 0.3s;
   transition: background-color 0.3s, color 0.3s; }
-  /* line 58, ../scss/general/_basic.scss */
+  /* line 59, ../scss/general/_basic.scss */
   .navbar .nav li:hover {
     background-color: #eeeeee;
     color: black; }
 
-/* line 66, ../scss/general/_basic.scss */
+/* line 67, ../scss/general/_basic.scss */
 a {
   outline: none !important; }
 
 /* FORMS */
-/* line 72, ../scss/general/_basic.scss */
+/* line 73, ../scss/general/_basic.scss */
 textarea {
   resize: none; }
 
-/* line 78, ../scss/general/_basic.scss */
+/* line 79, ../scss/general/_basic.scss */
 select option[disabled] {
   color: #eeeeee; }
 
 /* STYLING */
-/* line 86, ../scss/general/_basic.scss */
+/* line 87, ../scss/general/_basic.scss */
 .info {
   margin-top: 12.5px;
   margin-bottom: 25px;
@@ -7299,136 +7301,136 @@ select option[disabled] {
   padding-right: 15px;
   font-weight: bold; }
 
-/* line 93, ../scss/general/_basic.scss */
+/* line 94, ../scss/general/_basic.scss */
 .jumbotron.title-jumbo {
   background-color: lightblue; }
 
-/* line 99, ../scss/general/_basic.scss */
+/* line 100, ../scss/general/_basic.scss */
 .well#error-indication {
   font-size: 14pt;
   overflow: auto; }
 
-/* line 108, ../scss/general/_basic.scss */
+/* line 109, ../scss/general/_basic.scss */
 .error-container {
   margin: 3px;
   text-align: center;
   display: inline-block;
   vertical-align: top; }
-  /* line 114, ../scss/general/_basic.scss */
+  /* line 115, ../scss/general/_basic.scss */
   .error-container.no-margin {
     margin: 3px 0 3px 0; }
-  /* line 118, ../scss/general/_basic.scss */
+  /* line 119, ../scss/general/_basic.scss */
   .error-container .arrow {
     padding: 3px 5px 3px 5px;
     display: block;
     border-radius: 10px;
     margin: 0 auto; }
-  /* line 125, ../scss/general/_basic.scss */
+  /* line 126, ../scss/general/_basic.scss */
   .error-container .target {
     padding: 3px 5px 3px 5px;
     display: block;
     border-radius: 10px;
     margin: 0 auto; }
-  /* line 132, ../scss/general/_basic.scss */
+  /* line 133, ../scss/general/_basic.scss */
   .error-container .input {
     padding: 3px 5px 3px 5px;
     display: block;
     border-radius: 10px;
     margin: 0 auto; }
-    /* line 138, ../scss/general/_basic.scss */
+    /* line 139, ../scss/general/_basic.scss */
     .error-container .input.match {
       padding: 3px 0px 3px 0px; }
-    /* line 142, ../scss/general/_basic.scss */
+    /* line 143, ../scss/general/_basic.scss */
     .error-container .input.substitution {
       background-color: #b40000;
       color: white; }
-    /* line 147, ../scss/general/_basic.scss */
+    /* line 148, ../scss/general/_basic.scss */
     .error-container .input.deletion {
       background-color: #e00dde;
       color: white; }
-    /* line 152, ../scss/general/_basic.scss */
+    /* line 153, ../scss/general/_basic.scss */
     .error-container .input.insertion {
       background-color: #ff5b28;
       color: white; }
-    /* line 157, ../scss/general/_basic.scss */
+    /* line 158, ../scss/general/_basic.scss */
     .error-container .input.capitalization {
       background-color: #ffe145;
       color: white; }
-    /* line 162, ../scss/general/_basic.scss */
+    /* line 163, ../scss/general/_basic.scss */
     .error-container .input.punctuation {
       background-color: #6cd3ff;
       color: white; }
-    /* line 167, ../scss/general/_basic.scss */
+    /* line 168, ../scss/general/_basic.scss */
     .error-container .input.switch {
       background-color: #ffa100;
       color: white; }
 
-/* line 176, ../scss/general/_basic.scss */
+/* line 177, ../scss/general/_basic.scss */
 .legend .element {
   display: inline-block;
   border-radius: 6px;
   padding: 2px 6px 2px 6px;
   margin: 3px 0 3px 5px;
   border: 1px solid transparent; }
-  /* line 183, ../scss/general/_basic.scss */
+  /* line 184, ../scss/general/_basic.scss */
   .legend .element.substitution {
     background-color: #b40000;
     color: white; }
-  /* line 188, ../scss/general/_basic.scss */
+  /* line 189, ../scss/general/_basic.scss */
   .legend .element.deletion {
     background-color: #e00dde;
     color: white; }
-  /* line 193, ../scss/general/_basic.scss */
+  /* line 194, ../scss/general/_basic.scss */
   .legend .element.insertion {
     background-color: #ff5b28;
     color: white; }
-  /* line 198, ../scss/general/_basic.scss */
+  /* line 199, ../scss/general/_basic.scss */
   .legend .element.capitalization {
     background-color: #ffe145;
     color: black; }
-  /* line 203, ../scss/general/_basic.scss */
+  /* line 204, ../scss/general/_basic.scss */
   .legend .element.punctuation {
     background-color: #6cd3ff;
     color: black; }
-  /* line 208, ../scss/general/_basic.scss */
+  /* line 209, ../scss/general/_basic.scss */
   .legend .element.switch {
     background-color: #ffa100;
     color: white; }
 
-/* line 216, ../scss/general/_basic.scss */
+/* line 217, ../scss/general/_basic.scss */
 .spelling {
   float: left;
   border-radius: 6px;
   padding: 2px 6px 2px 6px;
   margin: 3px 0 3px 5px;
   border: 1px solid transparent; }
-  /* line 223, ../scss/general/_basic.scss */
+  /* line 224, ../scss/general/_basic.scss */
   .spelling.wrong {
     background-color: #ff3333; }
-  /* line 229, ../scss/general/_basic.scss */
+  /* line 230, ../scss/general/_basic.scss */
   .spelling.minor-mistake {
     background-color: #f2510c; }
-  /* line 234, ../scss/general/_basic.scss */
+  /* line 235, ../scss/general/_basic.scss */
   .spelling.correct {
     background-color: none;
     border: none; }
 
-/* line 241, ../scss/general/_basic.scss */
+/* line 242, ../scss/general/_basic.scss */
 #score-info {
   font-size: 28pt;
   text-align: center; }
-  /* line 245, ../scss/general/_basic.scss */
+  /* line 246, ../scss/general/_basic.scss */
   #score-info .score {
     font-weight: bold;
     font-size: 45pt;
     color: lightblue; }
-  /* line 251, ../scss/general/_basic.scss */
+  /* line 252, ../scss/general/_basic.scss */
   #score-info .ratio {
     font-weight: bold;
     font-size: 45pt;
     color: green; }
 
-/* line 258, ../scss/general/_basic.scss */
+/* line 259, ../scss/general/_basic.scss */
 .huge-fonticon {
   font-size: 30em;
   text-align: center; }

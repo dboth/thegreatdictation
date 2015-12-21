@@ -49,6 +49,8 @@ $(document).ready(function () {
         var action = $(this).attr("action");
         var method = $(this).attr("method");
 
+        console.log({data: JSON.stringify(data)});
+
         //SEND AND RECEIVE DATA FROM SERVER
         $.ajax({
             url: action,

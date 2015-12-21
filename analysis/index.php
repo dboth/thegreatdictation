@@ -1,6 +1,7 @@
 <?php
 //include the configs
 require_once __DIR__."/../inc/config.php";
+require_once __DIR__."/../inc/sqlConnector.php";
 
 //set the output to json
 header('Content-Type: application/json');
@@ -27,7 +28,7 @@ $new_json = array(
         //todo: add serverside information
     )
 );
-
+$input_json = json_encode($new_json);
 //escapeshellarg is shitty for windows because it replaces all double quotes.
 //therefore if on windows and testing do not use that and escape the argument with a rudimentary version of the escaper
 if (DIRECTORY_SEPARATOR == '\\' && $GLOBALS["conf"]["testing"]){
@@ -35,10 +36,10 @@ if (DIRECTORY_SEPARATOR == '\\' && $GLOBALS["conf"]["testing"]){
     function shitty_escapeshellarg($st){
         return '"'.str_replace('"','\\"',$st).'"';
     }
-    $argument = shitty_escapeshellarg(json_encode($new_json));
+    $argument = shitty_escapeshellarg($input_json);
 } else {
     //on linux everythings fine
-    $argument = escapeshellarg(json_encode($new_json));
+    $argument = escapeshellarg($input_json);
 }
 
 //var_dump($argument);
@@ -46,5 +47,9 @@ if (DIRECTORY_SEPARATOR == '\\' && $GLOBALS["conf"]["testing"]){
 //create the command
 $command = "python ". __DIR__ ."/analyse.py $argument";
 
-//execute the command (system() prints the output)
-system($command);
+//execute the command (system() prints the output) exec does not
+$output = exec($command);
+/* ONLY WORKS ON SERVER..
+$sql = new SqlConnector();
+$sql->saveAnalysisResult($input_json, $output);
+*/

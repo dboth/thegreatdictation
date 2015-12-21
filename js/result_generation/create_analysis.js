@@ -49,16 +49,16 @@ $(document).ready(function () {
         var action = $(this).attr("action");
         var method = $(this).attr("method");
 
-        console.log({data: JSON.stringify(data)});
-
         //SEND AND RECEIVE DATA FROM SERVER
         $.ajax({
             url: action,
             data: {data: JSON.stringify(data)},
             type: method
         }).fail(function (a,b,c){
-            console.log("ERROR IN AJAX");
-            console.log(a,b,c);
+            console.log("ERROR IN AJAX\n---------------");
+            console.log("received object: ", a);
+            console.log("Error msg: ", b);
+            console.log("ERROR TYPE: ", c);
         }).done(function (res){
             console.log("SUCCESS");
             createAnalysis(res);

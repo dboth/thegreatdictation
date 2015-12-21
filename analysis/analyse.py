@@ -75,6 +75,6 @@ class Result():
         return json.dumps([self.output_json])
 
 if __name__ == "__main__":
-    #tgd = Result('{"data" : {"input" : "Ich bin Elefant", "target" : "Ich bin ein Elefant", "text_id" : 4}}')
+    #tgd = Result('{"data" : {"input" : "Ich ein bin Elefant", "target" : "osen sind rot und Veilchen sind blau, ich mag gerne Brot, das ich mir oft klau", "text_id" : 4}}')
     tgd = Result(sys.argv[1])
     print(tgd.returnJSON())

@@ -171,7 +171,7 @@ class Aligner(object):
         return self.path
 
 if __name__ == "__main__":
-    a = Aligner("oelefant", "ölefant")
+    a = Aligner("nana oelefant", "ölefant nana")
     a.d.set_debug(True)
 
     print(a.finalize())

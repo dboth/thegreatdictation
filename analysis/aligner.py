@@ -11,8 +11,8 @@ class Aligner(object):
         self.debug = self.d.debug
 
         #STRINGS
-        self.input = unicode(input_str)
-        self.target = unicode(target_str)
+        self.input = input_str
+        self.target = target_str
 
         #WEIGHTS
         self.match = match
@@ -33,7 +33,7 @@ class Aligner(object):
         #BAGS
         self.simPunctBag = [".", "!", ";", ":"]
         self.punct_bag = [".", ":", ",", ";", "!", "?"]
-        self.umlaut_bag = {unicode(u"Ä"): "Ae", unicode(u"Ö"): "Oe", unicode(u"Ü"): "Ue", unicode(u"ä"): "ae", unicode(u"ö"): "oe", unicode(u"ü"): "ue"}
+        #self.umlaut_bag = {unicode(u"Ä"): "Ae", unicode(u"Ö"): "Oe", unicode(u"Ü"): "Ue", unicode(u"ä"): "ae", unicode(u"ö"): "oe", unicode(u"ü"): "ue"}
 
         #PROCESSED DATA
         self.matrix = []
@@ -132,44 +132,23 @@ class Aligner(object):
                 result.append([inputString[counter:letter_iter+1], counter, letter_iter+1])
         return result
 
-<<<<<<< HEAD
     def considerUmlauts(self):
         for i in range(len(self.target)):
             if self.target[i] in self.umlaut_bag:
                 for j in range(len(self.input)-1):
                     if self.input[j:j+2] == self.umlaut_bag[self.target[i]]:
                         self.matrix[i+1][j+2].append(self.matrix_field(i, j, self.umlauts, "Umlaut"))
-                
-=======
->>>>>>> 250d5a993d053621b5d1722beb1b677205a5f190
+
     def switchWords(self):
         input_words = self.indexSplit(self.input)
         target_words = self.indexSplit(self.target)
-<<<<<<< HEAD
-        self.debug(self.matrix[len(self.target)][len(self.input)])
-        self.debug("\n")
-        self.debug(input_words)
-        self.debug(target_words)
-        self.debug("\n\n")
-=======
->>>>>>> 6c6e803f2729c24d9c145443470efa19767bab83
+
         for input_iter in range(len(input_words)-1):
             for target_iter in range(len(target_words)-1):
                 switcher = Aligner(input_words[input_iter+1][0] + " " + input_words[input_iter][0], target_words[target_iter][0] + " " + target_words[target_iter+1][0], match=self.match, sub=self.sub, insert=self.insert, delete=self.delete, switch=self.switch, capitals=self.capitals, simPunct=self.simPunct, punct=self.punct, prefWordBound=self.prefWordBound, umlauts=self.umlauts, wordSwitch = self.wordSwitch, switcher = True)
                 switcher.finalize()
-<<<<<<< HEAD
-                self.debug(input_iter)
-                self.debug(target_iter)
-                self.debug("\n")
-=======
->>>>>>> 6c6e803f2729c24d9c145443470efa19767bab83
                 self.matrix[target_words[target_iter+1][2]][input_words[input_iter+1][2]].append([input_words[input_iter][1],target_words[target_iter][1], switcher.path[0][2][2]+self.wordSwitch, "wordSwitch"])
-<<<<<<< HEAD
- 
-=======
 
-
->>>>>>> 250d5a993d053621b5d1722beb1b677205a5f190
     def createPath(self):
         row = len(self.target)
         col = len(self.input)
@@ -183,21 +162,16 @@ class Aligner(object):
         self.applyCapitals()
         self.applyPunctuation()
         self.applyPrefWordBound()
-<<<<<<< HEAD
+        #self.considerUmlauts()
         #if self.switcher == False:
         #    self.switchWords()
-=======
-        self.considerUmlauts()
-        if self.switcher == False:
-            self.switchWords()
->>>>>>> 6c6e803f2729c24d9c145443470efa19767bab83
         self.fillMatrix()
         self.createPath()
 
         return self.path
 
 if __name__ == "__main__":
-    a = Aligner(u"oelefant", u"ölefant")
+    a = Aligner("oelefant", "ölefant")
     a.d.set_debug(True)
 
     print(a.finalize())

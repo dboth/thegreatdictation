@@ -1,7 +1,7 @@
 <?php
 //include the configs
 require_once __DIR__."/../inc/config.php";
-require_once __DIR__."/../inc/sqlConnector.php";
+//require_once __DIR__."/../inc/sqlConnector.php";
 
 //set the output to json
 header('Content-Type: application/json');
@@ -42,10 +42,9 @@ if (DIRECTORY_SEPARATOR == '\\' && $GLOBALS["conf"]["testing"]){
     $argument = escapeshellarg($input_json);
 }
 
-//var_dump($argument);
-
 //create the command
 $command = "python ". __DIR__ ."/analyse.py $argument";
+
 
 //execute the command (system() prints the output) exec does not
 $output = exec($command);
@@ -53,3 +52,4 @@ $output = exec($command);
 $sql = new SqlConnector();
 $sql->saveAnalysisResult($input_json, $output);
 */
+echo $output;

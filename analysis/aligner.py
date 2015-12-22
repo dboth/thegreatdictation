@@ -11,8 +11,8 @@ class Aligner(object):
         self.debug = self.d.debug
 
         #STRINGS
-        self.input = unicode(input_str)
-        self.target = unicode(target_str)
+        self.input = input_str
+        self.target = target_str
 
         #WEIGHTS
         self.match = match
@@ -130,6 +130,17 @@ class Aligner(object):
                     if self.input[input_iter-1] == " " & self.target[target_iter+2].lower() == self.input[input_iter]:
                         self.matrix[target_iter+2][input_iter].append([target_iter+3, input_iter+1, self.punctCapitalization, "punctCapitalization"])                               
 
+    def indexSplit(self, inputString):  #neccessary for wordSwitch
+        result = []
+        counter = 0
+        for letter_iter in range(len(inputString)):
+            if inputString[letter_iter] == " ":
+                result.append([inputString[counter:letter_iter], counter, letter_iter])
+                counter = letter_iter+1
+            if letter_iter == len(inputString)-1:
+                result.append([inputString[counter:letter_iter+1], counter, letter_iter+1])
+        return result
+
     def considerUmlauts(self):
         for i in range(len(self.target)):
             if self.target[i] in self.umlaut_bag:
@@ -153,6 +164,7 @@ class Aligner(object):
     def switchWords(self): #recognize switched words, even if there are further mistakes in them
         input_words = self.indexSplit(self.input)
         target_words = self.indexSplit(self.target)
+
         for input_iter in range(len(input_words)-1):
             for target_iter in range(len(target_words)-1):
                 switcher = Aligner(input_str=input_words[input_iter+1][0] + " " + input_words[input_iter][0], target_str=target_words[target_iter][0] + " " + target_words[target_iter+1][0], match=self.match, sub=self.sub, insert=self.insert, delete=self.delete, switch=self.switch, capitals=self.capitals, simPunct=self.simPunct, punct=self.punct, prefWordBound=self.prefWordBound, umlauts=self.umlauts, wordSwitch=self.wordSwitch, switcher=True)
@@ -164,7 +176,7 @@ class Aligner(object):
         switcher.finalize()
         self.matrix[target_words[1][2]][input_words[1][2]].append(self.matrix_field(target_words[0][1], input_words[0][1], switcher.path[0][2][2]+self.wordSwitch, "wordSwitch"))
         self.switched_words_bag[(target_words[1][2],input_words[1][2])] = switcher.path
-        
+
     def createPath(self):
         row = len(self.target)
         col = len(self.input)

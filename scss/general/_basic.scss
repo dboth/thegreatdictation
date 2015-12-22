@@ -48,6 +48,7 @@ body {
     .navbar-brand {
         img {
             margin-top: -8px;
+            filter: invert(100%);
         }
     }
 

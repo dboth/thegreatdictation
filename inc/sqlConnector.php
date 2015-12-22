@@ -11,7 +11,7 @@ class SqlConnector {
     
     public function __construct($live = false) {
 
-            $this->verbindung = new mysqli($this->mysql_host, $this->mysql_user, $this->mysql_passwort, $this->mysql_db);
+            $this->verbindung = new mysqli($this->mysql_host, $this->mysql_user, $this->mysql_passwort, $this->mysql_db) or echo "TODO: return an error";
 
     }
 
@@ -34,6 +34,23 @@ class SqlConnector {
 
     public function esc($str) {
         return $this->verbindung->escape_string($str);
+    }
+    
+    public function saveAnalysisResult($input, $output){
+        if (!($stmt = $this->db->prepare("INSERT INTO results (input, output) VALUES(?, ?)"))) echo "TODO: return an error";
+        $stmt->bind("ss",$input,$output);
+        $stmt->execute();
+    }
+    
+    public function saveFeedback($title, $subject, $text){
+        //feedback table sollte dann auch eine time spalte haben, die automatisch den timestamp erhält
+        if (!($stmt = $this->db->prepare("INSERT INTO feedback (title, subject, text) VALUES(?, ?, ?)"))) {
+            echo "TODO: return an error";
+            return false;
+            }
+        $stmt->bind("sss",$title, $subject, $text);
+        $stmt->execute();
+        return true;
     }
 
 }

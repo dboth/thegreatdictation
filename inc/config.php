@@ -8,5 +8,6 @@ $GLOBALS["conf"] = array(
         "database"=>"",
         "user"=>"",
         "password"=>""
-    )
+    ),
+    "log_path" => "/tmp/tgd/error.log"
 );

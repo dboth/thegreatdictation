@@ -61,6 +61,7 @@ $(document).ready(function () {
             console.log("ERROR TYPE: ", c);
         }).done(function (res){
             console.log("SUCCESS");
+            console.log(res);
             createAnalysis(res);
             revealAnalysis();
         });

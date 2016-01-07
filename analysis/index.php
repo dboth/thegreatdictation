@@ -1,12 +1,15 @@
 <?php
 //include the configs
 require_once __DIR__."/../inc/config.php";
+require_once __DIR__."/../inc/ErrorHandler.php";
 //require_once __DIR__."/../inc/sqlConnector.php";
 
 //set the output to json
 header('Content-Type: application/json');
 
-
+//initialize ErrorHandler
+$EHandler = new ErrorHandler("Analyse");
+$a = $EHandler->log(1, "bla");
 
 //check if there was data sent
 if (empty($_POST["data"]))

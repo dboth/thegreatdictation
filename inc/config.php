@@ -9,5 +9,5 @@ $GLOBALS["conf"] = array(
         "user"=>"",
         "password"=>""
     ),
-    "log_path" => "/tmp/tgd/error.log"
+    "log_path" => "/tmp/tgd/log.txt"
 );

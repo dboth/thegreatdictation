@@ -15,7 +15,6 @@ class ErrorHandler {
 		$this->log_file_path = $GLOBALS["conf"]["log_path"];
 	}
 
-
 	/**
 	 * Function gets information about an error based on ID and optional additional information
 	 * @param  int		$e_id		ID of the error
@@ -47,6 +46,18 @@ class ErrorHandler {
 	}
 
 	/**
+	 * Builds an Array in JSON format thats meant to be used by frontend
+	 * to present the user Infos about what happened
+	 * @param	int		$error_id	ID of error to be logged
+	 * @param	str		$add_info	Additional Info concerning error
+	 * @return 	json	           	json/arraymap containing the information for the frontend
+	 */
+	public function createErrorJSON($e_id, $add_info) {
+		$error_info = $this->getErrorInfo($error_id, $add_info);
+		return json_encode($error_info);
+	}
+
+	/**
 	 * Function logs errors to LOG FILE (defined in config)
 	 *
 	 * @param	int		$error_id	ID of error to be logged
@@ -55,7 +66,7 @@ class ErrorHandler {
 	 */
 	public function log($error_id, $add_info) {
 		$error_info = $this->getErrorInfo($error_id, $add_info);
-		$log_msg = $error_info["fatality"]."\t".$error_info["name"]."\t".$error_info["msg"];
+		$log_msg = $error_info["fatality"]."\t".$this->current_class."\t".$error_info["name"]."\t".$error_info["msg"]."\n";
 
 		$logger = fopen($this->log_file_path, "a");
 		$success = fwrite($logger, $log_msg);
@@ -68,5 +79,3 @@ class ErrorHandler {
 	}
 
 }
-
-?>

@@ -27,7 +27,7 @@ body {
 
         &.page-footer {
             height: $tgd-footer-height;
-            background-color: $tgd-primary-color;
+            background-color: $tgd-secondary-color;
         }
     }
 
@@ -45,10 +45,12 @@ body {
 /* NAVIGATION */
 
 .navbar {
+    border-bottom: 5px solid rgb(42, 147, 207);
+
     .navbar-brand {
         img {
             margin-top: -8px;
-            filter: invert(100%);
+            filter: invert(0%);
         }
     }
 

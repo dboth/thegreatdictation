@@ -22,7 +22,10 @@ function revealAnalysis() {
     */
 
     $("#dictation-container").fadeOut("fast", function () {
-        $("#analysis-container").fadeIn("fast");
+        $(this).attr("id", "");
+        $("#analysis-container").fadeIn("fast", function () {
+            $(this).attr("id", "main-container");
+        });
     });
 
 }
@@ -55,12 +58,8 @@ $(document).ready(function () {
             data: {data: JSON.stringify(data)},
             type: method
         }).fail(function (a,b,c){
-            console.log("ERROR IN AJAX\n---------------");
-            console.log("received object: ", a);
-            console.log("Error msg: ", b);
-            console.log("ERROR TYPE: ", c);
+            requestErrorInfo("f_analysis_create_analysis", "Server Request Failed");
         }).done(function (res){
-            console.log("SUCCESS");
             createAnalysis(res);
             revealAnalysis();
         });

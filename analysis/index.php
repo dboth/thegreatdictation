@@ -8,13 +8,14 @@ require_once __DIR__."/../inc/ErrorHandler.php";
 header('Content-Type: application/json');
 
 //initialize ErrorHandler
-$EHandler = new ErrorHandler("Analyse");
-$a = $EHandler->log(1, "bla");
+$EHandler = new ErrorHandler("Analysis");
 
 //check if there was data sent
-if (empty($_POST["data"]))
-    die("no data"); //todo handle error -> no data, should return a json error object
-
+if (empty($_POST["data"])) {
+    $EHandler.log(2);
+    echo $EHandler.createErrorJSON(2);
+    die();
+}
 
 
 //try to decode the data. data must be in json

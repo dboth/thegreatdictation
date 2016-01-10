@@ -47,7 +47,7 @@ class Aligner(object):
 
     def initializeMatrix(self):
         self.matrix = [[[] for x in range(len(self.input)+1)] for x in range(len(self.target)+1)]
-        
+
     def calculateMatrix(self):
         self.matrix[0][0].append(self.matrix_field(0, 0, 0, "Start"))
         for row in range(len(self.target)+1):  #in this loop, we calculate field x,y of the matrix
@@ -72,7 +72,7 @@ class Aligner(object):
                     for option_iter in range(len(poss)):
                         poss[option_iter] = self.matrix_field(poss[option_iter][0], poss[option_iter][1], self.matrix[poss[option_iter][0]][poss[option_iter][1]][2] + poss[option_iter][2], poss[option_iter][3])
                     self.matrix[row][col] = min(poss, key=itemgetter(2))
-                
+
 
     def applySwitch(self): #recognize switched letters
         for i in range(1, len(self.target)):
@@ -81,7 +81,7 @@ class Aligner(object):
                     if self.target[i-1] == self.input[j+1]:
                         self.matrix[i+1][j+2].append(self.matrix_field(i-1, j, self.switch, "switch"))
 
-    
+
     def applyCapitals(self):
         for target_iter in range(len(self.target)):
             for input_iter in range(len(self.input)):
@@ -91,20 +91,20 @@ class Aligner(object):
         if self.switchedSentenceStart == True:
             if self.target[0] == self.input[0].lower() or self.input[0] == self.target[0].lower():
                 self.matrix[1][1].append(self.matrix_field(0, 0, 0, "caveatCapitalization"))
-    
+
     def applyPunctuation(self):
         for target_iter in range(len(self.target)):
             if self.target[target_iter] in self.simPunctBag:			#look for similar punctuation
                 for input_iter in range(len(self.input)):
                     if self.target[target_iter] != self.input[input_iter]:
                         if self.input[input_iter] in self.simPunctBag:
-                            self.matrix[target_iter+1][input_iter+1].append(self.matrix_field(target_iter, input_iter, self.simPunct, "similarPunctuation"))                            
+                            self.matrix[target_iter+1][input_iter+1].append(self.matrix_field(target_iter, input_iter, self.simPunct, "similarPunctuation"))
             elif self.target[target_iter] in self.punct_bag:			#look for any punctuation
                 for input_iter in range(len(self.input)):
                     if self.target[target_iter] != self.input[input_iter]:
                         if self.input[input_iter] in self.punct_bag:
                             self.matrix[target_iter+1][input_iter+1].append(self.matrix_field(target_iter, input_iter, self.punct, "punctuation"))
-                            
+
     def applyPrefWordBound(self): #change input string in the fewest possible number of words (elephant problem)
         for i in range(1,len(self.target)):  #space in self.target
             if self.target[i] == " ":
@@ -122,13 +122,13 @@ class Aligner(object):
                     if j<len(self.input)-1:
                         if self.input[j+1] == self.target[i]:
                             self.matrix[i+1][j+2].append(self.matrix_field(i, j, self.prefWordBound, "+M"))  #match after space
-    
+
     def punctCapitalization(self): #consider changed capitalization after wrong punctuation
         for target_iter in range(len(self.target)):
             for input_iter in range(1,len(self.input)):
                 if self.target[target_iter] in capitalizer_bag & self.target[target_iter+1] == " ": #". A" -> ", a"
                     if self.input[input_iter-1] == " " & self.target[target_iter+2].lower() == self.input[input_iter]:
-                        self.matrix[target_iter+2][input_iter].append([target_iter+3, input_iter+1, self.punctCapitalization, "punctCapitalization"])                               
+                        self.matrix[target_iter+2][input_iter].append([target_iter+3, input_iter+1, self.punctCapitalization, "punctCapitalization"])
 
     def indexSplit(self, inputString):  #neccessary for wordSwitch
         result = []
@@ -146,8 +146,8 @@ class Aligner(object):
             if self.target[i] in self.umlaut_bag:
                 for j in range(len(self.input)-1):
                     if self.input[j:j+2] == self.umlaut_bag[self.target[i]]:
-                        self.matrix[i+1][j+2].append(self.matrix_field(i, j, self.umlauts, "Umlaut"))   
-                        
+                        self.matrix[i+1][j+2].append(self.matrix_field(i, j, self.umlauts, "Umlaut"))
+
     def indexSplit(self, inputString):  #neccessary for wordSwitch
         result = []
         counter = 0
@@ -159,8 +159,8 @@ class Aligner(object):
                         counter = letter_iter+1
                 elif letter_iter == len(inputString)-1: #last word
                     result.append([inputString[counter:letter_iter+1], counter, letter_iter+1])
-        return result    
-        
+        return result
+
     def switchWords(self): #recognize switched words, even if there are further mistakes in them
         input_words = self.indexSplit(self.input)
         target_words = self.indexSplit(self.target)

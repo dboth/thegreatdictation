@@ -25,20 +25,27 @@ class ErrorHandler {
 		$error_info = array(
 			"fatality"	=>	"", // Range: INFO DEBUG FATAL
 			"name"		=>	"",
-			"msg"		=>	""
+			"msg"		=>	"",
+			"debug"		=>	$e_id
 		);
 
 		switch ($e_id) {
-			case 1:
+			case "b_file_not_found":
 				$error_info["fatality"] = "FATAL";
 				$error_info["name"] = "FILE NOT FOUND";
 				$error_info["msg"] = "No file found at ".$add_info;
 				break;
 
+			case "f_analysis_create_analysis":
+				$error_info["fatality"] = "FATAL";
+				$error_info["name"] = "CREATE ANALYSIS FAIL";
+				$error_info["msg"] = "The creation of your analysis failed due to: ".$add_info;
+				break;
+
 			default:
 				$error_info["fatality"] = "DEBUG";
 				$error_info["name"] = "UNKNOWN ERROR";
-				$error_info["msg"] = "An unknown error occured. It might be labeled wrong.";
+				$error_info["msg"] = "An unknown error occured.".$e_id;
 				break;
 		}
 
@@ -53,7 +60,7 @@ class ErrorHandler {
 	 * @return 	json	           	json/arraymap containing the information for the frontend
 	 */
 	public function createErrorJSON($e_id, $add_info) {
-		$error_info = $this->getErrorInfo($error_id, $add_info);
+		$error_info = $this->getErrorInfo($e_id, $add_info);
 		return json_encode($error_info);
 	}
 

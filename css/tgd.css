@@ -7292,8 +7292,13 @@ textarea {
 select option[disabled] {
   color: #eeeeee; }
 
-/* STYLING */
+/* ELEMENTS */
 /* line 87, ../scss/general/_basic.scss */
+.error-alert {
+  margin: 20px 15px 20px 15px; }
+
+/* STYLING */
+/* line 93, ../scss/general/_basic.scss */
 .info {
   margin-top: 12.5px;
   margin-bottom: 25px;
@@ -7301,136 +7306,136 @@ select option[disabled] {
   padding-right: 15px;
   font-weight: bold; }
 
-/* line 94, ../scss/general/_basic.scss */
+/* line 100, ../scss/general/_basic.scss */
 .jumbotron.title-jumbo {
   background-color: lightblue; }
 
-/* line 100, ../scss/general/_basic.scss */
+/* line 106, ../scss/general/_basic.scss */
 .well#error-indication {
   font-size: 14pt;
   overflow: auto; }
 
-/* line 109, ../scss/general/_basic.scss */
+/* line 115, ../scss/general/_basic.scss */
 .error-container {
   margin: 3px;
   text-align: center;
   display: inline-block;
   vertical-align: top; }
-  /* line 115, ../scss/general/_basic.scss */
+  /* line 121, ../scss/general/_basic.scss */
   .error-container.no-margin {
     margin: 3px 0 3px 0; }
-  /* line 119, ../scss/general/_basic.scss */
+  /* line 125, ../scss/general/_basic.scss */
   .error-container .arrow {
     padding: 3px 5px 3px 5px;
     display: block;
     border-radius: 10px;
     margin: 0 auto; }
-  /* line 126, ../scss/general/_basic.scss */
+  /* line 132, ../scss/general/_basic.scss */
   .error-container .target {
     padding: 3px 5px 3px 5px;
     display: block;
     border-radius: 10px;
     margin: 0 auto; }
-  /* line 133, ../scss/general/_basic.scss */
+  /* line 139, ../scss/general/_basic.scss */
   .error-container .input {
     padding: 3px 5px 3px 5px;
     display: block;
     border-radius: 10px;
     margin: 0 auto; }
-    /* line 139, ../scss/general/_basic.scss */
+    /* line 145, ../scss/general/_basic.scss */
     .error-container .input.match {
       padding: 3px 0px 3px 0px; }
-    /* line 143, ../scss/general/_basic.scss */
+    /* line 149, ../scss/general/_basic.scss */
     .error-container .input.substitution {
       background-color: #b40000;
       color: white; }
-    /* line 148, ../scss/general/_basic.scss */
+    /* line 154, ../scss/general/_basic.scss */
     .error-container .input.deletion {
       background-color: #e00dde;
       color: white; }
-    /* line 153, ../scss/general/_basic.scss */
+    /* line 159, ../scss/general/_basic.scss */
     .error-container .input.insertion {
       background-color: #ff5b28;
       color: white; }
-    /* line 158, ../scss/general/_basic.scss */
+    /* line 164, ../scss/general/_basic.scss */
     .error-container .input.capitalization {
       background-color: #ffe145;
       color: white; }
-    /* line 163, ../scss/general/_basic.scss */
+    /* line 169, ../scss/general/_basic.scss */
     .error-container .input.punctuation {
       background-color: #6cd3ff;
       color: white; }
-    /* line 168, ../scss/general/_basic.scss */
+    /* line 174, ../scss/general/_basic.scss */
     .error-container .input.switch {
       background-color: #ffa100;
       color: white; }
 
-/* line 177, ../scss/general/_basic.scss */
+/* line 183, ../scss/general/_basic.scss */
 .legend .element {
   display: inline-block;
   border-radius: 6px;
   padding: 2px 6px 2px 6px;
   margin: 3px 0 3px 5px;
   border: 1px solid transparent; }
-  /* line 184, ../scss/general/_basic.scss */
+  /* line 190, ../scss/general/_basic.scss */
   .legend .element.substitution {
     background-color: #b40000;
     color: white; }
-  /* line 189, ../scss/general/_basic.scss */
+  /* line 195, ../scss/general/_basic.scss */
   .legend .element.deletion {
     background-color: #e00dde;
     color: white; }
-  /* line 194, ../scss/general/_basic.scss */
+  /* line 200, ../scss/general/_basic.scss */
   .legend .element.insertion {
     background-color: #ff5b28;
     color: white; }
-  /* line 199, ../scss/general/_basic.scss */
+  /* line 205, ../scss/general/_basic.scss */
   .legend .element.capitalization {
     background-color: #ffe145;
     color: black; }
-  /* line 204, ../scss/general/_basic.scss */
+  /* line 210, ../scss/general/_basic.scss */
   .legend .element.punctuation {
     background-color: #6cd3ff;
     color: black; }
-  /* line 209, ../scss/general/_basic.scss */
+  /* line 215, ../scss/general/_basic.scss */
   .legend .element.switch {
     background-color: #ffa100;
     color: white; }
 
-/* line 217, ../scss/general/_basic.scss */
+/* line 223, ../scss/general/_basic.scss */
 .spelling {
   float: left;
   border-radius: 6px;
   padding: 2px 6px 2px 6px;
   margin: 3px 0 3px 5px;
   border: 1px solid transparent; }
-  /* line 224, ../scss/general/_basic.scss */
+  /* line 230, ../scss/general/_basic.scss */
   .spelling.wrong {
     background-color: #ff3333; }
-  /* line 230, ../scss/general/_basic.scss */
+  /* line 236, ../scss/general/_basic.scss */
   .spelling.minor-mistake {
     background-color: #f2510c; }
-  /* line 235, ../scss/general/_basic.scss */
+  /* line 241, ../scss/general/_basic.scss */
   .spelling.correct {
     background-color: none;
     border: none; }
 
-/* line 242, ../scss/general/_basic.scss */
+/* line 248, ../scss/general/_basic.scss */
 #score-info {
   font-size: 28pt;
   text-align: center; }
-  /* line 246, ../scss/general/_basic.scss */
+  /* line 252, ../scss/general/_basic.scss */
   #score-info .score {
     font-weight: bold;
     font-size: 45pt;
     color: lightblue; }
-  /* line 252, ../scss/general/_basic.scss */
+  /* line 258, ../scss/general/_basic.scss */
   #score-info .ratio {
     font-weight: bold;
     font-size: 45pt;
     color: green; }
 
-/* line 259, ../scss/general/_basic.scss */
+/* line 265, ../scss/general/_basic.scss */
 .huge-fonticon {
   font-size: 30em;
   text-align: center; }

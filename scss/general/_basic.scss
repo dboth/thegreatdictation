@@ -45,9 +45,11 @@ body {
 /* NAVIGATION */
 
 .navbar {
-    border-bottom: 5px solid rgb(42, 147, 207);
+    border-bottom: 1px solid $tgd-primary-color;
+    font-size: 14px;
 
     .navbar-brand {
+        color: darken($tgd-primary-color, 15);
         img {
             margin-top: -8px;
             filter: invert(0%);
@@ -56,11 +58,15 @@ body {
 
     .nav {
         li {
-            -webkit-transition: background-color 0.3s, color 0.3s;
-            transition: background-color 0.3s, color 0.3s;
-            &:hover {
-                background-color: $gray-lighter;
-                color: $tgd-font-color;
+            text-align: center;
+            a {
+                //-webkit-transition: background-color 0.3s, color 0.3s;
+                //transition: background-color 0.3s, color 0.3s;
+                color: $tgd-primary-color;
+                &:hover {
+                    background-color: lighten($tgd-primary-color, 45);
+                    color: darken($tgd-primary-color, 20);
+                }
             }
         }
     }

@@ -1068,7 +1068,7 @@ html {
   -webkit-tap-highlight-color: transparent; }
 
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Impact, Charcoal, sans-serif;
   font-size: 14px;
   line-height: 1.42857;
   color: #333333;
@@ -5152,7 +5152,7 @@ button.close {
   position: absolute;
   z-index: 1070;
   display: block;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Impact, Charcoal, sans-serif;
   font-style: normal;
   font-weight: normal;
   letter-spacing: normal;
@@ -5258,7 +5258,7 @@ button.close {
   display: none;
   max-width: 276px;
   padding: 1px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Impact, Charcoal, sans-serif;
   font-style: normal;
   font-weight: normal;
   letter-spacing: normal;
@@ -5803,17 +5803,21 @@ body {
 
 /* NAVIGATION */
 .navbar {
-  border-bottom: 5px solid #2a93cf; }
-  .navbar .navbar-brand img {
-    margin-top: -8px;
-    -webkit-filter: invert(0%);
-            filter: invert(0%); }
+  border-bottom: 1px solid #2a93cf;
+  font-size: 14px; }
+  .navbar .navbar-brand {
+    color: #1d668f; }
+    .navbar .navbar-brand img {
+      margin-top: -8px;
+      -webkit-filter: invert(0%);
+              filter: invert(0%); }
   .navbar .nav li {
-    -webkit-transition: background-color 0.3s, color 0.3s;
-    transition: background-color 0.3s, color 0.3s; }
-    .navbar .nav li:hover {
-      background-color: #eeeeee;
-      color: black; }
+    text-align: center; }
+    .navbar .nav li a {
+      color: #2a93cf; }
+      .navbar .nav li a:hover {
+        background-color: #e5f2fa;
+        color: #19577a; }
 
 a {
   outline: none !important; }

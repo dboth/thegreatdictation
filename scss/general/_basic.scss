@@ -1,4 +1,5 @@
 /* DOCUMENT */
+
 html {
     height: 100%;
     //overflow-y: scroll;
@@ -8,6 +9,10 @@ body {
     padding: 50px 0 0 0; //save content from navbar
     height: 100%;
     margin: 0;
+}
+
+.jumbotron {
+    background-color: $tgd-secondary-color
 }
 
 #wrapper {
@@ -27,11 +32,12 @@ body {
 
         &.page-footer {
             height: $tgd-footer-height;
-            background-color: $tgd-primary-color;
+            background-color: $tgd-secondary-color;
         }
     }
 
 }
+
 /* GRID */
 
 .row-content {
@@ -45,19 +51,28 @@ body {
 /* NAVIGATION */
 
 .navbar {
+    border-bottom: 1px solid $tgd-primary-color;
+    font-size: 14px;
+
     .navbar-brand {
+        color: darken($tgd-primary-color, 15);
         img {
             margin-top: -8px;
+            filter: invert(0%);
         }
     }
 
     .nav {
         li {
-            -webkit-transition: background-color 0.3s, color 0.3s;
-            transition: background-color 0.3s, color 0.3s;
-            &:hover {
-                background-color: $gray-lighter;
-                color: $tgd-font-color;
+            text-align: center;
+            a {
+                //-webkit-transition: background-color 0.3s, color 0.3s;
+                //transition: background-color 0.3s, color 0.3s;
+                color: $tgd-primary-color;
+                &:hover {
+                    background-color: lighten($tgd-primary-color, 45);
+                    color: darken($tgd-primary-color, 20);
+                }
             }
         }
     }
@@ -79,6 +94,12 @@ select {
             color:  $gray-lighter;
         }
     }
+}
+
+/* ELEMENTS */
+
+.error-alert {
+    margin: 20px 15px 20px 15px;
 }
 
 /* STYLING */

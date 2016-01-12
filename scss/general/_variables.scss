@@ -2,12 +2,14 @@
 
 // DESIGN COLORS
 $tgd-bg-color: white;
-$tgd-primary-color: #354459;
-$tgd-secondary-color: lightblue;
+$tgd-primary-color: rgb(42, 147, 207);
+$tgd-secondary-color: darken($tgd-primary-color, 20);
+
+$tgd-nav-color: white;
 
 $tgd-font-color: black;
 $tgd-font-contrast-color: white;
-$tgd-navfont-color: $tgd-font-contrast-color;
+$tgd-navfont-color: rgb(36, 36, 36);
 
 // ALIGNMENT COLORS
 $tgd-correct-color:     #90ee90;

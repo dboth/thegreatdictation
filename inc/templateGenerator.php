@@ -126,7 +126,10 @@ class TemplateGenerator{
     }
     protected function getView($html){
         if (file_exists($GLOBALS["conf"]["base_path"]."/frontend/pages/".$html)){
-        return file_get_contents($GLOBALS["conf"]["base_path"]."/frontend/pages/".$html);} else return "";
+        return file_get_contents($GLOBALS["conf"]["base_path"]."/frontend/pages/".$html);} else {
+            $this->errors->log("b_view_not_found", $html);
+            return "";
+        };
     }
     protected function applyTranslation(){
         //replaces every occurence of <tgd_trans>WORD</tgd_trans> with the translation of word using the in the constructor specified translators translate method.

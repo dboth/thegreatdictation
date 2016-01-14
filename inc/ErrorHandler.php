@@ -80,7 +80,7 @@ class ErrorHandler {
 	 */
 	public function log($error_id, $add_info) {
 		$error_info = $this->getErrorInfo($error_id, $add_info);
-		$log_msg = $error_info["fatality"]."\t".$this->current_class."\t".$error_info["name"]."\t".$error_info["msg"]."\n";
+		$log_msg = date('d/m/Y H:i:s')."\t".$error_info["fatality"]."\t".$this->current_class."\t".$error_info["name"]."\t".$error_info["msg"]."\n";
 
 		$logger = fopen($this->log_file_path, "a");
 		$success = fwrite($logger, $log_msg);

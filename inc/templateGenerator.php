@@ -41,7 +41,8 @@ class TemplateGenerator{
                         "description" => ""
                         ),
                     "components" => array(
-                        "header-description" => "/description/home.php"
+                        "header-description" => "description.php",
+                        "citation" => "citations.php"
                     ),
                     "body"=>"dictation.html",
                     "template"=>"default.html"
@@ -55,7 +56,8 @@ class TemplateGenerator{
                         "header-title"=>"Get Started"
                         ),
                     "components" => array(
-                        "header-description" => "/description/home.html"
+                        "header-description" => "description.php",
+                        "citation" => "citations.php"
                     ),
                     //the page template (inside frontend/pages)
                     "body"=>"getstarted.html",
@@ -70,7 +72,8 @@ class TemplateGenerator{
                         "header-title"=>"Why Dictation?"
                         ),
                     "components" => array(
-                        "header-description" => "/description/home.html"
+                        "header-description" => "description.php",
+                        "citation" => "citations.php"
                     ),
                     //the page template (inside frontend/pages)
                     "body"=>"why.html",
@@ -85,7 +88,8 @@ class TemplateGenerator{
                         "header-title"=>"About Us"
                         ),
                     "components" => array(
-                        "header-description" => "/description/home.html"
+                        "header-description" => "description.php",
+                        "citation" => "citations.php"
                     ),
                     //the page template (inside frontend/pages)
                     "body"=>"aboutus.html",
@@ -100,7 +104,8 @@ class TemplateGenerator{
                         ),
                     //full components can be inserted depending on page name
                     "components" => array(
-                        "header-description" => "/description/home.html"
+                        "header-description" => "description.php",
+                        "citation" => "citations.php"
                     ),
                     //the page template (inside frontend/pages)
                     "body"=>"home.html",

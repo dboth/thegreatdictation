@@ -93,6 +93,10 @@ body {
                     background-color: $tgd-nav-hover-color;
                     color: $tgd-navfont-color;
                 }
+
+                &:focus {
+                    color: $tgd-navfont-color;
+                }
             }
         }
     }

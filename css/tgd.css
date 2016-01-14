@@ -5831,6 +5831,8 @@ body {
       .navbar .nav li a:hover {
         background-color: #2a93cf;
         color: #fff; }
+      .navbar .nav li a:focus {
+        color: #fff; }
 
 a {
   outline: none !important; }

@@ -16,10 +16,11 @@ body {
 
     .jumbotron-header {
         color: $tgd-font-contrast-color;
-        border: 1px solid $tgd-font-contrast-color;
+        //border: 1px solid $tgd-font-contrast-color;
 
         h3 {
             margin-top: 10px;
+            font-size: 36px;
         }
     }
 
@@ -104,6 +105,32 @@ body {
 
 a {
     outline: none !important;
+    color: inherit;
+
+    &.active {
+        color: $tgd-active-link-color;
+    }
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+.analysis-swapper {
+    color: $tgd-inactive-link-color;
+    font-size: 40px;
+
+    a {
+        color: lighten($tgd-inactive-link-color, 20);
+
+        &.active {
+            color: $tgd-active-link-color;
+        }
+    }
+
+    a:hover {
+        color: $tgd-active-link-color;
+    }
 }
 
 /* FORMS */

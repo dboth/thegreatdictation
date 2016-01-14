@@ -5780,10 +5780,10 @@ body {
 .jumbotron {
   background-color: #19577a; }
   .jumbotron .jumbotron-header {
-    color: #fff;
-    border: 1px solid #fff; }
+    color: #fff; }
     .jumbotron .jumbotron-header h3 {
-      margin-top: 10px; }
+      margin-top: 10px;
+      font-size: 36px; }
   .jumbotron .jumbotron-content {
     margin-top: 10px;
     color: #fff; }
@@ -5835,7 +5835,22 @@ body {
         color: #fff; }
 
 a {
-  outline: none !important; }
+  outline: none !important;
+  color: inherit; }
+  a.active {
+    color: #2a93cf; }
+  a:hover {
+    text-decoration: none; }
+
+.analysis-swapper {
+  color: #b3b3b3;
+  font-size: 40px; }
+  .analysis-swapper a {
+    color: #e6e6e6; }
+    .analysis-swapper a.active {
+      color: #2a93cf; }
+  .analysis-swapper a:hover {
+    color: #2a93cf; }
 
 /* FORMS */
 textarea {

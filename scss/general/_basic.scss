@@ -38,6 +38,11 @@ body {
 
     #content {
         padding-bottom: $tgd-footer-height + 100px;
+
+        .pointout {
+        	font-size: $tgd-pointout-font-size;
+
+        }
     }
 
     footer {

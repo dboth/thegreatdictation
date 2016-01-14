@@ -1,6 +1,7 @@
 @charset "UTF-8";
 /* Modified and extended Version of Bootstrap for The Great Dictation! */
 /* COLORS */
+/* TEXT STYLING */
 /* PAGE STRUCTURE */
 /* GRID */
 /*!
@@ -5793,6 +5794,8 @@ body {
   position: relative; }
   #wrapper #content {
     padding-bottom: 250px; }
+    #wrapper #content .pointout {
+      font-size: 1.2em; }
   #wrapper footer {
     bottom: 0;
     left: 0;

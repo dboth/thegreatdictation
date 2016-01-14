@@ -48,7 +48,8 @@ body {
 
         &.page-footer {
             height: $tgd-footer-height;
-            background-color: $tgd-nav-color;
+            background-color: $tgd-footer-color;
+            color: $tgd-font-contrast-color;
         }
     }
 
@@ -71,7 +72,7 @@ body {
     font-size: 14px;
 
     .navbar-brand {
-        color: darken($tgd-primary-color, 15);
+        color: darken($tgd-navfont-color, 15);
 
         img {
             margin-top: -8px;
@@ -86,11 +87,11 @@ body {
             a {
                 //-webkit-transition: background-color 0.3s, color 0.3s;
                 //transition: background-color 0.3s, color 0.3s;
-                color: $tgd-primary-color;
+                color: $tgd-navfont-color;
 
                 &:hover {
-                    background-color: lighten($tgd-primary-color, 45);
-                    color: darken($tgd-primary-color, 20);
+                    background-color: $tgd-nav-hover-color;
+                    color: $tgd-navfont-color;
                 }
             }
         }

@@ -5,11 +5,13 @@ $tgd-bg-color: #fff;
 $tgd-primary-color: rgb(42, 147, 207);
 $tgd-secondary-color: darken($tgd-primary-color, 20);
 
-$tgd-nav-color: #fff;
+$tgd-nav-color: #2f2f2f;
+$tgd-nav-hover-color: $tgd-primary-color;
+$tgd-footer-color: #2f2f2f;
 
 $tgd-font-color: #000;
 $tgd-font-contrast-color: #fff;
-$tgd-navfont-color: rgb(36, 36, 36);
+$tgd-navfont-color: #fff;
 
 // STATISTIC COLORS
 $tgd-score-color: #add8e6;

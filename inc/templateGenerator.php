@@ -41,7 +41,7 @@ class TemplateGenerator{
                         "description" => ""
                         ),
                     "components" => array(
-                        "header-description" => "/description/home.html"
+                        "header-description" => "/description/home.php"
                     ),
                     "body"=>"dictation.html",
                     "template"=>"default.html"
@@ -155,7 +155,10 @@ class TemplateGenerator{
 
     protected function getComponents($path){
         if (file_exists($GLOBALS["conf"]["base_path"]."/frontend/components/".$path)){
-            return file_get_contents($GLOBALS["conf"]["base_path"]."/frontend/components/".$path);
+            // Opens and runs php file and returns output
+            ob_start();
+            require $GLOBALS["conf"]["base_path"]."/frontend/components/".$path;
+            return ob_get_clean();
         } else {
             $this->errors->log("b_component_not_found", $path);
             return "ERROR: Content couldnt be found";

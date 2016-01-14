@@ -1,19 +1,23 @@
 /* COLORS */
 
 // DESIGN COLORS
-$tgd-bg-color: white;
+$tgd-bg-color: #fff;
 $tgd-primary-color: rgb(42, 147, 207);
 $tgd-secondary-color: darken($tgd-primary-color, 20);
 
-$tgd-nav-color: white;
+$tgd-nav-color: #fff;
 
-$tgd-font-color: black;
-$tgd-font-contrast-color: white;
+$tgd-font-color: #000;
+$tgd-font-contrast-color: #fff;
 $tgd-navfont-color: rgb(36, 36, 36);
+
+// STATISTIC COLORS
+$tgd-score-color: #add8e6;
+$tgd-ratio-color: #008000;
 
 // ALIGNMENT COLORS
 $tgd-correct-color:     #90ee90;
-$tgd-wrong-color:       #ff3333;
+$tgd-wrong-color:       #f33;
 $tgd-minor-mistake-color: #f2510c;
 
 // LEVENSHTEIN COLORS

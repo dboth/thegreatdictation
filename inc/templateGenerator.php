@@ -3,11 +3,14 @@
 
 //include translator
 require_once __DIR__."/translationEngine.php";
+require_once __DIR__."/ErrorHandler.php";
 
 class TemplateGenerator{
     public function __construct(){
         //make new translator
         $this->translator = new TranslationEngine();
+        //Error Handler
+        $this->errors = new ErrorHandler(__CLASS__);
         //pageMarkup contains the webpages html
         $this->pageMarkup = "";
 
@@ -20,6 +23,7 @@ class TemplateGenerator{
         $this->applyViews();
         $this->applyTranslation();
         $this->applyVars($page);
+        $this->applyComponents($page);
     }
 
     protected function getPage(){
@@ -32,9 +36,13 @@ class TemplateGenerator{
 
                     "vars" => array(
                         "title"=>"The Great Dictation",
-                        "analysispath"=> "analysis/index.php"
+                        "header-title" => "Start the Dictation!",
+                        "analysispath" => "analysis/index.php",
+                        "description" => ""
                         ),
-
+                    "components" => array(
+                        "header-description" => "/description/home.html"
+                    ),
                     "body"=>"dictation.html",
                     "template"=>"default.html"
                 );
@@ -44,7 +52,11 @@ class TemplateGenerator{
                     //inside a template all occurences of <tgd_varname> get replace by the value of vars[varname] in this array. do not use the variables "body" or "trans", as they are reserved.
                     "vars" => array(
                         "title"=>"The Great Dictation - Get Started",
+                        "header-title"=>"Get Started"
                         ),
+                    "components" => array(
+                        "header-description" => "/description/home.html"
+                    ),
                     //the page template (inside frontend/pages)
                     "body"=>"getstarted.html",
                     "template"=>"default.html"
@@ -55,7 +67,11 @@ class TemplateGenerator{
                     //inside a template all occurences of <tgd_varname> get replace by the value of vars[varname] in this array. do not use the variables "body" or "trans", as they are reserved.
                     "vars" => array(
                         "title"=>"The Great Dictation - Why Dictation",
+                        "header-title"=>"Why Dictation?"
                         ),
+                    "components" => array(
+                        "header-description" => "/description/home.html"
+                    ),
                     //the page template (inside frontend/pages)
                     "body"=>"why.html",
                     "template"=>"default.html"
@@ -66,7 +82,11 @@ class TemplateGenerator{
                     //inside a template all occurences of <tgd_varname> get replace by the value of vars[varname] in this array. do not use the variables "body" or "trans", as they are reserved.
                     "vars" => array(
                         "title"=>"The Great Dictation - About Us",
+                        "header-title"=>"About Us"
                         ),
+                    "components" => array(
+                        "header-description" => "/description/home.html"
+                    ),
                     //the page template (inside frontend/pages)
                     "body"=>"aboutus.html",
                     "template"=>"default.html"
@@ -76,7 +96,12 @@ class TemplateGenerator{
                     //inside a template all occurences of <tgd_varname> get replace by the value of vars[varname] in this array. do not use the variables "body" or "trans", as they are reserved.
                     "vars" => array(
                         "title"=>"The Great Dictation",
+                        "header-title"=>"The Great Dictation"
                         ),
+                    //full components can be inserted depending on page name
+                    "components" => array(
+                        "header-description" => "/description/home.html"
+                    ),
                     //the page template (inside frontend/pages)
                     "body"=>"home.html",
                     "template"=>"default.html"
@@ -117,5 +142,20 @@ class TemplateGenerator{
     protected function toVariable($name){
         //varkey to dom varname
         return "<tgd_$name>";
+    }
+
+    protected function applyComponents($page){
+        $from = array_map(array($this, "toVariable"), array_keys($page["components"]));
+        $to = array_map(array($this, 'getComponents'), array_values($page["components"]));
+        $this->pageMarkup = str_replace($from, $to, $this->pageMarkup);
+    }
+
+    protected function getComponents($path){
+        if (file_exists($GLOBALS["conf"]["base_path"]."/frontend/components/".$path)){
+            return file_get_contents($GLOBALS["conf"]["base_path"]."/frontend/components/".$path);
+        } else {
+            $this->errors->log("b_component_not_found", $path);
+            return "ERROR: Content couldnt be found";
+        }
     }
 }

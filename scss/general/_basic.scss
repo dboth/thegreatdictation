@@ -2,17 +2,33 @@
 
 html {
     height: 100%;
-    //overflow-y: scroll;
+    overflow-y: scroll;
 }
 
 body {
-    padding: 50px 0 0 0; //save content from navbar
     height: 100%;
     margin: 0;
+    padding: 50px 0 0; //save content from navbar
 }
 
 .jumbotron {
-    background-color: $tgd-secondary-color
+    background-color: $tgd-secondary-color;
+
+    .jumbotron-header {
+        color: $tgd-font-contrast-color;
+        border: 1px solid $tgd-font-contrast-color;
+
+        h3 {
+            margin-top: 10px;
+        }
+    }
+
+    .jumbotron-content {
+        margin-top: 10px;
+
+        color: $tgd-font-contrast-color;
+
+    }
 }
 
 #wrapper {
@@ -28,11 +44,11 @@ body {
         left: 0;
         position: absolute;
         width: 100%;
-        box-shadow: 0 0 0 1px white, 0 0 0 2px rgb(223, 223, 223);
+        border-top: 1px solid $tgd-primary-color;
 
         &.page-footer {
             height: $tgd-footer-height;
-            background-color: $tgd-secondary-color;
+            background-color: $tgd-nav-color;
         }
     }
 
@@ -56,6 +72,7 @@ body {
 
     .navbar-brand {
         color: darken($tgd-primary-color, 15);
+
         img {
             margin-top: -8px;
             filter: invert(0%);
@@ -65,10 +82,12 @@ body {
     .nav {
         li {
             text-align: center;
+
             a {
                 //-webkit-transition: background-color 0.3s, color 0.3s;
                 //transition: background-color 0.3s, color 0.3s;
                 color: $tgd-primary-color;
+
                 &:hover {
                     background-color: lighten($tgd-primary-color, 45);
                     color: darken($tgd-primary-color, 20);
@@ -79,19 +98,19 @@ body {
 }
 
 a {
-    outline:            none !important;
+    outline: none !important;
 }
 
 /* FORMS */
 
 textarea {
-    resize:     none;
+    resize: none;
 }
 
 select {
     option {
         &[disabled] {
-            color:  $gray-lighter;
+            color: $gray-lighter;
         }
     }
 }
@@ -99,7 +118,7 @@ select {
 /* ELEMENTS */
 
 .error-alert {
-    margin: 20px 15px 20px 15px;
+    margin: 20px 15px;
 }
 
 /* STYLING */
@@ -108,12 +127,6 @@ select {
     @include top-bottom-margin;
     @include left-right-margin;
     font-weight: bold;
-}
-
-.jumbotron {
-    &.title-jumbo {
-        background-color: $tgd-secondary-color;
-    }
 }
 
 .well {
@@ -133,31 +146,31 @@ select {
     vertical-align: top;
 
     &.no-margin {
-        margin: 3px 0 3px 0;
+        margin: 3px 0;
     }
 
     .arrow {
-        padding: 3px 5px 3px 5px;
+        padding: 3px 5px;
         display: block;
         border-radius: 10px;
         margin: 0 auto;
     }
 
     .target {
-        padding: 3px 5px 3px 5px;
+        padding: 3px 5px;
         display: block;
         border-radius: 10px;
         margin: 0 auto;
     }
 
     .input {
-        padding: 3px 5px 3px 5px;
+        padding: 3px 5px;
         display: block;
         border-radius: 10px;
         margin: 0 auto;
 
         &.match {
-            padding: 3px 0px 3px 0px;
+            padding: 3px 0;
         }
 
         &.substitution {
@@ -197,7 +210,7 @@ select {
     .element {
         display: inline-block;
         border-radius: 6px;
-        padding: 2px 6px 2px 6px;
+        padding: 2px 6px;
         margin: 3px 0 3px 5px;
         border: 1px solid transparent;
 
@@ -237,7 +250,7 @@ select {
 .spelling {
     float: left;
     border-radius: 6px;
-    padding: 2px 6px 2px 6px;
+    padding: 2px 6px;
     margin: 3px 0 3px 5px;
     border: 1px solid transparent;
 
@@ -254,7 +267,7 @@ select {
 
     &.correct {
         background-color: none;
-        border: none;
+        border: 0;
     }
 }
 
@@ -266,13 +279,13 @@ select {
     .score {
         font-weight: bold;
         font-size: 45pt;
-        color: lightblue;
+        color: $tgd-score-color;
     }
 
     .ratio {
         font-weight: bold;
         font-size: 45pt;
-        color: green;
+        color: $tgd-ratio-color;
     }
 }
 

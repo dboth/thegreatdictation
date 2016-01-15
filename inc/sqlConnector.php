@@ -37,7 +37,7 @@ class SqlConnector {
     }
     
     public function saveAnalysisResult($input, $output){
-        if (!($stmt = $this->db->prepare("INSERT INTO results (input, output) VALUES(?, ?)"))) echo "TODO: return an error";
+        if (!($stmt = $this->db->prepare("INSERT INTO results_v0 (input, output) VALUES(?, ?)"))) echo "TODO: return an error";
         $stmt->bind("ss",$input,$output);
         $stmt->execute();
     }

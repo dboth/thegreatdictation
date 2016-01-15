@@ -1,19 +1,29 @@
 /* COLORS */
 
 // DESIGN COLORS
-$tgd-bg-color: white;
+$tgd-bg-color: #fff;
 $tgd-primary-color: rgb(42, 147, 207);
 $tgd-secondary-color: darken($tgd-primary-color, 20);
 
-$tgd-nav-color: white;
+$tgd-nav-color: #2f2f2f;
+$tgd-nav-hover-color: $tgd-primary-color;
+$tgd-footer-color: #2f2f2f;
 
-$tgd-font-color: black;
-$tgd-font-contrast-color: white;
-$tgd-navfont-color: rgb(36, 36, 36);
+$tgd-inactive-link-color: #b3b3b3;
+$tgd-active-link-color: $tgd-primary-color;
+
+
+$tgd-font-color: #000;
+$tgd-font-contrast-color: #fff;
+$tgd-navfont-color: #fff;
+
+// STATISTIC COLORS
+$tgd-score-color: #add8e6;
+$tgd-ratio-color: #008000;
 
 // ALIGNMENT COLORS
 $tgd-correct-color:     #90ee90;
-$tgd-wrong-color:       #ff3333;
+$tgd-wrong-color:       #f33;
 $tgd-minor-mistake-color: #f2510c;
 
 // LEVENSHTEIN COLORS
@@ -24,6 +34,9 @@ $tgd-deletion-color: #e00dde;
 $tgd-punctuation-color: #6cd3ff;
 $tgd-capitalization-color: #ffe145;
 $tgd-switch-color: #ffa100;
+
+/* TEXT STYLING */
+$tgd-pointout-font-size: 1.2em;
 
 /* PAGE STRUCTURE */
 $tgd-footer-height: 150px;

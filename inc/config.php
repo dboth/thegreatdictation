@@ -9,5 +9,5 @@ $GLOBALS["conf"] = array(
         "user"=>"softpro_ws15_1",
         "password"=> "+]ntZYVePC%K7XDS"
     ),
-    "log_path" => "/tmp/tgd/log.txt"
+    "log_path" => __DIR__."/../log/errors.log"
 );

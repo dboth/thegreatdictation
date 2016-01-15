@@ -6,6 +6,7 @@
  * Meant to be loaded in any other projects PHP Class to provide
  * simple way of logging errors, informing users, ...
  *
+ * IMPORTANT: apache user needs full permissions to the log directory!
  */
 
 class ErrorHandler {
@@ -34,6 +35,12 @@ class ErrorHandler {
 				$error_info["fatality"] = "FATAL";
 				$error_info["name"] = "FILE NOT FOUND";
 				$error_info["msg"] = "No file found at ".$add_info;
+				break;
+
+			case "b_component_not_found":
+				$error_info["fatality"] = "DEBUG";
+				$error_info["name"] = "COMPONENT NOT FOUND";
+				$error_info["msg"] = "No component found at ".$add_info;
 				break;
 
 			case "f_analysis_create_analysis":
@@ -73,7 +80,7 @@ class ErrorHandler {
 	 */
 	public function log($error_id, $add_info) {
 		$error_info = $this->getErrorInfo($error_id, $add_info);
-		$log_msg = $error_info["fatality"]."\t".$this->current_class."\t".$error_info["name"]."\t".$error_info["msg"]."\n";
+		$log_msg = date('d/m/Y H:i:s')."\t".$error_info["fatality"]."\t".$this->current_class."\t".$error_info["name"]."\t".$error_info["msg"]."\n";
 
 		$logger = fopen($this->log_file_path, "a");
 		$success = fwrite($logger, $log_msg);

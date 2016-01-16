@@ -2,7 +2,7 @@
 
 import sys
 import json
-import aligner
+import Aligner
 
 
 class Result():
@@ -49,7 +49,7 @@ class Result():
         return diff_map
 
     def calcAlignmentDiff(self, input_data, target_data):
-        return aligner.Aligner(input_data, target_data, False).finalize()
+        return Aligner.Aligner(input_data, target_data, False).finalize()
 
     #CONTROL METHODS
 

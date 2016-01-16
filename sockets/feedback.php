@@ -7,7 +7,7 @@
 
 
 require_once __DIR__."/../inc/config.php";
-require_once __DIR__."/../inc/sqlConnector.php";
+require_once __DIR__."/../inc/SqlConnector.php";
 
 $title = $_POST["title"];
 $subject = $_POST["subject"];

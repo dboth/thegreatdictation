@@ -2,7 +2,7 @@
 //Template Generator Class
 
 //include translator
-require_once __DIR__."/translationEngine.php";
+require_once __DIR__."/TranslationEngine.php";
 require_once __DIR__."/ErrorHandler.php";
 
 class TemplateGenerator{

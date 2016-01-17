@@ -2,7 +2,7 @@
 //include the configs
 require_once __DIR__."/../inc/config.php";
 require_once __DIR__."/../inc/ErrorHandler.php";
-//require_once __DIR__."/../inc/sqlConnector.php";
+//require_once __DIR__."/../inc/SqlConnector.php";
 
 //set the output to json
 header('Content-Type: application/json');

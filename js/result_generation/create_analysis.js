@@ -15,20 +15,6 @@ function createAnalysis(res) {
 	target_info.find(".well").html(convertStringToHTML(result_object.target));
 }
 
-function revealAnalysis() {
-
-    /*
-    * Function to control the toggling between dictation form and analysis
-    */
-
-    $("#dictation-container").fadeOut("fast", function () {
-        $(this).attr("id", "");
-        $("#analysis-container").fadeIn("fast", function () {
-            $(this).attr("id", "main-container");
-        });
-    });
-
-}
 
 $(document).ready(function () {
     /*
@@ -61,7 +47,9 @@ $(document).ready(function () {
             requestErrorInfo("f_analysis_create_analysis", "Server Request Failed");
         }).done(function (res){
             createAnalysis(res);
-            revealAnalysis();
+            toggleViews("#analysis-container");
+            $("#res-switch").addClass("active");
+            $("#dict-switch").removeClass("active");
         });
     });
 });

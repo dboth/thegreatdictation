@@ -3,7 +3,7 @@
 
 //include necessary modules
 require_once "inc/config.php";
-require_once "inc/templateGenerator.php";
+require_once "inc/TemplateGenerator.php";
 
 //set base path for includes
 $GLOBALS["conf"]["base_path"] = __DIR__;

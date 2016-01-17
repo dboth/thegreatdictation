@@ -9,6 +9,11 @@ body {
     height: 100%;
     margin: 0;
     padding: 50px 0 0; //save content from navbar
+
+    &.modal-open {
+        overflow-y: none;
+        padding-right: inherit !important;
+    }
 }
 
 .jumbotron {
@@ -126,15 +131,21 @@ a {
     font-size: 40px;
 
     a {
+
         color: lighten($tgd-inactive-link-color, 20);
+        cursor: pointer;
 
         &.active {
             color: $tgd-active-link-color;
+
+            &:hover {
+                color: darken($tgd-active-link-color, 5);
+            }
         }
     }
 
     a:hover {
-        color: $tgd-active-link-color;
+        color: lighten($tgd-inactive-link-color, 15);
     }
 }
 

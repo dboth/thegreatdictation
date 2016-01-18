@@ -41,18 +41,18 @@ class SqlConnector {
     }
 
     public function saveAnalysisResult($input, $output){
-        if (!($stmt = $this->db->prepare("INSERT INTO results_v0 (input, output) VALUES(?, ?)"))) die("TODO: return an error");
-        $stmt->bind("ss",$input,$output);
+        if (!($stmt = $this->verbindung->prepare("INSERT INTO results_v0 (input, output) VALUES(?, ?)"))) die("TODO: return an error");
+        $stmt->bind_param("ss",$input,$output);
         $stmt->execute();
     }
 
     public function saveFeedback($title, $subject, $text){
         //feedback table sollte dann auch eine time spalte haben, die automatisch den timestamp erhält
-        if (!($stmt = $this->db->prepare("INSERT INTO feedback (title, subject, text) VALUES(?, ?, ?)"))) {
+        if (!($stmt = $this->verbindung->prepare("INSERT INTO feedback (title, subject, text) VALUES(?, ?, ?)"))) {
             die("TODO: return an error");
             return false;
             }
-        $stmt->bind("sss",$title, $subject, $text);
+        $stmt->bind_param("sss",$title, $subject, $text);
         $stmt->execute();
         return true;
     }

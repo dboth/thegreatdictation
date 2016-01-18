@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__."/config.php";
+
 class SqlConnector {
 
     //init
@@ -10,7 +12,6 @@ class SqlConnector {
     protected $mysql_db = $GLOBALS["conf"]["mysql"]["database"];
 
     public function __construct($live = false) {
-
             $this->verbindung = new mysqli($this->mysql_host, $this->mysql_user, $this->mysql_passwort, $this->mysql_db) or echo "TODO: return an error";
 
     }

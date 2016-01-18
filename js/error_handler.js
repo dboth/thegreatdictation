@@ -36,6 +36,10 @@ function informUser (info) {
 			error_container.addClass("alert-danger");
 			break;
 
+		case "WARNING":
+			error_container.addClass("alert-warning");
+			break;
+
 		case "DEBUG":
 			error_container.addClass("alert-warning");
 			break;

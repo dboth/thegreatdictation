@@ -13,7 +13,7 @@ $title = $_POST["title"];
 $subject = $_POST["subject"];
 $text = $_POST["text"];
 
-if (empty($title) || empty($subject) || empty($text)) 
+if (empty($title) || empty($subject) || empty($message))
     die("ERROR");
 
 $db = new SqlConnector();
@@ -22,3 +22,5 @@ if (!$db->putFeedback($title, $subject, $text))
     die("ERROR");
 
 die("OK");
+
+?>

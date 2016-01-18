@@ -2,7 +2,7 @@
 //include the configs
 require_once __DIR__."/../inc/config.php";
 require_once __DIR__."/../inc/ErrorHandler.php";
-//require_once __DIR__."/../inc/SqlConnector.php";
+require_once __DIR__."/../inc/SqlConnector.php";
 
 //set the output to json
 header('Content-Type: application/json');
@@ -52,8 +52,8 @@ $command = "python ". __DIR__ ."/analyse.py $argument";
 
 //execute the command (system() prints the output) exec does not
 $output = exec($command);
-/* ONLY WORKS ON SERVER..
+
 $sql = new SqlConnector();
 $sql->saveAnalysisResult($input_json, $output);
-*/
+
 echo $output;

@@ -5,19 +5,22 @@ require_once __DIR__."/config.php";
 class SqlConnector {
 
     //init
-    protected $verbindung;
-    protected $mysql_host = $GLOBALS["conf"]["mysql"]["host"];
-    protected $mysql_user = $GLOBALS["conf"]["mysql"]["user"];
-    protected $mysql_passwort = $GLOBALS["conf"]["mysql"]["password"];
-    protected $mysql_db = $GLOBALS["conf"]["mysql"]["database"];
+     protected $verbindung, $mysql_host, $mysql_user, $mysql_passwort, $mysql_db;
 
     public function __construct($live = false) {
-            $this->verbindung = new mysqli($this->mysql_host, $this->mysql_user, $this->mysql_passwort, $this->mysql_db) or echo "TODO: return an error";
-
+        $this->mysql_host = $GLOBALS["conf"]["mysql"]["host"];
+        $this->mysql_user = $GLOBALS["conf"]["mysql"]["user"];
+        $this->mysql_passwort = $GLOBALS["conf"]["mysql"]["password"];
+        $this->mysql_db = $GLOBALS["conf"]["mysql"]["database"];
+        $this->verbindung = @new mysqli($this->mysql_host, $this->mysql_user, $this->mysql_passwort, $this->mysql_db);
+        if ($this->verbindung->connect_error) {
+            die('Connect Error: ' . $this->verbindung->connect_error);
+        }
     }
 
     public function __destruct() {
-        $this->verbindung->close();
+        if (!$this->verbindung->connect_error) 
+             $this->verbindung->close();
     }
 
     public function getLastError(){
@@ -38,7 +41,7 @@ class SqlConnector {
     }
 
     public function saveAnalysisResult($input, $output){
-        if (!($stmt = $this->db->prepare("INSERT INTO results_v0 (input, output) VALUES(?, ?)"))) echo "TODO: return an error";
+        if (!($stmt = $this->db->prepare("INSERT INTO results_v0 (input, output) VALUES(?, ?)"))) die("TODO: return an error");
         $stmt->bind("ss",$input,$output);
         $stmt->execute();
     }
@@ -46,7 +49,7 @@ class SqlConnector {
     public function saveFeedback($title, $subject, $text){
         //feedback table sollte dann auch eine time spalte haben, die automatisch den timestamp erhält
         if (!($stmt = $this->db->prepare("INSERT INTO feedback (title, subject, text) VALUES(?, ?, ?)"))) {
-            echo "TODO: return an error";
+            die("TODO: return an error");
             return false;
             }
         $stmt->bind("sss",$title, $subject, $text);

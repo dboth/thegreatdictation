@@ -44,8 +44,10 @@ $(document).ready(function () {
             data: {data: JSON.stringify(data)},
             type: method
         }).fail(function (a,b,c){
+            console.log(a.responseText);
             requestErrorInfo("f_analysis_create_analysis", "Server Request Failed");
         }).done(function (res){
+            console.log(res);
             createAnalysis(res);
             toggleViews("#analysis-container");
             $("#res-switch").addClass("active");

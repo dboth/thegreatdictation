@@ -42,7 +42,7 @@ class SqlConnector {
 
     public function saveAnalysisResult($input, $output){
         if (!($stmt = $this->verbindung->prepare("INSERT INTO results_v0 (input, output) VALUES(?, ?)"))) die("TODO: return an error");
-        $stmt->bind("ss",$input,$output);
+        $stmt->bind_param("ss",$input,$output);
         $stmt->execute();
     }
 
@@ -52,7 +52,7 @@ class SqlConnector {
             die("TODO: return an error");
             return false;
             }
-        $stmt->bind("sss",$title, $subject, $text);
+        $stmt->bind_param("sss",$title, $subject, $text);
         $stmt->execute();
         return true;
     }

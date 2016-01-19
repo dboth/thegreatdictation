@@ -5,7 +5,7 @@ require_once __DIR__."/config.php";
 class SqlConnector {
 
     //init
-     protected $verbindung, $mysql_host, $mysql_user, $mysql_passwort, $mysql_db;
+    protected $verbindung, $mysql_host, $mysql_user, $mysql_passwort, $mysql_db;
 
     public function __construct($live = false) {
         $this->mysql_host = $GLOBALS["conf"]["mysql"]["host"];
@@ -19,7 +19,7 @@ class SqlConnector {
     }
 
     public function __destruct() {
-        if (!$this->verbindung->connect_error) 
+        if (!$this->verbindung->connect_error)
              $this->verbindung->close();
     }
 
@@ -41,14 +41,14 @@ class SqlConnector {
     }
 
     public function saveAnalysisResult($input, $output){
-        if (!($stmt = $this->db->prepare("INSERT INTO results_v0 (input, output) VALUES(?, ?)"))) die("TODO: return an error");
+        if (!($stmt = $this->verbindung->prepare("INSERT INTO results_v0 (input, output) VALUES(?, ?)"))) die("TODO: return an error");
         $stmt->bind("ss",$input,$output);
         $stmt->execute();
     }
 
     public function saveFeedback($title, $subject, $text){
         //feedback table sollte dann auch eine time spalte haben, die automatisch den timestamp erhält
-        if (!($stmt = $this->db->prepare("INSERT INTO feedback (title, subject, text) VALUES(?, ?, ?)"))) {
+        if (!($stmt = $this->verbindung->prepare("INSERT INTO feedback (title, subject, text) VALUES(?, ?, ?)"))) {
             die("TODO: return an error");
             return false;
             }

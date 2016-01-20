@@ -3,6 +3,7 @@
 from operator import itemgetter
 from collections import namedtuple
 import frames
+import faultPenalizer
 
 class Aligner(object):
     def __init__(self, input_str, target_str, match=0, sub=1, insert=1, delete=1, switch=1, capitals=0.5, simPunct=0.2, punct=0.5, prefWordBound=0.9, umlauts=0, wordSwitch=0.1, punctCapitalize=0.2, switcher=False, switchPunct=False, switchedSentenceStart=False):
@@ -87,7 +88,7 @@ class Aligner(object):
             for input_iter in range(len(self.input)):
                 if self.target[target_iter] != self.input[input_iter]:
                     if self.target[target_iter] == self.input[input_iter].lower() or self.target[target_iter] == self.input[input_iter].upper():
-                        self.matrix[target_iter+1][input_iter+1].append(self.matrix_field(target_iter, input_iter, self.capitals, "capitalization"))
+                        self.matrix[target_iter+1][input_iter+1].append(self.matrix_field(target_iter, input_iter, self.capitals, "capitals"))
         if self.switchedSentenceStart == True:
             if self.target[0] == self.input[0].lower() or self.input[0] == self.target[0].lower():
                 self.matrix[1][1].append(self.matrix_field(0, 0, 0, "caveatCapitalization"))
@@ -148,7 +149,7 @@ class Aligner(object):
                     if self.input[j:j+2] == self.umlaut_bag[self.target[i]]:
                         self.matrix[i+1][j+2].append(self.matrix_field(i, j, self.umlauts, "Umlaut"))
 
-    def indexSplit(self, inputString):  #neccessary for wordSwitch
+    def indexSplit(self, inputString):  #neccessary for wordSwitch. splits words into [["word0", startIndex_of_word0, endIndex_of_word0],...]
         result = []
         counter = 0
         for letter_iter in range(len(inputString)):
@@ -183,10 +184,17 @@ class Aligner(object):
         while row > 0 or col > 0:
             self.path.append([row, col, self.matrix[row][col]])
             if self.matrix[row][col][3] == "wordSwitch":
+                second_input_word_length = self.indexSplit(self.input[col-self.switched_words_bag[(row,col)][0][1]:col])[1][2]-self.indexSplit(self.input[col-self.switched_words_bag[(row,col)][0][1]:col])[1][1] #length of second word of switched words
                 target_length = self.switched_words_bag[(row,col)][0][0]
                 input_length = self.switched_words_bag[(row,col)][0][1]
                 for process in self.switched_words_bag[(row, col)]:
-                    self.path.append([row-target_length+process[0], col-input_length+process[1], self.matrix_field(row-target_length+process[2][0], col-input_length+process[2][1], process[2][2] , process[2][3])])
+                    #unswitch words
+                    if process[1]>second_input_word_length+1:   #second word to first word
+                        self.path.append([row-target_length+process[0], col-input_length+process[1]-second_input_word_length-1, self.matrix_field(row-target_length+process[2][0], col-input_length+process[2][1]-second_input_word_length-1, process[2][2] , process[2][3])])                        
+                    elif process[1]<second_input_word_length+1: #first word to second word
+                        self.path.append([row-target_length+process[0], col-input_length+process[1]+self.switched_words_bag[(row,col)][0][1]-second_input_word_length, self.matrix_field(row-target_length+process[2][0], col-input_length+process[2][1]+self.switched_words_bag[(row,col)][0][1]-second_input_word_length, process[2][2] , process[2][3])])
+                    else: #space to new place between exchanged words
+                        self.path.append([row-target_length+process[0], col-input_length+process[1]-self.switched_words_bag[(row,col)][0][1]+second_input_word_length, self.matrix_field(row-target_length+process[2][0], col-input_length+process[2][1]-self.switched_words_bag[(row,col)][0][1]+second_input_word_length, process[2][2] , process[2][3])])
             if self.matrix[row][col][0]>row:
                 self.debug("Error in createPath: new value for row larger than preceding value")
             if self.matrix[row][col][1]>col:
@@ -205,10 +213,13 @@ class Aligner(object):
             self.switchWords()
         self.calculateMatrix()
         self.createPath()
+        if self.switcher == False:
+            p = faultPenalizer.FaultPenalizer(self.path)
+            p.plugInFaultValues()
+            self.path = p.finalPath
         return self.path
 
 if __name__ == "__main__":
-    a = Aligner(u"julia hallo", u"Hallo Julia")
+    a = Aligner(u"t du holla", u"hallo du")
     a.d.set_debug(True)
-
-    print(a.finalize())
+    self.debug(a.finalize())

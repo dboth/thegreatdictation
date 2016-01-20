@@ -9,7 +9,6 @@ function toggleViews(to_view) {
     */
 
     if (!$(to_view).hasClass('main-container')) {
-        console.log($(to_view).attr("id"));
         $(".main-container").fadeOut(0, function () {
             $(this).removeClass("main-container");
             $(to_view).fadeIn(0, function () {

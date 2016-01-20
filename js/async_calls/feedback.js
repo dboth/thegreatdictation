@@ -6,6 +6,8 @@ $(document).ready(function() {
 		var subject = $("#feedback-subject").val();
 		var message = $("#feedback-message").val();
 
+		console.log(title, subject, message);
+
 		if (!title | !subject | !message) {
 			requestErrorInfo("f_fill_all_fields", 3);
 		} else {
@@ -14,11 +16,11 @@ $(document).ready(function() {
 				type: 'POST',
 				data: {"title": title, "subject": subject, "message": message}
 			})
-			.done(function() {
-				console.log("success");
+			.done(function(res) {
+				console.log("success", res);
 			})
-			.fail(function() {
-				console.log("error");
+			.fail(function(res) {
+				console.log("error", res);
 			})
 			.always(function() {
 				console.log("complete");

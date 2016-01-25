@@ -22,7 +22,7 @@ class ErrorHandler {
 	 * @param  str		$add_info 	additional info about error depending on errortype
 	 * @return array           		contains fatality, name and msg for error
 	 */
-	protected function getErrorInfo($e_id, $add_info = "") {
+	protected function getErrorInfo($e_id, $add_info) {
 		$error_info = array(
 			"fatality"	=>	"", // Range: INFO DEBUG WARNING FATAL
 			"name"		=>	"",
@@ -88,7 +88,7 @@ class ErrorHandler {
 	 * @param	str		$add_info	Additional Info concerning error
 	 * @return 	json	           	json/arraymap containing the information for the frontend
 	 */
-	public function createErrorJSON($e_id, $add_info) {
+	public function createErrorJSON($e_id, $add_info="") {
 		$error_info = $this->getErrorInfo($e_id, $add_info);
 		return json_encode($error_info);
 	}
@@ -100,7 +100,7 @@ class ErrorHandler {
 	 * @param	str		$add_info	Additional Info concerning error
 	 * @return	bool			True if logging succesful, False else
 	 */
-	public function log($error_id, $add_info) {
+	public function log($error_id, $add_info="") {
 		$error_info = $this->getErrorInfo($error_id, $add_info);
 		$log_msg = date('d/m/Y H:i:s')."\t".$error_info["fatality"]."\t".$this->current_class."\t".$error_info["name"]."\t".$error_info["msg"]."\n";
 

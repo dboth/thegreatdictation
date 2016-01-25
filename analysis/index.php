@@ -4,7 +4,7 @@ require_once __DIR__."/../inc/config.php";
 require_once __DIR__."/../inc/ErrorHandler.php";
 require_once __DIR__."/../inc/SqlConnector.php";
 
-require_once "inc/UserSystem.php";
+require_once "../inc/UserSystem.php";
 $usersystem = new UserSystem();
 
 //set the output to json

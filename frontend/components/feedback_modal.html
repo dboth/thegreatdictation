@@ -20,14 +20,14 @@
 							<div class="form-group row">
 								<label for="feedback-title" class="control-label col-xs-12 col-sm-3">Give it a title</label>
 								<div class="col-xs-12 col-sm-9">
-									<input type="text" class="form-control" id="feedback-title" name="title" placeholder="e.g. I don't like the color of the buttons!">
+									<input type="text" class="form-control" id="feedback-title" name="title" placeholder="e.g. I don't like the color of the buttons!" required>
 								</div>
 							</div>
 
 							<div class="form-group row">
 								<label for="feedback-subject" class="control-label col-xs-12 col-sm-3">And a subject</label>
 								<div class="col-xs-12 col-sm-9">
-									<select class="form-control" id="feedback-subject" name="subject">
+									<select class="form-control" id="feedback-subject" name="subject" required>
 										<option selected disabled></option>
 										<option value="praise">Laudation</option>
 										<option value="request">Feature Request</option>
@@ -40,7 +40,7 @@
 							<div class="form-group row">
 								<label for="feedback-message" class="control-label col-xs-12 col-sm-3">Now talk to us!</label>
 								<div class="col-xs-12 col-sm-9">
-									<textarea class="form-control" rows="6" id="feedback-message" name="message" placeholder="e.g. I am childish and want to complain about the design!"></textarea>
+									<textarea class="form-control" rows="6" id="feedback-message" name="message" placeholder="e.g. I am childish and want to complain about the design!" required></textarea>
 								</div>
 							</div>
 
@@ -59,4 +59,4 @@
 				</div>
 			</div>
 		</div>
-		<script src="js/page_events/handle_feedback.js"></script>
+		<script src="js/async_calls/feedback.js"></script>

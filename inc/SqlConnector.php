@@ -1,13 +1,15 @@
 <?php
 
 require_once __DIR__."/config.php";
+require_once __DIR__."/ErrorHandler.php";
 
 class SqlConnector {
 
     //init
-     protected $verbindung, $mysql_host, $mysql_user, $mysql_passwort, $mysql_db;
+    protected $verbindung, $mysql_host, $mysql_user, $mysql_passwort, $mysql_db;
 
     public function __construct($live = false) {
+        $this->errors = new ErrorHandler(__CLASS__);
         $this->mysql_host = $GLOBALS["conf"]["mysql"]["host"];
         $this->mysql_user = $GLOBALS["conf"]["mysql"]["user"];
         $this->mysql_passwort = $GLOBALS["conf"]["mysql"]["password"];
@@ -16,10 +18,11 @@ class SqlConnector {
         if ($this->verbindung->connect_error) {
             die('Connect Error: ' . $this->verbindung->connect_error);
         }
+
     }
 
     public function __destruct() {
-        if (!$this->verbindung->connect_error) 
+        if (!$this->verbindung->connect_error)
              $this->verbindung->close();
     }
 
@@ -49,9 +52,9 @@ class SqlConnector {
     public function saveFeedback($title, $subject, $text){
         //feedback table sollte dann auch eine time spalte haben, die automatisch den timestamp erhält
         if (!($stmt = $this->verbindung->prepare("INSERT INTO feedback (title, subject, text) VALUES(?, ?, ?)"))) {
-            die("TODO: return an error");
+            $this->errors->log("b_db_couldnt_prepare_sql", "feedback");
             return false;
-            }
+        }
         $stmt->bind_param("sss",$title, $subject, $text);
         $stmt->execute();
         return true;

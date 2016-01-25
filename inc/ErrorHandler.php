@@ -22,7 +22,7 @@ class ErrorHandler {
 	 * @param  str		$add_info 	additional info about error depending on errortype
 	 * @return array           		contains fatality, name and msg for error
 	 */
-	protected function getErrorInfo($e_id, $add_info) {
+	protected function getErrorInfo($e_id, $add_info = "") {
 		$error_info = array(
 			"fatality"	=>	"", // Range: INFO DEBUG WARNING FATAL
 			"name"		=>	"",
@@ -35,6 +35,16 @@ class ErrorHandler {
 				$error_info["fatality"] = "FATAL";
 				$error_info["name"] = "FILE NOT FOUND";
 				$error_info["msg"] = "No file found at ".$add_info;
+				break;
+                        case "b_usersystem_key_not_found":
+				$error_info["fatality"] = "WARNING";
+				$error_info["name"] = "KEY NOT FOUND";
+				$error_info["msg"] = "The following key could not be found in the user session: ".$add_info;
+				break;
+                         case "b_setInfo_jsonparseerror":
+				$error_info["fatality"] = "FATAL";
+				$error_info["name"] = "JSON NOT PARSEABLE";
+				$error_info["msg"] = "The setInformation Socket could not parse the incoming json.";
 				break;
 
 			case "b_component_not_found":

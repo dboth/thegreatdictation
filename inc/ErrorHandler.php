@@ -52,7 +52,11 @@ class ErrorHandler {
 				$error_info["name"] = "COMPONENT NOT FOUND";
 				$error_info["msg"] = "No component found at ".$add_info;
 				break;
-
+                        case "b_db_connection_error":
+				$error_info["fatality"] = "FATAL";
+				$error_info["name"] = "COULDNT SQL";
+				$error_info["msg"] = "Couldnt: ".$add_info;
+				break;
 			case "b_db_couldnt_prepare_sql":
 				$error_info["fatality"] = "FATAL";
 				$error_info["name"] = "COULDNT PREPARE SQL";

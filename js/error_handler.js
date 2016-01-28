@@ -10,7 +10,10 @@ function requestErrorInfo (error_id, add_info) {
 		type: "POST",
 		url: "sockets/getErrorInformations.php",
 		data: {id: error_id, add_info: add_info}
-	}).fail(function () {
+	}).fail(function (a, b, c) {
+		console.log(a);
+		console.log(b);
+		console.log(c);
 		informUser(error_error);
 	}).done(function (error_info) {
 		if (typeof error_info != "object"){

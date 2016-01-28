@@ -27,7 +27,7 @@ $(document).ready(function () {
     $("#dictation-form").submit(function (event) {
         event.preventDefault();
 
-        var tests = ["Rosen sind rot und Veilchen sind blau, ich mag gerne Brot, das ich mir oft klau", "Ich bin ein Elefant", "Dieses Projekt übersteigt alles in Awesomenesshaftigkeit"];
+        var tests = ["Rosen sind rot und Veilchen sind blau, ich mag gerne Brot, das ich mir oft klau", "Ich bin ein Elefant", "Ich haus gin das fisch"];
 
         var data = {
             input: $("#dictation-text").val().replace(/\s$/, ""),

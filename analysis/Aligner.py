@@ -190,7 +190,7 @@ class Aligner(object):
                 for process in self.switched_words_bag[(row, col)]:
                     #unswitch words
                     if process[1]>second_input_word_length+1:   #second word to first word
-                        self.path.append([row-target_length+process[0], col-input_length+process[1]-second_input_word_length-1, self.matrix_field(row-target_length+process[2][0], col-input_length+process[2][1]-second_input_word_length-1, process[2][2] , process[2][3])])                        
+                        self.path.append([row-target_length+process[0], col-input_length+process[1]-second_input_word_length-1, self.matrix_field(row-target_length+process[2][0], col-input_length+process[2][1]-second_input_word_length-1, process[2][2] , process[2][3])])
                     elif process[1]<second_input_word_length+1: #first word to second word
                         self.path.append([row-target_length+process[0], col-input_length+process[1]+self.switched_words_bag[(row,col)][0][1]-second_input_word_length, self.matrix_field(row-target_length+process[2][0], col-input_length+process[2][1]+self.switched_words_bag[(row,col)][0][1]-second_input_word_length, process[2][2] , process[2][3])])
                     else: #space to new place between exchanged words
@@ -222,4 +222,4 @@ class Aligner(object):
 if __name__ == "__main__":
     a = Aligner(u"t du holla", u"hallo du")
     a.d.set_debug(True)
-    self.debug(a.finalize())
+    a.debug(a.finalize())

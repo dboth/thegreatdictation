@@ -100,7 +100,7 @@ class ErrorHandler {
 		if (!$success) {
 			return False;
 		} else {
-			return True;
+			return $this->createErrorJSON($error_id, $add_info);
 		}
 	}
 

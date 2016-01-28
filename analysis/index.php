@@ -4,6 +4,9 @@ require_once __DIR__."/../inc/config.php";
 require_once __DIR__."/../inc/ErrorHandler.php";
 require_once __DIR__."/../inc/SqlConnector.php";
 
+require_once "../inc/UserSystem.php";
+$usersystem = new UserSystem();
+
 //set the output to json
 header('Content-Type: application/json');
 
@@ -30,6 +33,12 @@ $new_json = array(
     "data"=>$data,
     "meta"=>array(
         //todo: add serverside information
+        "username" => $usersystem->getUserInformation("username"),
+        "gender" => $usersystem->getUserInformation("gender"),
+        "age" => $usersystem->getUserInformation("age"),
+        "mothertongue" => $usersystem->getUserInformation("mothertongue"),
+        "learninglength" => $usersystem->getUserInformation("learninglength"),
+        "livingingerman" => $usersystem->getUserInformation("livingingerman"),
     )
 );
 $input_json = json_encode($new_json);

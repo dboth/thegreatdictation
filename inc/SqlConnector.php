@@ -16,7 +16,7 @@ class SqlConnector {
         $this->mysql_db = $GLOBALS["conf"]["mysql"]["database"];
         $this->verbindung = @new mysqli($this->mysql_host, $this->mysql_user, $this->mysql_passwort, $this->mysql_db);
         if ($this->verbindung->connect_error) {
-            die('Connect Error: ' . $this->verbindung->connect_error);
+            die($this->errors->createErrorJSON("b_db_connection_error", $this->verbindung->connect_error));
         }
 
     }
@@ -44,7 +44,7 @@ class SqlConnector {
     }
 
     public function saveAnalysisResult($input, $output){
-        if (!($stmt = $this->verbindung->prepare("INSERT INTO results_v0 (input, output) VALUES(?, ?)"))) die("TODO: return an error");
+        if (!($stmt = $this->verbindung->prepare("INSERT INTO results_v0 (input, output) VALUES(?, ?)"))) die($this->errors->createErrorJSON("b_db_couldnt_prepare_sql", "results_v0"));
         $stmt->bind_param("ss",$input,$output);
         $stmt->execute();
     }
@@ -52,7 +52,7 @@ class SqlConnector {
     public function saveFeedback($title, $subject, $text){
         //feedback table sollte dann auch eine time spalte haben, die automatisch den timestamp erhält
         if (!($stmt = $this->verbindung->prepare("INSERT INTO feedback (title, subject, text) VALUES(?, ?, ?)"))) {
-            $this->errors->log("b_db_couldnt_prepare_sql", "feedback");
+            die($this->errors->createErrorJSON("b_db_couldnt_prepare_sql", "feedback"));
             return false;
         }
         $stmt->bind_param("sss",$title, $subject, $text);

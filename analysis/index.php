@@ -6,6 +6,8 @@ require_once __DIR__."/../inc/SqlConnector.php";
 
 require_once "../inc/UserSystem.php";
 $usersystem = new UserSystem();
+$sql = new SqlConnector();
+$sql1 = new SqlConnector();
 
 //set the output to json
 header('Content-Type: application/json');
@@ -15,8 +17,8 @@ $EHandler = new ErrorHandler("Analysis");
 
 //check if there was data sent
 if (empty($_POST["data"])) {
-    $EHandler.log(2);
-    echo $EHandler.createErrorJSON(2);
+    $EHandler->log("b_missing_post_error", "analysis data");
+    echo $EHandler->createErrorJSON("b_missing_post_error", "analysis data");
     die();
 }
 
@@ -25,8 +27,14 @@ if (empty($_POST["data"])) {
 $data = json_decode($_POST["data"], true);
 
 //check if data is json
-if ($data === null)
-    die("no json"); //todo handle error -> unreadable json, should return a json error object
+if ($data === null) {
+    $EHandler->log("b_setInfo_jsonparseerror");
+    die(); //todo handle error -> unreadable json, should return a json error object
+}
+
+//get text
+$data["target"] = $sql1->getText($data["text_id"]);
+$EHandler->log("b_info", $data["target"]);
 
 //create a new data object with meta data
 $new_json = array(
@@ -62,7 +70,6 @@ $command = "python ". __DIR__ ."/analyse.py $argument";
 //execute the command (system() prints the output) exec does not
 $output = exec($command);
 
-$sql = new SqlConnector();
 $sql->saveAnalysisResult($input_json, $output);
 
 echo $output;

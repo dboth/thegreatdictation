@@ -31,28 +31,37 @@ class ErrorHandler {
 		);
 
 		switch ($e_id) {
+			case "b_missing_post_error":
+				$error_info["fatality"] = "FATAL";
+				$error_info["name"] = "MISSING POST";
+				$error_info["msg"] = "Needed data wasnt provided in POST: ".$add_info;
+				break;
+			case "b_info":
+				$error_info["fatality"] = "INFO";
+				$error_info["name"] = "NOTE";
+				$error_info["msg"] = $add_info;
+				break;
 			case "b_file_not_found":
 				$error_info["fatality"] = "FATAL";
 				$error_info["name"] = "FILE NOT FOUND";
 				$error_info["msg"] = "No file found at ".$add_info;
 				break;
-                        case "b_usersystem_key_not_found":
+            case "b_usersystem_key_not_found":
 				$error_info["fatality"] = "WARNING";
 				$error_info["name"] = "KEY NOT FOUND";
 				$error_info["msg"] = "The following key could not be found in the user session: ".$add_info;
 				break;
-                         case "b_setInfo_jsonparseerror":
+            case "b_setInfo_jsonparseerror":
 				$error_info["fatality"] = "FATAL";
 				$error_info["name"] = "JSON NOT PARSEABLE";
 				$error_info["msg"] = "The setInformation Socket could not parse the incoming json.";
 				break;
-
 			case "b_component_not_found":
 				$error_info["fatality"] = "DEBUG";
 				$error_info["name"] = "COMPONENT NOT FOUND";
 				$error_info["msg"] = "No component found at ".$add_info;
 				break;
-                        case "b_db_connection_error":
+            case "b_db_connection_error":
 				$error_info["fatality"] = "FATAL";
 				$error_info["name"] = "COULDNT SQL";
 				$error_info["msg"] = "Couldnt: ".$add_info;

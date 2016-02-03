@@ -6,7 +6,7 @@ import frames
 import faultPenalizer
 
 class Aligner(object):
-    def __init__(self, input_str, target_str, match=0, sub=1.8, insert=1, delete=1, switch=1, capitals=0.5, simPunct=0.2, punct=0.5, prefWordBound=0.9, umlauts=0, wordSwitch=0.1, punctCapitalize=0.2, switcher=False, switchPunct=False, switchedSentenceStart=False):
+    def __init__(self, target_str, input_str, match=0, sub=1.8, insert=1, delete=1, switch=1, capitals=0.5, simPunct=0.2, punct=0.5, prefWordBound=0.9, umlauts=0, wordSwitch=0.1, punctCapitalize=0.2, switcher=False, switchPunct=False, switchedSentenceStart=False):
         #DEBUGGER DONT TOUCH
         self.d = frames.Debugger()
         self.debug = self.d.debug
@@ -43,7 +43,7 @@ class Aligner(object):
 
         #PROCESSED DATA
         self.matrix = []
-        self.matrix_field = namedtuple("Field", ["x", "y", "cost", "op"])
+        self.matrix_field = namedtuple("Field", ["target", "input", "cost", "op"])
         self.path = []
 
     def initializeMatrix(self):
@@ -83,7 +83,6 @@ class Aligner(object):
                 if self.target[i] == self.input[j]:
                     if self.target[i-1] == self.input[j+1]:
                         self.matrix[i+1][j+2].append(self.matrix_field(i-1, j, self.switch, "switch"))
-
 
     def applyCapitals(self): #capitalization error
         for target_iter in range(len(self.target)):
@@ -228,6 +227,6 @@ class Aligner(object):
         return self.path[::-1] #reverse and return path
 
 if __name__ == "__main__":
-    a = Aligner(u"ich bin ein elefant", u"ich bin elefant")
+    a = Aligner(u"Ich bin", u"Bin ich")
     a.d.set_debug(True)
     a.debug(a.finalize())

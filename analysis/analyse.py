@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 import sys
 import json
@@ -18,7 +19,6 @@ class Result():
         self.text_id = self.getValueFromJSON("text_id")
 
         #calculated data
-        self.diff_map = self.calcSimpleDiff(self.input_data, self.target_data)
         self.alignment = self.calcAlignmentDiff(self.target_data, self.input_data)
 
         #output
@@ -66,7 +66,6 @@ class Result():
         output_json["data"].update({"text_id": self.text_id})
         output_json["data"].update({"target": self.target_data})
 
-        output_json["data"].update({"diff_map": self.diff_map})
         output_json["data"].update({"levenshtein": self.alignment})
         return output_json
 
@@ -75,6 +74,6 @@ class Result():
         return json.dumps([self.output_json])
 
 if __name__ == "__main__":
-    #tgd = Result('{"data" : {"input" : "Ich ein bin Elefant", "target" : "osen sind rot und Veilchen sind blau, ich mag gerne Brot, das ich mir oft klau", "text_id" : 4}}')
-    tgd = Result(sys.argv[1])
+    tgd = Result('{"data":{"input":"Ich bin ein Elefant","text_id":"1","target":"Testing a test"},"meta":{"username":false,"gender":false,"age":false,"mothertongue":false,"learninglength":false,"livingingerman":false}}')
+    #tgd = Result(sys.argv[1])
     print(tgd.returnJSON())

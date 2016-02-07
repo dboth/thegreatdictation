@@ -115,7 +115,7 @@ class Aligner(object):
                         self.matrix[i+1][j+1].append(self.matrix_field(i-1, j, self.prefWordBound, "M+"))
                     if i<len(self.target)-1:
                         if self.target[i+1] == self.input[j]:  #matches directly after space
-                            self.matrix[i+2][j+1].append(self.matrix_field(i, j, self.prefWordBound, "+M"))                        
+                            self.matrix[i+2][j+1].append(self.matrix_field(i, j, self.prefWordBound, "+M"))
         for j in range(1, len(self.input)):	  #space in self.input
             if self.input[j] == " ":
                 for i in range(len(self.target)):
@@ -124,7 +124,7 @@ class Aligner(object):
                     if j<len(self.input)-1:
                         if self.input[j+1] == self.target[i]:
                             self.matrix[i+1][j+2].append(self.matrix_field(i, j, self.prefWordBound, "+M"))  #match directly after space
-                            
+
 
     def punctCapitalization(self): #consider changed capitalization after wrong punctuation
         for target_iter in range(len(self.target)):
@@ -184,7 +184,7 @@ class Aligner(object):
     def createPath(self): #create list of lists in the form [fin_target, fin_input, (start_target, start_input, process_value, process_type)]
         row = len(self.target)
         col = len(self.input)
-        while row > 0 or col > 0:                    
+        while row > 0 or col > 0:
             if self.matrix[row][col][3] == "wordSwitch": #word switches need a special care. for example with target "hello you" and input "you hello", the switchedWords function treats the input like "hello you", so the coordinates in the switchedWords matrix are at the wrong places. so all the coordinates have to be recalculated here.
                 #print self.switched_words_bag
                 second_input_word_length = self.indexSplit(self.input[col-self.switched_words_bag[(row,col)][0][1]:col])[1][2]-self.indexSplit(self.input[col-self.switched_words_bag[(row,col)][0][1]:col])[1][1] #length of second word of switched words
@@ -225,6 +225,6 @@ class Aligner(object):
         return self.path[::-1] #reverse and return path
 
 if __name__ == "__main__":
-    a = Aligner(u"ich bin", u"binn ich")
+    a = Aligner(u"ich biün", u"büinn ich")
     a.d.set_debug(True)
     a.debug(a.finalize())

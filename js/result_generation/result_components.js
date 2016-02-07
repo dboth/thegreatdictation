@@ -105,6 +105,8 @@ Result.prototype.createLevenshteinDiffInfo = function (target_id) {
 
 		var add_space_necessary = false;
 
+		console.log(input_pos + "|" + this.input[input_pos]);
+
 		if (errortype === "M") {
 			container.addClass("no-margin");
 			input.addClass("match")

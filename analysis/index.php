@@ -33,8 +33,7 @@ if ($data === null) {
 }
 
 //get text
-$data["target"] = $sql1->getText($data["text_id"]);
-$EHandler->log("b_info", $data["target"]);
+$data["target"] = utf8_encode($sql1->getText($data["text_id"]));
 
 //create a new data object with meta data
 $new_json = array(
@@ -49,6 +48,8 @@ $new_json = array(
         "livingingerman" => $usersystem->getUserInformation("livingingerman"),
     )
 );
+
+
 $input_json = json_encode($new_json);
 //escapeshellarg is shitty for windows because it replaces all double quotes.
 //therefore if on windows and testing do not use that and escape the argument with a rudimentary version of the escaper
@@ -65,7 +66,7 @@ if (DIRECTORY_SEPARATOR == '\\' && $GLOBALS["conf"]["testing"]){
 
 //create the command
 $command = "python ". __DIR__ ."/analyse.py $argument";
-
+$EHandler->log("b_info", $command);
 
 //execute the command (system() prints the output) exec does not
 $output = exec($command);

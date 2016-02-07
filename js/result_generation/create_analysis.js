@@ -33,6 +33,8 @@ $(document).ready(function () {
             target: ""
         };
 
+        console.log(data);
+
         var action = $(this).attr("action");
         var method = $(this).attr("method");
 

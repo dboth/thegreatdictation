@@ -63,6 +63,8 @@ class ErrorHandler {
 				$error_info["name"] = "COMPONENT NOT FOUND";
 				$error_info["msg"] = "No component found at ".$add_info;
 				break;
+
+			// DATABASE ERRORS
             case "b_db_connection_error":
 				$error_info["fatality"] = "FATAL";
 				$error_info["name"] = "COULDNT SQL";
@@ -74,6 +76,7 @@ class ErrorHandler {
 				$error_info["msg"] = "Couldnt prepare the SQL Statement for execution at: ".$add_info;
 				break;
 
+			// FRONTEND ERRORS
 			case "f_analysis_create_analysis":
 				$error_info["fatality"] = "FATAL";
 				$error_info["name"] = "CREATE ANALYSIS FAIL";

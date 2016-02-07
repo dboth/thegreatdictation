@@ -40,7 +40,7 @@ class AlignmentPostProcessor():
             process = self.alignment[process_iter]
             print process
             target_iter = process[0]
-            word_fault_sum += process[2][2]   
+            word_fault_sum += process[2][2]  
             if process[0]>wordSwitchEnd: #ignore all processes inside wordSwitch  
                 if self.target[target_iter-1] == " ": #white space match
                     if target_iter > cont_iter: #this assures that each whitespace only creates one word if several processes have the same input start value
@@ -100,6 +100,6 @@ class AlignmentPostProcessor():
         return score, wrong_words, words
 
 if __name__ == "__main__":
-	a = Aligner.Aligner(u"tonne in der Nacht", u"Tonne ist in der Schlacht")
-	app = AlignmentPostProcessor(a.finalize(), a.target, a.input, a.match)
+	a = Aligner.Aligner(u"Tonne in der Schlacht", u"tonne in der Nacht")
+	app = AlignmentPostProcessor(a.finalize(), a.input, a.target, a.match)
 	print(app.convertToWordAlignment())

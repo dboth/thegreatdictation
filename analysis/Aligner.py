@@ -226,6 +226,6 @@ class Aligner(object):
         return self.path[::-1] #reverse and return path
 
 if __name__ == "__main__":
-    a = Aligner(u"ich biün", u"büinn ich")
+    a = Aligner(u"Tonne ist in der Schlacht", u"tonne in der Nacht")
     a.d.set_debug(True)
     a.debug(a.finalize())

@@ -82,12 +82,17 @@ class ErrorHandler {
 				$error_info["name"] = "CREATE ANALYSIS FAIL";
 				$error_info["msg"] = "The creation of your analysis failed due to: ".$add_info;
 				break;
-
 			case "f_fill_all_fields":
 				$error_info["fatality"] = "WARNING";
 				$error_info["name"] = "FILL ALL FIELDS";
 				$error_info["msg"] = "Please fill all ".$add_info." required fields!";
 				break;
+			case "f_select_a_text":
+				$error_info["fatality"] = "WARNING";
+				$error_info["name"] = "SELECT A TEXT";
+				$error_info["msg"] = "Please select a text!";
+				break;
+
 
 			default:
 				$error_info["fatality"] = "DEBUG";

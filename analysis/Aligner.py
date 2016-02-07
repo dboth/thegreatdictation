@@ -6,7 +6,7 @@ import frames
 import faultPenalizer
 
 class Aligner(object):
-    def __init__(self, target_str, input_str, match=0, sub=1.8, insert=1, delete=1, switch=1, capitals=0.5, simPunct=0.2, punct=0.5, prefWordBound=0.9, umlauts=0, wordSwitch=0.1, punctCapitalize=0.2, switcher=False, switchPunct=False, switchedSentenceStart=False):
+    def __init__(self, target_str, input_str, match=0, sub=1.8, insert=1, delete=1, switch=1, capitals=0.5, simPunct=0.2, punct=0.5, prefWordBound=0.9, umlauts=0, wordSwitch=0.1, punctCapitalize=0.2, wsPenalty=0.5, switcher=False, switchPunct=False, switchedSentenceStart=False):
         #DEBUGGER DONT TOUCH
         self.d = frames.Debugger()
         self.debug = self.d.debug
@@ -28,6 +28,7 @@ class Aligner(object):
         self.umlauts = umlauts
         self.wordSwitch = wordSwitch
         self.punctCapitalize = punctCapitalize
+        self.wsPenalty = wsPenalty
 
         #BOOLEANS
         self.switcher = switcher
@@ -170,7 +171,7 @@ class Aligner(object):
 
         for input_iter in range(len(input_words)-1):
             for target_iter in range(len(target_words)-1):
-                switcher = Aligner(input_str=input_words[input_iter+1][0] + " " + input_words[input_iter][0], target_str=target_words[target_iter][0] + " " + target_words[target_iter+1][0], match=self.match, sub=self.sub+0.5, insert=self.insert+0.5, delete=self.delete+0.5, switch=self.switch+0.5, capitals=self.capitals, simPunct=self.simPunct, punct=self.punct, prefWordBound=self.prefWordBound, umlauts=self.umlauts, wordSwitch=self.wordSwitch, switcher=True)
+                switcher = Aligner(input_str=input_words[input_iter+1][0] + " " + input_words[input_iter][0], target_str=target_words[target_iter][0] + " " + target_words[target_iter+1][0], match=self.match, sub=self.sub+self.wsPenalty, insert=self.insert+self.wsPenalty, delete=self.delete+self.wsPenalty, switch=self.switch+self.wsPenalty, capitals=self.capitals, simPunct=self.simPunct, punct=self.punct, prefWordBound=self.prefWordBound, umlauts=self.umlauts, wordSwitch=self.wordSwitch, switcher=True)
                 switcher.finalize()
                 self.matrix[target_words[target_iter+1][2]][input_words[input_iter+1][2]].append(self.matrix_field(target_words[target_iter][1], input_words[input_iter][1], switcher.path[0][2][2]+self.wordSwitch, "wordSwitch"))
                 self.switched_words_bag[(target_words[target_iter+1][2],input_words[input_iter+1][2])] = switcher.path

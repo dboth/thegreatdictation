@@ -5,7 +5,7 @@ from collections import namedtuple
 
 class AlignmentPostProcessor():
 
-    def __init__(self, alignment, target_str, input_str, match):
+    def __init__(self, alignment, input_str, target_str, match):
 
         #PATH
         self.alignment = alignment

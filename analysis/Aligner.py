@@ -170,7 +170,7 @@ class Aligner(object):
 
         for input_iter in range(len(input_words)-1):
             for target_iter in range(len(target_words)-1):
-                switcher = Aligner(input_str=input_words[input_iter+1][0] + " " + input_words[input_iter][0], target_str=target_words[target_iter][0] + " " + target_words[target_iter+1][0], match=self.match, sub=self.sub+10, insert=self.insert+10, delete=self.delete+10, switch=self.switch+10, capitals=self.capitals, simPunct=self.simPunct, punct=self.punct, prefWordBound=self.prefWordBound, umlauts=self.umlauts, wordSwitch=self.wordSwitch, switcher=True)
+                switcher = Aligner(input_str=input_words[input_iter+1][0] + " " + input_words[input_iter][0], target_str=target_words[target_iter][0] + " " + target_words[target_iter+1][0], match=self.match, sub=self.sub+0.5, insert=self.insert+0.5, delete=self.delete+0.5, switch=self.switch+0.5, capitals=self.capitals, simPunct=self.simPunct, punct=self.punct, prefWordBound=self.prefWordBound, umlauts=self.umlauts, wordSwitch=self.wordSwitch, switcher=True)
                 switcher.finalize()
                 self.matrix[target_words[target_iter+1][2]][input_words[input_iter+1][2]].append(self.matrix_field(target_words[target_iter][1], input_words[input_iter][1], switcher.path[0][2][2]+self.wordSwitch, "wordSwitch"))
                 self.switched_words_bag[(target_words[target_iter+1][2],input_words[input_iter+1][2])] = switcher.path
@@ -181,27 +181,25 @@ class Aligner(object):
             self.matrix[target_words[1][2]][input_words[1][2]].append(self.matrix_field(target_words[0][1], input_words[0][1], switcher.path[0][2][2]+self.wordSwitch, "wordSwitch"))
             self.switched_words_bag[(target_words[1][2],input_words[1][2])] = switcher.path
 
-    def createPath(self):
+    def createPath(self): #create list of lists in the form [fin_target, fin_input, (start_target, start_input, process_value, process_type)]
         row = len(self.target)
         col = len(self.input)
-        while row > 0 or col > 0:
-            if len(self.path)==0:
-                self.path.append([row, col, self.matrix[row][col]])
-            else:
-                self.path.append([row, col, self.matrix[row][col]])
-                    
-            if self.matrix[row][col][3] == "wordSwitch": #word switches need a special care. for example with "hello you" and "you hello", the switchedWords function treats the input like "hello you", so the coordinates in the switchedWords matrix are at the wrong places. so all the coordinates have to be recalculated here.
+        while row > 0 or col > 0:                    
+            if self.matrix[row][col][3] == "wordSwitch": #word switches need a special care. for example with target "hello you" and input "you hello", the switchedWords function treats the input like "hello you", so the coordinates in the switchedWords matrix are at the wrong places. so all the coordinates have to be recalculated here.
+                #print self.switched_words_bag
                 second_input_word_length = self.indexSplit(self.input[col-self.switched_words_bag[(row,col)][0][1]:col])[1][2]-self.indexSplit(self.input[col-self.switched_words_bag[(row,col)][0][1]:col])[1][1] #length of second word of switched words
                 target_length = self.switched_words_bag[(row,col)][0][0]
                 input_length = self.switched_words_bag[(row,col)][0][1]
                 for process in self.switched_words_bag[(row, col)]:
+                    #print process
                     #unswitch words
                     if process[1]>second_input_word_length+1:   #second word to first word
-                        self.path.append([row-target_length+process[0], col-input_length+process[1]-second_input_word_length-1, self.matrix_field(row-target_length+process[2][0], col-input_length+process[2][1]-second_input_word_length-1, process[2][2] , process[2][3])])                        
+                        self.path.append([row-target_length+process[0], col-input_length+process[1]-second_input_word_length-1, self.matrix_field(row-target_length+process[2][0], col-input_length+process[2][1]-second_input_word_length-1, process[2][2] , process[2][3])])
                     elif process[1]<second_input_word_length+1: #first word to second word
                         self.path.append([row-target_length+process[0], col-input_length+process[1]+self.switched_words_bag[(row,col)][0][1]-second_input_word_length, self.matrix_field(row-target_length+process[2][0], col-input_length+process[2][1]+self.switched_words_bag[(row,col)][0][1]-second_input_word_length, process[2][2] , process[2][3])])
                     else: #space to new place between exchanged words
-                        self.path.append([row-target_length+process[0], col-input_length+process[1]-self.switched_words_bag[(row,col)][0][1]+second_input_word_length, self.matrix_field(row-target_length+process[2][0], col-input_length+process[2][1]-self.switched_words_bag[(row,col)][0][1]+second_input_word_length, process[2][2] , process[2][3])])
+                        self.path.append([row-target_length+process[2][0]+1, col-second_input_word_length, self.matrix_field(row-target_length+process[2][0], col-second_input_word_length-1, process[2][2] , process[2][3])])
+            self.path.append([row, col, self.matrix[row][col]])
             if self.matrix[row][col][0]>row:
                 self.debug("Error in createPath: new value for row larger than preceding value")
             if self.matrix[row][col][1]>col:
@@ -227,6 +225,6 @@ class Aligner(object):
         return self.path[::-1] #reverse and return path
 
 if __name__ == "__main__":
-    a = Aligner(u"Ich bin", u"Bin ich")
+    a = Aligner(u"ich bin", u"binn ich")
     a.d.set_debug(True)
     a.debug(a.finalize())

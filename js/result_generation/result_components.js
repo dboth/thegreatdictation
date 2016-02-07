@@ -9,103 +9,10 @@ function Result (analysis) {
 	this.target = this.data.target;
 
 	this.diff_map = this.data.diff_map;
-	this.levenshtein = this.data.levenshtein.reverse();
+	this.levenshtein = this.data.levenshtein;
 }
 
 // PREPROCESSORS
-
-Result.prototype.convertStringToPositionMap = function (str, target) {
-
-	/**
-		returns 	--> 	[ WORD, START, END, ERROR (default 0), TARGET ]
-	**/
-
-	var lev = this.levenshtein;
-	var input_letters = str.split("");
-	var pos_map = [];
-
-	console.log(input_letters);
-
-	var cur_word = "", target_word = "", start_index = 0, cur_end_pos = 0;
-	for (var i = 0; i <= input_letters.length; i++) {
-
-		if (input_letters[i] === " " || input_letters[i] === "\n" || i+1 === input_letters.length) {
-			// is potential new word
-
-			// get errortype of letter to determine if this space is an intended new word beginning
-			var errortype = "ERROR";
-			for(var l_i = 0; l_i < lev.length; l_i++) {
-				if (lev[l_i][2][0] === i) {
-					errortype = lev[l_i][2][3];
-					break;
-				}
-			}
-
-			if (errortype === "M") {
-				// is new word
-
-				if (i+1 === input_letters.length) { // NOT BEAUTIFUL, but cant see another solution atm
-					cur_word += input_letters[i];
-					cur_end_pos++;
-				}
-
-				target_word = this.target.slice(this.getTargetPathInfo(start_index)[0], this.getTargetPathInfo(cur_end_pos)[0]);
-				pos_map.push([cur_word, start_index, cur_end_pos-1, 0, target_word]);
-				cur_word = "";
-				start_index = i+1;
-				cur_end_pos = start_index;
-
-			} else if (errortype === "D") {
-				// is not meant to be new word
-
-				cur_word += input_letters[i];
-				cur_end_pos += 1;
-
-			} else if (errortype === "I") {
-				// is meant to be new word
-
-				target_word = this.target.slice(Math.max.apply(null, this.getTargetPathInfo(start_index)),
-												Math.min.apply(null, this.getTargetPathInfo(cur_end_pos)));
-				console.log(target_word, cur_end_pos, this.getTargetPathInfo(cur_end_pos));
-				pos_map.push([cur_word, start_index, cur_end_pos-1, 0, target_word]);
-
-				console.log(cur_end_pos);
-				target_word = this.target.slice(Math.min.apply(null, this.getTargetPathInfo(cur_end_pos))+1, // +1 da Insert vor Leerzeichen beginnt
-												Math.max.apply(null, this.getTargetPathInfo(cur_end_pos)));
-				console.log(target_word);
-				pos_map.push([" __ ", cur_end_pos, cur_end_pos, 0, target_word]);
-				cur_word = "";
-				start_index = i+1;
-				cur_end_pos = start_index;
-
-			}
-
-		} else if (i+1 === input_letters.length) {
-			// is at end of input
-			cur_word += input_letters[i];
-			cur_end_pos++;
-
-			target_word = this.target.slice(this.getTargetPathInfo(start_index)[0], this.getTargetPathInfo(cur_end_pos)[0]);
-			pos_map.push([cur_word, start_index, cur_end_pos-1, 0, target_word]);
-
-		} else if ( [".",",","!","?",":",";"].indexOf(input_letters[i]) >= 0 ) {
-			// is Punctuation
-
-			target_word = this.target.slice(this.getTargetPathInfo(i)[0], this.getTargetPathInfo(i+1)[0]);
-
-			pos_map.push([input_letters[i], i, i, 0, target_word]);
-
-		} else {
-			// is Letter
-
-			cur_word += input_letters[i];
-			cur_end_pos += 1;
-
-		}
-	}
-	console.log(pos_map);
-	return pos_map.sort((a, b) => a[1]-b[1]); // SORTS by words starting index
-};
 
 Result.prototype.getTargetPathInfo = function (input) {
 

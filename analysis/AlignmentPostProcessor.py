@@ -5,14 +5,14 @@ from collections import namedtuple
 
 class AlignmentPostProcessor():
 
-    def __init__(self, alignment, input_str, target_str, match):
+    def __init__(self, alignment, target_str, input_str, match):
 
         #PATH
         self.alignment = alignment
 
         #STRINGS
-        self.target = target_str
         self.input = input_str
+        self.target = target_str
 
         #BAGS
         self.output_dict = {}
@@ -38,13 +38,19 @@ class AlignmentPostProcessor():
         final_word_switch_check = False
         for process_iter in range(len(self.alignment)):
             process = self.alignment[process_iter]
-            print process
+            #print process
             target_iter = process[0]
-            word_fault_sum += process[2][2]  
+            print process
+            word_fault_sum += process[2][2]
             if process[0]>wordSwitchEnd: #ignore all processes inside wordSwitch  
                 if self.target[target_iter-1] == " ": #white space match
                     if target_iter > cont_iter: #this assures that each whitespace only creates one word if several processes have the same input start value
-                        self.output_dict[self.alignment[start_process_iter][2][0]] = [process[0]-2, self.target[self.alignment[start_process_iter][2][0]:process[0]-1], self.input[self.alignment[start_process_iter][2][1]:process[1]-1], self.alignment[start_process_iter][2][1], process[1]-2, word_fault_sum]
+                        if process[2][3] == "M":
+                            self.output_dict[self.alignment[start_process_iter][2][0]] = [process[0]-2, self.target[self.alignment[start_process_iter][2][0]:process[0]-1], self.input[self.alignment[start_process_iter][2][1]:process[1]-1], self.alignment[start_process_iter][2][1], process[1]-2, word_fault_sum]
+                        elif process[2][3] == "I":
+                            self.output_dict[self.alignment[start_process_iter][2][0]] = [process[0]-2, self.target[self.alignment[start_process_iter][2][0]:process[0]-1], self.input[self.alignment[start_process_iter][2][1]:process[1]], self.alignment[start_process_iter][2][1], process[1]-1, word_fault_sum]                            
+                        else:
+                            raise NameError("unexpected process in AlignmentPostProcessor.convertToWordAlignment")
                         start_process_iter = process_iter+1
                         word_fault_sum = 0
                     cont_iter = target_iter
@@ -54,7 +60,7 @@ class AlignmentPostProcessor():
                     start_process_iter = process_iter
                     word_fault_sum = 0
                     cont_iter = target_iter
-            if process[2][3] == "wordSwitch": #catch wordSwitch
+            if process[2][3] == "wordSwitch": #catch wordSwitch               
                 if process[1] == len(self.target):
                     final_word_switch_check = True
                 wordSwitchEnd = process[0]
@@ -100,6 +106,6 @@ class AlignmentPostProcessor():
         return score, wrong_words, words
 
 if __name__ == "__main__":
-	a = Aligner.Aligner(u"Tonne in der Schlacht", u"tonne in der Nacht")
-	app = AlignmentPostProcessor(a.finalize(), a.input, a.target, a.match)
+	a = Aligner.Aligner(u"Hallo Sören", u"Holla Soeren")
+	app = AlignmentPostProcessor(a.finalize(), a.target, a.input, a.match)
 	print(app.convertToWordAlignment())

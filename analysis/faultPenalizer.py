@@ -2,7 +2,7 @@
 from collections import namedtuple
 
 class FaultPenalizer(object):
-    def __init__(self, path, M=0, S=1, I=1, D=1, switch=1, capitals=0.5, simPunct=0.2, punct=0.5, prefWordBound=1, umlauts=0, wordSwitch = 1, caveatCapitalization = 0):
+    def __init__(self, path, M=0, S=1, I=1, D=1, switch=1, capitals=0, simPunct=0.2, punct=0.5, plusM=1, umlauts=0, wordSwitch=1, caveatCapitalization=0):
         #FAULTS
         self.M = M
         self.S = S
@@ -12,7 +12,7 @@ class FaultPenalizer(object):
         self.capitals = capitals
         self.simPunct = simPunct
         self.punct = punct
-        self.prefWordBound = prefWordBound
+        self.plusM = plusM
         self.umlauts = umlauts
         self.path = path
         self.finalPath = []
@@ -25,8 +25,9 @@ class FaultPenalizer(object):
     
     def plugInFaultValues(self):	#go through path and exchange weight values by fault values
         for field in self.path:
-            if field[2][3] in ["M+", "+M"]:
-                self.finalPath.append([field[0], field[1], (field[2][0], field[2][1], self.prefWordBound, field[2][3])])
+
+            if field[2][3] =="+M":
+                self.finalPath.append([field[0], field[1], (field[2][0], field[2][1], self.plusM, "+M")])
             else:
                 test = False
                 for fault in self.__dict__.iteritems():

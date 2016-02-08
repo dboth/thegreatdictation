@@ -10,6 +10,8 @@ function Result (analysis) {
 
 	this.diff_map = this.data.diff_map;
 	this.levenshtein = this.data.levenshtein;
+	this.word_alignment = this.data.word_alignment;
+	this.score = this.data.score;
 }
 
 // PREPROCESSORS
@@ -90,8 +92,8 @@ Result.prototype.createLevenshteinDiffInfo = function (target_id) {
 
 	for (var step = 0; step < lev.length; step++){
 		var position = lev[step][2];
-		var input_pos = position[0];
-		var target_pos = position[1];
+		var input_pos = position[1];
+		var target_pos = position[0];
 		var errortype = position[3];
 
 		var container = $("<div>");
@@ -209,8 +211,7 @@ Result.prototype.createOverallScoreInfo = function (target_id) {
 		Calcs and creates Info about Score
 	*/
 
-	var parent = $(target_id);
-
+	// FRONTEND MATH
 	var total_cost = this.levenshtein[this.levenshtein.length-1][2][2];
 	var total_chars = this.levenshtein.length;
 
@@ -219,7 +220,15 @@ Result.prototype.createOverallScoreInfo = function (target_id) {
 
 	var score = Math.round(total_chars / total_cost * 100)/100;
 
-	var ratio_display = $(target_id+" .ratio").html(total_chars - total_errors + "/" + total_chars);
+	// BACKEND MATH
+	var score = this.score[0];
+	var correct_words = this.score[1];
+	var total_words = this.score[2];
+
+	// DISPLAYING
+	var parent = $(target_id);
+
+	var ratio_display = $(target_id+" .ratio").html(correct_words + "/" + total_words);
 	var score_display = $(target_id+" .score").html("0");
 
 

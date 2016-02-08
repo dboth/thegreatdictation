@@ -40,15 +40,14 @@ class AlignmentPostProcessor():
             process = self.alignment[process_iter]
             #print process
             target_iter = process[0]
-            print process
             word_fault_sum += process[2][2]
-            if process[0]>wordSwitchEnd: #ignore all processes inside wordSwitch  
+            if process[0]>wordSwitchEnd: #ignore all processes inside wordSwitch
                 if self.target[target_iter-1] == " ": #white space match
                     if target_iter > cont_iter: #this assures that each whitespace only creates one word if several processes have the same input start value
                         if process[2][3] == "M":
                             self.output_dict[self.alignment[start_process_iter][2][0]] = [process[0]-2, self.target[self.alignment[start_process_iter][2][0]:process[0]-1], self.input[self.alignment[start_process_iter][2][1]:process[1]-1], self.alignment[start_process_iter][2][1], process[1]-2, word_fault_sum]
                         elif process[2][3] == "I":
-                            self.output_dict[self.alignment[start_process_iter][2][0]] = [process[0]-2, self.target[self.alignment[start_process_iter][2][0]:process[0]-1], self.input[self.alignment[start_process_iter][2][1]:process[1]], self.alignment[start_process_iter][2][1], process[1]-1, word_fault_sum]                            
+                            self.output_dict[self.alignment[start_process_iter][2][0]] = [process[0]-2, self.target[self.alignment[start_process_iter][2][0]:process[0]-1], self.input[self.alignment[start_process_iter][2][1]:process[1]], self.alignment[start_process_iter][2][1], process[1]-1, word_fault_sum]
                         else:
                             raise NameError("unexpected process in AlignmentPostProcessor.convertToWordAlignment")
                         start_process_iter = process_iter+1
@@ -60,14 +59,14 @@ class AlignmentPostProcessor():
                     start_process_iter = process_iter
                     word_fault_sum = 0
                     cont_iter = target_iter
-            if process[2][3] == "wordSwitch": #catch wordSwitch               
+            if process[2][3] == "wordSwitch": #catch wordSwitch
                 if process[1] == len(self.target):
                     final_word_switch_check = True
                 wordSwitchEnd = process[0]
                 first_word_fault_sum = process[2][2] #wordSwitch error weight is added to first word
                 second_word_fault_sum = 0
                 len_first_input_word = len(self.input[process[2][1]:process[1]].split()[0])
-                len_first_target_word = len(self.target[process[2][0]:process[0]].split()[0])                
+                len_first_target_word = len(self.target[process[2][0]:process[0]].split()[0])
                 for sub_process_iter in range(process_iter+1, len(self.alignment)):
                     sub_process = self.alignment[sub_process_iter]
                     if sub_process[0]<=process[0] and sub_process[1]<=process[1]: #if a process is covered by the word switch
@@ -76,21 +75,21 @@ class AlignmentPostProcessor():
                             first_word_fault_sum += sub_process[2][2]
                         else:
                             second_word_fault_sum += sub_process[2][2]
+
                 self.output_dict[process[2][0]] = [process[2][0]+len_first_target_word-1, self.target[process[2][0]:process[2][0]+len_first_target_word], self.input[process[2][1]+len_first_input_word+1:process[1]], process[2][1]+len_first_input_word+1, process[1]-1,first_word_fault_sum]
                 self.output_dict[process[2][0]+len_first_target_word+1] = [process[0]-1, self.target[process[2][0]+len_first_target_word+1:process[0]], self.input[process[2][1]:process[2][1]+len_first_input_word], process[2][1], process[2][1]+len_first_input_word-1,second_word_fault_sum]
-                print "wordSwitch"
-                print self.output_dict
+
                 if len(self.alignment)>start_process_iter:
                     start_process_iter+=1 #+1 for the white space after the wordSwitch
 
-                
+
         #final word in target
         if final_word_switch_check == False:
             self.output_dict[self.alignment[start_process_iter][2][0]] = [process[0]-1, self.target[self.alignment[start_process_iter][2][0]:self.alignment[::-1][0][0]+1], self.input[self.alignment[start_process_iter][2][1]:], self.alignment[start_process_iter][2][1], self.alignment[-1][1]-1, word_fault_sum]
-        
+
         return self.output_dict
 
-    def calcResult(self):
+    def calcScore(self):
         error_weight = 0
         all_errors = 0
         wrong_words = 0
@@ -106,6 +105,6 @@ class AlignmentPostProcessor():
         return score, wrong_words, words
 
 if __name__ == "__main__":
-	a = Aligner.Aligner(u"Hallo Sören", u"Holla Soeren")
-	app = AlignmentPostProcessor(a.finalize(), a.target, a.input, a.match)
-	print(app.convertToWordAlignment())
+    a = Aligner.Aligner(u"Hallo Sören", u"Holla Soeren")
+    app = AlignmentPostProcessor(a.finalize(), a.target, a.input, a.match)
+    print(app.convertToWordAlignment())

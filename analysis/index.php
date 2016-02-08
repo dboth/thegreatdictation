@@ -65,7 +65,7 @@ if (DIRECTORY_SEPARATOR == '\\' && $GLOBALS["conf"]["testing"]){
 }
 
 //create the command
-$command = "python ". __DIR__ ."/analyse.py $argument";
+$command = "python ". __DIR__ ."/Result.py $argument";
 $EHandler->log("b_info", $command);
 
 //execute the command (system() prints the output) exec does not

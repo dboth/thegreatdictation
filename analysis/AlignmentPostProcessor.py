@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import Aligner
-from collections import namedtuple
 
 class AlignmentPostProcessor():
 
@@ -17,9 +16,6 @@ class AlignmentPostProcessor():
         #BAGS
         self.output_dict = {}
 
-        #PROCESSED DATA
-        self.matrix_field = namedtuple("Field", ["x", "y", "cost", "op"])
-
         #WEIGHT
         self.match = match
 
@@ -34,17 +30,16 @@ class AlignmentPostProcessor():
         start_process_iter = 0
         word_fault_sum = 0
         cont_iter = 0
-        wordSwitchEnd = -1
+        word_switch_end = -1
         final_word_switch_check = False
         for process_iter in range(len(self.alignment)):
             process = self.alignment[process_iter]
-            #print process
             target_iter = process[0]
-            print process
             word_fault_sum += process[2][2]
-            if process[0]>wordSwitchEnd: #ignore all processes inside wordSwitch  
+            if process[0]>word_switch_end: #ignore all processes inside word_switch  
                 if self.target[target_iter-1] == " ": #white space match
                     if target_iter > cont_iter: #this assures that each whitespace only creates one word if several processes have the same input start value
+                        print process
                         if process[2][3] == "M":
                             self.output_dict[self.alignment[start_process_iter][2][0]] = [process[0]-2, self.target[self.alignment[start_process_iter][2][0]:process[0]-1], self.input[self.alignment[start_process_iter][2][1]:process[1]-1], self.alignment[start_process_iter][2][1], process[1]-2, word_fault_sum]
                         elif process[2][3] == "I":
@@ -60,11 +55,11 @@ class AlignmentPostProcessor():
                     start_process_iter = process_iter
                     word_fault_sum = 0
                     cont_iter = target_iter
-            if process[2][3] == "wordSwitch": #catch wordSwitch               
-                if process[1] == len(self.target):
+            if process[2][3] == "word_switch": #catch word_switch   
+                if process[2][2]>0:
                     final_word_switch_check = True
-                wordSwitchEnd = process[0]
-                first_word_fault_sum = process[2][2] #wordSwitch error weight is added to first word
+                word_switch_end = process[0]
+                first_word_fault_sum = process[2][2] #word_switch error weight is added to first word
                 second_word_fault_sum = 0
                 len_first_input_word = len(self.input[process[2][1]:process[1]].split()[0])
                 len_first_target_word = len(self.target[process[2][0]:process[0]].split()[0])                
@@ -78,10 +73,10 @@ class AlignmentPostProcessor():
                             second_word_fault_sum += sub_process[2][2]
                 self.output_dict[process[2][0]] = [process[2][0]+len_first_target_word-1, self.target[process[2][0]:process[2][0]+len_first_target_word], self.input[process[2][1]+len_first_input_word+1:process[1]], process[2][1]+len_first_input_word+1, process[1]-1,first_word_fault_sum]
                 self.output_dict[process[2][0]+len_first_target_word+1] = [process[0]-1, self.target[process[2][0]+len_first_target_word+1:process[0]], self.input[process[2][1]:process[2][1]+len_first_input_word], process[2][1], process[2][1]+len_first_input_word-1,second_word_fault_sum]
-                print "wordSwitch"
+                print "word_switch"
                 print self.output_dict
                 if len(self.alignment)>start_process_iter:
-                    start_process_iter+=1 #+1 for the white space after the wordSwitch
+                    start_process_iter+=1 #+1 for the white space after the word_switch
 
                 
         #final word in target
@@ -106,6 +101,6 @@ class AlignmentPostProcessor():
         return score, wrong_words, words
 
 if __name__ == "__main__":
-	a = Aligner.Aligner(u"Hallo Sören", u"Holla Soeren")
+	a = Aligner.Aligner(u"Das ist ein entzückendes Fleckchen", u"Dass ist ein enttzükkendes Fläckchen")
 	app = AlignmentPostProcessor(a.finalize(), a.target, a.input, a.match)
 	print(app.convertToWordAlignment())

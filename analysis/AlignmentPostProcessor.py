@@ -39,7 +39,6 @@ class AlignmentPostProcessor():
             if process[0]>word_switch_end: #ignore all processes inside word_switch
                 if self.target[target_iter-1] == " ": #white space match
                     if target_iter > cont_iter: #this assures that each whitespace only creates one word if several processes have the same input start value
-                        print process
                         if process[2][3] == "M":
                             self.output_dict[self.alignment[start_process_iter][2][0]] = [process[0]-2, self.target[self.alignment[start_process_iter][2][0]:process[0]-1], self.input[self.alignment[start_process_iter][2][1]:process[1]-1], self.alignment[start_process_iter][2][1], process[1]-2, word_fault_sum]
                         elif process[2][3] == "I":

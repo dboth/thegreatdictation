@@ -47,7 +47,7 @@ $(document).ready(function () {
             console.log(a.responseText);
             requestErrorInfo("f_analysis_create_analysis", "Server Request Failed");
         }).done(function (res){
-            console.log(res);
+            console.log("RESULT: ",res);
             createAnalysis(res);
             toggleViews("#analysis-container");
             $("#res-switch").addClass("active");

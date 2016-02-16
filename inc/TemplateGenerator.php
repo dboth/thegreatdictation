@@ -43,7 +43,8 @@ class TemplateGenerator{
                     "components" => array(
                         "header-description" => "description.php",
                         "citation" => "citations.php",
-                        "texts" => "dictation_texts.php"
+                        "texts" => "dictation_texts.php",
+                        "simple_login" => "simple_login.php"
                     ),
                     "body"=>"dictation.html",
                     "template"=>"default.html"

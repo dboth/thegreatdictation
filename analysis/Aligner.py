@@ -214,6 +214,6 @@ class Aligner(object):
         return self.path[::-1] #reverse and return path
 
 if __name__ == "__main__":
-    a = Aligner(u"ich bin", u"ich")
+    a = Aligner(u"Elefant", u"Elefnt")  # Aligner(TARGET, INPUT)
     a.d.set_debug(True)
     a.debug(a.finalize())

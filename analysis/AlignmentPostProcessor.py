@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+#start_index des alternativen worts für den word switch mitgeben. error verteilen auf beide wörter des word switch
+
 import Aligner
 
 class AlignmentPostProcessor():

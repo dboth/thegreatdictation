@@ -5,6 +5,9 @@ from collections import namedtuple
 import frames
 import faultPenalizer
 
+"""
+@param
+"""
 class Aligner(object):
     def __init__(self, target_str, input_str, match=0, sub=1.8, insert=1, delete=1, switch=1, capitals=0.5, sim_punct=0.2, punct=0.5, plusM=0.9, umlauts=0, word_switch=0.1, punct_capitalize=0.2, ws_penalty=0.2, switcher=False, switch_punct=False, switched_sentence_start=False):
         #DEBUGGER DONT TOUCH

@@ -3,6 +3,8 @@
 #start_index des alternativen worts für den word switch mitgeben. error verteilen auf beide wörter des word switch
 
 import Aligner
+from collections import namedtuple
+
 
 class AlignmentPostProcessor():
 
@@ -20,6 +22,9 @@ class AlignmentPostProcessor():
 
         #WEIGHT
         self.match = match
+
+        #PROCESSED DATA
+        self.matrix_field = namedtuple("Field", ["target", "input", "cost", "op"])
 
     def convertToWordAlignment(self):
         """

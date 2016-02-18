@@ -94,7 +94,7 @@ class Aligner(object):
                             self.matrix[target_iter+1][input_iter+1].append(self.matrix_field(target_iter, input_iter, self.capitals, "capitals"))
         if self.switched_sentence_start == True: #only triggers if the start of a sentence is switched. the algorithm can't know if for example in switched words "Peter walks" and "Walks Peter" the "Peter" has to be written with a capital letter
             second_target_word_length = self.indexSplit(self.target)[1][1]
-            second_input_word_length = self.indexSplit(self.input)[1][1]    
+            second_input_word_length = self.indexSplit(self.input)[1][1]
             if self.target[0].lower() == self.input[0].lower():
                 self.matrix[1][1].append(self.matrix_field(0, 0, -0.1, "caveat_capitalization"))
             if self.target[second_target_word_length].lower() == self.input[second_input_word_length].lower():
@@ -214,6 +214,6 @@ class Aligner(object):
         return self.path[::-1] #reverse and return path
 
 if __name__ == "__main__":
-    a = Aligner(u"Elefant", u"Elefnt")  # Aligner(TARGET, INPUT)
+    a = Aligner(u"Elefant", u"elefnt")  # Aligner(TARGET, INPUT)
     a.d.set_debug(True)
     a.debug(a.finalize())

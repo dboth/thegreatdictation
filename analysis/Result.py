@@ -88,6 +88,6 @@ class Result():
         return json.dumps([self.output_json])
 
 if __name__ == "__main__":
-    #tgd = Result('{"data":{"input":"Elefant","text_id":"1","target":"Testing a test"},"meta":{"username":false,"gender":false,"age":false,"mothertongue":false,"learninglength":false,"livingingerman":false}}')
-    tgd = Result(sys.argv[1])
+    tgd = Result('{"data":{"input":"Elefant","text_id":"1","target":"Testing a test"},"meta":{"username":false,"gender":false,"age":false,"mothertongue":false,"learninglength":false,"livingingerman":false}}')
+    #tgd = Result(sys.argv[1])
     print(tgd.returnJSON())

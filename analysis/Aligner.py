@@ -5,6 +5,9 @@ from collections import namedtuple
 import frames
 import faultPenalizer
 
+"""
+@param
+"""
 class Aligner(object):
     def __init__(self, target_str, input_str, match=0, sub=1.8, insert=1, delete=1, switch=1, capitals=0.5, sim_punct=0.2, punct=0.5, plusM=0.9, umlauts=0, word_switch=0.1, punct_capitalize=0.2, ws_penalty=0.2, switcher=False, switch_punct=False, switched_sentence_start=False):
         #DEBUGGER DONT TOUCH
@@ -90,7 +93,7 @@ class Aligner(object):
             for input_iter in range(len(self.input)):
                 if self.target[target_iter] != self.input[input_iter]:
                     if self.target[target_iter] == self.input[input_iter].lower() or self.target[target_iter] == self.input[input_iter].upper():
-                        if self.switched_sentence_start == False or not (input_iter == second_input_word_length and target_iter == second_target_word_length):
+                        if self.switched_sentence_start == False:
                             self.matrix[target_iter+1][input_iter+1].append(self.matrix_field(target_iter, input_iter, self.capitals, "capitals"))
         if self.switched_sentence_start == True: #only triggers if the start of a sentence is switched. the algorithm can't know if for example in switched words "Peter walks" and "Walks Peter" the "Peter" has to be written with a capital letter
             second_target_word_length = self.indexSplit(self.target)[1][1]

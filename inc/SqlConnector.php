@@ -62,11 +62,25 @@ class SqlConnector {
 
     public function getText($id) {
         if (!($stmt = $this->verbindung->prepare("SELECT texts.fulltext FROM texts WHERE id=?"))) {
-            die($this->errors->createErrorJSON("b_db_couldnt_prepare_sql", "texts".$this->getLastError()));
+            die($this->errors->createErrorJSON("b_db_couldnt_prepare_sql", "texts: ".$this->getLastError()));
             return false;
         }
 
         $stmt->bind_param("s", $id);
+        $stmt->execute();
+        $stmt->bind_result($res);
+        $stmt->fetch();
+
+        return $res;
+    }
+
+    public function getAudioByText($text_id) {
+        if (!($stmt = $this->verbindung->prepare("SELECT audio.file FROM audio WHERE audio.text_id=?"))) {
+            die($this->errors->createErrorJSON("b_db_couldnt_prepare_sql", "audio: ".$this->getLastError()));
+            return false;
+        }
+
+        $stmt->bind_param("s", $text_id);
         $stmt->execute();
         $stmt->bind_result($res);
         $stmt->fetch();

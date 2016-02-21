@@ -63,6 +63,8 @@ class ErrorHandler {
 				$error_info["name"] = "COMPONENT NOT FOUND";
 				$error_info["msg"] = "No component found at ".$add_info;
 				break;
+
+			// DATABASE ERRORS
             case "b_db_connection_error":
 				$error_info["fatality"] = "FATAL";
 				$error_info["name"] = "COULDNT SQL";
@@ -74,17 +76,23 @@ class ErrorHandler {
 				$error_info["msg"] = "Couldnt prepare the SQL Statement for execution at: ".$add_info;
 				break;
 
+			// FRONTEND ERRORS
 			case "f_analysis_create_analysis":
 				$error_info["fatality"] = "FATAL";
 				$error_info["name"] = "CREATE ANALYSIS FAIL";
 				$error_info["msg"] = "The creation of your analysis failed due to: ".$add_info;
 				break;
-
 			case "f_fill_all_fields":
 				$error_info["fatality"] = "WARNING";
 				$error_info["name"] = "FILL ALL FIELDS";
 				$error_info["msg"] = "Please fill all ".$add_info." required fields!";
 				break;
+			case "f_select_a_text":
+				$error_info["fatality"] = "WARNING";
+				$error_info["name"] = "SELECT A TEXT";
+				$error_info["msg"] = "Please select a text!";
+				break;
+
 
 			default:
 				$error_info["fatality"] = "DEBUG";

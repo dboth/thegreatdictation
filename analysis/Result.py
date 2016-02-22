@@ -3,6 +3,7 @@
 
 import sys
 import json
+import re
 import Aligner
 import AlignmentPostProcessor as APPr
 
@@ -16,7 +17,7 @@ class Result():
         self.parameter = json.loads(parameter)
 
         #received data
-        self.input_data = self.getValueFromJSON("input")
+        self.input_data = self.normalizeInput(self.getValueFromJSON("input"))
         self.target_data = self.getValueFromJSON("target")
         self.text_id = self.getValueFromJSON("text_id")
 
@@ -31,6 +32,9 @@ class Result():
         self.output_json = self.buildOutputJSON()
 
     #DATA HANDLING METHODS
+
+    def normalizeInput(self, input_text):
+        return re.sub(" +", " ", input_text)
 
     def getValueFromJSON(self, key):
         return self.parameter["data"][key]
@@ -88,6 +92,6 @@ class Result():
         return json.dumps([self.output_json])
 
 if __name__ == "__main__":
-    tgd = Result('{"data":{"input":"Elefant","text_id":"1","target":"Testing a test"},"meta":{"username":false,"gender":false,"age":false,"mothertongue":false,"learninglength":false,"livingingerman":false}}')
-    #tgd = Result(sys.argv[1])
+    #tgd = Result('{"data":{"input":"Elefant","text_id":"1","target":"Testing a test"},"meta":{"username":false,"gender":false,"age":false,"mothertongue":false,"learninglength":false,"livingingerman":false}}')
+    tgd = Result(sys.argv[1])
     print(tgd.returnJSON())

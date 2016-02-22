@@ -18,6 +18,8 @@ $(document).ready(function() {
 			})
 			.done(function(res) {
 				console.log("success", res);
+				// TODO inform user about success
+				$("#feedback-modal").modal("hide");
 			})
 			.fail(function(res) {
 				console.log("error", res);

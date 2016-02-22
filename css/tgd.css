@@ -5873,6 +5873,14 @@ select option[disabled] {
   margin: 20px 15px; }
 
 /* STYLING */
+.modal-body {
+  padding: 20px 50px; }
+  .modal-body .modal-title {
+    color: #2a93cf;
+    font-size: 1.5em;
+    text-align: center;
+    margin: 10px 0 20px; }
+
 .info {
   margin-top: 12.5px;
   margin-bottom: 25px;

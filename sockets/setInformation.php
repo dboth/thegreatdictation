@@ -1,22 +1,22 @@
 <?php
 
 /*
- 
+
 this is the interface for the usersystem to javascript
 
 takes a post request with the following parameters:
  * username: string
  * information: json object
 
-if username is not empty the username gets set and the information for this 
+if username is not empty the username gets set and the information for this
 username in the database will be written in the session key-value storage.
 All existing key-values in the session will be deleted.
 
-if information contains elements the key will if allowed saved with its value 
+if information contains elements the key will if allowed saved with its value
 into the key-value storage. If a username was set before the data will also be
 saved into the database.
 
-The request returns a json object resembling the current key-value storage. 
+The request returns a json object resembling the current key-value storage.
 Username and information can both be empty to only receive this without any
 changes.
 
@@ -38,6 +38,7 @@ if (isset($_POST["information"])){
         if (in_array($key, $allowArr))
            $usersystem->setUserInformation($key, $val);
     }
+    echo "hi";
     echo json_encode($usersystem->getUserInformation(),15);
 
 } else die($errorsystem->createErrorJSON("b_setInfo_jsonparseerror"));

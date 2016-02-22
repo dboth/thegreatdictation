@@ -171,6 +171,16 @@ select {
 
 /* STYLING */
 
+.modal-body {
+    padding: 20px 50px;
+    .modal-title {
+        color: $tgd-primary-color;
+        font-size: $tgd-font-size-subtitle;
+        text-align: center;
+        margin: 10px 0 20px;
+    }
+}
+
 .info {
     @include top-bottom-margin;
     @include left-right-margin;

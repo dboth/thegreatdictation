@@ -312,6 +312,11 @@ select {
     margin: 3px 0 3px 5px;
     border: 1px solid transparent;
 
+    &.missing-word {
+        border: 2px solid $tgd-missing-word-color;
+        color: $tgd-missing-word-color;
+    }
+
     &.wrong {
         background-color: $tgd-wrong-color;
         //border-color: darken($tgd-wrong-color, 30);

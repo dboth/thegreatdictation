@@ -5966,10 +5966,13 @@ select option[disabled] {
   padding: 2px 6px;
   margin: 3px 0 3px 5px;
   border: 1px solid transparent; }
+  .spelling.missing-word {
+    border: 2px solid #ff5400;
+    color: #ff5400; }
   .spelling.wrong {
     background-color: #f33; }
   .spelling.minor-mistake {
-    background-color: #f2510c; }
+    background-color: #f6ba07; }
   .spelling.correct {
     background-color: none;
     border: 0; }

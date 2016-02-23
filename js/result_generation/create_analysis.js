@@ -8,7 +8,7 @@ function createAnalysis(res) {
     var result_object = new Result(res[0]);
 
     result_object.createHeader("#analysis-container .page-header");
-    result_object.createLevenshteinDiffInfo("#error-indication");
+    result_object.createAlignmentInfo("#error-indication");
     result_object.createOverallScoreInfo("#score-info");
 
     var target_info = $("#target-info");

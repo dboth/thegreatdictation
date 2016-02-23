@@ -180,27 +180,40 @@ Result.prototype.createAlignmentInfo = function (target_id) {
 		Creates Alignment Info based on Map
 	*/
 
-	// TARGET ID OF FORM "#id"
-	var words = this.calcLevenshteinWordErrors();
 
-	for (var w = 0; w < words.length; w++) {
-		if (words[w][3] >= 1) {
+
+	// TARGET ID OF FORM "#id"
+	var words = this.word_alignment;
+
+	for (input_start in words) {
+
+		console.log(input_start);
+		var word_info = words[input_start];
+		var input_word = word_info[2];
+		var target_word = word_info[1];
+		var word_error = word_info[5];
+
+		if (input_word === "") {
+			word_box = $("<span>")
+				.addClass("spelling missing-word")
+				.html(target_word);
+		} else if (word_error >= 3) {
 			word_box = $("<span>")
 				.addClass("spelling wrong")
-				.html(words[w][0]);
-		} else if (words[w][3] > 0) {
+				.html(input_word);
+		} else if (word_error > 0) {
 			word_box = $("<span>")
 				.addClass("spelling minor-mistake")
-				.html(words[w][0]);
+				.html(input_word);
 		} else {
 			word_box = $("<span>")
 				.addClass("spelling correct")
-				.html(words[w][0]);
+				.html(input_word);
 			$(target_id).append(word_box);
 		}
 
 		$(target_id).append(word_box);
-		word_box.css("background-color", tinycolor(word_box.css("background-color")).brighten(50-words[w][3]*10).toString() );
+		//word_box.css("background-color", tinycolor(word_box.css("background-color")).brighten(50-word_error*10).toString() );
 	}
 
 };

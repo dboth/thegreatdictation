@@ -41,8 +41,6 @@ $(document).ready(function() {
 
 		var information_array = {"age": age, "gender": gender, "mothertongue": mothertongue, "learninglength": learninglength, "livingingerman": livingingerman};
 
-		console.log(information_array);
-
 		if (!username | !gender | !learninglength | !mothertongue) {
 			requestErrorInfo("f_fill_all_fields", 4);
 		} else {

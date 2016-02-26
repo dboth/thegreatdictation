@@ -5890,12 +5890,18 @@ select option[disabled] {
 
 .well#error-indication {
   font-size: 14pt;
-  overflow: auto; }
+  overflow: auto;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap; }
 
 .error-container {
   margin: 3px;
   text-align: center;
-  display: inline-block;
   vertical-align: top; }
   .error-container.no-margin {
     margin: 3px 0; }

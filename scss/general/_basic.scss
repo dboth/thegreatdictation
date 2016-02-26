@@ -173,6 +173,7 @@ select {
 
 .modal-body {
     padding: 20px 50px;
+
     .modal-title {
         color: $tgd-primary-color;
         font-size: $tgd-font-size-subtitle;
@@ -191,6 +192,8 @@ select {
     &#error-indication {
         font-size: 14pt;
         overflow: auto;
+        display: flex;
+        flex-wrap: wrap;
     }
 }
 
@@ -200,7 +203,6 @@ select {
 .error-container {
     margin: 3px;
     text-align: center;
-    display: inline-block;
     vertical-align: top;
 
     &.no-margin {

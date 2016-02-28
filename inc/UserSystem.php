@@ -60,7 +60,7 @@ class UserSystem
         //if a certain key is specified return that keys value, else return an array of all keys for the user
         if ($key) {
             //the key has to be allowed and set
-            if (isset($_SESSION[$key]) && (in_array($key, self::allowed))) {
+            if (isset($_SESSION[$key]) && (in_array($key, self::$allowed))) {
                 return $_SESSION[$key];
             } else {
                 $this->errors->log("b_usersystem_key_not_found", $key);

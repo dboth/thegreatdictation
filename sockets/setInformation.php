@@ -42,8 +42,9 @@ if (isset($_POST["information"])){
     }
 
     foreach ($infArr as $key => $val){
-        if (in_array($key, $allowArr))
-           $usersystem->setUserInformation($key, $val);
+        if (in_array($key, $allowArr)){
+            
+        $usersystem->setUserInformation($key, $val);}
     }
 
     echo json_encode($usersystem->getUserInformation(), 15);

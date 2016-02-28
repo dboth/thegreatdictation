@@ -63,6 +63,11 @@ class ErrorHandler {
 				$error_info["name"] = "COMPONENT NOT FOUND";
 				$error_info["msg"] = "No component found at ".$add_info;
 				break;
+           case "b_page_not_found":
+				$error_info["fatality"] = "FATAL";
+				$error_info["name"] = "page NOT FOUND";
+				$error_info["msg"] = "No page found at ".$add_info;
+				break;
 
 			// DATABASE ERRORS
             case "b_db_connection_error":

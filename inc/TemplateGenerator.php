@@ -124,8 +124,15 @@ class TemplateGenerator{
     }
     protected function applyPage($page){
         //applies the page template
-        $page_body = file_get_contents($GLOBALS["conf"]["base_path"]."/frontend/pages/".$page["body"]);
+        if (file_exists($GLOBALS["conf"]["base_path"]."/frontend/pages/".$page["body"])){
+        ob_start();
+            require $GLOBALS["conf"]["base_path"]."/frontend/pages/".$page["body"];
+        $page_body = ob_get_clean();
         $this->pageMarkup = str_replace("<tgd_body>",$page_body,$this->pageMarkup);
+        } else {
+            $this->errors->log("b_page_not_found", $page["body"]);
+            return "ERROR: Content couldnt be found";
+        }
     }
     protected function applyViews(){
         //replaces every occurence of <tgd_page>page</tgd_page> with the translation of word using the in the constructor specified translators translate method.

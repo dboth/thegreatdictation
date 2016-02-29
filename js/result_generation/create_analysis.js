@@ -10,9 +10,11 @@ function createAnalysis(res) {
     result_object.createHeader("#analysis-container .page-header");
     result_object.createAlignmentInfo("#error-indication");
     result_object.createOverallScoreInfo("#score-info");
+    result_object.createMistakeDistributionInfo("#error-distribution-chart", "pie");
+    result_object.createPerformanceOverTimeInfo("#performance-over-time-chart");
 
-    var target_info = $("#target-info");
-	target_info.find(".well").html(convertStringToHTML(result_object.target));
+    // var target_info = $("#target-info");
+	// target_info.find(".well").html(convertStringToHTML(result_object.target));
 }
 
 
@@ -33,8 +35,6 @@ $(document).ready(function () {
             target: ""
         };
 
-        console.log(data);
-
         var action = $(this).attr("action");
         var method = $(this).attr("method");
 
@@ -44,7 +44,7 @@ $(document).ready(function () {
             data: {data: JSON.stringify(data)},
             type: method
         }).fail(function (a,b,c){
-            console.log(a.responseText);
+            console.log("ERROR: ", a.responseText);
             requestErrorInfo("f_analysis_create_analysis", "Server Request Failed");
         }).done(function (res){
             console.log("RESULT: ",res);

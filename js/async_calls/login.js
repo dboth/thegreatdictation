@@ -5,8 +5,6 @@ $(document).ready(function() {
 
 		var username = $("#login-username").val();
 
-		console.log(username);
-
 		if (!username) {
 			requestErrorInfo("f_fill_all_fields", 1);
 		} else {
@@ -19,6 +17,7 @@ $(document).ready(function() {
 				console.log("success", res);
 				// TODO inform user about success
 				$("#login-modal").modal("hide");
+				location.reload();
 			})
 			.fail(function(res) {
 				console.log("error", res);
@@ -52,6 +51,7 @@ $(document).ready(function() {
 				console.log("success", res);
 				// TODO inform user about success
 				$("#login-modal").modal("hide");
+				location.reload();
 			})
 			.fail(function(res) {
 				console.log("error", res);

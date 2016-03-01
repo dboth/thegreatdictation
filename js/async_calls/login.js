@@ -17,7 +17,8 @@ $(document).ready(function() {
 				console.log("success", res);
 				// TODO inform user about success
 				$("#login-modal").modal("hide");
-				location.reload();
+				//window.location = window.location.replace(/logout/, "");
+				window.location.reload();
 			})
 			.fail(function(res) {
 				console.log("error", res);

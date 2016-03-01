@@ -16,7 +16,7 @@ function Result (analysis) {
 
 // PREPROCESSORS
 
-Result.prototype.getPathInfoByInputIndex = function (input) {
+Result.prototype.getPathInfoByInputIndex = function (index) {
 
 	/**
 		returns the equivalent information for a given input index in the levenshtein path
@@ -25,22 +25,38 @@ Result.prototype.getPathInfoByInputIndex = function (input) {
 	var lev = this.levenshtein, out = [];
 	for (var step = 0; step < lev.length; step++) {
 		var path_pos = lev[step];
-		if (path_pos[2][1] === input) {
+		if (path_pos[2][1] === index) {
 			out.push(path_pos[2]);
 		}
 	}
 	return out;
 };
 
-Result.prototype.styleSingleLetterWithLevenshtein = function (input_index) {
+Result.prototype.getPathInfoByTargetIndex = function (index) {
+
+	/**
+		returns the equivalent information for a given target index in the levenshtein path
+	**/
+
+	var lev = this.levenshtein, out = [];
+	for (var step = 0; step < lev.length; step++) {
+		var path_pos = lev[step];
+		if (path_pos[2][0] === index) {
+			out.push(path_pos[2]);
+		}
+	}
+	return out;
+};
+
+Result.prototype.styleSingleLetterWithLevenshtein = function (target_index) {
 
 	/*
 		Creates a container with the info about the mistake at a given input position
 	 */
 
-	console.log("INPUT INDEX: ", input_index);
+	console.log("INPUT INDEX: ", target_index);
 
-	var concerned_inputs = this.getPathInfoByInputIndex(input_index);
+	var concerned_inputs = this.getPathInfoByTargetIndex(target_index);
 	var list_of_containers = [];
 
 	console.log("CONCERNED INPUTS: ", concerned_inputs);
@@ -48,7 +64,7 @@ Result.prototype.styleSingleLetterWithLevenshtein = function (input_index) {
 	for (var single_input in concerned_inputs) {
 
 		var char_info = concerned_inputs[single_input];
-		var input_pos = input_index;
+		var input_pos = char_info[1];
 		var target_pos = char_info[0];
 		var errortype = char_info[3];
 
@@ -284,7 +300,6 @@ Result.prototype.createAlignmentInfo = function (target_id) {
 
 		// add info about correct spelling
 		if (!word_box.hasClass('correct') && !word_box.hasClass('missing-word')) {
-			console.log("hi");
 			correct_spelling_info = $("<div>")
 				.addClass('correct-spelling-info')
 				.html(target_word);
@@ -315,7 +330,8 @@ Result.prototype.createMistakeDistributionInfo = function (target_id, type) {
 		return curr[2][3];
 	});
 
-	var errorCountMap = countArrayDuplicates(all_errors);
+	var error_count_map = countArrayDuplicates(all_errors);
+	console.log(error_count_map);
 	// delete errorCountMap.M;
 
 	// chart data and options
@@ -335,6 +351,8 @@ Result.prototype.createMistakeDistributionInfo = function (target_id, type) {
 	// map with errorshortcut mapping to className and label
 	var error_type_map = {
 		"M": ["error-distr-match", "correct"],
+		"+M": ["error-distr-match", "correct"],
+		"M+": ["error-distr-match", "correct"],
 		"D": ["error-distr-deletion", "waste"],
 		"I": ["error-distr-insert", "missing"],
 		"S": ["error-distr-sub", "wrong"],
@@ -345,10 +363,10 @@ Result.prototype.createMistakeDistributionInfo = function (target_id, type) {
 
 	// fill data
 	var char_count = this.levenshtein.length;
-	for (var error in errorCountMap) {
+	for (var error in error_count_map) {
 		data["labels"].push(error_type_map[error][1]);
 		data["series"].push({
-			value: (errorCountMap[error] / char_count) * 100,
+			value: (error_count_map[error] / char_count) * 100,
 			className: error_type_map[error][0]
 		});
 	}
@@ -429,7 +447,7 @@ Result.prototype.createWordwiseErrorInfo = function (target_id) {
 		var word_error = word_info[5];
 
 		// only if error occures
-		if (word_error > 0) {
+		if (word_error > 0 && input_word !== "") {
 
 			//container
 			var info_row = $("<div>").addClass('row');
@@ -440,11 +458,11 @@ Result.prototype.createWordwiseErrorInfo = function (target_id) {
  			var info_spelling = $("<div>").addClass('col-xs-7 error-indication');
 
 			//fill content
-			info_word.html(input_word);
-			info_pointer.html("-->");
-			for (var char = 0; char < input_word.length; char++) {
-				console.log("WORD: ", word, " CHAR: ", char);
-				var containers = this.styleSingleLetterWithLevenshtein(parseInt(word_info[3]) + char);
+			info_word.html(target_word);
+			info_pointer.html("------>");
+			for (var char = 0; char <= target_word.length; char++) {
+				console.log("-----\nWORD: ", word, " CHAR: ", char);
+				var containers = this.styleSingleLetterWithLevenshtein(parseInt(word) + char);
 				console.log("CONTAINERS: ", containers);
 				for (var c in containers) {
 					info_spelling.append(containers[c]);

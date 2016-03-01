@@ -107,7 +107,7 @@ Result.prototype.createLevenshteinDiffInfo = function (target_id) {
 
 		var add_space_necessary = false;
 
-		console.log(input_pos + "|" + this.input[input_pos]);
+		// console.log(input_pos + "|" + this.input[input_pos]);
 
 		if (errortype === "M") {
 			container.addClass("no-margin");
@@ -181,27 +181,151 @@ Result.prototype.createAlignmentInfo = function (target_id) {
 	*/
 
 	// TARGET ID OF FORM "#id"
-	var words = this.calcLevenshteinWordErrors();
+	var words = this.word_alignment;
 
-	for (var w = 0; w < words.length; w++) {
-		if (words[w][3] >= 1) {
+	for (var input_start in words) {
+
+		var word_info = words[input_start];
+		var input_word = word_info[2];
+		var target_word = word_info[1];
+		var word_error = word_info[5];
+
+		if (input_word === "") {
+			word_box = $("<span>")
+				.addClass("spelling missing-word")
+				.html(target_word);
+		} else if (word_error >= 3) {
 			word_box = $("<span>")
 				.addClass("spelling wrong")
-				.html(words[w][0]);
-		} else if (words[w][3] > 0) {
+				.html(input_word);
+		} else if (word_error > 0) {
 			word_box = $("<span>")
 				.addClass("spelling minor-mistake")
-				.html(words[w][0]);
+				.html(input_word);
 		} else {
 			word_box = $("<span>")
 				.addClass("spelling correct")
-				.html(words[w][0]);
+				.html(input_word);
 			$(target_id).append(word_box);
 		}
 
 		$(target_id).append(word_box);
-		word_box.css("background-color", tinycolor(word_box.css("background-color")).brighten(50-words[w][3]*10).toString() );
+		//word_box.css("background-color", tinycolor(word_box.css("background-color")).brighten(50-word_error*10).toString() );
 	}
+
+};
+
+Result.prototype.createMistakeDistributionInfo = function (target_id, type) {
+
+	/*
+		TODO
+		Calcs and displays Info about distribution of Error Type
+	 */
+
+	 if (!type) {
+		 type = "bar";
+	 }
+
+	var all_errors = this.levenshtein.map( function (curr) {
+		return curr[2][3];
+	});
+
+	var errorCountMap = countArrayDuplicates(all_errors);
+	// delete errorCountMap.M;
+
+	// chart data and options
+	var data = {
+  		labels: [],
+  		series: []
+	};
+
+	var pie_options = {
+	    showLabel: false
+	};
+
+	var bar_options = {
+		distributeSeries: true,
+	};
+
+	// map with errorshortcut mapping to className and label
+	var error_type_map = {
+		"M": ["error-distr-match", "correct"],
+		"D": ["error-distr-deletion", "waste"],
+		"I": ["error-distr-insert", "missing"],
+		"S": ["error-distr-sub", "wrong"],
+		"switch": ["error-distr-switch", "switched"],
+		"capitals": ["error-distr-capitalization", "capitalization"],
+		"punctuation": ["error-distr-punctuation", "punctuation"]
+	};
+
+	// fill data
+	var char_count = this.levenshtein.length;
+	for (var error in errorCountMap) {
+		data["labels"].push(error_type_map[error][1]);
+		data["series"].push({
+			value: (errorCountMap[error] / char_count) * 100,
+			className: error_type_map[error][0]
+		});
+	}
+
+	console.log(data);
+
+	//create chart
+	if (type === "pie") {
+		new Chartist.Pie(target_id, data, pie_options);
+	} else if (type === "bar") {
+		new Chartist.Bar(target_id, data, bar_options);
+	}
+
+};
+
+Result.prototype.createPerformanceOverTimeInfo = function (target_id) {
+
+	/*
+		Show Performance over time by relating the amount of overall error to the position in text wordwise
+	 */
+
+	var words = this.word_alignment;
+
+	var data = {
+		labels: [],
+		series: [[]]
+	};
+
+	var options = {
+		showPoint: false,
+		fullWidth: true,
+		lineSmooth: Chartist.Interpolation.simple(),
+		showLabel: false
+	};
+
+	// fill data
+	var c = 0;
+	var error = 0;
+	for (var index in words) {
+		console.log(c, error);
+		data["labels"].push(c);
+		data["series"][0].push(c / (error || 1));
+
+		c++;
+		error += words[index][5];
+	}
+
+	// last part of data
+	data["labels"].push(c);
+	data["series"][0].push(c / (error || 1));
+
+	console.log(data);
+
+	// create chart
+	new Chartist.Line(target_id, data, options);
+
+};
+
+Result.prototype.createWordwiseErrorInfo = function (target_id) {
+	/*
+		Shows information about each wrong word
+	 */
 
 };
 

@@ -3,6 +3,7 @@
 html {
     height: 100%;
     overflow-y: scroll;
+    font-size: $tgd-font-size;
 }
 
 body {
@@ -169,16 +170,23 @@ select {
     margin: 20px 15px;
 }
 
-/* STYLING */
-
 .modal-body {
     padding: 20px 50px;
+
     .modal-title {
         color: $tgd-primary-color;
-        font-size: $tgd-font-size-subtitle;
+        font-size: $tgd-font-size-modal-title;
         text-align: center;
         margin: 10px 0 20px;
     }
+}
+
+.subtitle {
+    color: $tgd-primary-color;
+    font-size: $tgd-font-size-subtitle;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .info {
@@ -187,11 +195,16 @@ select {
     font-weight: bold;
 }
 
-.well {
-    &#error-indication {
-        font-size: 14pt;
-        overflow: auto;
-    }
+.info-container {
+    border: 0 solid $tgd-primary-color;
+    //padding: $tgd-default-padding;
+}
+
+#error-indication {
+    font-size: 14pt;
+    overflow: auto;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 
@@ -200,7 +213,6 @@ select {
 .error-container {
     margin: 3px;
     text-align: center;
-    display: inline-block;
     vertical-align: top;
 
     &.no-margin {
@@ -272,6 +284,7 @@ select {
         margin: 3px 0 3px 5px;
         border: 1px solid transparent;
 
+        //CHARACTERWISE
         &.substitution {
             background-color: $tgd-sub-color;
             color: $tgd-font-contrast-color;
@@ -301,6 +314,30 @@ select {
             background-color: $tgd-switch-color;
             color: $tgd-font-contrast-color;
         }
+
+        //WORDWISE
+        &.missing-word {
+            border: 2px solid $tgd-missing-word-color;
+            color: $tgd-missing-word-color;
+        }
+
+        &.wrong {
+            background-color: $tgd-wrong-color;
+            color: $tgd-font-contrast-color;
+            //border-color: darken($tgd-wrong-color, 30);
+            //@include box-shadow(0 0 2px #858585);
+        }
+
+        &.minor-mistake {
+            background-color: $tgd-minor-mistake-color;
+            color: $tgd-font-contrast-color;
+            //border-color: $tgd-minor-mistake-color;
+        }
+
+        &.correct {
+            background-color: none;
+            border: 0;
+        }
     }
 }
 
@@ -312,14 +349,21 @@ select {
     margin: 3px 0 3px 5px;
     border: 1px solid transparent;
 
+    &.missing-word {
+        border: 2px solid $tgd-missing-word-color;
+        color: $tgd-missing-word-color;
+    }
+
     &.wrong {
         background-color: $tgd-wrong-color;
+        color: $tgd-font-contrast-color;
         //border-color: darken($tgd-wrong-color, 30);
         //@include box-shadow(0 0 2px #858585);
     }
 
     &.minor-mistake {
         background-color: $tgd-minor-mistake-color;
+        color: $tgd-font-contrast-color;
         //border-color: $tgd-minor-mistake-color;
     }
 
@@ -331,18 +375,16 @@ select {
 
 // SCORE
 #score-info {
-    font-size: 28pt;
-    text-align: center;
 
     .score {
         font-weight: bold;
-        font-size: 45pt;
+        font-size: 2em;
         color: $tgd-score-color;
     }
 
     .ratio {
         font-weight: bold;
-        font-size: 45pt;
+        font-size: 2em;
         color: $tgd-ratio-color;
     }
 }

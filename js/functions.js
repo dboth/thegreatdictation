@@ -2,6 +2,13 @@ function convertStringToHTML(str) {
     return str.replace(/\n/g, "<br>");
 }
 
+function countArrayDuplicates(array) {
+    var counts = {};
+    array.forEach(function(x) { counts[x] = (counts[x] || 0)+1; });
+
+    return counts;
+}
+
 function toggleViews(to_view) {
 
     /*

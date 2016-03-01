@@ -34,7 +34,11 @@ class Result():
     #DATA HANDLING METHODS
 
     def normalizeInput(self, input_text):
-        return re.sub(" +", " ", input_text)
+        normed = re.sub(" +", " ", input_text)  # multiple spaces wrapping
+        normed = re.sub("\s+$", "", normed)  # Remove trailing whitespaces
+        normed = re.sub("^\s+", "", normed)  # Remove preceding whitespaces
+        normed = re.sub("\n", "", normed)
+        return normed
 
     def getValueFromJSON(self, key):
         return self.parameter["data"][key]

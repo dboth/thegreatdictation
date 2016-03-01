@@ -32,7 +32,7 @@ class UserSystem
     public function setUserInformation($key, $value)
     {   
         //you cannot set the username this way, and cannot set keys not in the database
-        if ($key == "username" || (!in_array($key, self::allowed)))
+        if ($key == "username" || (!in_array($key, self::$allowed)))
             return false;
         
         //set the key for this session
@@ -45,12 +45,14 @@ class UserSystem
         //check if user exists in db
         $e = $this->db->query("SELECT null FROM users WHERE username = '".$this->db->esc($_SESSION["username"])."'");
         //if not exists: insert db
-        if (!$e->num_rows)
-            $this->db->query("INSERT INTO users (username, ".$this->db->esc($key).") VALUES ('".$this->db->esc($_SESSION["username"])."','".$this->db->esc($value)."')");
-        //else update db
-        else
-            $this->db->query("UPDATE users SET ".$this->db->esc($key)." = '".$this->db->esc($value)."' WHERE username = ".$this->db->esc($_SESSION["username"])."'");
         
+        if (!$e->num_rows){
+            $this->db->query("INSERT INTO users (username, ".$this->db->esc($key).") VALUES ('".$this->db->esc($_SESSION["username"])."','".$this->db->esc($value)."')");
+       
+        }//else update db
+        else
+            $this->db->query("UPDATE users SET ".$this->db->esc($key)." = '".$this->db->esc($value)."' WHERE username = '".$this->db->esc($_SESSION["username"])."'");
+       
     }
 
     public function getUserInformation($key = false)
@@ -58,7 +60,7 @@ class UserSystem
         //if a certain key is specified return that keys value, else return an array of all keys for the user
         if ($key) {
             //the key has to be allowed and set
-            if (isset($_SESSION[$key]) && (in_array($key, self::allowed))) {
+            if (isset($_SESSION[$key]) && (in_array($key, self::$allowed))) {
                 return $_SESSION[$key];
             } else {
                 $this->errors->log("b_usersystem_key_not_found", $key);
@@ -72,6 +74,7 @@ class UserSystem
                 if (isset($_SESSION[$key]))
                     $out[$key] = $_SESSION[$key];
             }
+            return $out;
         }
     }
 

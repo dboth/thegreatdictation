@@ -93,19 +93,19 @@ class AlignmentPostProcessor():
     def calcScore(self):
         error_weight = 0
         all_errors = 0
-        wrong_words = 0
+        correct_words = 0
         words = len(self.output_dict)
         for key in self.output_dict:
-            error_weight = self.output_dict[key][-1]
+            error_weight = self.output_dict[key][5]
             if error_weight != 0:
                 all_errors += error_weight
             else:
-                wrong_words += 1
-        score = all_errors/words
+                correct_words += 1
+        score = round((words/(all_errors+1))*100)
         #print(score,wrong_words,words)
-        return score, wrong_words, words
+        return score, correct_words, words
 
 if __name__ == "__main__":
-    a = Aligner.Aligner(u"Ich bin ein Elefant", u"Ich  wef wef bin ein Ewef lefantwef w w")
+    a = Aligner.Aligner(u"Ich bin ein Elefant", u"Ich bin Ein Elefant")
     app = AlignmentPostProcessor(a.finalize(), a.target, a.input, a.match)
     print(app.convertToWordAlignment())

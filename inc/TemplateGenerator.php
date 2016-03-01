@@ -120,7 +120,14 @@ class TemplateGenerator{
     }
     protected function applyTemplate($page){
         //applies the base template
-        $this->pageMarkup = file_get_contents($GLOBALS["conf"]["base_path"]."/frontend/".$page["template"]);
+        if (file_exists($GLOBALS["conf"]["base_path"]."/frontend/".$page["template"])){
+        ob_start();
+            require $GLOBALS["conf"]["base_path"]."/frontend/".$page["template"];
+        $this->pageMarkup = ob_get_clean();
+        } else {
+            $this->errors->log("b_page_not_found", $page["body"]);
+            return "ERROR: Content couldnt be found";
+        }
     }
     protected function applyPage($page){
         //applies the page template

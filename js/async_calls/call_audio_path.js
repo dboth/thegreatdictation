@@ -4,8 +4,6 @@ $(document).ready(function() {
 
 		var text_id = $("#dictation-id").val();
 
-		console.log(text_id);
-
 		if (!text_id) {
 			requestErrorInfo("f_select_a_text");
 		} else {
@@ -21,16 +19,13 @@ $(document).ready(function() {
 					type: 'audio/wav'
 				});
 
-				var audio = $("<audio>").prop("controls", true)
-				console.log("audio: "+audio);
+				var audio = $("<audio>").prop("controls", true);
+
 				audio.html(src);
 				$("#audio-player").append(audio);
 			})
 			.fail(function(res) {
 				console.log("error", res);
-			})
-			.always(function() {
-				console.log("complete");
 			});
 		}
 	});

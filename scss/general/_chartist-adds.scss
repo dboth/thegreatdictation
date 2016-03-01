@@ -1,0 +1,39 @@
+.error-distr-match {
+	stroke: $tgd-match-color;
+	fill: $tgd-match-color;
+}
+
+.error-distr-capitalization {
+	stroke: $tgd-capitalization-color;
+	fill: $tgd-capitalization-color;
+}
+
+.error-distr-wrong {
+	stroke: $tgd-wrong-color;
+	fill: wrong;
+}
+
+.error-distr-insert {
+	stroke: $tgd-insert-color;
+	fill: $tgd-insert-color;
+}
+
+.error-distr-deletion {
+	stroke: $tgd-deletion-color;
+	fill: $tgd-deletion-color;
+}
+
+.error-distr-switch {
+	stroke: $tgd-switch-color;
+	fill: $tgd-switch-color;
+}
+
+.error-distr-punctuation {
+	stroke: $tgd-punctuation-color;
+	fill: $tgd-punctuation-color;
+}
+
+.error-distr-sub {
+	stroke: $tgd-sub-color;
+	fill: $tgd-sub-color;
+}

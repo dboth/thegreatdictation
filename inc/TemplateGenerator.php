@@ -119,6 +119,7 @@ class TemplateGenerator{
         echo $this->pageMarkup;
     }
     protected function applyTemplate($page){
+        global $usersystem;
         //applies the base template
         if (file_exists($GLOBALS["conf"]["base_path"]."/frontend/".$page["template"])){
         ob_start();
@@ -130,6 +131,7 @@ class TemplateGenerator{
         }
     }
     protected function applyPage($page){
+        global $usersystem;
         //applies the page template
         if (file_exists($GLOBALS["conf"]["base_path"]."/frontend/pages/".$page["body"])){
         ob_start();
@@ -175,6 +177,7 @@ class TemplateGenerator{
     }
 
     protected function getComponents($path){
+        global $usersystem;
         if (file_exists($GLOBALS["conf"]["base_path"]."/frontend/components/".$path)){
             // Opens and runs php file and returns output
             ob_start();

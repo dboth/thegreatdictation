@@ -27,6 +27,7 @@ class TemplateGenerator{
     }
 
     protected function getPage(){
+        global $usersystem;
         //first page switcher only works with get.
         switch(@$_GET["p"]){
             //add other pages here. example.org/?p=pagename results in a switch here. "pagename" would be the case.
@@ -97,6 +98,8 @@ class TemplateGenerator{
                     "body"=>"aboutus.html",
                     "template"=>"default.html"
                 );
+            case "logout":
+                $usersystem->logout();
             default:
                 return array(
                     //inside a template all occurences of <tgd_varname> get replace by the value of vars[varname] in this array. do not use the variables "body" or "trans", as they are reserved.

@@ -77,7 +77,14 @@ class UserSystem
             return $out;
         }
     }
-
+    public function logout(){
+         foreach (self::$allowed as $key) {
+                //do not just return the $_SESSION, in case there will be secret keys later on
+         if (isset($_SESSION[$key]))
+                unset($_SESSION[$key]);
+         }
+        
+    }
     public function setUser($username)
     {
         if (!$username)

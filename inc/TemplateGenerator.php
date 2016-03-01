@@ -100,6 +100,7 @@ class TemplateGenerator{
                 );
             case "logout":
                 $usersystem->logout();
+
             default:
                 return array(
                     //inside a template all occurences of <tgd_varname> get replace by the value of vars[varname] in this array. do not use the variables "body" or "trans", as they are reserved.

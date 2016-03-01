@@ -200,7 +200,7 @@ select {
     //padding: $tgd-default-padding;
 }
 
-#error-indication {
+.error-indication {
     font-size: 14pt;
     overflow: auto;
     display: flex;
@@ -277,6 +277,8 @@ select {
 }
 
 .legend {
+    margin-top: 10px;
+
     .element {
         display: inline-block;
         border-radius: 6px;
@@ -342,34 +344,48 @@ select {
 }
 
 // WORDALIGNMENT
-.spelling {
-    float: left;
-    border-radius: 6px;
-    padding: 2px 6px;
+.alignment-word-container {
     margin: 3px 0 3px 5px;
-    border: 1px solid transparent;
+    float: left;
 
-    &.missing-word {
-        border: 2px solid $tgd-missing-word-color;
-        color: $tgd-missing-word-color;
+    .spelling {
+        border-radius: 6px;
+        padding: 2px 6px;
+        border: 1px solid transparent;
+        margin: auto;
+        text-align: center;
+
+        // ERROR info
+        &.missing-word {
+            border: 2px solid $tgd-missing-word-color;
+            color: $tgd-missing-word-color;
+        }
+
+        &.wrong {
+            background-color: $tgd-wrong-color;
+            color: $tgd-font-contrast-color;
+            //border-color: darken($tgd-wrong-color, 30);
+            //@include box-shadow(0 0 2px #858585);
+        }
+
+        &.minor-mistake {
+            background-color: $tgd-minor-mistake-color;
+            color: $tgd-font-contrast-color;
+            //border-color: $tgd-minor-mistake-color;
+        }
+
+        &.correct {
+            background-color: none;
+            border: 0;
+        }
+
     }
 
-    &.wrong {
-        background-color: $tgd-wrong-color;
-        color: $tgd-font-contrast-color;
-        //border-color: darken($tgd-wrong-color, 30);
-        //@include box-shadow(0 0 2px #858585);
-    }
-
-    &.minor-mistake {
-        background-color: $tgd-minor-mistake-color;
-        color: $tgd-font-contrast-color;
-        //border-color: $tgd-minor-mistake-color;
-    }
-
-    &.correct {
-        background-color: none;
-        border: 0;
+    //CORRECT Spelling info
+    .correct-spelling-info {
+        font-size: 0.6em;
+        text-align: center;
+        margin-top: 0;
     }
 }
 

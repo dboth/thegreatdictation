@@ -6522,7 +6522,7 @@ select option[disabled] {
 .info-container {
   border: 0 solid #2a93cf; }
 
-#error-indication {
+.error-indication {
   font-size: 14pt;
   overflow: auto;
   display: -webkit-box;
@@ -6575,61 +6575,70 @@ select option[disabled] {
       background-color: #ffa100;
       color: #fff; }
 
-.legend .element {
-  display: inline-block;
-  border-radius: 6px;
-  padding: 2px 6px;
-  margin: 3px 0 3px 5px;
-  border: 1px solid transparent; }
-  .legend .element.substitution {
-    background-color: #b40000;
-    color: #fff; }
-  .legend .element.deletion {
-    background-color: #e00dde;
-    color: #fff; }
-  .legend .element.insertion {
-    background-color: #ff5b28;
-    color: #fff; }
-  .legend .element.capitalization {
-    background-color: #ffe145;
-    color: #000; }
-  .legend .element.punctuation {
-    background-color: #6cd3ff;
-    color: #000; }
-  .legend .element.switch {
-    background-color: #ffa100;
-    color: #fff; }
-  .legend .element.missing-word {
-    border: 2px solid #ff5400;
-    color: #ff5400; }
-  .legend .element.wrong {
-    background-color: #f33;
-    color: #fff; }
-  .legend .element.minor-mistake {
-    background-color: #f6ba07;
-    color: #fff; }
-  .legend .element.correct {
-    background-color: none;
-    border: 0; }
+.legend {
+  margin-top: 10px; }
+  .legend .element {
+    display: inline-block;
+    border-radius: 6px;
+    padding: 2px 6px;
+    margin: 3px 0 3px 5px;
+    border: 1px solid transparent; }
+    .legend .element.substitution {
+      background-color: #b40000;
+      color: #fff; }
+    .legend .element.deletion {
+      background-color: #e00dde;
+      color: #fff; }
+    .legend .element.insertion {
+      background-color: #ff5b28;
+      color: #fff; }
+    .legend .element.capitalization {
+      background-color: #ffe145;
+      color: #000; }
+    .legend .element.punctuation {
+      background-color: #6cd3ff;
+      color: #000; }
+    .legend .element.switch {
+      background-color: #ffa100;
+      color: #fff; }
+    .legend .element.missing-word {
+      border: 2px solid #ff5400;
+      color: #ff5400; }
+    .legend .element.wrong {
+      background-color: #f33;
+      color: #fff; }
+    .legend .element.minor-mistake {
+      background-color: #f6ba07;
+      color: #fff; }
+    .legend .element.correct {
+      background-color: none;
+      border: 0; }
 
-.spelling {
-  float: left;
-  border-radius: 6px;
-  padding: 2px 6px;
+.alignment-word-container {
   margin: 3px 0 3px 5px;
-  border: 1px solid transparent; }
-  .spelling.missing-word {
-    border: 2px solid #ff5400;
-    color: #ff5400; }
-  .spelling.wrong {
-    background-color: #f33;
-    color: #fff; }
-  .spelling.minor-mistake {
-    background-color: #f6ba07;
-    color: #fff; }
-  .spelling.correct {
-    background-color: none;
-    border: 0; }
+  float: left; }
+  .alignment-word-container .spelling {
+    border-radius: 6px;
+    padding: 2px 6px;
+    border: 1px solid transparent;
+    margin: auto;
+    text-align: center; }
+    .alignment-word-container .spelling.missing-word {
+      border: 2px solid #ff5400;
+      color: #ff5400; }
+    .alignment-word-container .spelling.wrong {
+      background-color: #f33;
+      color: #fff; }
+    .alignment-word-container .spelling.minor-mistake {
+      background-color: #f6ba07;
+      color: #fff; }
+    .alignment-word-container .spelling.correct {
+      background-color: none;
+      border: 0; }
+  .alignment-word-container .correct-spelling-info {
+    font-size: 0.6em;
+    text-align: center;
+    margin-top: 0; }
 
 #score-info .score {
   font-weight: bold;

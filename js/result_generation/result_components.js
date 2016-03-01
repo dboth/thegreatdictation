@@ -16,58 +16,126 @@ function Result (analysis) {
 
 // PREPROCESSORS
 
-Result.prototype.getTargetPathInfo = function (input) {
+Result.prototype.getPathInfoByInputIndex = function (input) {
 
 	/**
-		returns the equivalent target positions for a given input position in the levenshtein path
+		returns the equivalent information for a given input index in the levenshtein path
 	**/
 
 	var lev = this.levenshtein, out = [];
 	for (var step = 0; step < lev.length; step++) {
 		var path_pos = lev[step];
-		if (path_pos[2][0] === input) {
-			out.push(path_pos[2][1]);
+		if (path_pos[2][1] === input) {
+			out.push(path_pos[2]);
 		}
 	}
 	return out;
 };
 
-Result.prototype.calcLevenshteinWordErrors = function () {
+Result.prototype.styleSingleLetterWithLevenshtein = function (input_index) {
 
-	// WORD , START, END, ERROR
-	var word_bag = this.convertStringToPositionMap(this.input);
+	/*
+		Creates a container with the info about the mistake at a given input position
+	 */
 
+	console.log("INPUT INDEX: ", input_index);
 
-	for (var step = 0; step < this.levenshtein.length; step++) {
-		var cur_step = this.levenshtein[step];
-		var found = false;
-		for (var word = 0; word < word_bag.length; word++) {
-			var cur_word = word_bag[word];
+	var concerned_inputs = this.getPathInfoByInputIndex(input_index);
+	var list_of_containers = [];
 
-			if (cur_word[1] <= cur_step[2][0] && cur_word[2] >= cur_step[2][0]) { // is this error in that word?
+	console.log("CONCERNED INPUTS: ", concerned_inputs);
 
-				var last_cost = 0;
-				if (step !== 0) {
-					last_cost = this.levenshtein[step-1][2][2];
-				}
+	for (var single_input in concerned_inputs) {
 
-				word_bag[word][3] += cur_step[2][2] - last_cost; // add diff of cost at pos to get error cost
-				found = true;
-				break;
-			}
+		var char_info = concerned_inputs[single_input];
+		var input_pos = input_index;
+		var target_pos = char_info[0];
+		var errortype = char_info[3];
+
+		console.log("CHARINFO: ", char_info);
+
+		var container = $("<div>");
+		container.addClass("error-container");
+
+		var input = $("<span>");
+		input.addClass("input").html("&nbsp");
+
+		var target = $("<span>");
+		target.addClass("target").html("&nbsp");
+
+		var add_space_necessary = false;
+
+		// console.log(input_pos + "|" + this.input[input_pos]);
+
+		if (errortype === "M") {
+			container.addClass("no-margin");
+			input.addClass("match")
+				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
+		} else if (errortype === "M+") {
+			add_space_necessary = true;
+			container.addClass("no-margin");
+			input.addClass("match")
+				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
+		} else if (errortype === "+M") {
+			var add_space = $("<div>").addClass("error-container").html("&nbsp");
+			list_of_containers.push(add_space);
+
+			container.addClass("no-margin");
+			input.addClass("match")
+				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
+		} else if (errortype === "I") {
+			input.addClass("insertion")
+				.html("_");
+			target.addClass("insertion")
+				.html(this.target[target_pos].replace(/\s/g, "&nbsp"));
+		} else if (errortype === "D") {
+			input.addClass("deletion")
+				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
+			target.addClass("deletion")
+				.html("&nbsp;");
+		} else if (errortype === "S") {
+			input.addClass("substitution")
+				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
+			target.addClass("substitution")
+				.html(this.target[target_pos].replace(/\s/g, "&nbsp"));
+		} else if (errortype === "capitalization") {
+			input.addClass("capitalization")
+				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
+			target.addClass("capitalization")
+				.html(this.target[target_pos].replace(/\s/g, "&nbsp"));
+		} else if (errortype === "switch") {
+			input.addClass("switch")
+				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
+			target.addClass("switch")
+				.html(this.target[target_pos].replace(/\s/g, "&nbsp"));
+		} else if (errortype === "punctuation") {
+			input.addClass("punctuation")
+				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
+			target.addClass("punctuation")
+				.html(this.target[target_pos].replace(/\s/g, "&nbsp"));
 		}
 
-		if (!found && cur_step[2][3] !== "M") {
-
+		container.append(input);
+		if (errortype !== "M" && errortype !== "D" && errortype !== "M+" && errortype !== "+M") {
+			var arrow = $("<i>").addClass("fa fa-long-arrow-down arrow");
+			container.append(arrow);
 		}
 
+		container.append(target);
+
+		list_of_containers.push(container);
+
+		if (add_space_necessary) {
+			var add_space = $("<div>").addClass("error-container").html("&nbsp");
+			list_of_containers.push(add_space);
+		}
 	}
 
-	return word_bag;
+	return list_of_containers;
 };
 
+// CREATIONS
 
-// PRODUCERS
 Result.prototype.createHeader = function (target_id) {
 
 	/*
@@ -180,7 +248,7 @@ Result.prototype.createAlignmentInfo = function (target_id) {
 		Creates Alignment Info based on Map
 	*/
 
-	// TARGET ID OF FORM "#id"
+
 	var words = this.word_alignment;
 
 	for (var input_start in words) {
@@ -190,27 +258,44 @@ Result.prototype.createAlignmentInfo = function (target_id) {
 		var target_word = word_info[1];
 		var word_error = word_info[5];
 
+		var container = $("<div>").addClass('alignment-word-container');
+		var word_box = $("<div>");
+
 		if (input_word === "") {
-			word_box = $("<span>")
+			word_box
 				.addClass("spelling missing-word")
 				.html(target_word);
 		} else if (word_error >= 3) {
-			word_box = $("<span>")
+			word_box
 				.addClass("spelling wrong")
 				.html(input_word);
 		} else if (word_error > 0) {
-			word_box = $("<span>")
+			word_box
 				.addClass("spelling minor-mistake")
 				.html(input_word);
 		} else {
-			word_box = $("<span>")
+			word_box
 				.addClass("spelling correct")
 				.html(input_word);
 			$(target_id).append(word_box);
 		}
 
-		$(target_id).append(word_box);
+		container.append(word_box);
+
+		// add info about correct spelling
+		if (!word_box.hasClass('correct') && !word_box.hasClass('missing-word')) {
+			console.log("hi");
+			correct_spelling_info = $("<div>")
+				.addClass('correct-spelling-info')
+				.html(target_word);
+			container.append(correct_spelling_info);
+		}
+
+		// add word to container
+		$(target_id).append(container);
+
 		//word_box.css("background-color", tinycolor(word_box.css("background-color")).brighten(50-word_error*10).toString() );
+
 	}
 
 };
@@ -296,7 +381,15 @@ Result.prototype.createPerformanceOverTimeInfo = function (target_id) {
 		showPoint: false,
 		fullWidth: true,
 		lineSmooth: Chartist.Interpolation.simple(),
-		showLabel: false
+		axisX: {
+			showLabel: false
+		},
+		chartPadding: {
+		    top: 15,
+		    right: 0,
+		    bottom: 5,
+		    left: 0
+		},
 	};
 
 	// fill data
@@ -326,6 +419,48 @@ Result.prototype.createWordwiseErrorInfo = function (target_id) {
 	/*
 		Shows information about each wrong word
 	 */
+
+	var words = this.word_alignment;
+
+	for (var word in words) {
+		var word_info = words[word];
+		var input_word = word_info[2];
+		var target_word = word_info[1];
+		var word_error = word_info[5];
+
+		// only if error occures
+		if (word_error > 0) {
+
+			//container
+			var info_row = $("<div>").addClass('row');
+
+			//content
+			var info_word = $("<div>").addClass('col-xs-3');
+			var info_pointer = $("<div>").addClass('col-xs-2');
+ 			var info_spelling = $("<div>").addClass('col-xs-7 error-indication');
+
+			//fill content
+			info_word.html(input_word);
+			info_pointer.html("-->");
+			for (var char = 0; char < input_word.length; char++) {
+				console.log("WORD: ", word, " CHAR: ", char);
+				var containers = this.styleSingleLetterWithLevenshtein(parseInt(word_info[3]) + char);
+				console.log("CONTAINERS: ", containers);
+				for (var c in containers) {
+					info_spelling.append(containers[c]);
+				}
+			}
+
+			// sticking stuff together
+			info_row
+				.append(info_word)
+				.append(info_pointer)
+				.append(info_spelling);
+
+			$(target_id).append(info_row);
+		}
+	}
+
 
 };
 

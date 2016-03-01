@@ -8,10 +8,11 @@ function createAnalysis(res) {
     var result_object = new Result(res[0]);
 
     result_object.createHeader("#analysis-container .page-header");
-    result_object.createAlignmentInfo("#error-indication");
+    result_object.createAlignmentInfo("#input-info-container");
     result_object.createOverallScoreInfo("#score-info");
     result_object.createMistakeDistributionInfo("#error-distribution-chart", "pie");
     result_object.createPerformanceOverTimeInfo("#performance-over-time-chart");
+    result_object.createWordwiseErrorInfo("#wordwise-error-info");
 
     // var target_info = $("#target-info");
 	// target_info.find(".well").html(convertStringToHTML(result_object.target));

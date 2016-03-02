@@ -8,7 +8,7 @@ require_once "inc/UserSystem.php";
 $usersystem = new UserSystem();
 if (isset($_GET["logout"])){
     $usersystem->logout();
-    header("Location: ".parse_url($url, PHP_URL_PATH));
+    header("Location: ".strtok("http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",'?'));
     die();
 }
 

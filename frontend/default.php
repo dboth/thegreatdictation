@@ -54,7 +54,7 @@
 							echo '<li><a data-toggle="modal" href="#login-modal"><i class="fa fa-sign-in"></i> Register or Log In</a></li>';
 						} else {
 							echo '<li><a href="#"><i class="fa fa-user"></i> '.$user.'</a></li>';
-							echo '<li><a href="?p=logout"><i class="fa fa-sign-out"></i> Log Out</a></li>';
+							echo '<li><a href="?logout"><i class="fa fa-sign-out"></i> Log Out</a></li>';
 						}
 						?>
 						<li><a data-toggle="modal" href="#feedback-modal"><i class="fa fa-comment"></i> Send Feedback</a></li>

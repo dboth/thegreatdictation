@@ -11,7 +11,7 @@ $(document).ready(function() {
 			$.ajax({
 				url: "sockets/setInformation.php",
 				type: 'POST',
-				data: {"username": username}
+				data: {"username": username, "information": JSON.stringify({})}
 			})
 			.done(function(res) {
 				console.log("success", res);

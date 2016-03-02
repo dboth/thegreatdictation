@@ -48,7 +48,7 @@ class TemplateGenerator{
                         "simple_login" => "simple_login.php"
                     ),
                     "body"=>"dictation.html",
-                    "template"=>"default.html"
+                    "template"=>"default.php"
                 );
 
             case "getstarted":
@@ -64,7 +64,7 @@ class TemplateGenerator{
                     ),
                     //the page template (inside frontend/pages)
                     "body"=>"getstarted.html",
-                    "template"=>"default.html"
+                    "template"=>"default.php"
                 );
 
             case "why":
@@ -80,7 +80,7 @@ class TemplateGenerator{
                     ),
                     //the page template (inside frontend/pages)
                     "body"=>"why.html",
-                    "template"=>"default.html"
+                    "template"=>"default.php"
                 );
 
 			case "aboutus":
@@ -96,10 +96,11 @@ class TemplateGenerator{
                     ),
                     //the page template (inside frontend/pages)
                     "body"=>"aboutus.html",
-                    "template"=>"default.html"
+                    "template"=>"default.php"
                 );
             case "logout":
                 $usersystem->logout();
+
             default:
                 return array(
                     //inside a template all occurences of <tgd_varname> get replace by the value of vars[varname] in this array. do not use the variables "body" or "trans", as they are reserved.
@@ -114,7 +115,7 @@ class TemplateGenerator{
                     ),
                     //the page template (inside frontend/pages)
                     "body"=>"home.html",
-                    "template"=>"default.html"
+                    "template"=>"default.php"
                 );
         }
     }

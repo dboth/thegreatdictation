@@ -48,7 +48,7 @@ class TemplateGenerator{
                         "simple_login" => "simple_login.php"
                     ),
                     "body"=>"dictation.html",
-                    "template"=>"default.php"
+                    "template"=>"default.html"
                 );
 
             case "getstarted":
@@ -64,7 +64,7 @@ class TemplateGenerator{
                     ),
                     //the page template (inside frontend/pages)
                     "body"=>"getstarted.html",
-                    "template"=>"default.php"
+                    "template"=>"default.html"
                 );
 
             case "why":
@@ -80,7 +80,7 @@ class TemplateGenerator{
                     ),
                     //the page template (inside frontend/pages)
                     "body"=>"why.html",
-                    "template"=>"default.php"
+                    "template"=>"default.html"
                 );
 
 			case "aboutus":
@@ -96,11 +96,9 @@ class TemplateGenerator{
                     ),
                     //the page template (inside frontend/pages)
                     "body"=>"aboutus.html",
-                    "template"=>"default.php"
+                    "template"=>"default.html"
                 );
-            case "logout":
-                $usersystem->logout();
-
+            
             default:
                 return array(
                     //inside a template all occurences of <tgd_varname> get replace by the value of vars[varname] in this array. do not use the variables "body" or "trans", as they are reserved.
@@ -115,7 +113,7 @@ class TemplateGenerator{
                     ),
                     //the page template (inside frontend/pages)
                     "body"=>"home.html",
-                    "template"=>"default.php"
+                    "template"=>"default.html"
                 );
         }
     }
@@ -130,7 +128,7 @@ class TemplateGenerator{
             require $GLOBALS["conf"]["base_path"]."/frontend/".$page["template"];
         $this->pageMarkup = ob_get_clean();
         } else {
-            $this->errors->log("b_page_not_found", $page["body"]);
+            $this->errors->log("b_page_not_found", $page["template"]);
             return "ERROR: Content couldnt be found";
         }
     }

@@ -521,15 +521,17 @@ Result.prototype.createOverallScoreInfo = function (target_id) {
 	var ratio_display = $(target_id+" .ratio").html(correct_words + "/" + total_words);
 	var score_display = $(target_id+" .score").html("0");
 
-
+	console.log("SCORE_--------------------  ", score);
 	var time = 100;
 	function add() {
 		if (cur_score < score) {
+			console.log("CUR: ", cur_score);
 			if (cur_score >= 100 && score === Infinity) {
 				score_display.html(score);
 				clearInterval(score_int);
 			} else {
 				cur_score += 0.1;
+				cur_score = Math.round(cur_score *10)/10;
 				score_display.html(Math.round(cur_score*100)/100);
 				clearInterval(score_int);
 				time--;

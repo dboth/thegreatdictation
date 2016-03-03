@@ -487,7 +487,7 @@ Result.prototype.createOverallScoreInfo = function (target_id) {
 
 	var ratio_display = $(target_id+" .ratio").html(correct_words + "/" + total_words);
 	var score_display = $(target_id+" .score").html("0");
-
+	console.log("-------------------SCORE--------------------: "score);
 
 	var time = 100;
 	function add() {

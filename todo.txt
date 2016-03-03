@@ -23,4 +23,5 @@ time statistics in dictation
 inform about how often they already did dictation
 validate email as username
 
+https://docs.google.com/document/d/1_sJ9FbtgVCM2T9QnaejkcawJ0ZapweF3EAQN5Q3X8P0/edit?usp=sharing
 

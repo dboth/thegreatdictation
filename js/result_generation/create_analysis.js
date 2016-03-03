@@ -10,7 +10,7 @@ function createAnalysis(res) {
     result_object.createHeader("#analysis-container .page-header");
     result_object.createAlignmentInfo("#input-info-container");
     result_object.createOverallScoreInfo("#score-info");
-    result_object.createMistakeDistributionInfo("#error-distribution-chart", "pie");
+    result_object.createMistakeDistributionInfo("#error-distribution-chart", "bar");
     result_object.createPerformanceOverTimeInfo("#performance-over-time-chart");
     result_object.createWordwiseErrorInfo("#wordwise-error-info");
 

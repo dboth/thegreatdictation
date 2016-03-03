@@ -1,0 +1,26 @@
+essential
+--------------------
+FILES!!!11!!
+survey for feedback
+permission on server
+ctest implementation
+if not logged in redirect to login/register
+improve the algorithm
+move performance over time chart to the end
+better get started
+clear user-workflow for data collection
+buttons everywhere
+instructions for data collection (with feedback, detailed, stuff)
+	do at least 3 texts
+loading bar for dcitation loading
+insert texts into database and link them with audio files
+TESTING TESTING TESTING
+
+optional
+--------
+improve statistics / options of visualization
+time statistics in dictation
+inform about how often they already did dictation
+validate email as username
+
+

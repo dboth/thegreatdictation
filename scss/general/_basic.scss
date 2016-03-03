@@ -73,8 +73,12 @@ body {
     @include row-margin;
 }
 
-.col-content {
-    @include col-margin;
+.row-spacing {
+    margin-top: $tgd-vertical-gap;
+}
+
+.row-spacing-lg {
+    margin-top: 2*$tgd-vertical-gap;
 }
 
 /* NAVIGATION */
@@ -181,12 +185,15 @@ select {
     }
 }
 
+.title {
+    color: $tgd-primary-color;
+    font-size: $tgd-font-size-title;
+    font-weight: normal;
+}
+
 .subtitle {
     color: $tgd-primary-color;
     font-size: $tgd-font-size-subtitle;
-    font-weight: bold;
-    margin-top: 20px;
-    margin-bottom: 20px;
 }
 
 .info {

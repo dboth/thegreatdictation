@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+
+	// LOGIN
 	$("#login-form").submit(function(event) {
 		event.preventDefault();
 
@@ -29,6 +31,7 @@ $(document).ready(function() {
 		}
 	});
 
+	//REGISTER
 	$("#register-form").submit(function(event) {
 		event.preventDefault();
 
@@ -52,7 +55,7 @@ $(document).ready(function() {
 				console.log("success", res);
 				// TODO inform user about success
 				$("#login-modal").modal("hide");
-				location.reload();
+				window.location.href = "?p=dictation";
 			})
 			.fail(function(res) {
 				console.log("error", res);

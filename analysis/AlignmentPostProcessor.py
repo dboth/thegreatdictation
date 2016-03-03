@@ -106,6 +106,6 @@ class AlignmentPostProcessor():
         return score, correct_words, words
 
 if __name__ == "__main__":
-    a = Aligner.Aligner(u"Ich bin ein Elefant", u"Ich bin Ein Elefant")
+    a = Aligner.Aligner(u"Ich bin ein Elefant hallo.", u"Ich ein bin Elefant hallo.")
     app = AlignmentPostProcessor(a.finalize(), a.target, a.input, a.match)
     print(app.convertToWordAlignment())

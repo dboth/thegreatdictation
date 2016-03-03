@@ -332,7 +332,9 @@ Result.prototype.createMistakeDistributionInfo = function (target_id, type) {
 
 	var error_count_map = countArrayDuplicates(all_errors);
 	console.log(error_count_map);
-	// delete errorCountMap.M;
+	delete error_count_map["M"];
+	delete error_count_map["M+"];
+	delete error_count_map["+M"];
 
 	// chart data and options
 	var data = {
@@ -346,6 +348,7 @@ Result.prototype.createMistakeDistributionInfo = function (target_id, type) {
 
 	var bar_options = {
 		distributeSeries: true,
+		onlyInteger: true
 	};
 
 	// map with errorshortcut mapping to className and label
@@ -357,16 +360,26 @@ Result.prototype.createMistakeDistributionInfo = function (target_id, type) {
 		"I": ["error-distr-insert", "missing"],
 		"S": ["error-distr-sub", "wrong"],
 		"switch": ["error-distr-switch", "switched"],
+
 		"capitals": ["error-distr-capitalization", "capitalization"],
-		"punctuation": ["error-distr-punctuation", "punctuation"]
+		"caveat_capitalization": ["error-distr-capitalization", "capitalization"],
+
+		"punct": ["error-distr-punctuation", "punctuation"],
+		"sim_punct": ["error-distr-similar-punctuation", "similar punctuation"],
+
+		"word_switch": ["error-distr-word-switch", "word switch"] // !
 	};
 
 	// fill data
-	var char_count = this.levenshtein.length;
+	var char_count = 0;
+	for (var el in error_count_map) {
+		char_count += error_count_map[el];
+	}
+
 	for (var error in error_count_map) {
 		data["labels"].push(error_type_map[error][1]);
 		data["series"].push({
-			value: (error_count_map[error] / char_count) * 100,
+			value: (type === "pie") ? ((error_count_map[error] / char_count) * 100) : error_count_map[error],
 			className: error_type_map[error][0]
 		});
 	}

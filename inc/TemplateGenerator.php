@@ -98,9 +98,7 @@ class TemplateGenerator{
                     "body"=>"aboutus.html",
                     "template"=>"default.php"
                 );
-            case "logout":
-                $usersystem->logout();
-
+            
             default:
                 return array(
                     //inside a template all occurences of <tgd_varname> get replace by the value of vars[varname] in this array. do not use the variables "body" or "trans", as they are reserved.
@@ -130,7 +128,7 @@ class TemplateGenerator{
             require $GLOBALS["conf"]["base_path"]."/frontend/".$page["template"];
         $this->pageMarkup = ob_get_clean();
         } else {
-            $this->errors->log("b_page_not_found", $page["body"]);
+            $this->errors->log("b_page_not_found", $page["template"]);
             return "ERROR: Content couldnt be found";
         }
     }

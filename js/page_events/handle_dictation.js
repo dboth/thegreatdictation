@@ -19,6 +19,7 @@ $(document).ready(function () {
     });
 
     //SWAP between views
+    /*
     $("#dict-switch").click(function () {
         toggleViews("#dictation-container");
         $("#dict-switch").addClass("active");
@@ -30,4 +31,5 @@ $(document).ready(function () {
         $("#res-switch").addClass("active");
         $("#dict-switch").removeClass("active");
     });
+    */
 });

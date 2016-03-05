@@ -19,7 +19,10 @@ $(document).ready(function() {
 				console.log("success", res);
 				// TODO inform user about success
 				$("#login-modal").modal("hide");
-				//window.location = window.location.replace(/logout/, "");
+				console.log(window.location.search);
+				if (window.location.search === "?p=register") {
+					window.location.href = "?p=dictation";
+				}
 				window.location.reload();
 			})
 			.fail(function(res) {

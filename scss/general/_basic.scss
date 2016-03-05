@@ -86,6 +86,8 @@ body {
 .navbar {
     border-bottom: 1px solid $tgd-primary-color;
     font-size: 14px;
+    // fix chrome fixed navbar bug
+    -webkit-transform: translateZ(0);
 
     .navbar-brand {
         color: darken($tgd-navfont-color, 15);
@@ -390,7 +392,7 @@ select {
 
     //CORRECT Spelling info
     .correct-spelling-info {
-        font-size: 0.6em;
+        font-size: .6em;
         text-align: center;
         margin-top: 0;
     }

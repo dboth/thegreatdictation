@@ -6674,7 +6674,8 @@ body {
 /* NAVIGATION */
 .navbar {
   border-bottom: 1px solid #2a93cf;
-  font-size: 14px; }
+  font-size: 14px;
+  -webkit-transform: translateZ(0); }
   .navbar .navbar-brand {
     color: #d9d9d9; }
     .navbar .navbar-brand img {
@@ -6864,7 +6865,7 @@ select option[disabled] {
       background-color: none;
       border: 0; }
   .alignment-word-container .correct-spelling-info {
-    font-size: 0.6em;
+    font-size: .6em;
     text-align: center;
     margin-top: 0; }
 

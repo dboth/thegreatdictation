@@ -416,3 +416,10 @@ select {
     font-size: 30em;
     text-align: center;
 }
+
+/* BOOTSTRAP */
+
+.progress-bar {
+    -webkit-transition: none !important;
+    transition: none !important;
+}

@@ -1,3 +1,7 @@
+<?php
+	$user = $usersystem->getUserInformation("username");
+?>
+
 <!doctype html>
 <html lang="de">
 
@@ -22,9 +26,6 @@
 </head>
 
 <body>
-	<?php
-		$user = $usersystem->getUserInformation("username");
-	?>
     <!-- BEGIN: NAVIGATION BAR -->
 		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 			<div class="container">

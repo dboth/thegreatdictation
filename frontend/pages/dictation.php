@@ -16,6 +16,14 @@
     </div>
 </div>
 
+<div class="container" id="loading-container">
+    <div class="row row-content">
+        <div class="col-xs-12" id="loading-bar">
+
+        </div>
+    </div>
+</div>
+
 <div class="container main-container" id="dictation-container">
     <form action="<tgd_analysispath>" method="POST" id="dictation-form">
         <div class="row row-content">

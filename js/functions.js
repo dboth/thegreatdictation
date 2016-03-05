@@ -25,3 +25,30 @@ function toggleViews(to_view) {
     }
 
 }
+
+function loadingbar(target, delay) {
+	var wrapper = $("<div>")
+		.addClass('progress');
+
+	var loadingbar = $("<div>")
+		.addClass('progress-bar')
+		.attr({
+			role: 'progressbar',
+            style: 'width: 5%;'
+		});
+
+    wrapper.append(loadingbar);
+    $(target).append(wrapper);
+
+	var current_state = 0;
+
+    var expand_bar = function () {
+        if (current_state < 99.99) {
+            current_state += ((100 - current_state)/3);
+            console.log(current_state);
+            loadingbar.animate({ width: current_state+"%" }, {easing: "linear", duration: 3500, complete: expand_bar});
+        }
+    };
+
+    expand_bar();
+}

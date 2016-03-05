@@ -39,6 +39,9 @@ $(document).ready(function () {
         var action = $(this).attr("action");
         var method = $(this).attr("method");
 
+        toggleViews("#loading-container");
+        loadingbar("#loading-bar", 2000);
+
         //SEND AND RECEIVE DATA FROM SERVER
         $.ajax({
             url: action,
@@ -48,11 +51,15 @@ $(document).ready(function () {
             console.log("ERROR: ", a.responseText);
             requestErrorInfo("f_analysis_create_analysis", "Server Request Failed");
         }).done(function (res){
+            var loadingbar = $("#loading-bar .progress-bar");
+            loadingbar.stop();
             console.log("RESULT: ",res);
-            createAnalysis(res);
-            toggleViews("#analysis-container");
-            $("#res-switch").addClass("active");
-            $("#dict-switch").removeClass("active");
+            loadingbar.animate({ width: "100%" }, {easing: "linear", duration: 100, complete: function () {
+                createAnalysis(res);
+                toggleViews("#analysis-container");
+                $("#res-switch").addClass("active");
+                $("#dict-switch").removeClass("active");
+            }});
         });
     });
 });

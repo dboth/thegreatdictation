@@ -6882,8 +6882,9 @@ fieldset input[type="radio"] {
   color: #008000; }
 
 .huge-fonticon {
-  font-size: 30em;
-  text-align: center; }
+  font-size: 20em;
+  text-align: center;
+}
 
 /* BOOTSTRAP */
 .progress-bar {

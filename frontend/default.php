@@ -98,15 +98,16 @@
 
 				<div class="row row-content">
 					<div class="col-xs-12 col-sm-4">
-						I bin a geiler bock
+
 					</div>
 
 					<div class="col-xs-12 col-sm-4">
-						AU REVOIR!
+
 					</div>
 
 					<div class="col-xs-12 col-sm-4">
-						AU REVOIR!
+						Impressum <br />
+						Contact us <br />
 					</div>
 				</div>
 

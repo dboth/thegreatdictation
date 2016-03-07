@@ -170,6 +170,12 @@ select {
     }
 }
 
+fieldset {
+    input[type="radio"] {
+        margin-right: 10px;
+    }
+}
+
 /* ELEMENTS */
 
 .error-alert {

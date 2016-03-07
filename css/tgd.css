@@ -6720,6 +6720,9 @@ textarea {
 select option[disabled] {
   color: #eeeeee; }
 
+fieldset input[type="radio"] {
+  margin-right: 10px; }
+
 /* ELEMENTS */
 .error-alert {
   margin: 20px 15px; }

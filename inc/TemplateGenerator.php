@@ -115,6 +115,22 @@ class TemplateGenerator{
                     "template"=>"default.php"
                 );
 
+            case "survey":
+                return array(
+                    //inside a template all occurences of <tgd_varname> get replace by the value of vars[varname] in this array. do not use the variables "body" or "trans", as they are reserved.
+                    "vars" => array(
+                        "title"=>"The Great Dictation - Evaluation Survey",
+                        "header-title"=>"Sign In"
+                        ),
+                    "components" => array(
+                        "header-description" => "description.php",
+                        "citation" => "citations.php"
+                    ),
+                    //the page template (inside frontend/pages)
+                    "body"=>"evaluation_survey.php",
+                    "template"=>"default.php"
+                );
+
             default:
                 return array(
                     //inside a template all occurences of <tgd_varname> get replace by the value of vars[varname] in this array. do not use the variables "body" or "trans", as they are reserved.

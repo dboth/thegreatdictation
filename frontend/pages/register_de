@@ -1,0 +1,109 @@
+<div class="container">
+        <div class="row row-content">
+
+			<div class="row">
+				<div class="col-xs-12 text-center subtitle">
+					Bevor du mit den Diktaten anfängst
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-12 text-center title">
+					Erstelle deine Datensammlungs-ID
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-12 text-center subtitle">
+					Und stelle die Informationen bereit, die wir zum analysieren und optimieren brauchen
+				</div>
+			</div>
+
+			<form class="form-horizontal" id="register-form" action="#">
+				<div class="form-group row row-spacing-lg">
+					<label class="control-label col-xs-12 col-sm-3" for="reg-username">
+						Username
+					</label>
+					<div class="col-xs-12 col-sm-3">
+						<input type="text" id="reg-username" name="username" class="form-control" required />
+					</div>
+					<!--
+						<label class="control-label col-xs-12 col-sm-3">
+							Passwort
+						</label>
+						<div class="col-xs-12 col-sm-3">
+							<input type="text" class="form-control" />
+						</div>
+					-->
+				</div>
+
+				<div class="form-group row">
+					<label class="control-label col-xs-12 col-sm-3" for="reg-gender">
+						Geschlecht
+					</label>
+					<div class="col-xs-12 col-sm-3">
+						<select class="form-control selectpicker" name="gender" id="reg-gender" required>
+							<option value="m">männlich</option>
+							<option value="f">weiblich</option>
+						</select>
+					</div>
+
+					<label class="control-label col-xs-12 col-sm-3" for="reg-age">
+						Alter
+					</label>
+					<div class="col-xs-12 col-sm-3">
+						<input type="number" id="reg-age" name="age" class="form-control" step="1" value="0" min="0" required />
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label class="control-label col-xs-12 col-sm-3" for="reg-mother-tongue">
+						Muttersprache
+					</label>
+					<div class="col-xs-12 col-sm-3">
+						<select data-live-search="true" data-size="3" data-dropup-auto="false" class="form-control selectpicker" id="reg-mother-tongue" name="mother-tongue" required>
+							<tgd_langs>
+						</select>
+					</div>
+
+					<label class="control-label col-xs-12 col-sm-3" for="reg-learninglength">
+						Wie lange lernst du schon Deutsch?
+					</label>
+					<div class="col-xs-12 col-sm-3">
+						<select class="form-control selectpicker" name="learninglength" id="reg-learninglength" required>
+							<option value="a">erst angefangen</option>
+							<option value="b">ein paar Monate</option>
+							<option value="c">1 Jahr</option>
+							<option value="d">mehr als 1 Jahr</option>
+						</select>
+					</div>
+
+				</div>
+
+				<div class="form-group row">
+					<label class="control-label col-xs-10 col-sm-3" for="reg-german-country">
+						Ich lebe in einem deutschsprachigen Land
+					</label>
+					<div class="col-xs-2">
+						<input type="checkbox" id="reg-german-country" name="german-country" class="checkbox-inline" checked="false" />
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<div class="col-xs-12 col-sm-offset-3">
+						<button type="submit" class="btn btn-primary">Registrieren</button>
+					</div>
+				</div>
+
+			</form>
+
+			<div class="row">
+				<div class="col-xs-12">
+					<p class="info">Wir brauchen deine Daten, um die Ergebnisse deiner Diktate auszuwerten, damit wir unser System verbessern können. Deine Informationen werden für nichts anderes verwendet!</p>
+				</div>
+			</div>
+
+    	</div>
+</div>
+
+<script src="js/async_calls/login.js"></script>

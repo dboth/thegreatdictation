@@ -10,7 +10,7 @@
     <div class="row row-content">
 		<div class="col-xs-12">
 			<div class="row">
-				<div class="col-xs-12 text-center subtitle">
+				<div class="col-xs-12 text-center title-description">
 					Take a moment to
 				</div>
 			</div>
@@ -22,7 +22,7 @@
 			</div>
 
 			<div class="row">
-				<div class="col-xs-12 text-center subtitle">
+				<div class="col-xs-12 text-center title-description">
 					so we can improve it asap
 				</div>
 			</div>

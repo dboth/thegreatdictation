@@ -6742,6 +6742,10 @@ fieldset input[type="radio"] {
 
 .subtitle {
   color: #2a93cf;
+  font-size: 1.5em; }
+
+.title-description {
+  color: #2a93cf;
   font-size: 1.2em; }
 
 .info {
@@ -6753,6 +6757,24 @@ fieldset input[type="radio"] {
 
 .info-container {
   border: 0 solid #2a93cf; }
+
+.picture-description {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100%;
+  color: #19577a;
+  font-style: italic; }
+
+/* BOOTSTRAP */
+.progress-bar {
+  -webkit-transition: none !important;
+          transition: none !important; }
 
 .error-indication {
   font-size: 14pt;
@@ -6882,11 +6904,5 @@ fieldset input[type="radio"] {
   color: #008000; }
 
 .huge-fonticon {
-  font-size: 20em;
-  text-align: center;
-}
-
-/* BOOTSTRAP */
-.progress-bar {
-  -webkit-transition: none !important;
-  transition: none !important; }
+  font-size: 30em;
+  text-align: center; }

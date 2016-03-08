@@ -27,6 +27,7 @@ class TemplateGenerator{
     }
 
     protected function getPage(){
+        global $usersystem;
         //first page switcher only works with get.
         switch(@$_GET["p"]){
             //add other pages here. example.org/?p=pagename results in a switch here. "pagename" would be the case.
@@ -43,11 +44,10 @@ class TemplateGenerator{
                     "components" => array(
                         "header-description" => "description.php",
                         "citation" => "citations.php",
-                        "texts" => "dictation_texts.php",
-                        "simple_login" => "simple_login.php"
+                        "texts" => "dictation_texts.php"
                     ),
-                    "body"=>"dictation.html",
-                    "template"=>"default.html"
+                    "body"=>"dictation.php",
+                    "template"=>"default.php"
                 );
 
             case "getstarted":
@@ -63,7 +63,7 @@ class TemplateGenerator{
                     ),
                     //the page template (inside frontend/pages)
                     "body"=>"getstarted.html",
-                    "template"=>"default.html"
+                    "template"=>"default.php"
                 );
 
             case "why":
@@ -79,7 +79,7 @@ class TemplateGenerator{
                     ),
                     //the page template (inside frontend/pages)
                     "body"=>"why.html",
-                    "template"=>"default.html"
+                    "template"=>"default.php"
                 );
 
 			case "aboutus":
@@ -95,8 +95,42 @@ class TemplateGenerator{
                     ),
                     //the page template (inside frontend/pages)
                     "body"=>"aboutus.html",
-                    "template"=>"default.html"
+                    "template"=>"default.php"
                 );
+
+            case "register":
+                return array(
+                    //inside a template all occurences of <tgd_varname> get replace by the value of vars[varname] in this array. do not use the variables "body" or "trans", as they are reserved.
+                    "vars" => array(
+                        "title"=>"The Great Dictation - Sign In",
+                        "header-title"=>"Sign In"
+                        ),
+                    "components" => array(
+                        "header-description" => "description.php",
+                        "citation" => "citations.php",
+                        "langs" => "language_options.php"
+                    ),
+                    //the page template (inside frontend/pages)
+                    "body"=>"register.html",
+                    "template"=>"default.php"
+                );
+
+            case "survey":
+                return array(
+                    //inside a template all occurences of <tgd_varname> get replace by the value of vars[varname] in this array. do not use the variables "body" or "trans", as they are reserved.
+                    "vars" => array(
+                        "title"=>"The Great Dictation - Evaluation Survey",
+                        "header-title"=>"Sign In"
+                        ),
+                    "components" => array(
+                        "header-description" => "description.php",
+                        "citation" => "citations.php"
+                    ),
+                    //the page template (inside frontend/pages)
+                    "body"=>"evaluation_survey.php",
+                    "template"=>"default.php"
+                );
+
             default:
                 return array(
                     //inside a template all occurences of <tgd_varname> get replace by the value of vars[varname] in this array. do not use the variables "body" or "trans", as they are reserved.
@@ -111,7 +145,7 @@ class TemplateGenerator{
                     ),
                     //the page template (inside frontend/pages)
                     "body"=>"home.html",
-                    "template"=>"default.html"
+                    "template"=>"default.php"
                 );
         }
     }
@@ -119,17 +153,19 @@ class TemplateGenerator{
         echo $this->pageMarkup;
     }
     protected function applyTemplate($page){
+        global $usersystem;
         //applies the base template
         if (file_exists($GLOBALS["conf"]["base_path"]."/frontend/".$page["template"])){
         ob_start();
             require $GLOBALS["conf"]["base_path"]."/frontend/".$page["template"];
         $this->pageMarkup = ob_get_clean();
         } else {
-            $this->errors->log("b_page_not_found", $page["body"]);
+            $this->errors->log("b_page_not_found", $page["template"]);
             return "ERROR: Content couldnt be found";
         }
     }
     protected function applyPage($page){
+        global $usersystem;
         //applies the page template
         if (file_exists($GLOBALS["conf"]["base_path"]."/frontend/pages/".$page["body"])){
         ob_start();
@@ -175,6 +211,7 @@ class TemplateGenerator{
     }
 
     protected function getComponents($path){
+        global $usersystem;
         if (file_exists($GLOBALS["conf"]["base_path"]."/frontend/components/".$path)){
             // Opens and runs php file and returns output
             ob_start();

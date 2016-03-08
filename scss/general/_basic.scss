@@ -73,8 +73,12 @@ body {
     @include row-margin;
 }
 
-.col-content {
-    @include col-margin;
+.row-spacing {
+    margin-top: $tgd-vertical-gap;
+}
+
+.row-spacing-lg {
+    margin-top: 2*$tgd-vertical-gap;
 }
 
 /* NAVIGATION */
@@ -82,6 +86,8 @@ body {
 .navbar {
     border-bottom: 1px solid $tgd-primary-color;
     font-size: 14px;
+    // fix chrome fixed navbar bug
+    -webkit-transform: translateZ(0);
 
     .navbar-brand {
         color: darken($tgd-navfont-color, 15);
@@ -164,6 +170,12 @@ select {
     }
 }
 
+fieldset {
+    input[type="radio"] {
+        margin-right: 10px;
+    }
+}
+
 /* ELEMENTS */
 
 .error-alert {
@@ -181,12 +193,20 @@ select {
     }
 }
 
+.title {
+    color: $tgd-primary-color;
+    font-size: $tgd-font-size-title;
+    font-weight: normal;
+}
+
 .subtitle {
     color: $tgd-primary-color;
     font-size: $tgd-font-size-subtitle;
-    font-weight: bold;
-    margin-top: 20px;
-    margin-bottom: 20px;
+}
+
+.title-description {
+    color: $tgd-primary-color;
+    font-size: $tgd-font-size-description;
 }
 
 .info {
@@ -200,196 +220,18 @@ select {
     //padding: $tgd-default-padding;
 }
 
-#error-indication {
-    font-size: 14pt;
-    overflow: auto;
+.picture-description {
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
+    height: 100%;
+    color: $tgd-secondary-color;
+    font-style: italic;
+    
 }
 
 
-// LEVENSHTEIN
+/* BOOTSTRAP */
 
-.error-container {
-    margin: 3px;
-    text-align: center;
-    vertical-align: top;
-
-    &.no-margin {
-        margin: 3px 0;
-    }
-
-    .arrow {
-        padding: 3px 5px;
-        display: block;
-        border-radius: 10px;
-        margin: 0 auto;
-    }
-
-    .target {
-        padding: 3px 5px;
-        display: block;
-        border-radius: 10px;
-        margin: 0 auto;
-    }
-
-    .input {
-        padding: 3px 5px;
-        display: block;
-        border-radius: 10px;
-        margin: 0 auto;
-
-        &.match {
-            padding: 3px 0;
-        }
-
-        &.substitution {
-            background-color: $tgd-sub-color;
-            color: $tgd-font-contrast-color;
-        }
-
-        &.deletion {
-            background-color: $tgd-deletion-color;
-            color: $tgd-font-contrast-color;
-        }
-
-        &.insertion {
-            background-color: $tgd-insert-color;
-            color: $tgd-font-contrast-color;
-        }
-
-        &.capitalization {
-            background-color: $tgd-capitalization-color;
-            color: $tgd-font-contrast-color;
-        }
-
-        &.punctuation {
-            background-color: $tgd-punctuation-color;
-            color: $tgd-font-contrast-color;
-        }
-
-        &.switch {
-            background-color: $tgd-switch-color;
-            color: $tgd-font-contrast-color;
-        }
-    }
-
-}
-
-.legend {
-    .element {
-        display: inline-block;
-        border-radius: 6px;
-        padding: 2px 6px;
-        margin: 3px 0 3px 5px;
-        border: 1px solid transparent;
-
-        //CHARACTERWISE
-        &.substitution {
-            background-color: $tgd-sub-color;
-            color: $tgd-font-contrast-color;
-        }
-
-        &.deletion {
-            background-color: $tgd-deletion-color;
-            color: $tgd-font-contrast-color;
-        }
-
-        &.insertion {
-            background-color: $tgd-insert-color;
-            color: $tgd-font-contrast-color;
-        }
-
-        &.capitalization {
-            background-color: $tgd-capitalization-color;
-            color: $tgd-font-color;
-        }
-
-        &.punctuation {
-            background-color: $tgd-punctuation-color;
-            color: $tgd-font-color;
-        }
-
-        &.switch {
-            background-color: $tgd-switch-color;
-            color: $tgd-font-contrast-color;
-        }
-
-        //WORDWISE
-        &.missing-word {
-            border: 2px solid $tgd-missing-word-color;
-            color: $tgd-missing-word-color;
-        }
-
-        &.wrong {
-            background-color: $tgd-wrong-color;
-            color: $tgd-font-contrast-color;
-            //border-color: darken($tgd-wrong-color, 30);
-            //@include box-shadow(0 0 2px #858585);
-        }
-
-        &.minor-mistake {
-            background-color: $tgd-minor-mistake-color;
-            color: $tgd-font-contrast-color;
-            //border-color: $tgd-minor-mistake-color;
-        }
-
-        &.correct {
-            background-color: none;
-            border: 0;
-        }
-    }
-}
-
-// WORDALIGNMENT
-.spelling {
-    float: left;
-    border-radius: 6px;
-    padding: 2px 6px;
-    margin: 3px 0 3px 5px;
-    border: 1px solid transparent;
-
-    &.missing-word {
-        border: 2px solid $tgd-missing-word-color;
-        color: $tgd-missing-word-color;
-    }
-
-    &.wrong {
-        background-color: $tgd-wrong-color;
-        color: $tgd-font-contrast-color;
-        //border-color: darken($tgd-wrong-color, 30);
-        //@include box-shadow(0 0 2px #858585);
-    }
-
-    &.minor-mistake {
-        background-color: $tgd-minor-mistake-color;
-        color: $tgd-font-contrast-color;
-        //border-color: $tgd-minor-mistake-color;
-    }
-
-    &.correct {
-        background-color: none;
-        border: 0;
-    }
-}
-
-// SCORE
-#score-info {
-
-    .score {
-        font-weight: bold;
-        font-size: 2em;
-        color: $tgd-score-color;
-    }
-
-    .ratio {
-        font-weight: bold;
-        font-size: 2em;
-        color: $tgd-ratio-color;
-    }
-}
-
-.huge-fonticon {
-    font-size: 30em;
-    text-align: center;
+.progress-bar {
+    transition: none !important;
 }

@@ -1,10 +1,27 @@
+<?php
+    $user = $usersystem->getUserInformation("username");
+    if (!$user) {
+        header('Location: ?p=register');
+        exit;
+    }
+?>
+
 <div class="container">
+
     <div class="row row-content">
 
         <div class="col-xs-12 text-center analysis-swapper">
             <a class="active" id="dict-switch">Dictation</a> / <a id="res-switch">Result</a>
         </div>
 
+    </div>
+</div>
+
+<div class="container" id="loading-container">
+    <div class="row row-content">
+        <div class="col-xs-12" id="loading-bar">
+
+        </div>
     </div>
 </div>
 
@@ -22,18 +39,18 @@
 
         <div class="row row-content">
 
-            <label for="dictation-id" class="control-label col-xs-3 col-sm-1 col-content">Choose</label>
-            <div class="col-xs-9 col-sm-3 col-content">
+            <label for="dictation-id" class="control-label col-xs-3 col-sm-1 ">Choose</label>
+            <div class="col-xs-9 col-sm-3 ">
                 <select class="form-control" id="dictation-id" name="subject">
                     <tgd_texts>
                 </select>
             </div>
 
-            <div class="col-xs-12 col-sm-2 text-center col-content">
+            <div class="col-xs-12 col-sm-2 text-center ">
                 <button class="btn btn-primary" id="select-text-button">Select this text</button>
             </div>
 
-            <div class="col-xs-12 col-sm-6 col-content text-right" id="audio-player">
+            <div class="col-xs-12 col-sm-6  text-right" id="audio-player">
 
             </div>
 
@@ -59,16 +76,17 @@
 </div>
 
 <div class="container" id="analysis-container" hidden>
-    <div class="row row-content">
-        <div class="text-center page-header">
-            <h3>Your Results</h3>
+
+    <div class="row row-spacing text-center">
+        <div class="col-xs-12">
+            <a role="button" class="btn btn-primary" href="?p=dictation">Start a new dictation</a>
         </div>
     </div>
 
     <div class="row row-content" id="input-info">
         <div class="col-xs-12">
             <div class="subtitle">What you've entered</div>
-            <div class="info-container" id="error-indication">
+            <div class="info-container error-indication" id="input-info-container">
             </div>
         </div>
     </div>
@@ -92,10 +110,9 @@
     <div class="row row-content">
         <div class="col-xs-12 col-sm-8">
             <div class="subtitle">Error Distribution (Character-wise)</div>
-            <div class="ct-chart ct-minor-seventh" id="error-distribution-chart">
+            <div class="ct-chart ct-minor-seventh" id="error-distribution-chart"></div>
 
-            </div>
-            <div class="row row-content" id="charwise-legend">
+            <div class="row" id="charwise-legend">
                 <div class="col-xs-12 text-center">
                     <div class="legend">
                         <div class="element substitution">
@@ -119,6 +136,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
 
         <div class="col-xs-12 col-sm-4">
@@ -139,12 +157,14 @@
     </div>
 
     <div class="row row-content">
-        <div class="subtitle">Performance over time (word-wise)</div>
-        <div class="col-xs-12" id="performance-over-time-chart">
-
-        </div>
+        <div class="col-xs-12 subtitle">Detailed word by word error info</div>
+        <div class="col-xs-12" id="wordwise-error-info"></div>
     </div>
 
+    <div class="row row-content">
+        <div class="col-xs-12 subtitle">Performance over time (word-wise)</div>
+        <div class="col-xs-12 ct-chart" id="performance-over-time-chart"></div>
+    </div>
 </div>
 
 <script src="js/result_generation/result_components.js"></script>

@@ -88,19 +88,40 @@ class AlignmentPostProcessor():
     def calcScore(self):
         error_weight = 0
         all_errors = 0
+        error_occ = 0   #wrong words
         correct_words = 0
         words = len(self.output_dict)
         for key in self.output_dict:
             error_weight = self.output_dict[key][5]
+            print(error_weight)
             if error_weight != 0:
+                error_occ += 1
                 all_errors += error_weight
             else:
                 correct_words += 1
-        score = round((words/(all_errors+1))*100)
-        #print(score,wrong_words,words)
+        #neg_score = (error_occ/float(words))*100
+        neg_score = (all_errors/float(words))
+        if neg_score == 0:
+            score = "Infinity"#oder perfect oder was auch immer
+        else:
+            score = (1/neg_score)  *10 # percent of rightness
+        #
+        #1 >=95 A
+        #1.3 >=90 A
+        #1.7 >=85 B
+        #2.0 >= 80 B
+        #2.3 >=75 C
+        #2.7 >=70 C
+        #3.0 >=65 D
+        #3.3 >=60 D
+        #3.7>=55 E
+        #4.0 >=50 E
+        #5.0 <=50 F like FAIL
+
         return score, correct_words, words
 
 if __name__ == "__main__":
-    a = Aligner.Aligner(u"ich bin ein muh", u"das ist eine bin muuh")
+    a = Aligner.Aligner(u"Ich bin ein Elefant hallo.", u"Ich ein bin Elefgdterdztfztfzant hallo.")
     app = AlignmentPostProcessor(a.finalize(), a.target, a.input, 1)
     print(app.convertToWordAlignment())
+    print(app.calcScore())

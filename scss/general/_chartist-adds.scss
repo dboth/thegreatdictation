@@ -28,6 +28,11 @@
 	fill: $tgd-switch-color;
 }
 
+.error-distr-word-switch {
+	stroke: lighten($tgd-switch-color, 20);
+	fill: lighten($tgd-switch-color, 20);
+}
+
 .error-distr-punctuation {
 	stroke: $tgd-punctuation-color;
 	fill: $tgd-punctuation-color;
@@ -36,4 +41,9 @@
 .error-distr-sub {
 	stroke: $tgd-sub-color;
 	fill: $tgd-sub-color;
+}
+
+.error-distr-similar-punctuation {
+	stroke: lighten($tgd-punctuation-color, 15);
+	fill: lighten($tgd-punctuation-color, 15);
 }

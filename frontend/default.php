@@ -1,3 +1,7 @@
+<?php
+	$user = $usersystem->getUserInformation("username");
+?>
+
 <!doctype html>
 <html lang="de">
 
@@ -15,13 +19,13 @@
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/libs/tinycolor/tinycolor.js"></script>
 	<script src="js/libs/chartist.js"></script>
+	<script src="js/libs/bootstrap-select.js"></script>
 
 	<script src="js/error_handler.js"></script>
 	<script src="js/functions.js"></script>
 </head>
 
 <body>
-
     <!-- BEGIN: NAVIGATION BAR -->
 		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 			<div class="container">
@@ -46,10 +50,18 @@
                     </ul>
 
 					<ul class="nav navbar-nav navbar-right">
-						<li><a data-toggle="modal" href="#login-modal"><i class="fa fa-user"></i> Register or Log In</a></li>
+						<?php
+
+						if (!$user) {
+							echo '<li><a data-toggle="modal" href="#login-modal"><i class="fa fa-sign-in"></i> Register or Log In</a></li>';
+						} else {
+							echo '<li><a href="#"><i class="fa fa-user"></i> '.$user.'</a></li>';
+							echo '<li><a href="?logout"><i class="fa fa-sign-out"></i> Log Out</a></li>';
+						}
+						?>
 						<li><a data-toggle="modal" href="#feedback-modal"><i class="fa fa-comment"></i> Send Feedback</a></li>
 						<li><a href="?P=faq"><i class="fa fa-question-circle"></i> FAQ</a></li>
-                    </ul>
+					</ul>
 				</div>
 
 			</div>
@@ -86,15 +98,16 @@
 
 				<div class="row row-content">
 					<div class="col-xs-12 col-sm-4">
-						I bin a geiler bock
+
 					</div>
 
 					<div class="col-xs-12 col-sm-4">
-						AU REVOIR!
+
 					</div>
 
 					<div class="col-xs-12 col-sm-4">
-						AU REVOIR!
+						Impressum <br />
+						Contact us <br />
 					</div>
 				</div>
 

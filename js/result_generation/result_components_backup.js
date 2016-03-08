@@ -16,7 +16,7 @@ function Result (analysis) {
 
 // PREPROCESSORS
 
-Result.prototype.getPathInfoByInputIndex = function (index) {
+Result.prototype.getPathInfoByInputIndex = function (input) {
 
 	/**
 		returns the equivalent information for a given input index in the levenshtein path
@@ -25,38 +25,22 @@ Result.prototype.getPathInfoByInputIndex = function (index) {
 	var lev = this.levenshtein, out = [];
 	for (var step = 0; step < lev.length; step++) {
 		var path_pos = lev[step];
-		if (path_pos[2][1] === index) {
+		if (path_pos[2][1] === input) {
 			out.push(path_pos[2]);
 		}
 	}
 	return out;
 };
 
-Result.prototype.getPathInfoByTargetIndex = function (index) {
-
-	/**
-		returns the equivalent information for a given target index in the levenshtein path
-	**/
-
-	var lev = this.levenshtein, out = [];
-	for (var step = 0; step < lev.length; step++) {
-		var path_pos = lev[step];
-		if (path_pos[2][0] === index) {
-			out.push(path_pos[2]);
-		}
-	}
-	return out;
-};
-
-Result.prototype.styleSingleLetterWithLevenshtein = function (target_index) {
+Result.prototype.styleSingleLetterWithLevenshtein = function (input_index) {
 
 	/*
 		Creates a container with the info about the mistake at a given input position
 	 */
 
-	console.log("INPUT INDEX: ", target_index);
+	console.log("INPUT INDEX: ", input_index);
 
-	var concerned_inputs = this.getPathInfoByTargetIndex(target_index);
+	var concerned_inputs = this.getPathInfoByInputIndex(input_index);
 	var list_of_containers = [];
 
 	console.log("CONCERNED INPUTS: ", concerned_inputs);
@@ -64,7 +48,7 @@ Result.prototype.styleSingleLetterWithLevenshtein = function (target_index) {
 	for (var single_input in concerned_inputs) {
 
 		var char_info = concerned_inputs[single_input];
-		var input_pos = char_info[1];
+		var input_pos = input_index;
 		var target_pos = char_info[0];
 		var errortype = char_info[3];
 
@@ -330,11 +314,8 @@ Result.prototype.createMistakeDistributionInfo = function (target_id, type) {
 		return curr[2][3];
 	});
 
-	var error_count_map = countArrayDuplicates(all_errors);
-	console.log(error_count_map);
-	delete error_count_map["M"];
-	delete error_count_map["M+"];
-	delete error_count_map["+M"];
+	var errorCountMap = countArrayDuplicates(all_errors);
+	// delete errorCountMap.M;
 
 	// chart data and options
 	var data = {
@@ -348,38 +329,25 @@ Result.prototype.createMistakeDistributionInfo = function (target_id, type) {
 
 	var bar_options = {
 		distributeSeries: true,
-		onlyInteger: true
 	};
 
 	// map with errorshortcut mapping to className and label
 	var error_type_map = {
 		"M": ["error-distr-match", "correct"],
-		"+M": ["error-distr-match", "correct"],
-		"M+": ["error-distr-match", "correct"],
 		"D": ["error-distr-deletion", "waste"],
 		"I": ["error-distr-insert", "missing"],
 		"S": ["error-distr-sub", "wrong"],
 		"switch": ["error-distr-switch", "switched"],
-
 		"capitals": ["error-distr-capitalization", "capitalization"],
-		"caveat_capitalization": ["error-distr-capitalization", "capitalization"],
-
-		"punct": ["error-distr-punctuation", "punctuation"],
-		"sim_punct": ["error-distr-similar-punctuation", "similar punctuation"],
-
-		"word_switch": ["error-distr-word-switch", "word switch"] // !
+		"punctuation": ["error-distr-punctuation", "punctuation"]
 	};
 
 	// fill data
-	var char_count = 0;
-	for (var el in error_count_map) {
-		char_count += error_count_map[el];
-	}
-
-	for (var error in error_count_map) {
+	var char_count = this.levenshtein.length;
+	for (var error in errorCountMap) {
 		data["labels"].push(error_type_map[error][1]);
 		data["series"].push({
-			value: (type === "pie") ? ((error_count_map[error] / char_count) * 100) : error_count_map[error],
+			value: (errorCountMap[error] / char_count) * 100,
 			className: error_type_map[error][0]
 		});
 	}
@@ -471,13 +439,12 @@ Result.prototype.createWordwiseErrorInfo = function (target_id) {
  			var info_spelling = $("<div>").addClass('col-xs-7 error-indication');
 
 			//fill content
-			info_word.html(target_word);
-			info_pointer.html("------>");
-			for (var char = 0; char <= target_word.length; char++) {
+			info_word.html(input_word);
+			info_pointer.html("-->");
+			for (var char = 0; char <= input_word.length; char++) {
 				console.log("-----\nWORD: ", word, " CHAR: ", char);
-				var containers = this.styleSingleLetterWithLevenshtein(parseInt(word) + char);
+				var containers = this.styleSingleLetterWithLevenshtein(parseInt(word_info[3]) + char);
 				console.log("CONTAINERS: ", containers);
-				for (var c in containers) {
 					info_spelling.append(containers[c]);
 				}
 			}
@@ -520,18 +487,16 @@ Result.prototype.createOverallScoreInfo = function (target_id) {
 
 	var ratio_display = $(target_id+" .ratio").html(correct_words + "/" + total_words);
 	var score_display = $(target_id+" .score").html("0");
+	console.log("-------------------SCORE--------------------: "score);
 
-	console.log("SCORE_--------------------  ", score);
 	var time = 100;
 	function add() {
 		if (cur_score < score) {
-			console.log("CUR: ", cur_score);
 			if (cur_score >= 100 && score === Infinity) {
 				score_display.html(score);
 				clearInterval(score_int);
 			} else {
 				cur_score += 0.1;
-				cur_score = Math.round(cur_score *10)/10;
 				score_display.html(Math.round(cur_score*100)/100);
 				clearInterval(score_int);
 				time--;

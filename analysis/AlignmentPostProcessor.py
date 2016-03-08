@@ -73,14 +73,6 @@ class AlignmentPostProcessor():
                     
         #last word
         self.output_dict[start_process[2][0]] = [self.alignment[-1][0]-1, self.target[start_process[2][0]:self.alignment[-1][0]], self.input[start_process[2][1]:self.alignment[-1][1]], start_process[2][1], self.alignment[-1][1]-1, word_fault_sum, None]
-
-
-        for wordswitch in word_switches:
-            for word in self.output_dict:
-                if wordswitch[0] == word: #look for start of first switched word
-                    self.output_dict[word][-1] = wordswitch[1]
-                if wordswitch[1] == word:
-                    self.output_dict[word][-1] = wordswitch[0]
         
         return self.output_dict
    

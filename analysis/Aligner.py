@@ -5,11 +5,15 @@ from collections import namedtuple
 import frames
 import faultPenalizer
 
+#alle ausgaben von input_str nach target_str. also z.b. target_str: "d", input_str: "da" -> deletion
+#punct_fault has to be smaller than deletion, insertion and substitution - else it will not be considered
+#sim_punct has to be smaller than punct -> else not considered
+
 """
 @param
 """
 class Aligner(object):
-    def __init__(self, target_str, input_str, match=0, sub=1.8, insert=1, delete=1, switch=1, capitals=0.5, sim_punct=0.2, punct=0.5, plusM=0.9, umlauts=0, word_switch=0.1, punct_capitalize=0.2, ws_penalty=0.2, switcher=False, switch_punct=False, switched_sentence_start=False):
+    def __init__(self, target_str, input_str, match=0, sub=1.8, insert=1, delete=1, switch=1, capitals=0.5, sim_punct=0.2, punct=0.5, punct_fault = 0.9, plusM=0.9, umlauts=0, word_switch=0.1, punct_capitalize=0.2, ws_penalty=0.2, switcher=False, switch_punct=False, switched_sentence_start=False):
         #DEBUGGER DONT TOUCH
         self.d = frames.Debugger()
         self.debug = self.d.debug
@@ -27,6 +31,7 @@ class Aligner(object):
         self.capitals = capitals
         self.sim_punct = sim_punct
         self.punct = punct
+        self.punct_fault = punct_fault
         self.plusM = plusM
         self.umlauts = umlauts
         self.word_switch = word_switch
@@ -41,7 +46,7 @@ class Aligner(object):
         #BAGS
         self.sim_punct_bag = [".", "!", ";", ":"]
         self.punct_bag = [".", ":", ",", ";", "!", "?"]
-        self.umlaut_bag = {unicode(u"Ä"): "Ae", unicode(u"Ö"): "Oe", unicode(u"Ü"): "Ue", unicode(u"ä"): "ae", unicode(u"ö"): "oe", unicode(u"ü"): "ue"}
+        self.umlaut_bag = {unicode(u"Ä"): "Ae", unicode(u"Ö"): "Oe", unicode(u"Ü"): "Ue", unicode(u"ä"): "ae", unicode(u"ö"): "oe", unicode(u"ü"): "ue", unicode(u"ß"): "ss"}
         self.capitalizer_bag = [".", "!", "?"]
         self.switched_words_bag = {}
 
@@ -50,16 +55,16 @@ class Aligner(object):
         self.matrix_field = namedtuple("Field", ["target", "input", "cost", "op"])
         self.path = []
 
-    def initializeMatrix(self): #matrix[target][input]
+    def initializeMatrix(self): #matrix[target][input]  creates an empty matrix without paths
         self.matrix = [[[] for x in range(len(self.input)+1)] for x in range(len(self.target)+1)]
 
-    def calculateMatrix(self):
+    def calculateMatrix(self): #this is done AFTER all processes are calculated and their subpaths are put into the matrix. this is where all possible paths through the matrix are created
         for row in range(len(self.target)+1):  #in this loop, we calculate field x,y of the matrix
             for col in range(len(self.input)+1):
                 if row==0 and col==0:
                     self.matrix[0][0] = self.matrix_field(0, 0, 0, "Start")
                 else:
-                    poss = []  #contains all possible lists for each starting field from where this target field can be accessed
+                    poss = []  #is filled with all possible lists for each starting field from where this target field can be accessed
                     ad = []
 
                     for option in range(len(self.matrix[row][col])):  #only triggers if additional entries exist in the field
@@ -96,14 +101,14 @@ class Aligner(object):
                         if self.switched_sentence_start == False:
                             self.matrix[target_iter+1][input_iter+1].append(self.matrix_field(target_iter, input_iter, self.capitals, "capitals"))
         if self.switched_sentence_start == True: #only triggers if the start of a sentence is switched. the algorithm can't know if for example in switched words "Peter walks" and "Walks Peter" the "Peter" has to be written with a capital letter
-            second_target_word_length = self.indexSplit(self.target)[1][1]
-            second_input_word_length = self.indexSplit(self.input)[1][1]
+            second_target_word_length = Aligner.indexSplit(self.target)[1][1]
+            second_input_word_length = Aligner.indexSplit(self.input)[1][1]
             if self.target[0].lower() == self.input[0].lower():
                 self.matrix[1][1].append(self.matrix_field(0, 0, -0.1, "caveat_capitalization"))
             if self.target[second_target_word_length].lower() == self.input[second_input_word_length].lower():
                 self.matrix[second_target_word_length+1][second_input_word_length+1].append(self.matrix_field(second_target_word_length, second_input_word_length, -0.1, "caveat_capitalization"))
 
-    def applyPunctuation(self): #looks for punctuation errors. also checks if the punctuation is a possible substitution for the original, for example "." for "!"
+    def applyPunctToPunct(self): #checks if the punctuation is a possible substitution for the original, for example "." for "!"
         for target_iter in range(len(self.target)):
             if self.target[target_iter] in self.sim_punct_bag:			#look for similar punctuation
                 for input_iter in range(len(self.input)):
@@ -116,6 +121,18 @@ class Aligner(object):
                         if self.input[input_iter] in self.punct_bag:
                             self.matrix[target_iter+1][input_iter+1].append(self.matrix_field(target_iter, input_iter, self.punct, "punct"))
 
+    def applyFaultPunctuation(self): #adds insertion and deletion processes from or to a punctuation
+        for target_iter in range(len(self.target)):
+            if self.target[target_iter] in self.punct_bag:
+                for input_iter in range(len(self.input)):
+                    self.matrix[target_iter+1][input_iter+1].append(self.matrix_field(target_iter, input_iter+1, self.punct_fault, "punctfault")) #insertion
+                    self.matrix[target_iter+1][input_iter+1].append(self.matrix_field(target_iter, input_iter, self.punct_fault, "punctfault")) #substitution
+        for input_iter in range(len(self.input)):
+            if self.input[input_iter] in self.punct_bag:
+                for target_iter in range(len(self.target)):
+                    self.matrix[target_iter+1][input_iter+1].append(self.matrix_field(target_iter+1, input_iter, self.punct_fault, "punctfault")) #deletion
+                    self.matrix[target_iter+1][input_iter+1].append(self.matrix_field(target_iter, input_iter, self.punct_fault, "punctfault")) #substitution
+    
     def applyPlusM(self): #change input string in the fewest possible number of words (elephant problem) by looking for matches directly after spaces and giving the combination a better score
         for i in range(1,len(self.target)):  #looks for spaces in self.target
             if self.target[i] == " ":
@@ -138,6 +155,7 @@ class Aligner(object):
                     if self.input[input_iter-1] == " " & self.target[target_iter+2].lower() == self.input[input_iter]:
                         self.matrix[target_iter+2][input_iter].append([target_iter+3, input_iter+1, self.punct_capitalization, "punct_capitalization"])
 
+    #umlauts like "ä" and "ß" may be substituted by "ae" and "ss". that is an umlauts process
     def considerUmlauts(self):
         for i in range(len(self.target)):
             if self.target[i] in self.umlaut_bag:
@@ -145,7 +163,8 @@ class Aligner(object):
                     if self.input[j:j+2] == self.umlaut_bag[self.target[i]]:
                         self.matrix[i+1][j+2].append(self.matrix_field(i, j, self.umlauts, "umlauts"))
 
-    def indexSplit(self, input_string):  #neccessary for wordSwitch. splits words into [["word0", startIndex_of_word0, endIndex_of_word0],...]
+    @staticmethod
+    def indexSplit(input_string):  #neccessary for wordSwitch. splits words into [["word0", startIndex_of_word0, endIndex_of_word0],...]
         result = []
         counter = 0
         for letter_iter in range(len(input_string)):
@@ -159,8 +178,8 @@ class Aligner(object):
         return result
 
     def switchWords(self): #recognize switched words, even if there are further mistakes in them. switches input
-        input_words = self.indexSplit(self.input)
-        target_words = self.indexSplit(self.target)
+        input_words = Aligner.indexSplit(self.input)
+        target_words = Aligner.indexSplit(self.target)
 
         for input_iter in range(len(input_words)-1):
             for target_iter in range(len(target_words)-1):
@@ -175,16 +194,16 @@ class Aligner(object):
             self.matrix[target_words[1][2]][input_words[1][2]].append(self.matrix_field(target_words[0][1], input_words[0][1], switcher.path[0][2][2]+self.word_switch, "word_switch"))
             self.switched_words_bag[(target_words[1][2],input_words[1][2])] = switcher.path
 
-    def createPath(self): #create list of lists in the form [fin_target, fin_input, (start_target, start_input, process_value, process_type)]
+    def createPath(self): #create list of lists in the form [fin_target, fin_input, (start_target, start_input, process_value, process_type)]. here the best path through the matrix is found
         row = len(self.target)
         col = len(self.input)
         while row > 0 or col > 0:
             if self.matrix[row][col].op == "word_switch": #word switches need a special care. for example with target "hello you" and input "you hello", the switchedWords function treats the input like "hello you", so the coordinates in the switchedWords matrix are at the wrong places. so all the coordinates have to be recalculated here.
-                second_input_word_length = self.indexSplit(self.input[col-self.switched_words_bag[(row,col)][0][1]:col])[1][2]-self.indexSplit(self.input[col-self.switched_words_bag[(row,col)][0][1]:col])[1][1] #length of second word of switched words
+                second_input_word_length = Aligner.indexSplit(self.input[col-self.switched_words_bag[(row,col)][0][1]:col])[1][2]-Aligner.indexSplit(self.input[col-self.switched_words_bag[(row,col)][0][1]:col])[1][1] #length of second word of switched words
                 target_length = self.switched_words_bag[(row,col)][0][0]
                 input_length = self.switched_words_bag[(row,col)][0][1]
                 for process in self.switched_words_bag[(row, col)]:
-                    #unswitch words
+                    #unswitch switched words
                     if process[1]>second_input_word_length+1:   #second word to first word
                         self.path.append([row-target_length+process[0], col-input_length+process[1]-second_input_word_length-1, self.matrix_field(row-target_length+process[2][0], col-input_length+process[2][1]-second_input_word_length-1, process[2][2] , process[2][3])])
                     elif process[1]<second_input_word_length+1: #first word to second word
@@ -198,18 +217,29 @@ class Aligner(object):
                 raise NameError("Error in Aligner.createPath: new value for col larger than preceding value")
             row, col, _, _ = self.matrix[row][col]
 
+    def rebuildPlusM(self): #splits +M back into two normal processes
+        temp_path = []
+        for process in self.path:
+            if process[2][3] == "+M":
+                temp_path.append([process[0], process[1], self.matrix_field(process[2][0]+1, process[2][1], self.match, "M")])
+                temp_path.append([process[0]-1, process[1]-1, self.matrix_field(process[2][0], process[2][1], self.delete, "I")])
+            else:
+                temp_path.append(process)
+        self.path = temp_path
 
     def finalize(self):
         self.initializeMatrix()
         self.applySwitch()
         self.applyCapitals()
-        self.applyPunctuation()
+        self.applyPunctToPunct()
+        self.applyFaultPunctuation()
         self.applyPlusM()
         self.considerUmlauts()
         if self.switcher == False:
             self.switchWords()
         self.calculateMatrix()
         self.createPath()
+        self.rebuildPlusM()
         if self.switcher == False:
             p = faultPenalizer.FaultPenalizer(self.path)
             p.plugInFaultValues()

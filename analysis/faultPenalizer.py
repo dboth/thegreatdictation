@@ -2,7 +2,12 @@
 from collections import namedtuple
 
 class FaultPenalizer(object):
-    def __init__(self, path, M=0, S=1, I=1, D=1, switch=1, capitals=0, sim_punct=0.2, punct=0.5, plusM=1, umlauts=0, word_switch=1, caveat_capitalization=0):
+    def __init__(self, path, M=0, S=1, I=1, D=1, switch=1, capitals=0, sim_punct=0.2, punct=0.5, punctfault = 1, plusM=1, umlauts=0, word_switch=1, caveat_capitalization=0):
+        
+        #PATHS
+        self.path = path
+        self.final_path = []
+        
         #FAULTS
         self.M = M
         self.S = S
@@ -12,10 +17,9 @@ class FaultPenalizer(object):
         self.capitals = capitals
         self.sim_punct = sim_punct
         self.punct = punct
+        self.punctfault = punctfault
         self.plusM = plusM
         self.umlauts = umlauts
-        self.path = path
-        self.final_path = []
         self.word_switch = word_switch
         self.caveat_capitalization = caveat_capitalization
 		

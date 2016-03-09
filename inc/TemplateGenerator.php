@@ -102,8 +102,8 @@ class TemplateGenerator{
                 return array(
                     //inside a template all occurences of <tgd_varname> get replace by the value of vars[varname] in this array. do not use the variables "body" or "trans", as they are reserved.
                     "vars" => array(
-                        "title"=>"The Great Dictation - Sign In",
-                        "header-title"=>"Sign In"
+                        "title"=>"The Great Dictation - Register",
+                        "header-title"=>"Register"
                         ),
                     "components" => array(
                         "header-description" => "description.php",

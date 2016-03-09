@@ -6724,6 +6724,9 @@ fieldset input[type="radio"] {
   margin-right: 10px; }
 
 /* ELEMENTS */
+.obvious-link {
+  color: #19577a; }
+
 .error-alert {
   margin: 20px 15px; }
 

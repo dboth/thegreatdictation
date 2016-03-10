@@ -178,6 +178,10 @@ fieldset {
 
 /* ELEMENTS */
 
+.obvious-link {
+    color: $tgd-secondary-color;
+}
+
 .error-alert {
     margin: 20px 15px;
 }
@@ -226,7 +230,7 @@ fieldset {
     height: 100%;
     color: $tgd-secondary-color;
     font-style: italic;
-    
+
 }
 
 

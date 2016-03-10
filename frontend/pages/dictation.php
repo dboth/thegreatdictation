@@ -62,7 +62,9 @@
 
                 <div class="form-group">
                     <label for="data">What you understand</label>
-                    <textarea  class="form-control" rows="10" placeholder="Choose a text first!" id="dictation-text" name="data" disabled>Ich bin ein Elefant</textarea>
+                    <textarea  class="form-control" rows="10" placeholder="Choose a text first!" id="dictation-text" name="data" disabled>
+                        Liebe Tanja, kannewst du bitte einufen? Ich habe heute Nachmittag keine Zeit und ich möchte heute Abend kochen. I ch brauche noch Kartoffeln, Paprika, Tomaten und Zwiebeln. Für das Frühstück brauchen ffee, Tee, Brot, ButterMarmelade, Käse und Wurst. Kwe annst du auch Schokolade und Cola mitbringen? Vielen Dank! Liebe Grüße Mama
+                    </textarea>
                 </div>
 
                 <div class="text-center">
@@ -157,13 +159,31 @@
     </div>
 
     <div class="row row-content">
-        <div class="col-xs-12 subtitle">Detailed word by word error info</div>
-        <div class="col-xs-12" id="wordwise-error-info"></div>
+        <div class="col-xs-12">
+            <div class="row">
+                <div class="col-xs-12 subtitle">Detailed word by word error info</div>
+            </div>
+        </div>
+
+        <div class="col-xs-12">
+            <div class="row">
+                <div class="col-xs-12" id="wordwise-error-info"></div>
+            </div>
+        </div>
     </div>
 
     <div class="row row-content">
-        <div class="col-xs-12 subtitle">Performance over time (word-wise)</div>
-        <div class="col-xs-12 ct-chart" id="performance-over-time-chart"></div>
+        <div class="col-xs-12">
+            <div class="row">
+                <div class="col-xs-12 subtitle">Performance over time (word-wise)</div>
+            </div>
+        </div>
+
+        <div class="col-xs-12">
+            <div class="row">
+                <div class="col-xs-12 ct-chart" id="performance-over-time-chart"></div>
+            </div>
+        </div>
     </div>
 </div>
 

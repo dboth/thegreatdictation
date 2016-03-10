@@ -4,7 +4,6 @@
 
 <!doctype html>
 <html lang="de">
-
 <head>
 	<title><tgd_title></title>
 	<meta charset="utf-8" />
@@ -53,7 +52,7 @@
 						<?php
 
 						if (!$user) {
-							echo '<li><a data-toggle="modal" href="#login-modal"><i class="fa fa-sign-in"></i> Register or Log In</a></li>';
+							echo '<li><a data-toggle="modal" href="#login-modal"><i class="fa fa-sign-in"></i> Sign In</a></li>';
 						} else {
 							echo '<li><a href="#"><i class="fa fa-user"></i> '.$user.'</a></li>';
 							echo '<li><a href="?logout"><i class="fa fa-sign-out"></i> Log Out</a></li>';

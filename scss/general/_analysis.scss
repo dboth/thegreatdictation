@@ -1,0 +1,209 @@
+
+.error-indication {
+    font-size: 14pt;
+    overflow: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+// LEVENSHTEIN
+.error-container {
+    margin: 0 1px 2px 1px;
+    text-align: center;
+    vertical-align: top;
+
+    &.no-margin {
+        margin: 3px 0;
+    }
+
+    .target {
+        padding: 3px 5px;
+        display: block;
+        border-radius: 0 0 5px 5px;
+        margin: 0 auto;
+
+        font-size: .6em;
+        font-weight: bold;
+        color: $tgd-font-contrast-color;
+
+        background-color: $tgd-font-color;
+    }
+
+    .input {
+        padding: 3px 5px;
+        display: block;
+        border-radius: 5px 5px 0 0;
+        margin: 0 auto;
+
+        &.match {
+            padding: 3px 0;
+        }
+
+        &.substitution {
+            background-color: $tgd-sub-color;
+            color: $tgd-font-contrast-color;
+        }
+
+        &.deletion {
+            color: $tgd-deletion-color;
+            text-decoration: line-through;
+            padding: 3px 0;
+        }
+
+        &.insertion {
+            background-color: $tgd-insert-color;
+            color: $tgd-font-contrast-color;
+        }
+
+        &.capitalization {
+            background-color: $tgd-capitalization-color;
+            color: $tgd-font-contrast-color;
+        }
+
+        &.punctuation {
+            background-color: $tgd-punctuation-color;
+            color: $tgd-font-contrast-color;
+        }
+
+        &.switch {
+            background-color: $tgd-switch-color;
+            color: $tgd-font-contrast-color;
+        }
+    }
+
+}
+
+.legend {
+    margin-top: 10px;
+
+    .element {
+        display: inline-block;
+        border-radius: 6px;
+        padding: 2px 6px;
+        margin: 3px 0 3px 5px;
+        border: 1px solid transparent;
+
+        //CHARACTERWISE
+        &.substitution {
+            background-color: $tgd-sub-color;
+            color: $tgd-font-contrast-color;
+        }
+
+        &.deletion {
+            background-color: $tgd-deletion-color;
+            color: $tgd-font-contrast-color;
+        }
+
+        &.insertion {
+            background-color: $tgd-insert-color;
+            color: $tgd-font-contrast-color;
+        }
+
+        &.capitalization {
+            background-color: $tgd-capitalization-color;
+            color: $tgd-font-color;
+        }
+
+        &.punctuation {
+            background-color: $tgd-punctuation-color;
+            color: $tgd-font-color;
+        }
+
+        &.switch {
+            background-color: $tgd-switch-color;
+            color: $tgd-font-contrast-color;
+        }
+
+        //WORDWISE
+        &.missing-word {
+            border: 2px solid $tgd-missing-word-color;
+            color: $tgd-missing-word-color;
+        }
+
+        &.wrong {
+            background-color: $tgd-wrong-color;
+            color: $tgd-font-contrast-color;
+            //border-color: darken($tgd-wrong-color, 30);
+            //@include box-shadow(0 0 2px #858585);
+        }
+
+        &.minor-mistake {
+            background-color: $tgd-minor-mistake-color;
+            color: $tgd-font-contrast-color;
+            //border-color: $tgd-minor-mistake-color;
+        }
+
+        &.correct {
+            background-color: none;
+            border: 0;
+        }
+    }
+}
+
+// WORDALIGNMENT
+.alignment-word-container {
+    margin: 3px 0 3px 5px;
+    float: left;
+
+    .spelling {
+        border-radius: 6px;
+        padding: 2px 6px;
+        border: 1px solid transparent;
+        margin: auto;
+        text-align: center;
+
+        // ERROR info
+        &.missing-word {
+            border: 2px solid $tgd-missing-word-color;
+            color: $tgd-missing-word-color;
+        }
+
+        &.wrong {
+            background-color: $tgd-wrong-color;
+            color: $tgd-font-contrast-color;
+            //border-color: darken($tgd-wrong-color, 30);
+            //@include box-shadow(0 0 2px #858585);
+        }
+
+        &.minor-mistake {
+            background-color: $tgd-minor-mistake-color;
+            color: $tgd-font-contrast-color;
+            //border-color: $tgd-minor-mistake-color;
+        }
+
+        &.correct {
+            background-color: none;
+            border: 0;
+        }
+
+    }
+
+    //CORRECT Spelling info
+    .correct-spelling-info {
+        font-size: .6em;
+        text-align: center;
+        margin-top: 0;
+    }
+}
+
+// SCORE
+#score-info {
+
+    .score {
+        font-weight: bold;
+        font-size: 2em;
+        color: $tgd-score-color;
+    }
+
+    .ratio {
+        font-weight: bold;
+        font-size: 2em;
+        color: $tgd-ratio-color;
+    }
+}
+
+.huge-fonticon {
+    font-size: 30em;
+    text-align: center;
+}

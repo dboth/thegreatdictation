@@ -18,7 +18,7 @@ class Result():
 
         #received data
         self.input_data = self.normalizeInput(self.getValueFromJSON("input"))
-        self.target_data = self.getValueFromJSON("target")
+        self.target_data = self.normalizeInput(self.getValueFromJSON("target"))
         self.text_id = self.getValueFromJSON("text_id")
 
         #calculated data
@@ -96,6 +96,6 @@ class Result():
         return json.dumps([self.output_json])
 
 if __name__ == "__main__":
-    #tgd = Result('{"data":{"input":"Elefant","text_id":"1","target":"Testing a test"},"meta":{"username":false,"gender":false,"age":false,"mothertongue":false,"learninglength":false,"livingingerman":false}}')
+    #tgd = Result('{"data":{"input":"Hallo du","text_id":"1","target":"du Hallo"},"meta":{"username":false,"gender":false,"age":false,"mothertongue":false,"learninglength":false,"livingingerman":false}}')
     tgd = Result(sys.argv[1])
     print(tgd.returnJSON())

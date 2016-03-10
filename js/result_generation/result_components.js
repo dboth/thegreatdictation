@@ -54,12 +54,8 @@ Result.prototype.styleSingleLetterWithLevenshtein = function (target_index) {
 		Creates a container with the info about the mistake at a given input position
 	 */
 
-	console.log("INPUT INDEX: ", target_index);
-
 	var concerned_inputs = this.getPathInfoByTargetIndex(target_index);
 	var list_of_containers = [];
-
-	console.log("CONCERNED INPUTS: ", concerned_inputs);
 
 	for (var single_input in concerned_inputs) {
 
@@ -68,8 +64,6 @@ Result.prototype.styleSingleLetterWithLevenshtein = function (target_index) {
 		var target_pos = char_info[0];
 		var errortype = char_info[3];
 
-		console.log("CHARINFO: ", char_info);
-
 		var container = $("<div>");
 		container.addClass("error-container");
 
@@ -77,25 +71,11 @@ Result.prototype.styleSingleLetterWithLevenshtein = function (target_index) {
 		input.addClass("input").html("&nbsp");
 
 		var target = $("<span>");
-		target.addClass("target").html("&nbsp");
+		target.addClass("target");
 
 		var add_space_necessary = false;
 
-		// console.log(input_pos + "|" + this.input[input_pos]);
-
 		if (errortype === "M") {
-			container.addClass("no-margin");
-			input.addClass("match")
-				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
-		} else if (errortype === "M+") {
-			add_space_necessary = true;
-			container.addClass("no-margin");
-			input.addClass("match")
-				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
-		} else if (errortype === "+M") {
-			var add_space = $("<div>").addClass("error-container").html("&nbsp");
-			list_of_containers.push(add_space);
-
 			container.addClass("no-margin");
 			input.addClass("match")
 				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
@@ -105,16 +85,15 @@ Result.prototype.styleSingleLetterWithLevenshtein = function (target_index) {
 			target.addClass("insertion")
 				.html(this.target[target_pos].replace(/\s/g, "&nbsp"));
 		} else if (errortype === "D") {
+			container.addClass('no-margin')
 			input.addClass("deletion")
 				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
-			target.addClass("deletion")
-				.html("&nbsp;");
 		} else if (errortype === "S") {
 			input.addClass("substitution")
 				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
 			target.addClass("substitution")
 				.html(this.target[target_pos].replace(/\s/g, "&nbsp"));
-		} else if (errortype === "capitalization") {
+		} else if (errortype === "capitals" || errortype === "caveat_capitalization") {
 			input.addClass("capitalization")
 				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
 			target.addClass("capitalization")
@@ -124,7 +103,8 @@ Result.prototype.styleSingleLetterWithLevenshtein = function (target_index) {
 				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
 			target.addClass("switch")
 				.html(this.target[target_pos].replace(/\s/g, "&nbsp"));
-		} else if (errortype === "punctuation") {
+		} else if (errortype === "punctuation" || errortype === "punctfault" || errortype === "sim_punct") {
+			console.log("LENGTH: " + this.input.length + "; POS: " + input_pos);
 			input.addClass("punctuation")
 				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
 			target.addClass("punctuation")
@@ -132,12 +112,9 @@ Result.prototype.styleSingleLetterWithLevenshtein = function (target_index) {
 		}
 
 		container.append(input);
-		if (errortype !== "M" && errortype !== "D" && errortype !== "M+" && errortype !== "+M") {
-			var arrow = $("<i>").addClass("fa fa-long-arrow-down arrow");
-			container.append(arrow);
+		if (target.html()) {
+			container.append(target);
 		}
-
-		container.append(target);
 
 		list_of_containers.push(container);
 
@@ -162,100 +139,6 @@ Result.prototype.createHeader = function (target_id) {
     var text_id = $("<small>");
     text_id.html("<br>For Text " + this.text_id); //actually want to look up real name from DB
     header.find("h3").append(text_id);
-};
-
-Result.prototype.createLevenshteinDiffInfo = function (target_id) {
-
-	/*
-		creates an untokenized char-by-char visual representation of the levenshtein path
-	*/
-
-	var lev = this.levenshtein;
-
-	var parent = $(target_id);
-
-	for (var step = 0; step < lev.length; step++){
-		var position = lev[step][2];
-		var input_pos = position[1];
-		var target_pos = position[0];
-		var errortype = position[3];
-
-		var container = $("<div>");
-		container.addClass("error-container");
-
-		var input = $("<span>");
-		input.addClass("input").html("&nbsp");
-
-		var target = $("<span>");
-		target.addClass("target").html("&nbsp");
-
-		var add_space_necessary = false;
-
-		// console.log(input_pos + "|" + this.input[input_pos]);
-
-		if (errortype === "M") {
-			container.addClass("no-margin");
-			input.addClass("match")
-				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
-		} else if (errortype === "M+") {
-			add_space_necessary = true;
-			container.addClass("no-margin");
-			input.addClass("match")
-				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
-		} else if (errortype === "+M") {
-			var add_space = $("<div>").addClass("error-container").html("&nbsp");
-			parent.append(add_space);
-
-			container.addClass("no-margin");
-			input.addClass("match")
-				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
-		} else if (errortype === "I") {
-			input.addClass("insertion")
-				.html("_");
-			target.addClass("insertion")
-				.html(this.target[target_pos].replace(/\s/g, "&nbsp"));
-		} else if (errortype === "D") {
-			input.addClass("deletion")
-				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
-			target.addClass("deletion")
-				.html("&nbsp;");
-		} else if (errortype === "S") {
-			input.addClass("substitution")
-				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
-			target.addClass("substitution")
-				.html(this.target[target_pos].replace(/\s/g, "&nbsp"));
-		} else if (errortype === "capitalization") {
-			input.addClass("capitalization")
-				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
-			target.addClass("capitalization")
-				.html(this.target[target_pos].replace(/\s/g, "&nbsp"));
-		} else if (errortype === "switch") {
-			input.addClass("switch")
-				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
-			target.addClass("switch")
-				.html(this.target[target_pos].replace(/\s/g, "&nbsp"));
-		} else if (errortype === "punctuation") {
-			input.addClass("punctuation")
-				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
-			target.addClass("punctuation")
-				.html(this.target[target_pos].replace(/\s/g, "&nbsp"));
-		}
-
-		container.append(input);
-		if (errortype !== "M" && errortype !== "D" && errortype !== "M+" && errortype !== "+M") {
-			var arrow = $("<i>").addClass("fa fa-long-arrow-down arrow");
-			container.append(arrow);
-		}
-		container.append(target);
-
-		parent.append(container);
-		if (add_space_necessary) {
-			var add_space = $("<div>").addClass("error-container").html("&nbsp");
-			parent.append(add_space);
-		}
-
-	}
-
 };
 
 Result.prototype.createAlignmentInfo = function (target_id) {
@@ -354,8 +237,6 @@ Result.prototype.createMistakeDistributionInfo = function (target_id, type) {
 	// map with errorshortcut mapping to className and label
 	var error_type_map = {
 		"M": ["error-distr-match", "correct"],
-		"+M": ["error-distr-match", "correct"],
-		"M+": ["error-distr-match", "correct"],
 		"D": ["error-distr-deletion", "waste"],
 		"I": ["error-distr-insert", "missing"],
 		"S": ["error-distr-sub", "wrong"],
@@ -365,6 +246,7 @@ Result.prototype.createMistakeDistributionInfo = function (target_id, type) {
 		"caveat_capitalization": ["error-distr-capitalization", "capitalization"],
 
 		"punct": ["error-distr-punctuation", "punctuation"],
+		"punctfault": ["error-distr-punctuation", "punctuation"],
 		"sim_punct": ["error-distr-similar-punctuation", "similar punctuation"],
 
 		"word_switch": ["error-distr-word-switch", "word switch"] // !
@@ -383,8 +265,6 @@ Result.prototype.createMistakeDistributionInfo = function (target_id, type) {
 			className: error_type_map[error][0]
 		});
 	}
-
-	console.log(data);
 
 	//create chart
 	if (type === "pie") {
@@ -427,7 +307,6 @@ Result.prototype.createPerformanceOverTimeInfo = function (target_id) {
 	var c = 0;
 	var error = 0;
 	for (var index in words) {
-		console.log(c, error);
 		data["labels"].push(c);
 		data["series"][0].push(c / (error || 1));
 
@@ -438,8 +317,6 @@ Result.prototype.createPerformanceOverTimeInfo = function (target_id) {
 	// last part of data
 	data["labels"].push(c);
 	data["series"][0].push(c / (error || 1));
-
-	console.log(data);
 
 	// create chart
 	new Chartist.Line(target_id, data, options);
@@ -455,8 +332,15 @@ Result.prototype.createWordwiseErrorInfo = function (target_id) {
 
 	for (var word in words) {
 		var word_info = words[word];
+
 		var input_word = word_info[2];
+		var input_start = word_info[3];
+		var input_end = word_info[4];
+
 		var target_word = word_info[1];
+		var target_start = word;
+		var target_end = word_info[0];
+
 		var word_error = word_info[5];
 
 		// only if error occures
@@ -466,17 +350,17 @@ Result.prototype.createWordwiseErrorInfo = function (target_id) {
 			var info_row = $("<div>").addClass('row');
 
 			//content
-			var info_word = $("<div>").addClass('col-xs-3');
-			var info_pointer = $("<div>").addClass('col-xs-2');
+			var info_word = $("<div>").addClass('col-xs-1');
+			var info_pointer = $("<div>").addClass('col-xs-1');
  			var info_spelling = $("<div>").addClass('col-xs-7 error-indication');
 
 			//fill content
 			info_word.html(target_word);
-			info_pointer.html("------>");
-			for (var char = 0; char <= target_word.length; char++) {
-				console.log("-----\nWORD: ", word, " CHAR: ", char);
-				var containers = this.styleSingleLetterWithLevenshtein(parseInt(word) + char);
-				console.log("CONTAINERS: ", containers);
+			info_pointer.html("");
+
+			// Basis has to be target, because on one target character there can be multiple linked input positions
+			for (var char = target_start-1; char <= target_end; char++) {
+				var containers = this.styleSingleLetterWithLevenshtein(char);
 				for (var c in containers) {
 					info_spelling.append(containers[c]);
 				}
@@ -484,8 +368,8 @@ Result.prototype.createWordwiseErrorInfo = function (target_id) {
 
 			// sticking stuff together
 			info_row
-				.append(info_word)
-				.append(info_pointer)
+				//.append(info_word)
+				//.append(info_pointer)
 				.append(info_spelling);
 
 			$(target_id).append(info_row);
@@ -521,11 +405,9 @@ Result.prototype.createOverallScoreInfo = function (target_id) {
 	var ratio_display = $(target_id+" .ratio").html(correct_words + "/" + total_words);
 	var score_display = $(target_id+" .score").html("0");
 
-	console.log("SCORE_--------------------  ", score);
 	var time = 100;
 	function add() {
 		if (cur_score < score) {
-			console.log("CUR: ", cur_score);
 			if (cur_score >= 100 && score === Infinity) {
 				score_display.html(score);
 				clearInterval(score_int);

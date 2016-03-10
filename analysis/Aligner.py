@@ -10,6 +10,9 @@ import SuffixTree
 #punct_fault has to be smaller than deletion, insertion and substitution - else it will not be considered
 #sim_punct has to be smaller than punct -> else not considered
 
+# OUTPUT SCHEME:
+# [[?, ?, (input_index, target_index, cost, errortype)]]
+
 """
 @param
 """
@@ -301,6 +304,7 @@ class Aligner(object):
                     
 if __name__ == "__main__":
     a = Aligner(u"hazyo i xiw", u"da bin i")  # Aligner(TARGET, INPUT)
+
     a.d.set_debug(True)
     #a.debug(a.finalize())
     print "\n"

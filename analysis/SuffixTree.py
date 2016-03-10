@@ -19,7 +19,7 @@ class SuffixTree(object):
         string1 = self.string1
         #build tree from string0
         for suffix_i in range(len(string0)):
-        #for suffix_i in range(8):
+        #for suffix_i in range(7):
             active_point_found = False
             ghost_i = 0
             ghost_removes = [] #here the ghosts that have to be removed from ghosts after all iterations are stored
@@ -32,29 +32,16 @@ class SuffixTree(object):
                     found_child = False
                     child_i = 0
                     for child in ghost.node.children: #look if there is a legal path for ghost
-                        if len(child.name) == 0:
-                            print "short child"
-                        if len(string0) <= child.depth + ghost.start:
-                            print "short string"
-                            print len(string0)
-                            print child.depth
-                            print ghost.start
-                        elif child.name[0] == string0[child.depth+ghost.start]:
+                        if child.name[0] == string0[child.depth+ghost.start]:
                             found_child = True
                             ghost.x = ghost.x + len(ghost.node.name) #shorten the index by the number of characters we skipped by moving on
                             ghost.node = child #go this way in the path
                             break
                     if found_child == False: #no path found for ghost -> ghost becomes a new node (in fact two new nodes, one as angle (non_leaf_node), one as leaf(well guessed: leaf_node))
-                        non_leaf_node = TreeNode.TreeNode(ghost.node.name[:ghost.get_index()], ghost.node.parent)
-                        self.nodes.add(non_leaf_node)
-                        leaf_node = TreeNode.TreeNode(string0[suffix_i:], non_leaf_node)
+                        leaf_node = TreeNode.TreeNode(string0[child.depth+ghost.start:], ghost.node)
                         self.nodes.add(leaf_node)
-                        ghost.node.parent.children.remove(ghost.node)
-                        ghost.node.parent.children.add(non_leaf_node)
-                        ghost.node.parent = non_leaf_node
-                        ghost.node.depth = non_leaf_node.depth + len(non_leaf_node.name)
-                        non_leaf_node.children = non_leaf_node.children.union((ghost.node, leaf_node))
-                        ghost.node.name = string0[ghost.get_index():]
+                        ghost.node.children.add(leaf_node)
+                        leaf_node.depth = ghost.node.depth + len(ghost.node.name)
                         ghost_removes.append(ghost)
                         self.ghostsSet.remove(ghost)
                         ghost_is_alive = True #ghost became a node. so there is no need for the next step
@@ -88,12 +75,10 @@ class SuffixTree(object):
                     found_root_child = True
             if found_root_child == False:
                 node = TreeNode.TreeNode(string0[suffix_i:], self.root)
-                if len(node.name) == 0:
-                    print "that's where we are"
                 self.nodes.add(node)
                 self.root.children.add(node)
-            #self.checkGraph(suffix_i)
             TreeNode.e +=1
+        TreeNode.e = 0
         
         second_string = string1 #check for similarities with second string
         maximum = 0
@@ -102,9 +87,9 @@ class SuffixTree(object):
             depth = 0
             node = self.root #this is where we start our walk along the path
             common_substring = "" #this is the result we get
-            found_path = True #we stop when no path is found anymore
+            found_path = True #we stop when the path leads to a dead end
             while found_path == True:
-                if len(second_string) == depth:
+                if len(second_string) == depth: #end of string1 reached
                     found_path = False
                     break
                 child_found = False
@@ -112,8 +97,10 @@ class SuffixTree(object):
                     if child.name[0] == second_string[depth]:
                         node = child
                         child_found = True
+                        break
                 if child_found == False:
                     found_path = False
+                    break
                         
                 for i in range(len(node.name)): #check letter by letter if path is similar to second_string
                     if len(second_string) == depth:
@@ -128,22 +115,24 @@ class SuffixTree(object):
             if len(common_substring) > maximum: #result is updated if new found string is longer
                 maximum = len(common_substring)
                 result_list = [common_substring]
-            elif len(common_substring) == 0:
+            elif len(common_substring) == maximum:
                 result_list.append(common_substring)
             second_string = second_string[1:]
         #TreeNode.e = 0 #reset e for next SuffixTree
+        if result_list == []:
+            return ""
         return result_list[len(result_list)/2] #return middle element of list in the hope that this is more or less in the middle of string1
                     
 if __name__ == "__main__":
-    #s = SuffixTree("das isn ganz schön langa text mit viele gomischen wörtern, der so lang is das er ganz schö lang rechnen lasse kann. des müsse mer mal schaue ob des wirklich so is, weil des wär net so guat. noch meeeehr text!! das soll so sein, wir wollen ganz viel zeit schinden und so", "das hier ist ein langer text mit vielen komischen wörtern, der so lange ist dass er ganz schön lange rechenzeiten erzwingen könnte. das müssen wir jetzt mal genau überprüfen, denn sonst wäre das ziemlich blöd wenn das nicht so klappt. uiuiui hier steht ganz schön viel unsinn, aber das sind wir ja gewöhnt. mal sehen was es da noch so gibt")
+    s = SuffixTree("hallo du da, wie geht es dir? das frage ich mich schon lange, deshalb dachte ich, dass dich dich jetzt einfach mal direkt frage.", "danke sehr, mir geht es sehr gut, und dir? ja, also mir geht es auch richtig gut, muss ich sagen.")
     long_string0 = createLongString.createRandomString(1000, True)
     long_string1 = createLongString.createRandomString(1000, True)
     #print long_string0
     #print long_string1
-    s = SuffixTree(long_string0, long_string1)
-    result_list = s.createTree()
+    #s = SuffixTree("Liebe Tanja, kannst du bitte einkaufen? Ich habe heute Nachmittag keine Zeit und ich m\u00f6chte heute Abend kochen. Ich brauche neoch Kartoffeln, Paprika, Tomaten und Zwiebeln. F\u00fcr das Fr\u00fchst\u00fcck brauchen wir Kaffee, Tee, Brot, Butter, Marmelade, K\u00e4se und Wurst. Kannst du auch Schokolade und Cola mitbringen? Vielen Dank! Liebe Gr\u00fc\u00dfe Mama Liebe Tanja, kannst du bitte einkaufen? Ich habe heute Nachmittag keine Zeit und ich m\u00f6chte heute Abend kochen. Ich brauche noch Kartoffeln, Paprika, Tomaten und Zwiebeln. F\u00fcr das Fr\u00fchst\u00fcck brauchen wir Kaffee, Tee, Brot, Butter, Marmelade, K\u00e4se und Wurst. Kannst du auch Schokolade und Cola mitbringen? Vielen Dank! Liebe Gr\u00fc\u00dfe Mama", "FamilienfotoTimo erzÃ¤hlt: Das ist meine Mutter. Sie trÃ¤gt ein Kleid. Das Kleid ist blau. Das ist mein Vater. Er trÃ¤gt Jeans und ein Hemd. Das Hemd ist weiÃŸ. Ich habe auch eine Schwester. Sie ist zwÃ¶lf. Und ich habe einen Hund. Er ist groÃŸ und weiÃŸ und heiÃŸt Benni. Wir lieben Benni. Hier sind auch meine Tante Monika und mein Onkel Anton. Sie haben auch zwei Kinder, zwei MÃ¤dchen. Das sind meine Cousinen. Sie heiÃŸen Tina und Nina. Sie sind fÃ¼nf Jahre alt. Sie sind Zwillinge. Tina und Nina spielen gern mit Benni. Meine Oma und mein Opa sind schon alt. Sie sitzen hier. Meine Oma kocht super. Ich liebe ihre Nudeln mit Tomatensauce.FamilienfotoTimo erzÃ¤hlt: Das ist meine Mutter. Sie trÃ¤gt ein Kleid. Das Kleid ist blau. Das ist mein Vater. Er trÃ¤gt Jeans und ein Hemd. Das Hemd ist weiÃŸ. Ich habe auch eine Schwester. Sie ist zwÃ¶lf. Und ich habe einen Hund. Er ist groÃŸ und weiÃŸ und heiÃŸt Benni. Wir lieben Benni. Hier sind auch meine Tante Monika und mein Onkel Anton. Sie haben auch zwei Kinder, zwei MÃ¤dchen. Das sind meine Cousinen. Sie heiÃŸen Tina und Nina. Sie sind fÃ¼nf Jahre alt. Sie sind Zwillinge. Tina und Nina spielen gern mit Benni. Meine Oma und mein Opa sind schon alt. Sie sitzen hier. Meine Oma kocht super. Ich liebe ihre Nudeln mit Tomatensauce.")
+    result = s.createTree()
+
     # print "result:"
-    # print len(s.nodes)
     # for node in s.nodes:
         # if len(node.children) == 0:
             # print node.depth
@@ -160,6 +149,6 @@ if __name__ == "__main__":
         # print ghost.get_index()-1
         # print ghost.start
         # print ghost.node
-    print result_list
+    print result
         
         

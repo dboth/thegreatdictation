@@ -4,6 +4,7 @@ from operator import itemgetter
 from collections import namedtuple
 import frames
 import faultPenalizer
+import SuffixTree
 
 #alle ausgaben von input_str nach target_str. also z.b. target_str: "d", input_str: "da" -> deletion
 #punct_fault has to be smaller than deletion, insertion and substitution - else it will not be considered
@@ -13,14 +14,16 @@ import faultPenalizer
 @param
 """
 class Aligner(object):
+    matrix_field = namedtuple("Field", ["target", "input", "cost", "op"])
+
     def __init__(self, target_str, input_str, match=0, sub=1.8, insert=1, delete=1, switch=1, capitals=0.5, sim_punct=0.2, punct=0.5, punct_fault = 0.9, plusM=0.9, umlauts=0, word_switch=0.1, punct_capitalize=0.2, ws_penalty=0.2, switcher=False, switch_punct=False, switched_sentence_start=False):
         #DEBUGGER DONT TOUCH
         self.d = frames.Debugger()
         self.debug = self.d.debug
 
         #STRINGS
-        self.input = input_str.strip()
-        self.target = target_str.strip()
+        self.input = input_str
+        self.target = target_str
 
         #WEIGHTS
         self.match = match
@@ -75,7 +78,7 @@ class Aligner(object):
                         ad = [self.matrix_field(row-1, col, self.insert, "I")]
                     elif self.target[row-1]==self.input[col-1]: #match
                         ad = [self.matrix_field(row-1, col-1, self.match, "M"), self.matrix_field(row, col-1, self.delete, "D"), self.matrix_field(row-1, col, self.insert, "I")]
-                        if self.matrix[row-1][col-1].op == "M":
+                        if self.matrix[row-1][col-1].op == "M": #if there was a match before, improve weight of this match (so chains of matches are prefered!)
                             ad.append(self.matrix_field(row-1, col-1, self.match-0.1, "M"))
                     else:  #no match
                         ad = [self.matrix_field(row-1, col-1, self.sub, "S"), self.matrix_field(row, col-1, self.delete, "D"), self.matrix_field(row-1, col, self.insert, "I")]
@@ -125,13 +128,13 @@ class Aligner(object):
         for target_iter in range(len(self.target)):
             if self.target[target_iter] in self.punct_bag:
                 for input_iter in range(len(self.input)):
-                    self.matrix[target_iter+1][input_iter+1].append(self.matrix_field(target_iter, input_iter+1, self.punct_fault, "punctfault")) #insertion
-                    self.matrix[target_iter+1][input_iter+1].append(self.matrix_field(target_iter, input_iter, self.punct_fault, "punctfault")) #substitution
+                    self.matrix[target_iter+1][input_iter+1].append(self.matrix_field(target_iter, input_iter+1, self.punct_fault, "punctfault_i")) #insertion
+                    self.matrix[target_iter+1][input_iter+1].append(self.matrix_field(target_iter, input_iter, self.punct_fault, "punctfault_i")) #substitution
         for input_iter in range(len(self.input)):
             if self.input[input_iter] in self.punct_bag:
                 for target_iter in range(len(self.target)):
-                    self.matrix[target_iter+1][input_iter+1].append(self.matrix_field(target_iter+1, input_iter, self.punct_fault, "punctfault")) #deletion
-                    self.matrix[target_iter+1][input_iter+1].append(self.matrix_field(target_iter, input_iter, self.punct_fault, "punctfault")) #substitution
+                    self.matrix[target_iter+1][input_iter+1].append(self.matrix_field(target_iter+1, input_iter, self.punct_fault, "punctfault_t")) #deletion
+                    self.matrix[target_iter+1][input_iter+1].append(self.matrix_field(target_iter, input_iter, self.punct_fault, "punctfault_t")) #substitution
     
     def applyPlusM(self): #change input string in the fewest possible number of words (elephant problem) by looking for matches directly after spaces and giving the combination a better score
         for i in range(1,len(self.target)):  #looks for spaces in self.target
@@ -139,14 +142,16 @@ class Aligner(object):
                 for j in range(len(self.input)):
                     if i<len(self.target)-1:
                         if self.target[i+1] == self.input[j]:
-                            self.matrix[i+2][j+1].append(self.matrix_field(i, j, self.plusM, "+M"))
+                            self.matrix[i+2][j+1].append(self.matrix_field(i, j, self.plusM, "+M_target"))
         for j in range(1, len(self.input)):	  #looks for spaces in self.input
             if self.input[j] == " ":
                 for i in range(len(self.target)):
                     if j<len(self.input)-1:
                         if self.input[j+1] == self.target[i]:
-                            self.matrix[i+1][j+2].append(self.matrix_field(i, j, self.plusM, "+M"))
+                            self.matrix[i+1][j+2].append(self.matrix_field(i, j, self.plusM, "+M_input"))
 
+
+                            
 
     def punctCapitalization(self): #consider changed capitalization after wrong punctuation
         for target_iter in range(len(self.target)):
@@ -163,6 +168,8 @@ class Aligner(object):
                     if self.input[j:j+2] == self.umlaut_bag[self.target[i]]:
                         self.matrix[i+1][j+2].append(self.matrix_field(i, j, self.umlauts, "umlauts"))
 
+                        
+                        
     @staticmethod
     def indexSplit(input_string):  #neccessary for wordSwitch. splits words into [["word0", startIndex_of_word0, endIndex_of_word0],...]
         result = []
@@ -189,10 +196,11 @@ class Aligner(object):
                 self.switched_words_bag[(target_words[target_iter+1][2],input_words[input_iter+1][2])] = switcher.path
         #first switcher: caveat changed Capitalization. only difference: switchedSentenceStart=True which triggers a 0 weight effect in applyCapitals
         if len(input_words)>1 and len(target_words)>1:
-            switcher = Aligner(input_str=input_words[1][0] + " " + input_words[0][0], target_str=target_words[0][0] + " " + target_words[1][0], match=self.match, sub=self.sub+0.5, insert=self.insert+0.5, delete=self.delete+0.5, switch=self.switch+0.5, capitals=self.capitals, sim_punct=self.sim_punct, punct=self.punct, plusM=self.plusM, umlauts=self.umlauts, word_switch = self.word_switch, switcher=True, switched_sentence_start=True)
-            switcher.finalize()
-            self.matrix[target_words[1][2]][input_words[1][2]].append(self.matrix_field(target_words[0][1], input_words[0][1], switcher.path[0][2][2]+self.word_switch, "word_switch"))
-            self.switched_words_bag[(target_words[1][2],input_words[1][2])] = switcher.path
+            if not (target_words[0][0] == "" or target_words[1][0] == "" or input_words[0][0] == "" or input_words[1][0] == ""): #this is for implications from preprocessed strings which may start or end with whitespace
+                switcher = Aligner(input_str=input_words[1][0] + " " + input_words[0][0], target_str=target_words[0][0] + " " + target_words[1][0], match=self.match, sub=self.sub+0.5, insert=self.insert+0.5, delete=self.delete+0.5, switch=self.switch+0.5, capitals=self.capitals, sim_punct=self.sim_punct, punct=self.punct, plusM=self.plusM, umlauts=self.umlauts, word_switch = self.word_switch, switcher=True, switched_sentence_start=True)
+                switcher.finalize()
+                self.matrix[target_words[1][2]][input_words[1][2]].append(self.matrix_field(target_words[0][1], input_words[0][1], switcher.path[0][2][2]+self.word_switch, "word_switch"))
+                self.switched_words_bag[(target_words[1][2],input_words[1][2])] = switcher.path
 
     def createPath(self): #create list of lists in the form [fin_target, fin_input, (start_target, start_input, process_value, process_type)]. here the best path through the matrix is found
         row = len(self.target)
@@ -220,17 +228,22 @@ class Aligner(object):
     def rebuildPlusM(self): #splits +M back into two normal processes
         temp_path = []
         for process in self.path:
-            if process[2][3] == "+M":
+            if process[2][3] == "+M_target":
                 temp_path.append([process[0], process[1], self.matrix_field(process[2][0]+1, process[2][1], self.match, "M")])
                 temp_path.append([process[0]-1, process[1]-1, self.matrix_field(process[2][0], process[2][1], self.delete, "I")])
+            elif process[2][3] == "+M_input":
+                temp_path.append([process[0], process[1], self.matrix_field(process[2][0], process[2][1]+1, self.match, "M")])
+                temp_path.append([process[0]-1, process[1]-1, self.matrix_field(process[2][0], process[2][1], self.delete, "D")])
             else:
                 temp_path.append(process)
         self.path = temp_path
 
+        
     def finalize(self):
         self.initializeMatrix()
         self.applySwitch()
-        self.applyCapitals()
+        if len(self.target)>0 and len(self.input)>0:
+            self.applyCapitals()
         self.applyPunctToPunct()
         self.applyFaultPunctuation()
         self.applyPlusM()
@@ -245,8 +258,53 @@ class Aligner(object):
             p.plugInFaultValues()
             self.path = p.final_path
         return self.path[::-1] #reverse and return path
-
+        
+        
+    @staticmethod
+    def preProcessStrings(target_string, input_string, min_common_length=15, recursive=False): #split target and input strings to accelerate the aligner
+        if len(target_string) == len(input_string) == 0:
+            return []
+        s = SuffixTree.SuffixTree(target_string, input_string)
+        result = s.createTree() #this is the longest common substring
+        if len(result) >= min_common_length:
+            splitted_string = result.split()
+            if len(splitted_string) > 2:
+                result = " ".join(splitted_string[1:-1]) #if the string is long enough, edges are cut so that full words are not ripped apart
+            target_start = target_string.find(result)
+            input_start = input_string.find(result)
+            if recursive == False: #return splitted strings: [[target0, input0], [target_match, input_match], [target1, input1]]
+                return [[target_string[:target_start], input_string[:input_start]], target_string[target_start:target_start+len(result)], [target_string[target_start+len(result):], input_string[input_start+len(result):]]]
+            else: #return result of recursive call
+                return Aligner.preProcessStrings(target_string[:target_start], input_string[:input_start], min_common_length, True) + [target_string[target_start:target_start+len(result)]] + Aligner.preProcessStrings(target_string[target_start+len(result):], input_string[input_start+len(result):], min_common_length, True)
+        else: #return unchanged strings
+            return [[target_string, input_string]]
+    
+    @staticmethod
+    def getPathFromPreprocessedString(preprocessed_list):
+        final_path = []
+        current_target_state = 0
+        current_input_state = 0
+        for element in preprocessed_list:
+            if type(element) in [str, unicode]:
+                for letter in element:
+                    final_path.append([current_target_state+1, current_input_state+1, Aligner.matrix_field(current_target_state, current_input_state, 0, "M")])
+                    current_target_state += 1
+                    current_input_state += 1
+            elif type(element) == list:
+                a = Aligner(element[0], element[1])
+                path = a.finalize()
+                for process in path: #increase all indices in path by current state
+                    final_path.append([process[0]+current_target_state, process[1]+current_input_state, Aligner.matrix_field(process[2][0]+current_target_state, process[2][1]+current_input_state, process[2][2], process[2][3])])
+                current_target_state = final_path[-1][0]
+                current_input_state = final_path[-1][1]
+        return final_path
+                    
 if __name__ == "__main__":
-    a = Aligner(u"Ich bin ein Elefant", u"Ich b e Elefant")  # Aligner(TARGET, INPUT)
+    a = Aligner(u"hazyo i xiw", u"da bin i")  # Aligner(TARGET, INPUT)
     a.d.set_debug(True)
-    a.debug(a.finalize())
+    #a.debug(a.finalize())
+    print "\n"
+    pre_result = Aligner.preProcessStrings(u"hazyo i xiw", u"da bin i", 1, True)
+    result = Aligner.getPathFromPreprocessedString(pre_result)
+    print result
+    

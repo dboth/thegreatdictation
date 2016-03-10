@@ -1,5 +1,4 @@
 e=0 #this has to be a global variable. so it is created here although it is used in suffixtree and treeghost
-counter = 0
 
 class TreeNode(object):
     def __init__(self, name, parent):

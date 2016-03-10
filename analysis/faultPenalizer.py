@@ -2,7 +2,7 @@
 from collections import namedtuple
 
 class FaultPenalizer(object):
-    def __init__(self, path, M=0, S=1, I=1, D=1, switch=1, capitals=0, sim_punct=0.2, punct=0.5, punctfault = 1, plusM=1, umlauts=0, word_switch=1, caveat_capitalization=0):
+    def __init__(self, path, M=0, S=1, I=1, D=1, switch=1, capitals=0, sim_punct=0.2, punct=0.5, punctfault_i = 1, punctfault_t = 1, plusM=1, umlauts=0, word_switch=1, caveat_capitalization=0):
         
         #PATHS
         self.path = path
@@ -17,7 +17,8 @@ class FaultPenalizer(object):
         self.capitals = capitals
         self.sim_punct = sim_punct
         self.punct = punct
-        self.punctfault = punctfault
+        self.punctfault_i = punctfault_i
+        self.punctfault_t = punctfault_t
         self.plusM = plusM
         self.umlauts = umlauts
         self.word_switch = word_switch
@@ -38,4 +39,5 @@ class FaultPenalizer(object):
                         self.final_path.append([field[0], field[1], (field[2][0], field[2][1], fault[1], field[2][3])])
                         test = True
                 if test == False:
+                    print field
                     raise NameError("fault type not listed in faultPenalizer")

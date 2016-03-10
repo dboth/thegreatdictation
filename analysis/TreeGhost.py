@@ -4,8 +4,6 @@ import TreeNode
 class TreeGhost(object): #non leaf nodes in boundary path
     
     def __init__(self, node):
-        self.number = TreeNode.counter
-        TreeNode.counter += 1
         self.x = TreeNode.e #x value stays the same while e increases with each iteration
         self.node = node
         node.ghosts.add(self)

@@ -9,6 +9,9 @@ import faultPenalizer
 #punct_fault has to be smaller than deletion, insertion and substitution - else it will not be considered
 #sim_punct has to be smaller than punct -> else not considered
 
+# OUTPUT SCHEME:
+# [[?, ?, (input_index, target_index, cost, errortype)]]
+
 """
 @param
 """
@@ -132,7 +135,7 @@ class Aligner(object):
                 for target_iter in range(len(self.target)):
                     self.matrix[target_iter+1][input_iter+1].append(self.matrix_field(target_iter+1, input_iter, self.punct_fault, "punctfault")) #deletion
                     self.matrix[target_iter+1][input_iter+1].append(self.matrix_field(target_iter, input_iter, self.punct_fault, "punctfault")) #substitution
-    
+
     def applyPlusM(self): #change input string in the fewest possible number of words (elephant problem) by looking for matches directly after spaces and giving the combination a better score
         for i in range(1,len(self.target)):  #looks for spaces in self.target
             if self.target[i] == " ":
@@ -247,6 +250,6 @@ class Aligner(object):
         return self.path[::-1] #reverse and return path
 
 if __name__ == "__main__":
-    a = Aligner(u"Ich bin ein Elefant", u"Ich b e Elefant")  # Aligner(TARGET, INPUT)
+    a = Aligner(u"Ich", u"Ich")  # Aligner(TARGET, INPUT)
     a.d.set_debug(True)
     a.debug(a.finalize())

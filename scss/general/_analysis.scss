@@ -8,9 +8,8 @@
 
 
 // LEVENSHTEIN
-
 .error-container {
-    margin: 3px;
+    margin: 0 1px 2px 1px;
     text-align: center;
     vertical-align: top;
 
@@ -18,24 +17,23 @@
         margin: 3px 0;
     }
 
-    .arrow {
-        padding: 3px 5px;
-        display: block;
-        border-radius: 10px;
-        margin: 0 auto;
-    }
-
     .target {
         padding: 3px 5px;
         display: block;
-        border-radius: 10px;
+        border-radius: 0 0 5px 5px;
         margin: 0 auto;
+
+        font-size: .6em;
+        font-weight: bold;
+        color: $tgd-font-contrast-color;
+
+        background-color: $tgd-font-color;
     }
 
     .input {
         padding: 3px 5px;
         display: block;
-        border-radius: 10px;
+        border-radius: 5px 5px 0 0;
         margin: 0 auto;
 
         &.match {
@@ -48,8 +46,9 @@
         }
 
         &.deletion {
-            background-color: $tgd-deletion-color;
-            color: $tgd-font-contrast-color;
+            color: $tgd-deletion-color;
+            text-decoration: line-through;
+            padding: 3px 0;
         }
 
         &.insertion {

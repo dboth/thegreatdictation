@@ -6791,25 +6791,24 @@ fieldset input[type="radio"] {
           flex-wrap: wrap; }
 
 .error-container {
-  margin: 3px;
+  margin: 0 1px 2px 1px;
   text-align: center;
   vertical-align: top; }
   .error-container.no-margin {
     margin: 3px 0; }
-  .error-container .arrow {
-    padding: 3px 5px;
-    display: block;
-    border-radius: 10px;
-    margin: 0 auto; }
   .error-container .target {
     padding: 3px 5px;
     display: block;
-    border-radius: 10px;
-    margin: 0 auto; }
+    border-radius: 0 0 5px 5px;
+    margin: 0 auto;
+    font-size: .6em;
+    font-weight: bold;
+    color: #fff;
+    background-color: #000; }
   .error-container .input {
     padding: 3px 5px;
     display: block;
-    border-radius: 10px;
+    border-radius: 5px 5px 0 0;
     margin: 0 auto; }
     .error-container .input.match {
       padding: 3px 0; }
@@ -6817,8 +6816,9 @@ fieldset input[type="radio"] {
       background-color: #b40000;
       color: #fff; }
     .error-container .input.deletion {
-      background-color: #e00dde;
-      color: #fff; }
+      color: #e00dde;
+      text-decoration: line-through;
+      padding: 3px 0; }
     .error-container .input.insertion {
       background-color: #ff5b28;
       color: #fff; }

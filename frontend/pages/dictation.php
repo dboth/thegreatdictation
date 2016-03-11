@@ -63,7 +63,7 @@
                 <div class="form-group">
                     <label for="data">What you understand</label>
                     <textarea  class="form-control" rows="10" placeholder="Choose a text first!" id="dictation-text" name="data" disabled>
-                        Liebe Tanja, kannewst du bitte einufen? Ich habe heute Nachmittag keine Zeit und ich möchte heute Abend kochen. I ch brauche noch Kartoffeln, Paprika, Tomaten und Zwiebeln. Für das Frühstück brauchen ffee, Tee, Brot, ButterMarmelade, Käse und Wurst. Kwe annst du auch Schokolade und Cola mitbringen? Vielen Dank! Liebe Grüße Mama
+                        Liebe Tonia, kannewst du bitte einufen? Ich habe heute Nachmittag keine Zeit und ich möchte heute Abend kochen. I ch brauche noch Kartoffeln, Paprika, Tomaten und Zwiebeln. Für das Frühstück brauchen Tee, Kaffee, Brot, ButterMarmelade, Käse und Wurst. Kwe annst du auch Schokolade und Coka mitbringen? Viele Dank! Liebe Grüße Mama
                     </textarea>
                 </div>
 
@@ -159,32 +159,31 @@
     </div>
 
     <div class="row row-content">
-        <div class="col-xs-12">
-            <div class="row">
-                <div class="col-xs-12 subtitle">Detailed word by word error info</div>
-            </div>
-        </div>
+        <div class="col-xs-12 subtitle">Detailed word by word error info</div>
+        <div class="col-xs-12" id="wordwise-error-info">
+            <div class="row text-info">
+                <div class="col-xs-5 col-sm-3">
+                    Correct Spelling
+                </div>
 
-        <div class="col-xs-12">
-            <div class="row">
-                <div class="col-xs-12" id="wordwise-error-info"></div>
+                <div class="hidden-xs col-sm-3">
+                    Your Spelling
+                </div>
+
+                <div class="hidden-xs col-sm-2">
+                </div>
+
+                <div class="col-xs-7 col-sm-4">
+                    Correction
+                </div>
             </div>
         </div>
-    </div>
 
     <div class="row row-content">
-        <div class="col-xs-12">
-            <div class="row">
-                <div class="col-xs-12 subtitle">Performance over time (word-wise)</div>
-            </div>
-        </div>
-
-        <div class="col-xs-12">
-            <div class="row">
-                <div class="col-xs-12 ct-chart" id="performance-over-time-chart"></div>
-            </div>
-        </div>
+        <div class="col-xs-12 subtitle">Performance over time (word-wise)</div>
+        <div class="col-xs-12 ct-chart" id="performance-over-time-chart"></div>
     </div>
+
 </div>
 
 <script src="js/result_generation/result_components.js"></script>

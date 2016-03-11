@@ -83,7 +83,7 @@ Result.prototype.styleSingleLetterWithLevenshtein = function (target_index) {
 			target.addClass("insertion")
 				.html(this.target[target_pos].replace(/\s/g, "&nbsp"));
 		} else if (errortype === "D") {
-			container.addClass('no-margin')
+			container.addClass('no-margin');
 			input.addClass("deletion")
 				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
 		} else if (errortype === "S") {
@@ -101,10 +101,16 @@ Result.prototype.styleSingleLetterWithLevenshtein = function (target_index) {
 				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
 			target.addClass("switch")
 				.html(this.target[target_pos].replace(/\s/g, "&nbsp"));
-		} else if (errortype === "punctuation" || errortype === "punctfault" || errortype === "sim_punct") {
+		} else if (errortype === "punctuation" || errortype === "punctfault_t" || errortype === "sim_punct") {
 			console.log("LENGTH: " + this.input.length + "; POS: " + input_pos);
 			input.addClass("punctuation")
 				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
+			target.addClass("punctuation")
+				.html(this.target[target_pos].replace(/\s/g, "&nbsp"));
+		} else if (errortype === "punctfault_i") {
+			console.log("LENGTH: " + this.input.length + "; POS: " + input_pos);
+			input.addClass("punctuation")
+				.html("_");
 			target.addClass("punctuation")
 				.html(this.target[target_pos].replace(/\s/g, "&nbsp"));
 		}
@@ -230,7 +236,7 @@ Result.prototype.createMistakeDistributionInfo = function (target_id, type) {
 	// map with errorshortcut mapping to className and label
 	var error_type_map = {
 		"M": ["error-distr-match", "correct"],
-		"D": ["error-distr-deletion", "waste"],
+		//"D": ["error-distr-deletion", "waste"],
 		"I": ["error-distr-insert", "missing"],
 		"S": ["error-distr-sub", "wrong"],
 		"switch": ["error-distr-switch", "switched"],
@@ -239,7 +245,8 @@ Result.prototype.createMistakeDistributionInfo = function (target_id, type) {
 		"caveat_capitalization": ["error-distr-capitalization", "capitalization"],
 
 		"punct": ["error-distr-punctuation", "punctuation"],
-		"punctfault": ["error-distr-punctuation", "punctuation"],
+		"punctfault_t": ["error-distr-punctuation", "punctuation"],
+		"punctfault_i": ["error-distr-punctuation", "punctuation"],
 		"sim_punct": ["error-distr-similar-punctuation", "similar punctuation"],
 
 		"word_switch": ["error-distr-word-switch", "word switch"] // !
@@ -252,10 +259,20 @@ Result.prototype.createMistakeDistributionInfo = function (target_id, type) {
 	}
 
 	for (var error in error_count_map) {
-		data["labels"].push(error_type_map[error][1]);
+		// catch unknown error types, shouldnt happen tho
+		var error_label = "unknown";
+		var error_css = "error-distr-unknown"
+
+		if (error_type_map[error]) {
+			error_label = error_type_map[error][1];
+			error_css = error_type_map[error][0];
+		}
+
+		// write into data object
+		data["labels"].push(error_label);
 		data["series"].push({
 			value: (type === "pie") ? ((error_count_map[error] / char_count) * 100) : error_count_map[error],
-			className: error_type_map[error][0]
+			className: error_css
 		});
 	}
 
@@ -340,13 +357,13 @@ Result.prototype.createWordwiseErrorInfo = function (target_id) {
 		if (word_error > 0 && input_word !== "") {
 
 			//container
-			var info_row = $("<div>").addClass('row');
+			var info_row = $("<div>").addClass('row row-spacing');
 
 			//content
-			var info_target_word = $("<div>").addClass('col-xs-1');
-			var info_input_word = $("<div>").addClass('col-xs-1');
-			var info_pointer = $("<div>").addClass('col-xs-1');
- 			var info_spelling = $("<div>").addClass('col-xs-7 error-indication');
+			var info_target_word = $("<div>").addClass('col-xs-5 col-sm-3');
+			var info_input_word = $("<div>").addClass('col-sm-3 hidden-xs');
+			var info_pointer = $("<div>").addClass('col-sm-2 hidden-xs');
+ 			var info_spelling = $("<div>").addClass('col-xs-7 col-sm-4 error-indication');
 
 			//fill content
 			info_target_word.html(target_word);

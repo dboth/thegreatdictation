@@ -6616,6 +6616,10 @@ select.selectpicker {
   stroke: #b8eaff;
   fill: #b8eaff; }
 
+.error-distr-unknown {
+  stroke: #707070;
+  fill: #707070; }
+
 /* DOCUMENT */
 html {
   height: 100%;
@@ -6779,55 +6783,32 @@ fieldset input[type="radio"] {
   -webkit-transition: none !important;
           transition: none !important; }
 
-.error-indication {
-  font-size: 14pt;
-  overflow: auto;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-wrap: wrap;
-      -ms-flex-wrap: wrap;
-          flex-wrap: wrap; }
-
 .error-container {
-  margin: 0 1px 2px 1px;
   text-align: center;
   vertical-align: top; }
-  .error-container.no-margin {
-    margin: 3px 0; }
   .error-container .target {
-    padding: 3px 5px;
-    display: block;
-    border-radius: 0 0 5px 5px;
-    margin: 0 auto;
     font-size: .6em;
     font-weight: bold;
-    color: #fff;
-    background-color: #000; }
-  .error-container .input {
-    padding: 3px 5px;
+    color: #000;
     display: block;
-    border-radius: 5px 5px 0 0;
-    margin: 0 auto; }
+    margin-top: -5px; }
+  .error-container .input {
+    padding: 3px 0;
+    display: block; }
     .error-container .input.match {
       padding: 3px 0; }
     .error-container .input.substitution {
-      background-color: #b40000;
-      color: #fff; }
+      color: #b40000;
+      text-decoration: line-through; }
     .error-container .input.deletion {
       color: #e00dde;
-      text-decoration: line-through;
-      padding: 3px 0; }
+      text-decoration: line-through; }
     .error-container .input.insertion {
-      background-color: #ff5b28;
-      color: #fff; }
+      color: #ff5b28; }
     .error-container .input.capitalization {
-      background-color: #ffe145;
-      color: #fff; }
+      color: #ffe145; }
     .error-container .input.punctuation {
-      background-color: #6cd3ff;
-      color: #fff; }
+      color: #6cd3ff; }
     .error-container .input.switch {
       background-color: #ffa100;
       color: #fff; }
@@ -6870,6 +6851,17 @@ fieldset input[type="radio"] {
     .legend .element.correct {
       background-color: none;
       border: 0; }
+
+.error-indication {
+  font-size: 14pt;
+  overflow: auto;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap; }
 
 .alignment-word-container {
   margin: 3px 0 3px 5px;

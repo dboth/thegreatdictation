@@ -47,3 +47,8 @@
 	stroke: lighten($tgd-punctuation-color, 15);
 	fill: lighten($tgd-punctuation-color, 15);
 }
+
+.error-distr-unknown {
+	stroke: $tgd-unknown-color;
+	fill: $tgd-unknown-color;
+}

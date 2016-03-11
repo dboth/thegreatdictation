@@ -1,69 +1,45 @@
-
-.error-indication {
-    font-size: 14pt;
-    overflow: auto;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-
 // LEVENSHTEIN
 .error-container {
-    margin: 0 1px 2px 1px;
     text-align: center;
     vertical-align: top;
 
-    &.no-margin {
-        margin: 3px 0;
-    }
-
     .target {
-        padding: 3px 5px;
-        display: block;
-        border-radius: 0 0 5px 5px;
-        margin: 0 auto;
-
         font-size: .6em;
         font-weight: bold;
-        color: $tgd-font-contrast-color;
+        color: $tgd-font-color;
+        display: block;
 
-        background-color: $tgd-font-color;
+        margin-top: -5px;
     }
 
     .input {
-        padding: 3px 5px;
+        padding: 3px 0;
         display: block;
-        border-radius: 5px 5px 0 0;
-        margin: 0 auto;
 
         &.match {
             padding: 3px 0;
         }
 
         &.substitution {
-            background-color: $tgd-sub-color;
-            color: $tgd-font-contrast-color;
+            color: $tgd-sub-color;
+            text-decoration: line-through;
         }
 
         &.deletion {
             color: $tgd-deletion-color;
             text-decoration: line-through;
-            padding: 3px 0;
         }
 
         &.insertion {
-            background-color: $tgd-insert-color;
-            color: $tgd-font-contrast-color;
+            color: $tgd-insert-color;
         }
 
         &.capitalization {
-            background-color: $tgd-capitalization-color;
-            color: $tgd-font-contrast-color;
+            color: $tgd-capitalization-color;
         }
 
         &.punctuation {
-            background-color: $tgd-punctuation-color;
-            color: $tgd-font-contrast-color;
+            color: $tgd-punctuation-color;
         }
 
         &.switch {
@@ -74,6 +50,7 @@
 
 }
 
+//LEGEND
 .legend {
     margin-top: 10px;
 
@@ -142,6 +119,13 @@
 }
 
 // WORDALIGNMENT
+.error-indication {
+    font-size: 14pt;
+    overflow: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .alignment-word-container {
     margin: 3px 0 3px 5px;
     float: left;
@@ -179,7 +163,6 @@
 
 }
 
-//CORRECT Spelling info
 .correct-spelling-info {
     font-size: .6em;
     text-align: center;

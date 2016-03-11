@@ -73,8 +73,6 @@ Result.prototype.styleSingleLetterWithLevenshtein = function (target_index) {
 		var target = $("<span>");
 		target.addClass("target");
 
-		var add_space_necessary = false;
-
 		if (errortype === "M") {
 			container.addClass("no-margin");
 			input.addClass("match")
@@ -117,11 +115,6 @@ Result.prototype.styleSingleLetterWithLevenshtein = function (target_index) {
 		}
 
 		list_of_containers.push(container);
-
-		if (add_space_necessary) {
-			var add_space = $("<div>").addClass("error-container").html("&nbsp");
-			list_of_containers.push(add_space);
-		}
 	}
 
 	return list_of_containers;
@@ -350,12 +343,14 @@ Result.prototype.createWordwiseErrorInfo = function (target_id) {
 			var info_row = $("<div>").addClass('row');
 
 			//content
-			var info_word = $("<div>").addClass('col-xs-1');
+			var info_target_word = $("<div>").addClass('col-xs-1');
+			var info_input_word = $("<div>").addClass('col-xs-1');
 			var info_pointer = $("<div>").addClass('col-xs-1');
  			var info_spelling = $("<div>").addClass('col-xs-7 error-indication');
 
 			//fill content
-			info_word.html(target_word);
+			info_target_word.html(target_word);
+			info_input_word.html(input_word);
 			info_pointer.html("");
 
 			// Basis has to be target, because on one target character there can be multiple linked input positions
@@ -368,8 +363,9 @@ Result.prototype.createWordwiseErrorInfo = function (target_id) {
 
 			// sticking stuff together
 			info_row
-				//.append(info_word)
-				//.append(info_pointer)
+				.append(info_target_word)
+				.append(info_input_word)
+				.append(info_pointer)
 				.append(info_spelling);
 
 			$(target_id).append(info_row);

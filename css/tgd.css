@@ -6874,28 +6874,29 @@ fieldset input[type="radio"] {
 .alignment-word-container {
   margin: 3px 0 3px 5px;
   float: left; }
-  .alignment-word-container .spelling {
-    border-radius: 6px;
-    padding: 2px 6px;
-    border: 1px solid transparent;
-    margin: auto;
-    text-align: center; }
-    .alignment-word-container .spelling.missing-word {
-      border: 2px solid #ff5400;
-      color: #ff5400; }
-    .alignment-word-container .spelling.wrong {
-      background-color: #f33;
-      color: #fff; }
-    .alignment-word-container .spelling.minor-mistake {
-      background-color: #f6ba07;
-      color: #fff; }
-    .alignment-word-container .spelling.correct {
-      background-color: none;
-      border: 0; }
-  .alignment-word-container .correct-spelling-info {
-    font-size: .6em;
-    text-align: center;
-    margin-top: 0; }
+
+.spelling {
+  border-radius: 6px;
+  padding: 2px 6px;
+  border: 1px solid transparent;
+  margin: auto;
+  text-align: center; }
+  .spelling.missing-word {
+    border: 2px solid #ff5400;
+    color: #ff5400; }
+  .spelling.wrong {
+    background-color: #f33;
+    color: #fff; }
+  .spelling.minor-mistake {
+    background-color: #f6ba07;
+    color: #fff; }
+  .spelling.correct {
+    background-color: none; }
+
+.correct-spelling-info {
+  font-size: .6em;
+  text-align: center;
+  margin-top: 0; }
 
 #score-info .score {
   font-weight: bold;

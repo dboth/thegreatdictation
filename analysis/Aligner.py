@@ -250,6 +250,6 @@ class Aligner(object):
         return self.path[::-1] #reverse and return path
 
 if __name__ == "__main__":
-    a = Aligner(u"Ich", u"Ich")  # Aligner(TARGET, INPUT)
+    a = Aligner(u"Ich bin ein Elefant.", u"Ich bin ein Elefant")  # Aligner(TARGET, INPUT)
     a.d.set_debug(True)
     a.debug(a.finalize())

@@ -145,46 +145,45 @@
 .alignment-word-container {
     margin: 3px 0 3px 5px;
     float: left;
+}
 
-    .spelling {
-        border-radius: 6px;
-        padding: 2px 6px;
-        border: 1px solid transparent;
-        margin: auto;
-        text-align: center;
+.spelling {
+    border-radius: 6px;
+    padding: 2px 6px;
+    border: 1px solid transparent;
+    margin: auto;
+    text-align: center;
 
-        // ERROR info
-        &.missing-word {
-            border: 2px solid $tgd-missing-word-color;
-            color: $tgd-missing-word-color;
-        }
-
-        &.wrong {
-            background-color: $tgd-wrong-color;
-            color: $tgd-font-contrast-color;
-            //border-color: darken($tgd-wrong-color, 30);
-            //@include box-shadow(0 0 2px #858585);
-        }
-
-        &.minor-mistake {
-            background-color: $tgd-minor-mistake-color;
-            color: $tgd-font-contrast-color;
-            //border-color: $tgd-minor-mistake-color;
-        }
-
-        &.correct {
-            background-color: none;
-            border: 0;
-        }
-
+    // ERROR info
+    &.missing-word {
+        border: 2px solid $tgd-missing-word-color;
+        color: $tgd-missing-word-color;
     }
 
-    //CORRECT Spelling info
-    .correct-spelling-info {
-        font-size: .6em;
-        text-align: center;
-        margin-top: 0;
+    &.wrong {
+        background-color: $tgd-wrong-color;
+        color: $tgd-font-contrast-color;
+        //border-color: darken($tgd-wrong-color, 30);
+        //@include box-shadow(0 0 2px #858585);
     }
+
+    &.minor-mistake {
+        background-color: $tgd-minor-mistake-color;
+        color: $tgd-font-contrast-color;
+        //border-color: $tgd-minor-mistake-color;
+    }
+
+    &.correct {
+        background-color: none;
+    }
+
+}
+
+//CORRECT Spelling info
+.correct-spelling-info {
+    font-size: .6em;
+    text-align: center;
+    margin-top: 0;
 }
 
 // SCORE

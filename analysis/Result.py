@@ -22,9 +22,8 @@ class Result():
         self.text_id = self.getValueFromJSON("text_id")
 
         #calculated data
-        self.the_aligner = Aligner.Aligner(self.target_data, self.input_data, False)
         self.alignment = self.calcAlignmentDiff(self.target_data, self.input_data)
-        self.postprocessor = APPr.AlignmentPostProcessor(self.alignment, self.target_data, self.input_data, self.the_aligner.match)
+        self.postprocessor = APPr.AlignmentPostProcessor(self.alignment, self.target_data, self.input_data, 1)
         self.word_alignment = self.calcWordAlignment()
         self.score = self.calcScore()
 
@@ -49,21 +48,10 @@ class Result():
 
     #CALCULATION METHODS
 
-    def calcSimpleDiff(self, input_data, target_data):
-        #todo: multiple sentences support
-
-        diff_map = {}
-
-        for i, inp, tar in zip(range(len(input_data)), self.parseTextToList(input_data)[0], self.parseTextToList(target_data)[0]):
-            if inp != tar:
-                diff_map.update({i: False})
-            else:
-                diff_map.update({i: True})
-
-        return diff_map
-
     def calcAlignmentDiff(self, target_data, input_data):
-        return self.the_aligner.finalize()
+        pre_result = Aligner.Aligner.preProcessStrings(target_data, input_data, 1, True)
+        result = Aligner.Aligner.getPathFromPreprocessedString(pre_result)
+        return result
 
     def calcWordAlignment(self):
         return self.postprocessor.convertToWordAlignment()

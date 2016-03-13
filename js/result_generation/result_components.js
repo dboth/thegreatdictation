@@ -143,7 +143,7 @@ Result.prototype.createHeader = function (target_id) {
 Result.prototype.createAlignmentInfo = function (target_id) {
 
 	/*
-		Creates Alignment Info based on Map
+		Creates Word Alignment Info about wordwise Errors based on Map
 	*/
 
 
@@ -236,7 +236,7 @@ Result.prototype.createMistakeDistributionInfo = function (target_id, type) {
 	// map with errorshortcut mapping to className and label
 	var error_type_map = {
 		"M": ["error-distr-match", "correct"],
-		//"D": ["error-distr-deletion", "waste"],
+		"D": ["error-distr-deletion", "waste"],
 		"I": ["error-distr-insert", "missing"],
 		"S": ["error-distr-sub", "wrong"],
 		"switch": ["error-distr-switch", "switched"],

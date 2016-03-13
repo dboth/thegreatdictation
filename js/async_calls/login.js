@@ -22,8 +22,9 @@ $(document).ready(function() {
 				console.log(window.location.search);
 				if (window.location.search === "?p=register") {
 					window.location.href = "?p=dictation";
+				} else {
+					window.location.reload();
 				}
-				window.location.reload();
 			})
 			.fail(function(res) {
 				console.log("error", res);

@@ -6663,6 +6663,9 @@ body {
       background-color: #2f2f2f;
       color: #fff; }
 
+.el-spacing-left {
+  margin-left: 10px; }
+
 /* GRID */
 .row-content {
   padding-left: 15px;
@@ -6854,7 +6857,6 @@ fieldset input[type="radio"] {
 
 .error-indication {
   font-size: 14pt;
-  overflow: auto;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;

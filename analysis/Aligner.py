@@ -303,10 +303,10 @@ class Aligner(object):
         return final_path
 
 if __name__ == "__main__":
-    a = Aligner(u"Ich bin ein Elefant.", u"Ich bin ein Elefant")  # Aligner(TARGET, INPUT)
+    a = Aligner(u"Elefant", u"Eleafnt")  # Aligner(TARGET, INPUT)
     a.d.set_debug(True)
     #a.debug(a.finalize())
     print "\n"
-    pre_result = Aligner.preProcessStrings(u"hazyo i xiw", u"da bin i", 1, True)
+    pre_result = Aligner.preProcessStrings(u"Elefant", u"Eleafnt", 1, True)
     result = Aligner.getPathFromPreprocessedString(pre_result)
     print result

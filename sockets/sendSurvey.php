@@ -29,5 +29,5 @@ foreach ($allowed as $key){
 if (count($setter))
     $db->query($sql = "INSERT INTO survey SET ".implode(", ",$setter));
 
-header("Location: ".strtok("http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",'?'));
+header("Location: ".strtok("http://$_SERVER[HTTP_HOST]",'?'));
 die();

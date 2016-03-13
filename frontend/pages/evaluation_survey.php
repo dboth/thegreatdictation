@@ -46,7 +46,7 @@
 					  		</fieldset>
 
 						<label for="getstarted-suggestions">Some suggested improvements?</label>
-						<textarea class="form-control" id="getstarted-suggestions" placeholder="Type in your suggestions here" rows="5"></textarea>
+						<textarea class="form-control" name="getstarted-suggestions" id="getstarted-suggestions" placeholder="Type in your suggestions here" rows="5"></textarea>
 					</div>
 				</div>
 
@@ -63,7 +63,7 @@
 					  		</fieldset>
 
 						<label for="dictation-suggestions">Some suggested improvements?</label>
-						<textarea class="form-control" id="dictation-suggestions" placeholder="Type in your suggestions here" rows="5"></textarea>
+						<textarea class="form-control" name="dictation-suggestions" id="dictation-suggestions" placeholder="Type in your suggestions here" rows="5"></textarea>
 					</div>
 				</div>
 
@@ -80,7 +80,7 @@
 					  		</fieldset>
 
 						<label for="background-suggestions">Some suggested improvements?</label>
-						<textarea class="form-control" id="background-suggestions" placeholder="Type in your suggestions here" rows="5"></textarea>
+						<textarea class="form-control" name="background-suggestions" id="background-suggestions" placeholder="Type in your suggestions here" rows="5"></textarea>
 					</div>
 				</div>
 
@@ -97,7 +97,7 @@
 					  		</fieldset>
 
 						<label for="wouldyouuse-suggestions">If not, why?</label>
-						<textarea class="form-control" id="wouldyouuse-suggestions" placeholder="Type in your suggestions here" rows="5"></textarea>
+						<textarea class="form-control" name="wouldyouuse-suggestions" id="wouldyouuse-suggestions" placeholder="Type in your suggestions here" rows="5"></textarea>
 					</div>
 				</div>
 
@@ -114,14 +114,14 @@
 					  		</fieldset>
 
 						<label for="learninggame-suggestions">Some inspiring ideas?</label>
-						<textarea class="form-control" id="learninggame-suggestions" placeholder="Type in your suggestions here" rows="5"></textarea>
+						<textarea class="form-control" name="learninggame-suggestions" id="learninggame-suggestions" placeholder="Type in your suggestions here" rows="5"></textarea>
 					</div>
 				</div>
 
 				<div class="form-group row row-spacing">
 					<div class="col-xs-12">
 						<label for="getstarted-suggestions">Further improvement suggestions?</label>
-						<textarea class="form-control" id="getstarted-suggestions" placeholder="Type in your suggestions here" rows="5"></textarea>
+						<textarea class="form-control" id="further-suggestions" name="further-suggestions" placeholder="Type in your suggestions here" rows="5"></textarea>
 					</div>
 				</div>
 

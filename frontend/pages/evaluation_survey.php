@@ -31,7 +31,7 @@
 
 	<div class="row row-content">
 		<div class="col-xs-12">
-			<form class="form-horizontal" id="eval-survey" action="sockets/submitSurvey.php">
+			<form class="form-horizontal" id="eval-survey" action="sockets/sendSurvey.php">
 
 				<!-- GET STARTED -->
 				<div class="form-group row row-spacing">

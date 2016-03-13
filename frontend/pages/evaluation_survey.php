@@ -38,7 +38,7 @@
 					<div class="col-xs-12">
 						<label for="getstarted-rating">Was Get Started helpful?</label>
 					  		<fieldset id="getstarted-rating">
-								<label for="gs-1"> 1 </label><input type="radio" name="getstarted-rating" id="gs-1" value="1" />
+								<label for="gs-1"> 1 </label><input type="radio" name="getstarted-rating" id="gs-1" value="1" required />
 								<label for="gs-2"> 2 </label><input type="radio" name="getstarted-rating" id="gs-2" value="2" />
 								<label for="gs-3"> 3 </label><input type="radio" name="getstarted-rating" id="gs-3" value="3" />
 								<label for="gs-4"> 4 </label><input type="radio" name="getstarted-rating" id="gs-4" value="4" />
@@ -55,7 +55,7 @@
 					<div class="col-xs-12">
 						<label for="dictation-rating">Did you cope well with the main dictation site?</label>
 					  		<fieldset id="dictation-rating">
-								<label for="dictaion-1"> 1 </label><input type="radio" name="dictation-rating" id="dictaion-1" value="1" />
+								<label for="dictaion-1"> 1 </label><input type="radio" name="dictation-rating" id="dictaion-1" value="1" required />
 								<label for="dictaion-2"> 2 </label><input type="radio" name="dictation-rating" id="dictaion-2" value="2" />
 								<label for="dictaion-3"> 3 </label><input type="radio" name="dictation-rating" id="dictaion-3" value="3" />
 								<label for="dictaion-4"> 4 </label><input type="radio" name="dictation-rating" id="dictaion-4" value="4" />
@@ -72,11 +72,11 @@
 					<div class="col-xs-12">
 						<label for="background-rating">Did you like the infos about dictation background ("Why Dictation")?</label>
 					  		<fieldset id="background-rating">
-								<label for="background-1"> 1 </label><input type="radio" name="background-rating" id="background-1" value="1" />
-								<label for="background-2"> 2 </label><input type="radio" name="background-rating" id="background-2" value="2" />
-								<label for="background-3"> 3 </label><input type="radio" name="background-rating" id="background-3" value="3" />
-								<label for="background-4"> 4 </label><input type="radio" name="background-rating" id="background-4" value="4" />
-								<label for="background-5"> 5 </label><input type="radio" name="background-rating" id="background-5" value="5" />
+								<label for="background-1"> 1 </label><input type="radio" name="background-rating" id="background-1" value="1" required/>
+								<label for="background-2"> 2 </label><input type="radio" name="background-rating" id="background-2" value="2"/>
+								<label for="background-3"> 3 </label><input type="radio" name="background-rating" id="background-3" value="3"/>
+								<label for="background-4"> 4 </label><input type="radio" name="background-rating" id="background-4" value="4"/>
+								<label for="background-5"> 5 </label><input type="radio" name="background-rating" id="background-5" value="5"/>
 					  		</fieldset>
 
 						<label for="background-suggestions">Some suggested improvements?</label>
@@ -89,7 +89,7 @@
 					<div class="col-xs-12">
 						<label for="wouldyouuse-rating">Would you use this platform for language learning?</label>
 					  		<fieldset id="wouldyouuse-rating">
-								<label for="wouldyouuse-1"> 1 </label><input type="radio" name="wouldyouuse-rating" id="wouldyouuse-1" value="1" />
+								<label for="wouldyouuse-1"> 1 </label><input type="radio" name="wouldyouuse-rating" id="wouldyouuse-1" value="1" required/>
 								<label for="wouldyouuse-2"> 2 </label><input type="radio" name="wouldyouuse-rating" id="wouldyouuse-2" value="2" />
 								<label for="wouldyouuse-3"> 3 </label><input type="radio" name="wouldyouuse-rating" id="wouldyouuse-3" value="3" />
 								<label for="wouldyouuse-4"> 4 </label><input type="radio" name="wouldyouuse-rating" id="wouldyouuse-4" value="4" />
@@ -106,7 +106,7 @@
 					<div class="col-xs-12">
 						<label for="learninggame-rating">Would you like dictation as kind of a game (e.g. colegting points and challenges)?</label>
 					  		<fieldset id="learninggame-rating">
-								<label for="learninggame-1"> 1 </label><input type="radio" name="learninggame-rating" id="learninggame-1" value="1" />
+								<label for="learninggame-1"> 1 </label><input type="radio" name="learninggame-rating" id="learninggame-1" value="1" required/>
 								<label for="learninggame-2"> 2 </label><input type="radio" name="learninggame-rating" id="learninggame-2" value="2" />
 								<label for="learninggame-3"> 3 </label><input type="radio" name="learninggame-rating" id="learninggame-3" value="3" />
 								<label for="learninggame-4"> 4 </label><input type="radio" name="learninggame-rating" id="learninggame-4" value="4" />

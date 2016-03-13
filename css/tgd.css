@@ -1070,7 +1070,7 @@ html {
   -webkit-tap-highlight-color: transparent; }
 
 body {
-  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  font-family: Verdana, Geneva, sans-serif;
   font-size: 14px;
   line-height: 1.42857;
   color: #333333;
@@ -5154,7 +5154,7 @@ button.close {
   position: absolute;
   z-index: 1070;
   display: block;
-  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  font-family: Verdana, Geneva, sans-serif;
   font-style: normal;
   font-weight: normal;
   letter-spacing: normal;
@@ -5260,7 +5260,7 @@ button.close {
   display: none;
   max-width: 276px;
   padding: 1px;
-  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  font-family: Verdana, Geneva, sans-serif;
   font-style: normal;
   font-weight: normal;
   letter-spacing: normal;
@@ -6786,6 +6786,16 @@ fieldset input[type="radio"] {
   -webkit-transition: none !important;
           transition: none !important; }
 
+.charwise-word-wrapper {
+  font-size: 14pt;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap; }
+
 .error-container {
   text-align: center;
   vertical-align: top; }
@@ -6863,16 +6873,19 @@ fieldset input[type="radio"] {
   display: flex;
   -webkit-flex-wrap: wrap;
       -ms-flex-wrap: wrap;
-          flex-wrap: wrap; }
+          flex-wrap: wrap;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between; }
 
 .alignment-word-container {
-  margin: 3px 0 3px 5px;
+  margin: 3px 8px 3px 0;
   float: left; }
 
 .spelling {
   border-radius: 6px;
   padding: 2px 6px;
-  border: 1px solid transparent;
   margin: auto;
   text-align: center; }
   .spelling.missing-word {
@@ -6885,7 +6898,8 @@ fieldset input[type="radio"] {
     background-color: #f6ba07;
     color: #fff; }
   .spelling.correct {
-    background-color: none; }
+    background-color: inherit;
+    padding: 0; }
 
 .correct-spelling-info {
   font-size: .6em;

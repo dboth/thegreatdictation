@@ -140,7 +140,7 @@ Result.prototype.createHeader = function (target_id) {
     header.find("h3").append(text_id);
 };
 
-Result.prototype.createAlignmentInfo = function (target_id) {
+Result.prototype.createWordwiseErrorInfo = function (target_id) {
 
 	/*
 		Creates Word Alignment Info about wordwise Errors based on Map
@@ -333,7 +333,7 @@ Result.prototype.createPerformanceOverTimeInfo = function (target_id) {
 
 };
 
-Result.prototype.createWordwiseErrorInfo = function (target_id) {
+Result.prototype.createCharwiseErrorInfo = function (target_id) {
 	/*
 		Shows information about each wrong word
 	 */
@@ -363,7 +363,7 @@ Result.prototype.createWordwiseErrorInfo = function (target_id) {
 			var info_target_word = $("<div>").addClass('col-xs-5 col-sm-3');
 			var info_input_word = $("<div>").addClass('col-sm-3 hidden-xs');
 			var info_pointer = $("<div>").addClass('col-sm-2 hidden-xs');
- 			var info_spelling = $("<div>").addClass('col-xs-7 col-sm-4 error-indication');
+ 			var info_spelling = $("<div>").addClass('col-xs-7 col-sm-4 charwise-word-wrapper');
 
 			//fill content
 			info_target_word.html(target_word);

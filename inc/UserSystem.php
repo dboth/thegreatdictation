@@ -85,6 +85,17 @@ class UserSystem
          }
         
     }
+    
+    public function getResultCount(){
+        if (empty($_SESSION["username"]))
+            return 0;
+        
+        
+        return substr(base_convert(md5($_SESSION["username"]),36,10),0,1);
+            
+        
+    }
+    
     public function setUser($username)
     {
         if (!$username)

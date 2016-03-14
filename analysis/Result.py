@@ -49,7 +49,7 @@ class Result():
     #CALCULATION METHODS
 
     def calcAlignmentDiff(self, target_data, input_data):
-        pre_result = Aligner.Aligner.preProcessStrings(target_data, input_data, 15, True)
+        pre_result = Aligner.Aligner.preProcessStrings(target_data, input_data, 4, True)
         result = Aligner.Aligner.getPathFromPreprocessedString(pre_result)
         return result
 

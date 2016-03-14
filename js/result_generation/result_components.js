@@ -354,7 +354,7 @@ Result.prototype.createCharwiseErrorInfo = function (target_id) {
 		var word_error = word_info[5];
 
 		// only if error occures
-		if (word_error > 0 && input_word !== "") {
+		if (word_error > 0 && input_word !== "" && word_info[6] === null) {
 
 			//container
 			var info_row = $("<div>").addClass('row row-spacing');
@@ -398,15 +398,6 @@ Result.prototype.createOverallScoreInfo = function (target_id) {
 		Calcs and creates Info about Score
 	*/
 
-	// FRONTEND MATH
-	var total_cost = this.levenshtein[this.levenshtein.length-1][2][2];
-	var total_chars = this.levenshtein.length;
-
-	var total_errors = 0;
-	for (var i = 0; i < total_chars; i++) {if (this.levenshtein[i][2][3] !== "M") {total_errors++;} }
-
-	var score = Math.round(total_chars / total_cost * 100)/100;
-
 	// BACKEND MATH
 	var score = this.score[0];
 	var correct_words = this.score[1];
@@ -421,7 +412,7 @@ Result.prototype.createOverallScoreInfo = function (target_id) {
 	var time = 100;
 	function add() {
 		if (cur_score < score) {
-			if (cur_score >= 100 && score === Infinity) {
+			if (cur_score >= 100 && score === "Infinity") {
 				score_display.html(score);
 				clearInterval(score_int);
 			} else {
@@ -439,17 +430,6 @@ Result.prototype.createOverallScoreInfo = function (target_id) {
 
 	var cur_score = 0;
 	var score_int = setInterval(add, time);
-
-	var color_ratio = total_errors / total_chars;
-	if (color_ratio >= 0.8) {
-		ratio_display.css("color", "red");
-	} else if (color_ratio >= 0.5) {
-		ratio_display.css("color", "orange");
-	} else if (color_ratio >= 0.3) {
-		ratio_display.css("color", "palegreen");
-	} else if (color_ratio >= 0.1) {
-		ratio_display.css("color", "green");
-	}
 
 	//parent.append(ratio_display).append(score_display);
 

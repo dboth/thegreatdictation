@@ -307,6 +307,6 @@ if __name__ == "__main__":
     a.d.set_debug(True)
     #a.debug(a.finalize())
     print "\n"
-    pre_result = Aligner.preProcessStrings(u"Elefant", u"Eleafnt", 1, True)
+    pre_result = Aligner.preProcessStrings(u"Elefant", u"Eleafnt", 15, True)
     result = Aligner.getPathFromPreprocessedString(pre_result)
     print result

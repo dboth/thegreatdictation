@@ -98,9 +98,9 @@ Result.prototype.styleSingleLetterWithLevenshtein = function (target_index) {
 				.html(this.target[target_pos].replace(/\s/g, "&nbsp"));
 		} else if (errortype === "switch") {
 			input.addClass("switch")
-				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
+				.html((this.input[input_pos] + this.target[target_pos]).replace(/\s/g, "&nbsp"));
 			target.addClass("switch")
-				.html(this.target[target_pos].replace(/\s/g, "&nbsp"));
+				.html("<i class='fa fa-exchange'></i>");
 		} else if (errortype === "punctuation" || errortype === "punctfault_t" || errortype === "sim_punct") {
 			console.log("LENGTH: " + this.input.length + "; POS: " + input_pos);
 			input.addClass("punctuation")
@@ -261,7 +261,7 @@ Result.prototype.createMistakeDistributionInfo = function (target_id, type) {
 	for (var error in error_count_map) {
 		// catch unknown error types, shouldnt happen tho
 		var error_label = "unknown";
-		var error_css = "error-distr-unknown"
+		var error_css = "error-distr-unknown";
 
 		if (error_type_map[error]) {
 			error_label = error_type_map[error][1];

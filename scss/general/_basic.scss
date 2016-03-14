@@ -91,7 +91,7 @@ body {
     border-bottom: 1px solid $tgd-primary-color;
     font-size: 14px;
     // fix chrome fixed navbar bug
-    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
 
     .navbar-brand {
         color: darken($tgd-navfont-color, 15);
@@ -201,6 +201,7 @@ fieldset {
     }
 }
 
+// titles
 .title {
     color: $tgd-primary-color;
     font-size: $tgd-font-size-title;
@@ -215,6 +216,12 @@ fieldset {
 .title-description {
     color: $tgd-primary-color;
     font-size: $tgd-font-size-description;
+}
+
+.title-hline {
+    padding-bottom: 10px;
+    border-bottom: 1px solid $tgd-primary-color;
+    margin-bottom: $tgd-vertical-gap;
 }
 
 .info {

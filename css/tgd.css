@@ -6682,7 +6682,8 @@ body {
 .navbar {
   border-bottom: 1px solid #2a93cf;
   font-size: 14px;
-  -webkit-transform: translateZ(0); }
+  -webkit-transform: translateZ(0);
+          transform: translateZ(0); }
   .navbar .navbar-brand {
     color: #d9d9d9; }
     .navbar .navbar-brand img {
@@ -6758,6 +6759,11 @@ fieldset input[type="radio"] {
   color: #2a93cf;
   font-size: 1.2em; }
 
+.title-hline {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #2a93cf;
+  margin-bottom: 40px; }
+
 .info {
   margin-top: 20px;
   margin-bottom: 40px;
@@ -6823,8 +6829,7 @@ fieldset input[type="radio"] {
     .error-container .input.punctuation {
       color: #6cd3ff; }
     .error-container .input.switch {
-      background-color: #ffa100;
-      color: #fff; }
+      color: #ffa100; }
 
 .legend {
   margin-top: 10px; }

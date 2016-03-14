@@ -6,6 +6,7 @@ import json
 import re
 import Aligner
 import AlignmentPostProcessor as APPr
+import pprint
 
 
 class Result():
@@ -49,7 +50,7 @@ class Result():
     #CALCULATION METHODS
 
     def calcAlignmentDiff(self, target_data, input_data):
-        pre_result = Aligner.Aligner.preProcessStrings(target_data, input_data, 4, True)
+        pre_result = Aligner.Aligner.preProcessStrings(target_data, input_data, 15, True)
         result = Aligner.Aligner.getPathFromPreprocessedString(pre_result)
         return result
 
@@ -84,6 +85,9 @@ class Result():
         return json.dumps([self.output_json])
 
 if __name__ == "__main__":
-    #tgd = Result('{"data":{"input":"Hallo du","text_id":"1","target":"du Hallo"},"meta":{"username":false,"gender":false,"age":false,"mothertongue":false,"learninglength":false,"livingingerman":false}}')
-    tgd = Result(sys.argv[1])
+    target_string = "Liebe Tanja, kannst du bitte einkaufen? Ich habe heute Nachmittag keine Zeit und ich möchte heute Abend kochen. Ich brauche noch Kartoffeln, Paprika, Tomaten und Zwiebeln. Für das Frühstück brauchen wir Kaffee, Tee, Brot, Butter, Marmelade, Käse und Wurst. Kannst du auch Schokolade und Cola mitbringen? Vielen Dank! Liebe Grüße Mama"
+    input_string = "Liebe Tonia, kannewst du bitte einufen? Ich habe heute Nacmhittag keine Zeit und ich möchte heute Abend kochen. I ch brauche noch Kartoffeln, Paprika, Tomaten und Zwiebeln. das Für Frühstück brauchen Tee, Kaffee, Brot, ButterMarmelade, Käse und Wurst. Kwe annst du auch Schokolade und Coka mitbringen? Viele Dank! Liebe Grüße Mama"
+
+    tgd = Result('{"data":{"input":"' + input_string + '","text_id":"1","target":"' + target_string + '"},"meta":{"username":false,"gender":false,"age":false,"mothertongue":false,"learninglength":false,"livingingerman":false}}')
+    #tgd = Result(sys.argv[1])
     print(tgd.returnJSON())

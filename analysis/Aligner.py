@@ -298,8 +298,8 @@ class Aligner(object):
                 path = a.finalize()
                 for process in path: #increase all indices in path by current state
                     final_path.append([process[0]+current_target_state, process[1]+current_input_state, Aligner.matrix_field(process[2][0]+current_target_state, process[2][1]+current_input_state, process[2][2], process[2][3])])
-                current_target_state = final_path[-1][0]
-                current_input_state = final_path[-1][1]
+                current_target_state += len(element[0])
+                current_input_state += len(element[1])
         return final_path
 
 if __name__ == "__main__":

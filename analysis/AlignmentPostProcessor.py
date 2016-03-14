@@ -118,7 +118,6 @@ if __name__ == "__main__":
     input_string = "Liebe Tonia, kannewst du bitte einufen? Ich habe heute Nacmhittag keine Zeit und ich möchte heute Abend kochen. I ch brauche noch Kartoffeln, Paprika, Tomaten und Zwiebeln. das Für Frühstück brauchen Tee, Kaffee, Brot, ButterMarmelade, Käse und Wurst. Kwe annst du auch Schokolade und Coka mitbringen? Viele Dank! Liebe Grüße Mama"
     #app = AlignmentPostProcessor(a.finalize(), "ich bin ein elefant", "ich bin auch ein elefant", 1)
     pre_result = Aligner.Aligner.preProcessStrings(target_string, input_string, 15, True)
-    #pre_result
     result = Aligner.Aligner.getPathFromPreprocessedString(pre_result)
     appro = AlignmentPostProcessor(result, target_string, input_string, 1)
 

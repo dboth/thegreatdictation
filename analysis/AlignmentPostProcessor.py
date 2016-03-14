@@ -5,6 +5,7 @@
 import Aligner
 from collections import namedtuple
 import time
+import pprint
 
 
 class AlignmentPostProcessor():
@@ -75,7 +76,7 @@ class AlignmentPostProcessor():
 
         return self.output_dict
 
-        
+
     def calcScore(self):
         error_weight = 0
         all_errors = 0
@@ -113,15 +114,15 @@ class AlignmentPostProcessor():
 
 if __name__ == "__main__":
     start_time = time.time()
-    #a = Aligner.Aligner(u"Liebe Tanja, kannst du bitte einkaufen? Ich habe heute Nachmittag keine Zeit und ich m\u00f6chte heute Abend kochen. Ich brauche noch Kartoffeln, Paprika, Tomaten und Zwiebeln. F\u00fcr das Fr\u00fchst\u00fcck brauchen wir Kaffee, Tee, Brot, Butter, Marmelade, K\u00e4se und Wurst. Kannst du auch Schokolade und Cola mitbringen? Vielen Dank! Liebe Gr\u00fc\u00dfe Mama", u"Liebe Tanja, kannst du bitte einkaufen? Ich habe heute Nachmittag keine Zeit und ich m\u00f6chte heute Abend kochen. Ich brauche noch Kartoffeln, Paprika, Tomaten und Zwiebeln. F\u00fcr das Fr\u00fchst\u00fcck brauchen wir Kaffee, Tee, Brot, Butter, Marmelade, K\u00e4se und Wurst. Kannst du auch Schokolade und Cola mitbringen? Vielen Dank! Liebe Gr\u00fc\u00dfe Mama")
-    target_string = "Liebe Tanja, kannst du bitte einkaufen? Ich habe heute Nachmittag keine Zeit und ich m\u00f6chte heute Abend kochen. Ich brauche noch Kartoffeln, Paprika, Tomaten und Zwiebeln. F\u00fcr das Fr\u00fchst\u00fcck brauchen wir Kaffee, Tee, Brot, Butter, Marmelade, K\u00e4se und Wurst. Kannst du auch Schokolade und Cola mitbringen? Vielen Dank! Liebe Gr\u00fc\u00dfe Mama"
-    input_string = "Liebe Tanja, kannsat du bitte einkaufen? Ich habe heute Nachmfittag keine Zeit und ich m\u00f6chte heute Abend skochen. Ich brauche nowefch Kartoffeln, Papfwarika, Tomatsen und Zwiebeln. F\u00fcr fdas Fr\u00fchst\u00fcck bwaefrauchen wir Kafwfee, Tee, Brot, Butter, Marmelade, K\u00e4se und Wurst.f Kannst du auch Schokolade und Colaeasef mitbringen? Vielen Dank! ewaLiebe Gr\u00fc\u00dfef Mama"
+    #a = Aligner.Aligner(u"Liebe Tanja, kannst du bitte einkaufen? Ich habe heute Nachmittag keine Zeit und ich m\u00f6chte heute Abend kochen. Ich brauche noch Kartoffeln, Paprika, Tomaten und Zwiebeln. F\u00fcr das Fr\u00fchst\u00fcck brauchen wir Kaffee, Tee, Brot, Butter, Marmelade, K\u00e4se und Wurst. Kannst du auch Schokolade und Cola mitbringen? Vielen Dank! Liebe Gr\u00fc\u00dfe Mama", u"Liebe Tonia, kannewst du bitte einufen? Ich habe heute Nacmhittag keine Zeit und ich möchte heute Abend kochen. I ch brauche noch Kartoffeln, Paprika, Tomaten und Zwiebeln. das Für Frühstück brauchen Tee, Kaffee, Brot, ButterMarmelade, Käse und Wurst. Kwe annst du auch Schokolade und Coka mitbringen? Viele Dank! Liebe Grüße Mama")
+    target_string = "Liebe Tanja, kannst du bitte einkaufen? Ich habe heute Nachmittag keine Zeit und ich möchte heute Abend kochen. Ich brauche noch Kartoffeln, Paprika, Tomaten und Zwiebeln. Für das Frühstück brauchen wir Kaffee, Tee, Brot, Butter, Marmelade, Käse und Wurst. Kannst du auch Schokolade und Cola mitbringen? Vielen Dank! Liebe Grüße Mama"
+    input_string = "Liebe Tonia, kannewst du bitte einufen? Ich habe heute Nacmhittag keine Zeit und ich möchte heute Abend kochen. I ch brauche noch Kartoffeln, Paprika, Tomaten und Zwiebeln. das Für Frühstück brauchen Tee, Kaffee, Brot, ButterMarmelade, Käse und Wurst. Kwe annst du auch Schokolade und Coka mitbringen? Viele Dank! Liebe Grüße Mama"
     #app = AlignmentPostProcessor(a.finalize(), "ich bin ein elefant", "ich bin auch ein elefant", 1)
     pre_result = Aligner.Aligner.preProcessStrings(target_string, input_string, 15, True)
     result = Aligner.Aligner.getPathFromPreprocessedString(pre_result)
     appro = AlignmentPostProcessor(result, target_string, input_string, 1)
-    
-    print appro.convertToWordAlignment()
+
+    pprint.pprint(appro.convertToWordAlignment())
     #print(app.convertToWordAlignment())
     #print(app.calcScore())
     print("--- %s seconds ---" % (time.time() - start_time))

@@ -98,9 +98,9 @@ Result.prototype.styleSingleLetterWithLevenshtein = function (target_index) {
 				.html(this.target[target_pos].replace(/\s/g, "&nbsp"));
 		} else if (errortype === "switch") {
 			input.addClass("switch")
-				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
+				.html((this.input[input_pos] + this.target[target_pos]).replace(/\s/g, "&nbsp"));
 			target.addClass("switch")
-				.html(this.target[target_pos].replace(/\s/g, "&nbsp"));
+				.html("<i class='fa fa-exchange'></i>");
 		} else if (errortype === "punctuation" || errortype === "punctfault_t" || errortype === "sim_punct") {
 			console.log("LENGTH: " + this.input.length + "; POS: " + input_pos);
 			input.addClass("punctuation")
@@ -140,10 +140,10 @@ Result.prototype.createHeader = function (target_id) {
     header.find("h3").append(text_id);
 };
 
-Result.prototype.createAlignmentInfo = function (target_id) {
+Result.prototype.createWordwiseErrorInfo = function (target_id) {
 
 	/*
-		Creates Alignment Info based on Map
+		Creates Word Alignment Info about wordwise Errors based on Map
 	*/
 
 
@@ -236,7 +236,7 @@ Result.prototype.createMistakeDistributionInfo = function (target_id, type) {
 	// map with errorshortcut mapping to className and label
 	var error_type_map = {
 		"M": ["error-distr-match", "correct"],
-		//"D": ["error-distr-deletion", "waste"],
+		"D": ["error-distr-deletion", "waste"],
 		"I": ["error-distr-insert", "missing"],
 		"S": ["error-distr-sub", "wrong"],
 		"switch": ["error-distr-switch", "switched"],
@@ -261,7 +261,7 @@ Result.prototype.createMistakeDistributionInfo = function (target_id, type) {
 	for (var error in error_count_map) {
 		// catch unknown error types, shouldnt happen tho
 		var error_label = "unknown";
-		var error_css = "error-distr-unknown"
+		var error_css = "error-distr-unknown";
 
 		if (error_type_map[error]) {
 			error_label = error_type_map[error][1];
@@ -333,7 +333,7 @@ Result.prototype.createPerformanceOverTimeInfo = function (target_id) {
 
 };
 
-Result.prototype.createWordwiseErrorInfo = function (target_id) {
+Result.prototype.createCharwiseErrorInfo = function (target_id) {
 	/*
 		Shows information about each wrong word
 	 */
@@ -363,7 +363,7 @@ Result.prototype.createWordwiseErrorInfo = function (target_id) {
 			var info_target_word = $("<div>").addClass('col-xs-5 col-sm-3');
 			var info_input_word = $("<div>").addClass('col-sm-3 hidden-xs');
 			var info_pointer = $("<div>").addClass('col-sm-2 hidden-xs');
- 			var info_spelling = $("<div>").addClass('col-xs-7 col-sm-4 error-indication');
+ 			var info_spelling = $("<div>").addClass('col-xs-7 col-sm-4 charwise-word-wrapper');
 
 			//fill content
 			info_target_word.html(target_word);

@@ -111,19 +111,30 @@
 		<!-- FOOTER -->
 		<footer class="page-footer">
 			<div class="container">
-
-				<div class="row row-content">
+				<div class="row">
 					<div class="col-xs-12 col-sm-4">
+						<div class="title-small">
+							Sitemap
+						</div>
+						<a href="?p=home">Startpage</a> <br />
+						<a href="?p=getstarted">Get Started</a> <br />
+						<a href="?p=why">Why Dictation</a> <br />
+						<a href="?p=aboutus">About Us</a> <br />
+						<a href="?p=impressum">Impressum</a> <br />
+						<a href="?p=contact">Contact us</a>
+					</div>
 
+					<div class="col-xs-12 col-sm-4">
+						<div class="title-small">
+							Data Collection
+						</div>
+						<a href="?p=getstarted">Get Started</a> <br />
+						<a href="?p=dictation">Dictation</a> <br />
+						<a href="?p=survey">Survey</a> <br />
 					</div>
 
 					<div class="col-xs-12 col-sm-4">
 
-					</div>
-
-					<div class="col-xs-12 col-sm-4">
-						Impressum <br />
-						Contact us <br />
 					</div>
 				</div>
 

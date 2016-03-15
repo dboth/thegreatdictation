@@ -2,7 +2,8 @@
 
 html {
     height: 100%;
-    overflow-y: hidden;
+    overflow-y: scroll;
+    overflow-x: hidden;
     font-size: $tgd-font-size;
 }
 
@@ -10,7 +11,6 @@ body {
     height: 100%;
     margin: 0;
     padding: 50px 0 0; //save content from navbar
-    overflow: auto;
 
     &.modal-open {
         overflow-y: none;
@@ -39,7 +39,7 @@ body {
     }
 
     p {
-        font-size: $tgd-font-size-description+0.1;
+        font-size: $tgd-font-size-description+.1;
     }
 }
 
@@ -62,9 +62,10 @@ body {
         position: absolute;
         width: 100%;
         border-top: 1px solid $tgd-primary-color;
+        padding: 20px 0 20px 0;
 
         &.page-footer {
-            height: $tgd-footer-height;
+            min-height: $tgd-footer-height;
             background-color: $tgd-footer-color;
             color: $tgd-font-contrast-color;
         }
@@ -218,14 +219,18 @@ fieldset {
 
 // titles
 .title {
-    color: $tgd-primary-color;
     font-size: $tgd-font-size-title;
+    color: $tgd-primary-color;
     font-weight: normal;
 }
 
 .subtitle {
     color: $tgd-primary-color;
     font-size: $tgd-font-size-subtitle;
+}
+
+.title-small {
+    color: $tgd-primary-color;
 }
 
 .title-description {

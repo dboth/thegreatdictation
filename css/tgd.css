@@ -6623,14 +6623,14 @@ select.selectpicker {
 /* DOCUMENT */
 html {
   height: 100%;
-  overflow-y: hidden;
+  overflow-y: scroll;
+  overflow-x: hidden;
   font-size: 1em; }
 
 body {
   height: 100%;
   margin: 0;
-  padding: 50px 0 0;
-  overflow: auto; }
+  padding: 50px 0 0; }
   body.modal-open {
     overflow-y: none;
     padding-right: inherit !important; }
@@ -6653,7 +6653,7 @@ body {
   min-height: 100%;
   position: relative; }
   #wrapper #content {
-    padding-bottom: 250px; }
+    padding-bottom: 300px; }
     #wrapper #content .pointout {
       font-size: 1.2em; }
   #wrapper footer {
@@ -6661,9 +6661,10 @@ body {
     left: 0;
     position: absolute;
     width: 100%;
-    border-top: 1px solid #2a93cf; }
+    border-top: 1px solid #2a93cf;
+    padding: 20px 0 20px 0; }
     #wrapper footer.page-footer {
-      height: 150px;
+      min-height: 200px;
       background-color: #2f2f2f;
       color: #fff; }
 
@@ -6759,13 +6760,16 @@ fieldset input[type="radio"] {
     margin: 10px 0 20px; }
 
 .title {
-  color: #2a93cf;
   font-size: 2.5em;
+  color: #2a93cf;
   font-weight: normal; }
 
 .subtitle {
   color: #2a93cf;
   font-size: 1.5em; }
+
+.title-small {
+  color: #2a93cf; }
 
 .title-description {
   color: #2a93cf;

@@ -87,28 +87,23 @@ class UserSystem
     }
     
     public function getResultCount(){
-        if (empty($_SESSION["username"]))
-            return 0;
-        
-        
-        return substr(base_convert(md5($_SESSION["username"]),36,10),0,1);
-            
-        
-    }
+        return empty($_SESSION["username"]) ? 0 : $this->db->query("SELECT id FROM results_v0 WHERE username = '".$this->db->esc($_SESSION["username"])."'")->num_rows;
+	}
     
-    public function setUser($username)
+    public function setUser($username, $onlyLogin = false)
     {
         if (!$username)
             return false;
         
-        //set the username for the session
-        $_SESSION["username"] = $username;
+        
         
         //select info from database and instatiate
         $e = $this->db->query("SELECT * FROM users WHERE username = '".$this->db->esc($username)."'");
         $r = array();
         if ($e->num_rows)
             $r = $e->fetch_assoc();
+		else if ($onlyLogin)
+			return false;
         
         foreach (self::$allowed as $key){
             if ($key == "username")
@@ -118,6 +113,8 @@ class UserSystem
             else
                 $_SESSION[$key] = "";
         }
+		//set the username for the session
+        $_SESSION["username"] = $username;
         
     }
 

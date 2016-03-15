@@ -38,7 +38,7 @@ if (isset($_POST["information"])){
     }
 
     if ($user) {
-        $usersystem->setUser($user);
+        $usersystem->setUser($user, empty($infArr));
     }
 
     foreach ($infArr as $key => $val){

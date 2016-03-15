@@ -71,6 +71,6 @@ $EHandler->log("b_info", $command);
 //execute the command (system() prints the output) exec does not
 $output = exec($command);
 
-$sql->saveAnalysisResult($input_json, $output);
+$sql->saveAnalysisResult($input_json, $output, $usersystem->getUserInformation("username"));
 
 echo $output;

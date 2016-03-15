@@ -6623,13 +6623,14 @@ select.selectpicker {
 /* DOCUMENT */
 html {
   height: 100%;
-  overflow-y: scroll;
+  overflow-y: hidden;
   font-size: 1em; }
 
 body {
   height: 100%;
   margin: 0;
-  padding: 50px 0 0; }
+  padding: 50px 0 0;
+  overflow: auto; }
   body.modal-open {
     overflow-y: none;
     padding-right: inherit !important; }
@@ -6643,7 +6644,10 @@ body {
       font-size: 36px; }
   .jumbotron .jumbotron-content {
     margin-top: 10px;
+    font-size: 1em;
     color: #fff; }
+  .jumbotron p {
+    font-size: 1.3em; }
 
 #wrapper {
   min-height: 100%;
@@ -6700,6 +6704,9 @@ body {
       .navbar .nav li a:focus {
         color: #fff; }
 
+.sidebar {
+  top: 50px; }
+
 a {
   outline: none !important;
   color: inherit; }
@@ -6732,6 +6739,11 @@ fieldset input[type="radio"] {
   margin-right: 10px; }
 
 /* ELEMENTS */
+.pointout-font {
+  font-size: 2.5em;
+  color: #2a93cf;
+  font-weight: bold; }
+
 .obvious-link {
   color: #19577a; }
 
@@ -6761,7 +6773,7 @@ fieldset input[type="radio"] {
 
 .title-hline {
   padding-bottom: 10px;
-  border-bottom: 1px solid #2a93cf;
+  border-bottom: 2px solid #2a93cf;
   margin-bottom: 40px; }
 
 .info {

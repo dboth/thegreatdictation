@@ -1,5 +1,9 @@
 $(document).ready(function() {
 
+	//autofocus username
+	$('#login-modal').on('shown.bs.modal', function () {
+    	$('#login-username').focus();
+	});
 
 	// LOGIN
 	$("#login-form").submit(function(event) {

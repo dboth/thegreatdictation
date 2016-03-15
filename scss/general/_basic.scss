@@ -2,7 +2,7 @@
 
 html {
     height: 100%;
-    overflow-y: scroll;
+    overflow-y: hidden;
     font-size: $tgd-font-size;
 }
 
@@ -10,6 +10,7 @@ body {
     height: 100%;
     margin: 0;
     padding: 50px 0 0; //save content from navbar
+    overflow: auto;
 
     &.modal-open {
         overflow-y: none;
@@ -32,9 +33,13 @@ body {
 
     .jumbotron-content {
         margin-top: 10px;
-
+        font-size: $tgd-font-size;
         color: $tgd-font-contrast-color;
 
+    }
+
+    p {
+        font-size: $tgd-font-size-description+0.1;
     }
 }
 
@@ -124,6 +129,10 @@ body {
     }
 }
 
+.sidebar {
+    top: 50px;
+}
+
 a {
     outline: none !important;
     color: inherit;
@@ -182,6 +191,12 @@ fieldset {
 
 /* ELEMENTS */
 
+.pointout-font {
+    font-size: $tgd-font-size-title;
+    color: $tgd-primary-color;
+    font-weight: bold;
+}
+
 .obvious-link {
     color: $tgd-secondary-color;
 }
@@ -220,7 +235,7 @@ fieldset {
 
 .title-hline {
     padding-bottom: 10px;
-    border-bottom: 1px solid $tgd-primary-color;
+    border-bottom: 2px solid $tgd-primary-color;
     margin-bottom: $tgd-vertical-gap;
 }
 

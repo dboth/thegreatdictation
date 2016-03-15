@@ -45,7 +45,8 @@ class TemplateGenerator{
                         "header-description" => "description.php",
                         "citation" => "citations.php",
                         "texts" => "dictation_texts.php",
-                        "result" => "result_page.php"
+                        "result" => "result_page.php",
+                        "scrollspy" => "scrollspy/result.php"
                     ),
                     "body"=>"dictation.php",
                     "template"=>"default.php"

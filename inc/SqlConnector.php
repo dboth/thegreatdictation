@@ -45,7 +45,7 @@ class SqlConnector {
 
     public function saveAnalysisResult($input, $output, $username = ""){
         if (!($stmt = $this->verbindung->prepare("INSERT INTO results_v0 (input, output, username) VALUES(?, ?, ?)"))) die($this->errors->createErrorJSON("b_db_couldnt_prepare_sql", "results_v0"));
-        $stmt->bind_param("ss",$input,$output, $username);
+        $stmt->bind_param("sss",$input,$output, $username);
         $stmt->execute();
     }
 

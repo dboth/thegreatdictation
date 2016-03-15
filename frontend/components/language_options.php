@@ -10,7 +10,9 @@
 	$langs = json_decode($file, true);
 	foreach ($langs as $k => $l) {
 		$language = $langs[$k];
-		echo "<option value='".$k."'>".$language."</option>";
+		$selected = "";
+		if ($k === "eng") $selected = "selected";
+		echo "<option value='".$k." '".$selected.">".$language."</option>";
 	}
 
 ?>

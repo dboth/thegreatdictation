@@ -92,11 +92,11 @@
 
 				<?php
 
-				if ($usersystem->getResultCount() > 3) {
+				if ($usersystem->getResultCount() >= 3) {
 					echo '
 					<div class="text-center alert alert-success" role="alert">
 						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						You have already finished '.$usersystem->getResultCount().' or more dictations! Thank you for your help. If you could evaluate your work, this would help us even more!<br />
+						You have already finished '.$usersystem->getResultCount().' dictations! Thank you for your help. If you could evaluate your work, this would help us even more!<br />
 						<a class="alert-link" href="?p=survey">Take the survey now!</a>
 					</div>
 					';

@@ -6,6 +6,7 @@ $tgd-primary-color: rgb(42, 147, 207);
 $tgd-secondary-color: darken($tgd-primary-color, 20);
 
 $tgd-nav-color: #2f2f2f;
+$tgd-nav-footer-border-color: #000;
 $tgd-nav-hover-color: $tgd-primary-color;
 $tgd-footer-color: #2f2f2f;
 
@@ -16,6 +17,7 @@ $tgd-active-link-color: $tgd-primary-color;
 $tgd-font-color: #000;
 $tgd-font-contrast-color: #fff;
 $tgd-navfont-color: #fff;
+$tgd-footer-font-color: #b1b1b1;
 
 // STATISTIC COLORS
 $tgd-score-color: #add8e6;
@@ -38,9 +40,11 @@ $tgd-switch-color: #ffa100;
 $tgd-unknown-color: rgb(112, 112, 112);
 
 /* TEXT STYLING */
-$tgd-font-family: Verdana, Geneva, sans-serif;
+$tgd-font-family: Helvetica, sans-serif;
 
 $tgd-font-size: 1em;
+$tgd-font-size-nav: 1.1em;
+
 $tgd-font-size-subtitle: 1.5em;
 $tgd-font-size-description: 1.2em;
 $tgd-font-size-title: 2.5em;
@@ -56,3 +60,5 @@ $tgd-horizontal-gap:    15px;
 
 /* ELEMENTS */
 $tgd-default-padding: 15px;
+
+$tgd-nav-hoverbar-height: 5px;

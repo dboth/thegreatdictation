@@ -1070,7 +1070,7 @@ html {
   -webkit-tap-highlight-color: transparent; }
 
 body {
-  font-family: Verdana, Geneva, sans-serif;
+  font-family: Helvetica, sans-serif;
   font-size: 14px;
   line-height: 1.42857;
   color: #333333;
@@ -5154,7 +5154,7 @@ button.close {
   position: absolute;
   z-index: 1070;
   display: block;
-  font-family: Verdana, Geneva, sans-serif;
+  font-family: Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   letter-spacing: normal;
@@ -5260,7 +5260,7 @@ button.close {
   display: none;
   max-width: 276px;
   padding: 1px;
-  font-family: Verdana, Geneva, sans-serif;
+  font-family: Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   letter-spacing: normal;
@@ -6623,12 +6623,15 @@ select.selectpicker {
 /* DOCUMENT */
 html {
   height: 100%;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  max-width: 100%;
+  overflow: hidden;
   font-size: 1em; }
 
 body {
   height: 100%;
+  max-width: 100%;
+  overflow: auto;
+  overflow-x: hidden;
   margin: 0;
   padding: 50px 0 0; }
   body.modal-open {
@@ -6657,16 +6660,17 @@ body {
     #wrapper #content .pointout {
       font-size: 1.2em; }
   #wrapper footer {
+    color: #b1b1b1;
     bottom: 0;
     left: 0;
     position: absolute;
     width: 100%;
     border-top: 1px solid #2a93cf;
-    padding: 20px 0 20px 0; }
+    padding: 20px 0;
+    font-size: 1.2em; }
     #wrapper footer.page-footer {
       min-height: 200px;
-      background-color: #2f2f2f;
-      color: #fff; }
+      background-color: #2f2f2f; }
 
 .el-spacing-left {
   margin-left: 10px; }
@@ -6685,12 +6689,16 @@ body {
 
 /* NAVIGATION */
 .navbar {
-  border-bottom: 1px solid #2a93cf;
-  font-size: 14px;
+  border: 0;
+  text-transform: uppercase;
+  font-size: 1.1em;
   -webkit-transform: translateZ(0);
-          transform: translateZ(0); }
+          transform: translateZ(0);
+  font-weight: bold;
+  padding-top: 5px; }
   .navbar .navbar-brand {
-    color: #d9d9d9; }
+    -webkit-filter: brightness(100);
+            filter: brightness(100); }
     .navbar .navbar-brand img {
       margin-top: -8px;
       -webkit-filter: invert(0%);
@@ -6698,10 +6706,11 @@ body {
   .navbar .nav li {
     text-align: center; }
     .navbar .nav li a {
-      color: #fff; }
+      color: #fff;
+      border-bottom: 5px inset transparent; }
       .navbar .nav li a:hover {
-        background-color: #2a93cf;
-        color: #fff; }
+        color: #fff;
+        border-bottom: 5px inset #2a93cf; }
       .navbar .nav li a:focus {
         color: #fff; }
 
@@ -6769,6 +6778,7 @@ fieldset input[type="radio"] {
   font-size: 1.5em; }
 
 .title-small {
+  text-transform: uppercase;
   color: #2a93cf; }
 
 .title-description {

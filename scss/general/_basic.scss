@@ -3,15 +3,15 @@
 html {
     height: 100%;
     max-width: 100%;
-    overflow: hidden;
+    overflow-y: scroll;
     font-size: $tgd-font-size;
 }
 
 body {
     height: 100%;
     max-width: 100%;
-    overflow: auto;
-    overflow-x: hidden;
+    //overflow: auto;
+    //overflow: hidden;
     margin: 0;
     padding: 50px 0 0; //save content from navbar
 
@@ -25,6 +25,10 @@ body {
 
 .jumbotron {
     background-color: $tgd-secondary-color;
+    position: fixed;
+    width: 100%;
+    margin: 0;
+    z-index: 1;
 
     .jumbotron-header {
         color: $tgd-font-contrast-color;
@@ -53,6 +57,14 @@ body {
     position: relative;
 
     #content {
+        padding-top: $tgd-vertical-gap;
+        top: $tgd-header-height + 12px;
+        width: 100%;
+        margin: 0;
+        background-color: #fff;
+        z-index: 2;
+        position: relative;
+
         padding-bottom: $tgd-footer-height + 100px;
 
         .pointout {
@@ -64,7 +76,7 @@ body {
     footer {
         color: $tgd-footer-font-color;
 
-        bottom: 0;
+        bottom: -$tgd-header-height - 12px;
         left: 0;
         position: absolute;
         width: 100%;
@@ -73,6 +85,8 @@ body {
         padding: 20px 0;
 
         font-size: $tgd-font-size+.2;
+
+        z-index: 3;
 
         &.page-footer {
             min-height: $tgd-footer-height;
@@ -102,6 +116,10 @@ body {
 
 /* NAVIGATION */
 
+.navbar-collapse.in {
+    overflow: hidden;
+}
+
 .navbar {
     //border-bottom: 1px solid $tgd-nav-footer-border-color;
     border: 0;
@@ -113,6 +131,10 @@ body {
 
     font-weight: bold;
     padding-top: $tgd-nav-hoverbar-height;
+
+    &.navbar-inverse {
+        overflow: hidden;
+    }
 
     .navbar-brand {
         filter: brightness(100);

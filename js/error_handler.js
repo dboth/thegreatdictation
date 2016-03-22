@@ -1,4 +1,4 @@
-function requestErrorInfo (error_id, add_info) {
+function requestErrorInfo (error_id, add_info, target_id) {
 
 	var error_error = {
 		"msg": "There has been an error reporting this error. Whoooopsi",
@@ -17,15 +17,15 @@ function requestErrorInfo (error_id, add_info) {
 		informUser(error_error);
 	}).done(function (error_info) {
 		if (typeof error_info != "object"){
-			informUser(error_error);
+			informUser(error_error, target_id);
 		}
 
-		informUser(error_info);
+		informUser(error_info, target_id);
 	});
 
 }
 
-function informUser (info) {
+function informUser (info, target_id) {
 
 	var weight = info["fatality"];
 	var name = info["name"];
@@ -61,6 +61,10 @@ function informUser (info) {
 		.addClass("alert-dismissible")
 		.html(dismiss_button + "<strong>" + name + ": </strong>" + error_msg/* + " " + debug*/);
 
-	$("#content .main-container").append(error_container);
+	if (!target_id) {
+		target_id = "#content .main-container";
+	}
+
+	$(target_id).append(error_container);
 
 }

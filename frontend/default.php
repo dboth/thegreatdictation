@@ -58,8 +58,8 @@
 							echo '<li><a href="?logout"><i class="fa fa-sign-out"></i> Log Out</a></li>';
 						}
 						?>
-						<li><a data-toggle="modal" href="#feedback-modal"><i class="fa fa-comment"></i> Send Feedback</a></li>
-						<li><a href="?P=faq"><i class="fa fa-question-circle"></i> FAQ</a></li>
+						<li><a data-toggle="modal" href="#feedback-modal"><i class="fa fa-comment"></i> Feedback</a></li>
+						<!--<li><a href="?P=faq"><i class="fa fa-question-circle"></i> FAQ</a></li>-->
 					</ul>
 				</div>
 

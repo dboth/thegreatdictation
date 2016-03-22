@@ -97,7 +97,11 @@ class ErrorHandler {
 				$error_info["name"] = "SELECT A TEXT";
 				$error_info["msg"] = "Please select a text!";
 				break;
-
+			case "f_user_doesnt_exist":
+				$error_info["fatality"] = "FATAL";
+				$error_info["name"] = "USER NOT FOUND";
+				$error_info["msg"] = "The username you entered doesnt exist. Please check your spelling or register first!";
+				break;
 
 			default:
 				$error_info["fatality"] = "DEBUG";

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container main-container">
         <div class="row row-content">
 
 			<div class="row">
@@ -43,6 +43,7 @@
 					</label>
 					<div class="col-xs-12 col-sm-3">
 						<select class="form-control selectpicker" name="gender" id="reg-gender" required>
+                            <option disabled selected value>- select -</option>
 							<option value="m">male</option>
 							<option value="f">female</option>
 						</select>
@@ -52,7 +53,7 @@
 						Age
 					</label>
 					<div class="col-xs-12 col-sm-3">
-						<input type="number" id="reg-age" name="age" class="form-control" step="1" value="16" min="0" required />
+						<input type="number" id="reg-age" name="age" class="form-control" step="1" value="" min="0" placeholder="16" required />
 					</div>
 				</div>
 
@@ -62,6 +63,7 @@
 					</label>
 					<div class="col-xs-12 col-sm-3">
 						<select data-live-search="true" data-size="3" data-dropup-auto="false" class="form-control selectpicker" id="reg-mother-tongue" name="mother-tongue" required>
+                            <option disabled selected value>- select -</option>
 							<tgd_langs>
 						</select>
 					</div>
@@ -71,7 +73,8 @@
 					</label>
 					<div class="col-xs-12 col-sm-3">
 						<select class="form-control selectpicker" name="learninglength" id="reg-learninglength" required>
-							<option value="a" selected>just started</option>
+                            <option disabled selected value>- select -</option>
+							<option value="a">just started</option>
 							<option value="b">few months</option>
 							<option value="c">1 year</option>
 							<option value="d">more than 1 year</option>
@@ -105,5 +108,3 @@
 
     	</div>
 </div>
-
-<script src="js/async_calls/login.js"></script>

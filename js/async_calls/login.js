@@ -58,26 +58,32 @@ $(document).ready(function() {
 
 		var information_array = {"age": age, "gender": gender, "mothertongue": mothertongue, "learninglength": learninglength, "livingingerman": livingingerman};
 
-		if (!username | !gender | !learninglength | !mothertongue) {
-			requestErrorInfo("f_fill_all_fields", 4);
+		if (username.search(/\@/) === -1) {
+			console.log("hi");
+			requestErrorInfo("f_username_not_valid", "", "#content .main-container");
 		} else {
-			$.ajax({
-				url: "sockets/setInformation.php",
-				type: 'POST',
-				data: {"username": username, "information": JSON.stringify(information_array)}})
-			.done(function(res) {
-				console.log("success", res);
-				// TODO inform user about success
-				$("#login-modal").modal("hide");
-				window.location.href = "?p=dictation";
-			})
-			.fail(function(res) {
-				console.log("error", res);
-			})
-			.always(function() {
-				console.log("complete");
-			});
+			if (!username | !gender | !learninglength | !mothertongue) {
+				requestErrorInfo("f_fill_all_fields", 4);
+			} else {
+				$.ajax({
+					url: "sockets/setInformation.php",
+					type: 'POST',
+					data: {"username": username, "information": JSON.stringify(information_array)}})
+				.done(function(res) {
+					console.log("success", res);
+					// TODO inform user about success
+					$("#login-modal").modal("hide");
+					window.location.href = "?p=dictation";
+				})
+				.fail(function(res) {
+					console.log("error", res);
+				})
+				.always(function() {
+					console.log("complete");
+				});
+			}
 		}
+
 	});
 
 });

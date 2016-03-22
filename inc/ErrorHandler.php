@@ -102,6 +102,11 @@ class ErrorHandler {
 				$error_info["name"] = "USER NOT FOUND";
 				$error_info["msg"] = "The username you entered doesnt exist. Please check your spelling or register first!";
 				break;
+			case "f_username_not_valid":
+				$error_info["fatality"] = "FATAL";
+				$error_info["name"] = "EMAIL INVALID";
+				$error_info["msg"] = "Please provide a valid email!";
+				break;
 
 			default:
 				$error_info["fatality"] = "DEBUG";

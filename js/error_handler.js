@@ -65,6 +65,8 @@ function informUser (info, target_id) {
 		target_id = "#content .main-container";
 	}
 
+	console.log(error_container);
+
 	$(target_id).append(error_container);
 
 }

@@ -258,6 +258,8 @@ Result.prototype.createMistakeDistributionInfo = function (target_id, type) {
 		char_count += error_count_map[el];
 	}
 
+	var already_added = [];
+
 	for (var error in error_count_map) {
 		// catch unknown error types, shouldnt happen tho
 		var error_label = "unknown";
@@ -274,7 +276,11 @@ Result.prototype.createMistakeDistributionInfo = function (target_id, type) {
 			value: (type === "pie") ? ((error_count_map[error] / char_count) * 100) : error_count_map[error],
 			className: error_css
 		});
+
+		already_added.push(error_label);
 	}
+
+	console.log(data);
 
 	//create chart
 	if (type === "pie") {

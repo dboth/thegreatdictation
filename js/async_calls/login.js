@@ -20,15 +20,21 @@ $(document).ready(function() {
 				data: {"username": username, "information": JSON.stringify({})}
 			})
 			.done(function(res) {
-				console.log("success", res);
-				// TODO inform user about success
-				$("#login-modal").modal("hide");
-				console.log(window.location.search);
-				if (window.location.search === "?p=register") {
-					window.location.href = "?p=dictation";
+				console.log(res);
+
+				//if empty object, user doesnt exist
+				if (jQuery.isEmptyObject(JSON.parse(res))) {
+					requestErrorInfo("f_user_doesnt_exist", "", "#login-modal .modal-body");
 				} else {
-					window.location.reload();
+					$("#login-modal").modal("hide");
+					console.log(window.location.search);
+					if (window.location.search === "?p=register") {
+						window.location.href = "?p=dictation";
+					} else {
+						window.location.reload();
+					}
 				}
+
 			})
 			.fail(function(res) {
 				console.log("error", res);

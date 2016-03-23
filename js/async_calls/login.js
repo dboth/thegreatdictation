@@ -58,8 +58,7 @@ $(document).ready(function() {
 
 		var information_array = {"age": age, "gender": gender, "mothertongue": mothertongue, "learninglength": learninglength, "livingingerman": livingingerman};
 
-		if (username.search(/\@/) === -1) {
-			console.log("hi");
+		if (!isEmail(username)) {
 			requestErrorInfo("f_username_not_valid", "", "#content .main-container");
 		} else {
 			if (!username | !gender | !learninglength | !mothertongue) {

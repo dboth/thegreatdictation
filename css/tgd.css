@@ -6625,6 +6625,7 @@ html {
   height: 100%;
   max-width: 100%;
   overflow-y: scroll;
+  overflow-x: hidden;
   font-size: 1em; }
 
 body {
@@ -6674,7 +6675,6 @@ body {
     left: 0;
     position: absolute;
     width: 100%;
-    border-top: 1px solid #2a93cf;
     padding: 20px 0;
     font-size: 1.2em;
     z-index: 3; }
@@ -6698,9 +6698,6 @@ body {
   margin-top: 80px; }
 
 /* NAVIGATION */
-.navbar-collapse.in {
-  overflow: hidden; }
-
 .navbar {
   border: 0;
   text-transform: uppercase;
@@ -6762,6 +6759,11 @@ select option[disabled] {
 
 fieldset input[type="radio"] {
   margin-right: 10px; }
+
+.validation-notification {
+  color: red;
+  padding-top: 5px;
+  padding-left: 0px; }
 
 /* ELEMENTS */
 .pointout-font {

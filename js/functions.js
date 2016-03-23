@@ -52,3 +52,11 @@ function loadingbar(target, delay) {
 
     expand_bar();
 }
+
+function isEmail(mail) {
+    if (mail.search(/\@/) === -1) {
+        return false;
+    } else {
+        return true;
+    }
+}

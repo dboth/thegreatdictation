@@ -233,10 +233,18 @@ fieldset {
 .validation-notification {
     color: red;
     padding-top: 5px;
-    padding-left: 0px;
+    padding-left: 0;
 }
 
 /* ELEMENTS */
+
+.font-large {
+    font-size: $tgd-font-size * 1.5;
+}
+
+.font-huge {
+    font-size: $tgd-font-size * 2;
+}
 
 .pointout-font {
     font-size: $tgd-font-size-title;

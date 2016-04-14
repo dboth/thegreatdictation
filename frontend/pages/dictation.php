@@ -50,7 +50,7 @@
                 <button class="btn btn-primary" id="select-text-button">Select this text</button>
             </div>
 
-            <div class="col-xs-12 col-sm-6  text-right" id="audio-player">
+            <div class="col-xs-12 col-sm-6  text-right" id="audio-player-col">
 
             </div>
 

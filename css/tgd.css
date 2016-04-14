@@ -6132,9 +6132,15 @@ fieldset input[type="radio"] {
 .validation-notification {
   color: red;
   padding-top: 5px;
-  padding-left: 0px; }
+  padding-left: 0; }
 
 /* ELEMENTS */
+.font-large {
+  font-size: 1.5em; }
+
+.font-huge {
+  font-size: 2em; }
+
 .pointout-font {
   font-size: 2.5em;
   color: #2a93cf;

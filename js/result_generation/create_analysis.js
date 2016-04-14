@@ -29,6 +29,9 @@ $(document).ready(function () {
 
     $("#dictation-form").submit(function (event) {
         event.preventDefault();
+        var audio_player = $("#audio-player");
+        audio_player.trigger("pause");
+        audio_player.currentTime = 0;
 
         var data = {
             input: $("#dictation-text").val().replace(/\s$/, ""),

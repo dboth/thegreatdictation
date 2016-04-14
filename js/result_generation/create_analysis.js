@@ -55,8 +55,8 @@ $(document).ready(function () {
             loadingbar.stop();
             console.log("RESULT: ",res);
             loadingbar.animate({ width: "100%" }, {easing: "linear", duration: 100, complete: function () {
-                createAnalysis(res);
                 toggleViews("#analysis-container");
+                createAnalysis(res);
                 $("#res-switch").addClass("active");
                 $("#dict-switch").removeClass("active");
             }});

@@ -6262,10 +6262,10 @@ fieldset input[type="radio"] {
       color: #fff; }
     .legend .element.capitalization {
       background-color: #d5b545;
-      color: #000; }
+      color: #fff; }
     .legend .element.punctuation {
       background-color: #4786ad;
-      color: #000; }
+      color: #fff; }
     .legend .element.switch {
       background-color: #9e54c1;
       color: #fff; }

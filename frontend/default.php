@@ -17,7 +17,7 @@
 	<script src="js/jquery/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/libs/tinycolor.js"></script>
-	<script src="js/libs/chartist.js"></script>
+	<script src="js/libs/chart.js"></script>
 	<script src="js/libs/bootstrap-select.js"></script>
 
 	<script src="js/error_handler.js"></script>

@@ -38,7 +38,7 @@
         <div class="col-xs-12 col-sm-8" id="errordistribution-row">
             <div class="subtitle title-hline">Error Distribution (Character-wise)</div>
 
-            <div class="ct-chart ct-minor-seventh" id="error-distribution-chart"></div>
+            <div class="chart" id="error-distribution-chart"></div>
 
             <div class="row" id="charwise-legend">
                 <div class="col-xs-12 text-center">
@@ -57,6 +57,9 @@
                         </div>
                         <div class="element switch">
                             Switched Letters
+                        </div>
+                        <div class="element word-switch">
+                            Switched Words
                         </div>
                         <div class="element capitalization">
                             Capitalization Mistake
@@ -117,7 +120,7 @@
         <div class="col-xs-12">
             <div class="subtitle title-hline">Performance over time (word-wise)</div>
         </div>
-        <div class="col-xs-12 ct-chart" id="performance-over-time-chart"></div>
+        <div class="col-xs-12 chart" id="performance-over-time-chart"></div>
     </div>
 
 </div>

@@ -98,6 +98,11 @@
             color: $tgd-font-contrast-color;
         }
 
+        &.word-switch {
+            background-color: darken($tgd-switch-color, 20);
+            color: $tgd-font-contrast-color;
+        }
+
         //WORDWISE
         &.missing-word {
             border: 2px solid $tgd-missing-word-color;

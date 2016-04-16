@@ -212,7 +212,7 @@ Result.prototype.createMistakeDistributionInfo = function (target_id, type) {
 	/* PREPARE CHART */
 	var canvas = $("<canvas>").attr({
 		width: target_div.width(),
-		height: 200
+		height: (type === "bar") ? 200 : 400
 	});
 	var context = canvas.get(0).getContext("2d");
 
@@ -221,14 +221,33 @@ Result.prototype.createMistakeDistributionInfo = function (target_id, type) {
   		datasets: [
 			{
 				label: "Error Type Distribution",
-	            fillColor: "blue",
-	            strokeColor: "lightblue",
-	            highlightFill: "green",
-	            highlightStroke: "lightgreen",
 	            data: []
 			}
 		]
 	};
+
+	if (type === "bar") {
+
+		data["datasets"][0].fillColor = "blue";
+		data["datasets"][0].strokeColor = "lightblue";
+		data["datasets"][0].highlightFill = "green";
+		data["datasets"][0].highlightStroke = "lightgreen";
+
+	} else if (type === "radar") {
+
+		data["datasets"][0].fillColor = "rgba(151,187,205,0.2)";
+		data["datasets"][0].fillColor = "rgba(151,187,205,0.2)";
+        data["datasets"][0].strokeColor = "rgba(151,187,205,1)";
+        data["datasets"][0].pointColor = "rgba(151,187,205,1)";
+        data["datasets"][0].pointStrokeColor = "#fff";
+        data["datasets"][0].pointHighlightFill = "#fff";
+        data["datasets"][0].pointHighlightStroke = "rgba(151,187,205,1)";
+
+	} else if (type === "pie") {
+
+		// TODO
+
+	}
 
 	/* PREPARE DATA */
 
@@ -303,7 +322,12 @@ Result.prototype.createMistakeDistributionInfo = function (target_id, type) {
 	/* CREATE CHART */
 	target_div.append(canvas);
 
-	if (type === "pie") {
+	if (type === "radar") {
+		var radar_chart = new Chart(context).Radar(data, {
+			responsive: true
+		});
+
+		return radar_chart;
 
 	} else if (type === "bar") {
 		var bar_chart = new Chart(context).Bar(data, {
@@ -321,6 +345,8 @@ Result.prototype.createMistakeDistributionInfo = function (target_id, type) {
 		}
 
 		bar_chart.update();
+
+		return bar_chart;
 	}
 
 };

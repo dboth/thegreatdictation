@@ -1,15 +1,3 @@
-<div class="container" id="analysis-container" hidden>
-
-    <div class="row row-spacing text-center">
-        <div class="col-xs-12 text-center">
-            This was your <span class="pointout-font"><?php echo $usersystem->getResultCount() + 1 ?>.</span> dictation! <br />
-            You are awesome!
-        </div>
-        <div class="col-xs-12 row-spacing">
-            <a role="button" class="btn btn-primary" href="?p=dictation">Start a new dictation</a>
-        </div>
-    </div>
-
     <div class="row row-content row-spacing-lg" id="input-row">
         <div class="col-xs-12">
             <div class="subtitle title-hline">What you've entered</div>
@@ -39,7 +27,7 @@
             <div class="subtitle title-hline">Error Distribution (Character-wise)</div>
 
             <div id="error-distr-tablist">
-                <ul class="nav nav-tabs tiny-tablist" role="tablist">
+                <ul class="nav nav-tabs tablist-tiny" role="tablist">
                     <li role="presentation" class="active"><a href="#error-distr-radar-panel" aria-controls="error-distr-radar-panel" role="tab" data-toggle="tab" id="error-distr-radar-tab">display as radar</a></li>
                     <li role="presentation"><a href="#error-distr-bar-panel" aria-controls="error-distr-bar-panel" role="tab" data-toggle="tab" id="error-distr-bar-tab">display as bar chart</a></li>
                 </ul>
@@ -137,5 +125,3 @@
         </div>
         <div class="col-xs-12 chart" id="performance-over-time-chart"></div>
     </div>
-
-</div>

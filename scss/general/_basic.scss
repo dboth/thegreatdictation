@@ -117,10 +117,6 @@ body {
 
 /* NAVIGATION */
 
-.navbar-collapse.in {
-    //overflow: hidden;
-}
-
 .navbar {
     //border-bottom: 1px solid $tgd-nav-footer-border-color;
     border: 0;
@@ -132,10 +128,6 @@ body {
 
     font-weight: bold;
     padding-top: $tgd-nav-hoverbar-height;
-
-    &.navbar-inverse {
-        overflow: hidden;
-    }
 
     .navbar-brand {
         filter: brightness(100);
@@ -160,6 +152,42 @@ body {
                     //background-color: $tgd-nav-hover-color;
                     color: $tgd-navfont-color;
                     border-bottom: $tgd-nav-hoverbar-height inset $tgd-primary-color;
+                }
+
+                &:focus {
+                    color: $tgd-navfont-color;
+                }
+
+            }
+
+            &.open {
+                a, a:hover, a:focus, a:visited {
+                    background-color: $tgd-nav-color;
+
+                }
+
+            }
+        }
+
+        ul.dropdown-menu {
+            left: 50%;
+            right: auto;
+            text-align: center;
+            transform: translate(-50%, 0);
+            text-align: center;
+            background-color: $tgd-nav-color;
+            margin-top: -1px;
+            border: 0;
+            font-size: $tgd-font-size-nav*.8;
+
+            a {
+                padding: 5px 0;
+                color: $tgd-navfont-color;
+                border-bottom: $tgd-nav-hoverbar-height inset transparent;
+
+                &:hover {
+                    background-color: transparent;
+                    color: $tgd-nav-hover-color;
                 }
 
                 &:focus {
@@ -225,6 +253,8 @@ select {
 }
 
 fieldset {
+    margin-bottom: 10px;
+
     input[type="radio"] {
         margin-right: 10px;
     }
@@ -268,6 +298,41 @@ fieldset {
         font-size: $tgd-font-size-modal-title;
         text-align: center;
         margin: 10px 0 20px;
+    }
+}
+
+.tablist-tiny {
+    &.nav-tabs {
+        border-bottom: 0;
+    }
+
+    li {
+        font-weight: bold;
+
+        &.active {
+            a {
+                border: 0;
+                color: $tgd-primary-color;
+
+                &:hover, &:focus, &:visited, &:active {
+                    color: darken($tgd-primary-color, 20);
+                    border: 0;
+                    background-color: transparent;
+                }
+            }
+        }
+
+        a {
+            border: 0;
+            border-radius: 0;
+            color: $tgd-inactive-link-color;
+
+            &:hover, &:focus, &:visited, &:active {
+                color: darken($tgd-inactive-link-color, 20);
+                border: 0;
+                background-color: transparent;
+            }
+        }
     }
 }
 
@@ -318,6 +383,17 @@ fieldset {
     font-style: italic;
 
 }
+
+.profile-information-title {
+    font-size: $tgd-font-size-subtitle;
+    color: $tgd-primary-color;
+}
+
+.profile-information {
+    font-size: $tgd-font-size-title;
+    color: $tgd-font-color;
+}
+
 
 /* BOOTSTRAP */
 

@@ -31,7 +31,7 @@ function createAnalysis(res) {
         $('#error-distr-bar-tab').click(function (e) {
     		e.preventDefault();
             $(this).tab('show');
-            distr_chart_bar.destroy()
+            distr_chart_bar.destroy();
             $("#error-distribution-chart-bar").find('canvas').remove();
             distr_chart_bar = result_object.createMistakeDistributionInfo("#error-distribution-chart-bar", "bar");
     	});

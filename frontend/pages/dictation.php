@@ -77,7 +77,21 @@
     </form>
 </div>
 
-<tgd_result>
+<div class="container" id="analysis-container" hidden>
+
+    <div class="row row-spacing text-center">
+        <div class="col-xs-12 text-center">
+            This was your <span class="pointout-font"><?php echo $usersystem->getResultCount() + 1 ?>.</span> dictation! <br />
+            You are awesome!
+        </div>
+        <div class="col-xs-12 row-spacing">
+            <a role="button" class="btn btn-primary" href="?p=dictation">Start a new dictation</a>
+        </div>
+    </div>
+
+    <tgd_result>
+
+</div>
 
 <script src="js/result_generation/result_components.js"></script>
 <script src="js/result_generation/create_analysis.js"></script>

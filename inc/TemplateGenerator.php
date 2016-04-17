@@ -133,6 +133,38 @@ class TemplateGenerator{
                     "template"=>"default.php"
                 );
 
+            case "profile":
+                return array(
+                    //inside a template all occurences of <tgd_varname> get replace by the value of vars[varname] in this array. do not use the variables "body" or "trans", as they are reserved.
+                    "vars" => array(
+                        "title"=>"The Great Dictation - Profile Page",
+                        "header-title"=>"Your Profile"
+                        ),
+                    "components" => array(
+                        "header-description" => "description.php",
+                        "citation" => "citations.php"
+                    ),
+                    //the page template (inside frontend/pages)
+                    "body"=>"profile.php",
+                    "template"=>"default.php"
+                );
+
+            case "statistics":
+                return array(
+                    //inside a template all occurences of <tgd_varname> get replace by the value of vars[varname] in this array. do not use the variables "body" or "trans", as they are reserved.
+                    "vars" => array(
+                        "title"=>"The Great Dictation - Statistics",
+                        "header-title"=>"Your Statistics"
+                        ),
+                    "components" => array(
+                        "header-description" => "description.php",
+                        "citation" => "citations.php"
+                    ),
+                    //the page template (inside frontend/pages)
+                    "body"=>"statistics.php",
+                    "template"=>"default.php"
+                );
+
             default:
                 return array(
                     //inside a template all occurences of <tgd_varname> get replace by the value of vars[varname] in this array. do not use the variables "body" or "trans", as they are reserved.

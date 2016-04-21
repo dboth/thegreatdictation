@@ -170,6 +170,7 @@ body {
         }
 
         ul.dropdown-menu {
+            padding: 5px 15px;
             left: 50%;
             right: auto;
             text-align: center;
@@ -236,6 +237,10 @@ a {
     a:hover {
         color: lighten($tgd-inactive-link-color, 15);
     }
+}
+
+.menu-icon {
+    margin-right: 5px;
 }
 
 /* FORMS */

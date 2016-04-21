@@ -57,9 +57,10 @@
 							echo '<li class="dropdown">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i> '.$user.' <span class="caret"></span></a>
 									<ul class="dropdown-menu">
-										<li><a href="?logout"><i class="fa fa-sign-out"></i> Log Out</a></li>
-										<li><a href="?p=profile"><i class="fa fa-cog"></i> Profile</a></li>
-										<li><a href="?p=statistics"><i class="fa fa-bar-chart"></i> Statistics</a></li>
+										<li><a href="?p=yourdictations"><i class="menu-icon fa fa-list"></i> Your Dictations</a></li>
+										<li><a href="?p=profile"><i class="menu-icon fa fa-cog"></i> Profile</a></li>
+										<li><a href="?p=statistics"><i class="menu-icon fa fa-bar-chart"></i> Statistics</a></li>
+										<li><a href="?logout"><i class="menu-icon fa fa-sign-out"></i> Log Out</a></li>
 									</ul>
 								  </li>';
 						}

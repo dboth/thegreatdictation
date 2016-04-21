@@ -88,4 +88,18 @@ class SqlConnector {
         return $res;
     }
 
+    public function getAllDictationsForUser($username) {
+        if (!($stmt = $this->verbindung->prepare("SELECT * FROM results_v0 as r WHERE r.username=?"))) {
+            die($this->errors->createErrorJSON("b_db_couldnt_prepare_sql", "audio: ".$this->getLastError()));
+            return false;
+        }
+
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $stmt->bind_result($res);
+        $stmt->fetch();
+
+        return $res;
+    }
+
 }

@@ -85,16 +85,21 @@
 
         &.capitalization {
             background-color: $tgd-capitalization-color;
-            color: $tgd-font-color;
+            color: $tgd-font-contrast-color;
         }
 
         &.punctuation {
             background-color: $tgd-punctuation-color;
-            color: $tgd-font-color;
+            color: $tgd-font-contrast-color;
         }
 
         &.switch {
             background-color: $tgd-switch-color;
+            color: $tgd-font-contrast-color;
+        }
+
+        &.word-switch {
+            background-color: darken($tgd-switch-color, 20);
             color: $tgd-font-contrast-color;
         }
 

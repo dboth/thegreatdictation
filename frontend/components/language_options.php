@@ -11,7 +11,7 @@
 	foreach ($langs as $k => $l) {
 		$language = $langs[$k];
 		$selected = "";
-		if ($k === "eng") $selected = "selected";
+		if ($k === "eng") $selected = "";
 		echo "<option value='".$k." '".$selected.">".$language."</option>";
 	}
 

@@ -16,19 +16,19 @@
 	<!-- JAVASCRIPT -->
 	<script src="js/jquery/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/libs/tinycolor/tinycolor.js"></script>
-	<script src="js/libs/chartist.js"></script>
+	<script src="js/libs/tinycolor.js"></script>
+	<script src="js/libs/chart.js"></script>
 	<script src="js/libs/bootstrap-select.js"></script>
 
 	<script src="js/error_handler.js"></script>
 	<script src="js/functions.js"></script>
+
 </head>
 
 <body>
     <!-- BEGIN: NAVIGATION BAR -->
-		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<nav class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
 			<div class="container">
-
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#tgd-main-nav" aria-expanded="false">
 						<span class="sr-only">Toggle navigation</span>
@@ -54,8 +54,14 @@
 						if (!$user) {
 							echo '<li><a data-toggle="modal" href="#login-modal"><i class="fa fa-sign-in"></i> Sign In</a></li>';
 						} else {
-							echo '<li><a href="#"><i class="fa fa-user"></i> '.$user.'</a></li>';
-							echo '<li><a href="?logout"><i class="fa fa-sign-out"></i> Log Out</a></li>';
+							echo '<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i> '.$user.' <span class="caret"></span></a>
+									<ul class="dropdown-menu">
+										<li><a href="?logout"><i class="fa fa-sign-out"></i> Log Out</a></li>
+										<li><a href="?p=profile"><i class="fa fa-cog"></i> Profile</a></li>
+										<li><a href="?p=statistics"><i class="fa fa-bar-chart"></i> Statistics</a></li>
+									</ul>
+								  </li>';
 						}
 						?>
 						<li><a data-toggle="modal" href="#feedback-modal"><i class="fa fa-comment"></i> Feedback</a></li>
@@ -65,6 +71,7 @@
 
 			</div>
 		</nav>
+
 	<!-- END: NAVIGATION BAR -->
 
 	<!-- BEGIN: MODALS -->
@@ -97,7 +104,7 @@
 					<div class="text-center alert alert-success" role="alert">
 						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 						You have already finished '.$usersystem->getResultCount().' dictations! Thank you for your help. If you could evaluate your work, this would help us even more!<br />
-						<a class="alert-link" href="?p=survey">Take the survey now!</a>
+						<a class="alert-link font-large" href="?p=survey">Take the survey now!</a>
 					</div>
 					';
 				}

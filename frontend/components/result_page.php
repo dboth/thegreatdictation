@@ -1,15 +1,3 @@
-<div class="container" id="analysis-container" hidden>
-
-    <div class="row row-spacing text-center">
-        <div class="col-xs-12 text-center">
-            This was your <span class="pointout-font"><?php echo $usersystem->getResultCount() + 1 ?>.</span> dictation! <br />
-            You are awesome!
-        </div>
-        <div class="col-xs-12 row-spacing">
-            <a role="button" class="btn btn-primary" href="?p=dictation">Start a new dictation</a>
-        </div>
-    </div>
-
     <div class="row row-content row-spacing-lg" id="input-row">
         <div class="col-xs-12">
             <div class="subtitle title-hline">What you've entered</div>
@@ -38,28 +26,46 @@
         <div class="col-xs-12 col-sm-8" id="errordistribution-row">
             <div class="subtitle title-hline">Error Distribution (Character-wise)</div>
 
-            <div class="ct-chart ct-minor-seventh" id="error-distribution-chart"></div>
+            <div id="error-distr-tablist">
+                <ul class="nav nav-tabs tablist-tiny" role="tablist">
+                    <li role="presentation" class="active"><a href="#error-distr-radar-panel" aria-controls="error-distr-radar-panel" role="tab" data-toggle="tab" id="error-distr-radar-tab">display as radar</a></li>
+                    <li role="presentation"><a href="#error-distr-bar-panel" aria-controls="error-distr-bar-panel" role="tab" data-toggle="tab" id="error-distr-bar-tab">display as bar chart</a></li>
+                </ul>
 
-            <div class="row" id="charwise-legend">
-                <div class="col-xs-12 text-center">
-                    <div class="legend">
-                        <div class="element substitution">
-                            Wrong Letter
-                        </div>
-                        <div class="element insertion">
-                            Missing Letter
-                        </div>
-                        <div class="element deletion">
-                            Waste Letter
-                        </div>
-                        <div class="element punctuation">
-                            Punctuation Mistake
-                        </div>
-                        <div class="element switch">
-                            Switched Letters
-                        </div>
-                        <div class="element capitalization">
-                            Capitalization Mistake
+                <div class="tab-content row-spacing">
+                    <div role="tabpanel" class="tab-pane active" id="error-distr-radar-panel">
+                        <div class="chart" id="error-distribution-chart-radar"></div>
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane" id="error-distr-bar-panel">
+                        <div class="chart" id="error-distribution-chart-bar"></div>
+
+                        <div class="row" id="charwise-legend">
+                            <div class="col-xs-12 text-center">
+                                <div class="legend">
+                                    <div class="element substitution">
+                                        Wrong Letter
+                                    </div>
+                                    <div class="element insertion">
+                                        Missing Letter
+                                    </div>
+                                    <div class="element deletion">
+                                        Waste Letter
+                                    </div>
+                                    <div class="element punctuation">
+                                        Punctuation Mistake
+                                    </div>
+                                    <div class="element switch">
+                                        Switched Letters
+                                    </div>
+                                    <div class="element word-switch">
+                                        Switched Words
+                                    </div>
+                                    <div class="element capitalization">
+                                        Capitalization Mistake
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -117,7 +123,5 @@
         <div class="col-xs-12">
             <div class="subtitle title-hline">Performance over time (word-wise)</div>
         </div>
-        <div class="col-xs-12 ct-chart" id="performance-over-time-chart"></div>
+        <div class="col-xs-12 chart" id="performance-over-time-chart"></div>
     </div>
-
-</div>

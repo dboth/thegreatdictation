@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container main-container">
         <div class="row row-content">
 
 			<div class="row">
@@ -24,7 +24,7 @@
 					<label class="control-label col-xs-12 col-sm-3" for="reg-username">
 						Email
 					</label>
-					<div class="col-xs-12 col-sm-3">
+					<div class="col-xs-12 col-sm-3 register-field" id="reg-username-col">
 						<input type="text" id="reg-username" name="username" class="form-control" required />
 					</div>
 					<!--
@@ -43,6 +43,7 @@
 					</label>
 					<div class="col-xs-12 col-sm-3">
 						<select class="form-control selectpicker" name="gender" id="reg-gender" required>
+                            <option disabled selected value>- select -</option>
 							<option value="m">male</option>
 							<option value="f">female</option>
 						</select>
@@ -51,8 +52,8 @@
 					<label class="control-label col-xs-12 col-sm-3" for="reg-age">
 						Age
 					</label>
-					<div class="col-xs-12 col-sm-3">
-						<input type="number" id="reg-age" name="age" class="form-control" step="1" value="16" min="0" required />
+					<div class="col-xs-12 col-sm-3 register-field" id="reg-age-col">
+						<input type="number" id="reg-age" name="age" class="form-control" step="1" value="" min="0" placeholder="16" required />
 					</div>
 				</div>
 
@@ -62,6 +63,7 @@
 					</label>
 					<div class="col-xs-12 col-sm-3">
 						<select data-live-search="true" data-size="3" data-dropup-auto="false" class="form-control selectpicker" id="reg-mother-tongue" name="mother-tongue" required>
+                            <option disabled selected value>- select -</option>
 							<tgd_langs>
 						</select>
 					</div>
@@ -71,7 +73,8 @@
 					</label>
 					<div class="col-xs-12 col-sm-3">
 						<select class="form-control selectpicker" name="learninglength" id="reg-learninglength" required>
-							<option value="a" selected>just started</option>
+                            <option disabled selected value>- select -</option>
+							<option value="a">just started</option>
 							<option value="b">few months</option>
 							<option value="c">1 year</option>
 							<option value="d">more than 1 year</option>
@@ -106,4 +109,4 @@
     	</div>
 </div>
 
-<script src="js/async_calls/login.js"></script>
+<script type="text/javascript" src="js/page_events/handle_register.js"></script>

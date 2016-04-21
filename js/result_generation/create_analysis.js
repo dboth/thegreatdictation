@@ -8,14 +8,35 @@ function createAnalysis(res) {
     var result_object = new Result(res[0]);
 
     result_object.createHeader("#analysis-container .page-header");
+
     result_object.createWordwiseErrorInfo("#input-info-container");
+
     result_object.createOverallScoreInfo("#score-info");
-    result_object.createMistakeDistributionInfo("#error-distribution-chart", "bar");
+
     result_object.createPerformanceOverTimeInfo("#performance-over-time-chart");
     result_object.createCharwiseErrorInfo("#wordwise-error-info");
 
-    // var target_info = $("#target-info");
-	// target_info.find(".well").html(convertStringToHTML(result_object.target));
+    var distr_chart_radar = result_object.createMistakeDistributionInfo("#error-distribution-chart-radar", "radar");
+    var distr_chart_bar = result_object.createMistakeDistributionInfo("#error-distribution-chart-bar", "bar");
+    // EventHandler for Error Distribution Tabpanel, that reinitializes the charts such that they are visible. Ugly but necessary Workaround
+    $(document).ready(function() {
+    	$('#error-distr-radar-tab').click(function (e) {
+    		e.preventDefault();
+            $(this).tab('show');
+            $("#error-distribution-chart-radar").find('canvas').remove();
+            distr_chart_radar.destroy();
+            distr_chart_radar = result_object.createMistakeDistributionInfo("#error-distribution-chart-radar", "radar");
+    	});
+
+        $('#error-distr-bar-tab').click(function (e) {
+    		e.preventDefault();
+            $(this).tab('show');
+            distr_chart_bar.destroy();
+            $("#error-distribution-chart-bar").find('canvas').remove();
+            distr_chart_bar = result_object.createMistakeDistributionInfo("#error-distribution-chart-bar", "bar");
+    	});
+    });
+
 }
 
 
@@ -29,6 +50,9 @@ $(document).ready(function () {
 
     $("#dictation-form").submit(function (event) {
         event.preventDefault();
+        var audio_player = $("#audio-player");
+        audio_player.trigger("pause");
+        audio_player.currentTime = 0;
 
         var data = {
             input: $("#dictation-text").val().replace(/\s$/, ""),
@@ -55,8 +79,8 @@ $(document).ready(function () {
             loadingbar.stop();
             console.log("RESULT: ",res);
             loadingbar.animate({ width: "100%" }, {easing: "linear", duration: 100, complete: function () {
-                createAnalysis(res);
                 toggleViews("#analysis-container");
+                createAnalysis(res);
                 $("#res-switch").addClass("active");
                 $("#dict-switch").removeClass("active");
             }});

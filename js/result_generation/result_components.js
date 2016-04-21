@@ -200,13 +200,56 @@ Result.prototype.createWordwiseErrorInfo = function (target_id) {
 Result.prototype.createMistakeDistributionInfo = function (target_id, type) {
 
 	/*
-		TODO
 		Calcs and displays Info about distribution of Error Type
 	 */
 
-	 if (!type) {
-		 type = "bar";
-	 }
+	if (!type) {
+		type = "bar";
+	}
+
+	var target_div = $(target_id);
+
+	/* PREPARE CHART */
+	var canvas = $("<canvas>").attr({
+		width: target_div.width(),
+		height: (type === "bar") ? 200 : 400
+	});
+	var context = canvas.get(0).getContext("2d");
+
+	var data = {
+  		labels: [],
+  		datasets: [
+			{
+				label: "Error Type Distribution",
+	            data: []
+			}
+		]
+	};
+
+	if (type === "bar") {
+
+		data["datasets"][0].fillColor = "blue";
+		data["datasets"][0].strokeColor = "lightblue";
+		data["datasets"][0].highlightFill = "green";
+		data["datasets"][0].highlightStroke = "lightgreen";
+
+	} else if (type === "radar") {
+
+		data["datasets"][0].fillColor = "rgba(151,187,205,0.2)";
+		data["datasets"][0].fillColor = "rgba(151,187,205,0.2)";
+        data["datasets"][0].strokeColor = "rgba(151,187,205,1)";
+        data["datasets"][0].pointColor = "rgba(151,187,205,1)";
+        data["datasets"][0].pointStrokeColor = "#fff";
+        data["datasets"][0].pointHighlightFill = "#fff";
+        data["datasets"][0].pointHighlightStroke = "rgba(151,187,205,1)";
+
+	} else if (type === "pie") {
+
+		// TODO
+
+	}
+
+	/* PREPARE DATA */
 
 	var all_errors = this.levenshtein.map( function (curr) {
 		return curr[2][3];
@@ -218,41 +261,39 @@ Result.prototype.createMistakeDistributionInfo = function (target_id, type) {
 	delete error_count_map["M+"];
 	delete error_count_map["+M"];
 
-	// chart data and options
-	var data = {
-  		labels: [],
-  		series: []
-	};
-
-	var pie_options = {
-	    showLabel: false
-	};
-
-	var bar_options = {
-		distributeSeries: true,
-		onlyInteger: true
-	};
-
 	// map with errorshortcut mapping to className and label
 	var error_type_map = {
-		"M": ["error-distr-match", "correct"],
-		"D": ["error-distr-deletion", "waste"],
-		"I": ["error-distr-insert", "missing"],
-		"S": ["error-distr-sub", "wrong"],
-		"switch": ["error-distr-switch", "switched"],
+		"M": "correct",
+		"D": "waste",
+		"I": "missing",
+		"S": "wrong",
+		"switch": "switched",
 
-		"capitals": ["error-distr-capitalization", "capitalization"],
-		"caveat_capitalization": ["error-distr-capitalization", "capitalization"],
+		"capitals": "capitalization",
+		"caveat_capitalization": "capitalization",
 
-		"punct": ["error-distr-punctuation", "punctuation"],
-		"punctfault_t": ["error-distr-punctuation", "punctuation"],
-		"punctfault_i": ["error-distr-punctuation", "punctuation"],
-		"sim_punct": ["error-distr-similar-punctuation", "similar punctuation"],
+		"punct": "punctuation",
+		"punctfault_t": "punctuation",
+		"punctfault_i": "punctuation",
+		"sim_punct": "similar punctuation",
 
-		"word_switch": ["error-distr-word-switch", "word switch"] // !
+		"word_switch": "word switch"
 	};
 
-	// fill data
+	var color_map = {
+		correct: "match",
+		waste: "deletion",
+		missing: "insertion",
+		wrong: "substitution",
+		switched: "switch",
+		capitalization: "capitalization",
+		punctuation: "punctuation",
+		"word switch": "word-switch"
+	};
+
+	/* FILL DATA */
+
+	// get total amount of wrong chars for percentage
 	var char_count = 0;
 	for (var el in error_count_map) {
 		char_count += error_count_map[el];
@@ -261,26 +302,51 @@ Result.prototype.createMistakeDistributionInfo = function (target_id, type) {
 	for (var error in error_count_map) {
 		// catch unknown error types, shouldnt happen tho
 		var error_label = "unknown";
-		var error_css = "error-distr-unknown";
 
 		if (error_type_map[error]) {
-			error_label = error_type_map[error][1];
-			error_css = error_type_map[error][0];
+			error_label = error_type_map[error];
 		}
 
-		// write into data object
-		data["labels"].push(error_label);
-		data["series"].push({
-			value: (type === "pie") ? ((error_count_map[error] / char_count) * 100) : error_count_map[error],
-			className: error_css
-		});
+		var label_pos = data["labels"].indexOf(error_label);
+		console.log(error_label + " -> " + label_pos);
+		if (label_pos === -1) {
+			// write into data object
+			data["labels"].push(error_label);
+			data["datasets"][0]["data"].push((type === "pie") ? ((error_count_map[error] / char_count) * 100) : error_count_map[error]);
+		} else {
+			// add to already existing label
+			data["datasets"][0]["data"][label_pos] += (type === "pie") ? ((error_count_map[error] / char_count) * 100) : error_count_map[error];
+		}
 	}
 
-	//create chart
-	if (type === "pie") {
-		new Chartist.Pie(target_id, data, pie_options);
+	/* CREATE CHART */
+	target_div.append(canvas);
+
+	if (type === "radar") {
+		var radar_chart = new Chart(context).Radar(data, {
+			responsive: true
+		});
+
+		return radar_chart;
+
 	} else if (type === "bar") {
-		new Chartist.Bar(target_id, data, bar_options);
+		var bar_chart = new Chart(context).Bar(data, {
+			responsive: true
+		});
+
+		for (var index in data["labels"]) {
+			if (data["labels"].hasOwnProperty(index)) {
+				var label_color = $(".element." + color_map[data["labels"][index]]).css("background-color");
+				bar_chart.datasets[0].bars[index].fillColor = label_color;
+				bar_chart.datasets[0].bars[index].strokeColor = tinycolor(label_color).lighten(10);
+				bar_chart.datasets[0].bars[index].highlightFill = tinycolor(label_color).lighten(15);
+				bar_chart.datasets[0].bars[index].highlightStroke = tinycolor(label_color).lighten(20);
+			}
+		}
+
+		bar_chart.update();
+
+		return bar_chart;
 	}
 
 };
@@ -291,34 +357,40 @@ Result.prototype.createPerformanceOverTimeInfo = function (target_id) {
 		Show Performance over time by relating the amount of overall error to the position in text wordwise
 	 */
 
+	var target_div = $(target_id);
+
+	/* PREPARE CHART */
+ 	var canvas = $("<canvas>").attr({
+ 		width: target_div.width(),
+ 		height: 200
+ 	});
+ 	var context = canvas.get(0).getContext("2d");
+
+ 	var data = {
+   		labels: [],
+   		datasets: [
+ 			{
+ 				label: "Error Type Distribution",
+	            fillColor: "rgba(151,187,205,0.2)",
+	            strokeColor: "rgba(151,187,205,1)",
+	            pointColor: "rgba(151,187,205,1)",
+	            pointStrokeColor: "#fff",
+	            pointHighlightFill: "#fff",
+	            pointHighlightStroke: "rgba(151,187,205,1)",
+ 	            data: []
+ 			}
+ 		]
+ 	};
+
+
 	var words = this.word_alignment;
 
-	var data = {
-		labels: [],
-		series: [[]]
-	};
-
-	var options = {
-		showPoint: false,
-		fullWidth: true,
-		lineSmooth: Chartist.Interpolation.simple(),
-		axisX: {
-			showLabel: false
-		},
-		chartPadding: {
-		    top: 15,
-		    right: 0,
-		    bottom: 5,
-		    left: 0
-		},
-	};
-
-	// fill data
+	/* FILL DATA */
 	var c = 0;
 	var error = 0;
 	for (var index in words) {
 		data["labels"].push(c);
-		data["series"][0].push(c / (error || 1));
+		data["datasets"][0]["data"].push(c / (error || 1));
 
 		c++;
 		error += words[index][5];
@@ -326,10 +398,15 @@ Result.prototype.createPerformanceOverTimeInfo = function (target_id) {
 
 	// last part of data
 	data["labels"].push(c);
-	data["series"][0].push(c / (error || 1));
+	data["datasets"][0]["data"].push(c / (error || 1));
 
 	// create chart
-	new Chartist.Line(target_id, data, options);
+	target_div.append(canvas);
+	var line_chart = new Chart(context).Line(data, {
+		responsive: true,
+		pointHitDetectionRadius : 3,
+		pointDot: false
+	});
 
 };
 

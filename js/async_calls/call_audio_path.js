@@ -19,10 +19,12 @@ $(document).ready(function() {
 					type: 'audio/wav'
 				});
 
-				var audio = $("<audio>").prop("controls", true);
+				var audio = $("<audio>").prop("controls", true).attr({
+					id: 'audio-player'
+				});
 
 				audio.html(src);
-				$("#audio-player").append(audio);
+				$("#audio-player-col").append(audio);
 			})
 			.fail(function(res) {
 				console.log("error", res);

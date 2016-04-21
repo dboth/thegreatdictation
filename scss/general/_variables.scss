@@ -14,7 +14,7 @@ $tgd-inactive-link-color: #b3b3b3;
 $tgd-active-link-color: $tgd-primary-color;
 
 
-$tgd-font-color: #000;
+$tgd-font-color: #393939;
 $tgd-font-contrast-color: #fff;
 $tgd-navfont-color: #fff;
 $tgd-footer-font-color: #b1b1b1;
@@ -30,13 +30,14 @@ $tgd-wrong-color:       #f33;
 $tgd-minor-mistake-color: #f6ba07;
 
 // LEVENSHTEIN COLORS
-$tgd-match-color: #84c140;
-$tgd-sub-color: #b40000;
-$tgd-insert-color: #ff5b28;
-$tgd-deletion-color: #e00dde;
-$tgd-punctuation-color: #6cd3ff;
-$tgd-capitalization-color: #ffe145;
-$tgd-switch-color: #ffa100;
+$tgd-match-color: #85aa5c;
+$tgd-sub-color: #ad4747;
+$tgd-insert-color: #d96f3b;
+$tgd-deletion-color: #bb5745;
+$tgd-punctuation-color: #4786ad;
+$tgd-capitalization-color: #d5b545;
+$tgd-switch-color: #9e54c1;
+$tgd-word-switch-color: #c154b6;
 $tgd-unknown-color: rgb(112, 112, 112);
 
 /* TEXT STYLING */

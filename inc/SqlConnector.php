@@ -44,8 +44,20 @@ class SqlConnector {
     }
 
     public function saveAnalysisResult($input, $output, $username = ""){
-        if (!($stmt = $this->verbindung->prepare("INSERT INTO results_v0 (input, output, username) VALUES(?, ?, ?)"))) die($this->errors->createErrorJSON("b_db_couldnt_prepare_sql", "results_v0"));
-        $stmt->bind_param("sss",$input,$output, $username);
+        $output_arr = json_decode($output, true);
+        if ($output_arr){
+            $text_id = $output_arr["0"]["data"]["text_id"];
+            $score1 = $output_arr["0"]["data"]["score"][0];
+            $score2 = $output_arr["0"]["data"]["score"][1];
+            $score3 = $output_arr["0"]["data"]["score"][2];
+        } else {
+            $text_id = 0;
+            $score1 = 0;
+            $score2 = 0;
+            $score3 = 0;
+        }
+        if (!($stmt = $this->verbindung->prepare("INSERT INTO results_v0 (input, output, username, text_id, score1, score2, score3) VALUES(?, ?, ?, ?, ?, ? ,?)"))) die($this->errors->createErrorJSON("b_db_couldnt_prepare_sql", "results_v0"));
+        $stmt->bind_param("sssssss",$input,$output, $username, $text_id, $score1, $score2, $score3);
         $stmt->execute();
     }
 

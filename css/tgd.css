@@ -6582,10 +6582,10 @@ fieldset {
       background-color: #662f80;
       color: #fff; }
     .legend .element.missing-word {
-      border: 2px solid #ff5400;
-      color: #ff5400; }
+      border: 2px solid #d96f3b;
+      color: #d96f3b; }
     .legend .element.wrong {
-      background-color: #f33;
+      background-color: #ad4747;
       color: #fff; }
     .legend .element.minor-mistake {
       background-color: #f6ba07;
@@ -6618,10 +6618,10 @@ fieldset {
   margin: auto;
   text-align: center; }
   .spelling.missing-word {
-    border: 2px solid #ff5400;
-    color: #ff5400; }
+    border: 2px solid #d96f3b;
+    color: #d96f3b; }
   .spelling.wrong {
-    background-color: #f33;
+    background-color: #ad4747;
     color: #fff; }
   .spelling.minor-mistake {
     background-color: #f6ba07;
@@ -6647,3 +6647,36 @@ fieldset {
 .huge-fonticon {
   font-size: 30em;
   text-align: center; }
+
+.dictation-overview-row {
+  height: 100px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-top: 40px;
+  padding: 15px;
+  font-size: 1.5em;
+  border: 1px solid rgba(0, 0, 0, 0.2); }
+  .dictation-overview-row.good {
+    background-color: #85aa5c;
+    color: #fff; }
+  .dictation-overview-row.mediocre {
+    background-color: white; }
+  .dictation-overview-row.bad {
+    background-color: #ad4747;
+    color: #fff; }
+  .dictation-overview-row .dict-corrects {
+    font-size: 1.8em; }
+  .dictation-overview-row:hover {
+    margin-left: 10px;
+    margin-right: -10px;
+    cursor: pointer; }

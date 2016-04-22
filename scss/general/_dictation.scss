@@ -1,0 +1,50 @@
+.dictation-overview-row {
+	height: $tgd-info-row-height;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	margin-top: $tgd-vertical-gap;
+	padding: $tgd-default-padding;
+
+	font-size: $tgd-font-size-subtitle;
+
+	border: 1px solid $tgd-shadow-color;
+
+	// EVALUATION
+	&.good {
+		background-color: $tgd-correct-color;
+		color: $tgd-font-contrast-color;
+	}
+
+	&.mediocre {
+		background-color: white;
+		//box-shadow: 2px 2px 10px $tgd-shadow-color;
+	}
+
+	&.bad {
+		background-color: $tgd-wrong-color;
+		color: $tgd-font-contrast-color;
+	}
+
+	// ELEMENTS
+	.dict-title {
+
+	}
+
+	.dict-corrects {
+		font-size: $tgd-font-size-subtitle * 1.2;
+	}
+
+	.dict-score {
+
+	}
+
+	// SELECTORS
+	&:hover {
+		margin-left: 10px;
+		margin-right: -10px;
+		cursor: pointer;
+	}
+
+}

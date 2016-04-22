@@ -11,7 +11,7 @@ if (isset($_GET["logout"])){
     header("Location: ".strtok("http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]",'?'));
     die();
 }
-if (isset($_GET["ctest"]){
+if (isset($_GET["ctest"])){
 	$usersystem->setUserInformation("ctest",$_GET["ctest"]);
 }
 

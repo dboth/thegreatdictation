@@ -6,9 +6,7 @@ function createAnalysis(res) {
      */
 
     var result_object = new Result(res[0]);
-
-    result_object.createHeader("#analysis-container .page-header");
-
+    
     result_object.createWordwiseErrorInfo("#input-info-container");
 
     result_object.createOverallScoreInfo("#score-info");

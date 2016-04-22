@@ -56,7 +56,7 @@ class SqlConnector {
             $score2 = 0;
             $score3 = 0;
         }
-        if (!($stmt = $this->verbindung->prepare("INSERT INTO results_v0 (input, output, username, text_id, score1, score2, score3) VALUES(?, ?, ?, ?, ?, ? ,?)"))) die($this->errors->createErrorJSON("b_db_couldnt_prepare_sql", "results_v0"));
+        if (!($stmt = $this->verbindung->prepare("INSERT INTO results_v0 (input, output, username, text_id, score, correct_words, total_words) VALUES(?, ?, ?, ?, ?, ? ,?)"))) die($this->errors->createErrorJSON("b_db_couldnt_prepare_sql", "results_v0"));
         $stmt->bind_param("sssssss",$input,$output, $username, $text_id, $score1, $score2, $score3);
         $stmt->execute();
     }
@@ -86,6 +86,20 @@ class SqlConnector {
         return $res;
     }
 
+    public function getTextName($id) {
+        if (!($stmt = $this->verbindung->prepare("SELECT texts.name FROM texts WHERE id=?"))) {
+            die($this->errors->createErrorJSON("b_db_couldnt_prepare_sql", "textnames: ".$this->getLastError()));
+            return false;
+        }
+
+        $stmt->bind_param("s", $id);
+        $stmt->execute();
+        $stmt->bind_result($res);
+        $stmt->fetch();
+
+        return $res;
+    }
+
     public function getAudioByText($text_id) {
         if (!($stmt = $this->verbindung->prepare("SELECT audio.file FROM audio WHERE audio.text_id=?"))) {
             die($this->errors->createErrorJSON("b_db_couldnt_prepare_sql", "audio: ".$this->getLastError()));
@@ -100,18 +114,16 @@ class SqlConnector {
         return $res;
     }
 
-    public function getAllDictationsForUser($username) {
-        if (!($stmt = $this->verbindung->prepare("SELECT * FROM results_v0 as r WHERE r.username=?"))) {
-            die($this->errors->createErrorJSON("b_db_couldnt_prepare_sql", "audio: ".$this->getLastError()));
+    public function getAllDictationsForUser($username, $limit, $offset) {
+        $sql = "SELECT r.id as dict_id, t.id as text_id, t.name, r.score, r.correct_words, r.total_words, r.input, r.output FROM results_v0 as r, texts as t WHERE r.text_id = t.id AND r.username='".$username."' LIMIT ".strval($limit)." OFFSET ".strval($offset);
+
+        $result = $this->query($sql);
+        if ($result) {
+            return $result;
+        } else {
+            die($this->errors->createErrorJSON("b_db_couldnt_prepare_sql", "dictation: ".$this->getLastError()));
             return false;
         }
-
-        $stmt->bind_param("s", $username);
-        $stmt->execute();
-        $stmt->bind_result($res);
-        $stmt->fetch();
-
-        return $res;
     }
 
 }

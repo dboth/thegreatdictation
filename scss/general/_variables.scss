@@ -19,15 +19,11 @@ $tgd-font-contrast-color: #fff;
 $tgd-navfont-color: #fff;
 $tgd-footer-font-color: #b1b1b1;
 
+$tgd-shadow-color: rgba(0, 0, 0, 0.2);
+
 // STATISTIC COLORS
 $tgd-score-color: #add8e6;
 $tgd-ratio-color: #008000;
-
-// ALIGNMENT COLORS
-$tgd-correct-color:     #90ee90;
-$tgd-missing-word-color: #ff5400;
-$tgd-wrong-color:       #f33;
-$tgd-minor-mistake-color: #f6ba07;
 
 // LEVENSHTEIN COLORS
 $tgd-match-color: #85aa5c;
@@ -39,6 +35,12 @@ $tgd-capitalization-color: #d5b545;
 $tgd-switch-color: #9e54c1;
 $tgd-word-switch-color: #c154b6;
 $tgd-unknown-color: rgb(112, 112, 112);
+
+// ALIGNMENT COLORS
+$tgd-correct-color:     $tgd-match-color;
+$tgd-missing-word-color: $tgd-insert-color;
+$tgd-wrong-color:       $tgd-sub-color;
+$tgd-minor-mistake-color: #f6ba07;
 
 /* TEXT STYLING */
 $tgd-font-family: Helvetica, sans-serif;
@@ -66,3 +68,5 @@ $tgd-horizontal-gap:    15px;
 $tgd-default-padding: 15px;
 
 $tgd-nav-hoverbar-height: 5px;
+
+$tgd-info-row-height: 100px;

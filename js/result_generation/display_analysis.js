@@ -71,7 +71,7 @@ $(document).ready(function () {
             type: method
         }).fail(function (a,b,c){
             console.log("ERROR: ", a.responseText);
-            requestErrorInfo("f_analysis_create_analysis", "Server Request Failed");
+            requestErrorInfo("f_analysis_display_analysis", "Server Request Failed");
         }).done(function (res){
             var loadingbar = $("#loading-bar .progress-bar");
             loadingbar.stop();

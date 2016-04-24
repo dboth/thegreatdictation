@@ -12,4 +12,4 @@
 
 <script type="text/javascript" src="js/show_dictations/display_dictations.js"></script>
 <script type="text/javascript" src="js/result_generation/Result.js"></script>
-<script type="text/javascript" src="js/result_generation/create_analysis.js"></script>
+<script type="text/javascript" src="js/result_generation/display_analysis.js"></script>

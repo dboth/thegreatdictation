@@ -82,7 +82,7 @@ class ErrorHandler {
 				break;
 
 			// FRONTEND ERRORS
-			case "f_analysis_create_analysis":
+			case "f_analysis_display_analysis":
 				$error_info["fatality"] = "FATAL";
 				$error_info["name"] = "CREATE ANALYSIS FAIL";
 				$error_info["msg"] = "The creation of your analysis failed due to: ".$add_info;

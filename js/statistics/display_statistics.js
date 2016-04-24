@@ -16,7 +16,8 @@ $(document).ready(function() {
 
 			var statistics_object = new Statistics(dictations);
 
-			statistics_object.prepareDataForAvgErrorDistribution();
+			var error_distr_data = statistics_object.prepareDataForAvgErrorDistribution();
+			var error_distr_radar = statistics_object.displayAvgErrorDistribution(error_distr_data, "#avg-error-distr", "radar");	
 
 		})
 		.fail(function() {
@@ -27,6 +28,7 @@ $(document).ready(function() {
 		});
 	}
 
+	// INITIATE
 	$.ajax({
 		url: 'sockets/setInformation.php',
 		type: 'POST',

@@ -94,6 +94,6 @@
 </div>
 
 <script src="js/result_generation/Result.js"></script>
-<script src="js/result_generation/create_analysis.js"></script>
+<script src="js/result_generation/display_analysis.js"></script>
 <script src="js/page_events/handle_dictation.js"></script>
 <script src="js/async_calls/call_audio_path.js"></script>

@@ -86,6 +86,20 @@ class SqlConnector {
         return $res;
     }
 
+    public function getTaggedText($id) {
+        if (!($stmt = $this->verbindung->prepare("SELECT texts.tagged FROM texts WHERE id=?"))) {
+            die($this->errors->createErrorJSON("b_db_couldnt_prepare_sql", "taggedtexts: ".$this->getLastError()));
+            return false;
+        }
+
+        $stmt->bind_param("s", $id);
+        $stmt->execute();
+        $stmt->bind_result($res);
+        $stmt->fetch();
+
+        return $res;
+    }
+
     public function getTextName($id) {
         if (!($stmt = $this->verbindung->prepare("SELECT texts.name FROM texts WHERE id=?"))) {
             die($this->errors->createErrorJSON("b_db_couldnt_prepare_sql", "textnames: ".$this->getLastError()));

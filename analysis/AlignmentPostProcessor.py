@@ -10,7 +10,7 @@ import pprint
 
 class AlignmentPostProcessor():
 
-    def __init__(self, alignment, target_str, input_str, word_switch):
+    def __init__(self, alignment, target_str, input_str, tagged_text, word_switch):
 
         #PATH
         self.alignment = alignment
@@ -25,14 +25,29 @@ class AlignmentPostProcessor():
         #WEIGHT
         self.word_switch = word_switch
 
+        #TAGGED TEXT
+        self.tagged_text = tagged_text
+
         #PROCESSED DATA
         self.matrix_field = namedtuple("Field", ["target", "input", "cost", "op"])
+        self.word_alignment = self.convertToWordAlignment()
+
+    def countErrorsByWordType(self):
+        """
+        Uses self.word_alignment and self.tagged_text to create a map of postags and the following values:
+            {POSTAG: {
+                "errors": VALUE,
+                "errors_weight": VALUE
+            }}
+        """
+
+        return "TEST"
 
     def convertToWordAlignment(self):
         """
             Creates a wordwise alignment based on self.alignment (characterwise).
             Outputs in dict format:
-                { TARGET_START_INDEX: [TARGET_END_INDEX, TARGET_STRING, INPUT_STRING, INPUT_START_INDEX, INPUT_END_INDEX, ERROR_WEIGHT_OF_INPUT, WORD_SWITCH_INDEX] }
+                { TARGET_START_INDEX: [TARGET_END_INDEX, TARGET_STRING, INPUT_STRING, INPUT_START_INDEX, INPUT_END_INDEX, ERROR_WEIGHT_OF_INPUT, WORD_SWITCH_INDEX, POS] }
                 e.g. { 5: [8, "Maus", "Haus", 4, 7, 1]}
                 all indices are INCLUSIVE!
         """

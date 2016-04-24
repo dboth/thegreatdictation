@@ -34,6 +34,7 @@ if ($data === null) {
 
 //get text
 $data["target"] = utf8_encode($sql1->getText($data["text_id"]));
+$data["treetagged"] = json_decode(utf8_encode($sql1->getTaggedText($data["text_id"])));
 
 //create a new data object with meta data
 $new_json = array(

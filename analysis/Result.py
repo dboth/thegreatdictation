@@ -21,12 +21,14 @@ class Result():
         self.input_data = self.normalizeInput(self.getValueFromJSON("input"))
         self.target_data = self.normalizeInput(self.getValueFromJSON("target"))
         self.text_id = self.getValueFromJSON("text_id")
+        self.text_tagged = self.getValueFromJSON("treetagged")
 
         #calculated data
         self.alignment = self.calcAlignmentDiff(self.target_data, self.input_data)
-        self.postprocessor = APPr.AlignmentPostProcessor(self.alignment, self.target_data, self.input_data, 1)
+        self.postprocessor = APPr.AlignmentPostProcessor(self.alignment, self.target_data, self.input_data, self.text_tagged, 1)
         self.word_alignment = self.calcWordAlignment()
         self.score = self.calcScore()
+        self.postag_map = self.calcTaggedMap()
 
         #output
         self.output_json = self.buildOutputJSON()
@@ -55,10 +57,13 @@ class Result():
         return result
 
     def calcWordAlignment(self):
-        return self.postprocessor.convertToWordAlignment()
+        return self.postprocessor.word_alignment
 
     def calcScore(self):
         return self.postprocessor.calcScore()
+
+    def calcTaggedMap(self):
+        return self.postprocessor.countErrorsByWordType()
 
     #CONTROL METHODS
 
@@ -77,6 +82,7 @@ class Result():
 
         output_json["data"].update({"levenshtein": self.alignment})
         output_json["data"].update({"word_alignment": self.word_alignment})
+        output_json["data"].update({"postag_map": self.postag_map})
         output_json["data"].update({"score": self.score})
         return output_json
 

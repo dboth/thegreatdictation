@@ -6337,7 +6337,7 @@ body {
       border-bottom: 5px inset transparent; }
       .navbar .nav li a:hover {
         color: #fff;
-        border-bottom: 5px inset #2a93cf !important; }
+        border-bottom: 5px inset #2a93cf; }
       .navbar .nav li a:focus {
         color: #fff; }
     .navbar .nav li.open a, .navbar .nav li.open a:hover, .navbar .nav li.open a:focus, .navbar .nav li.open a:visited {

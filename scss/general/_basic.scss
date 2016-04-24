@@ -151,7 +151,7 @@ body {
                 &:hover {
                     //background-color: $tgd-nav-hover-color;
                     color: $tgd-navfont-color;
-                    border-bottom: $tgd-nav-hoverbar-height inset $tgd-primary-color !important;
+                    border-bottom: $tgd-nav-hoverbar-height inset $tgd-primary-color;
                 }
 
                 &:focus {

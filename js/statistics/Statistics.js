@@ -17,14 +17,12 @@ Statistics.prototype.prepareDataForAvgErrorDistribution = function () {
 	var error_count_all = {};
 	$.each(error_count_seperate, function(index, dict) {
 		$.each(dict, function(error, amount) {
-			console.log(error, amount);
 			if (!error_count_all.hasOwnProperty(error)) {
 			   error_count_all[error] = parseInt(amount);
 		   	} else {
 			   error_count_all[error] += parseInt(amount);
 		   	}
 		});
-		console.log(error_count_all);
 	});
 
 	$.each(error_count_all, function(index, val) {
@@ -44,7 +42,7 @@ Statistics.prototype.displayAvgErrorDistribution = function(avgdata, target_id, 
 	/* PREPARE CHART */
 	var canvas = $("<canvas>").attr({
 		width: target_div.width(),
-		height: (type === "bar") ? 200 : 400
+		height: (type === "bar") ? 400 : 400
 	});
 	var context = canvas.get(0).getContext("2d");
 
@@ -84,7 +82,6 @@ Statistics.prototype.displayAvgErrorDistribution = function(avgdata, target_id, 
 	/* PREPARE DATA */
 
 	var error_count_map = avgdata;
-	console.log(error_count_map);
 	delete error_count_map["M"];
 	delete error_count_map["M+"];
 	delete error_count_map["+M"];
@@ -136,7 +133,6 @@ Statistics.prototype.displayAvgErrorDistribution = function(avgdata, target_id, 
 		}
 
 		var label_pos = data["labels"].indexOf(error_label);
-		console.log(error_label + " -> " + label_pos);
 		if (label_pos === -1) {
 			// write into data object
 			data["labels"].push(error_label);

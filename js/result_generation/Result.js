@@ -102,13 +102,11 @@ Result.prototype.styleSingleLetterWithLevenshtein = function (target_index) {
 			target.addClass("switch")
 				.html("<i class='fa fa-exchange'></i>");
 		} else if (errortype === "punctuation" || errortype === "punctfault_t" || errortype === "sim_punct") {
-			console.log("LENGTH: " + this.input.length + "; POS: " + input_pos);
 			input.addClass("punctuation")
 				.html(this.input[input_pos].replace(/\s/g, "&nbsp"));
 			target.addClass("punctuation")
 				.html(this.target[target_pos].replace(/\s/g, "&nbsp"));
 		} else if (errortype === "punctfault_i") {
-			console.log("LENGTH: " + this.input.length + "; POS: " + input_pos);
 			input.addClass("punctuation")
 				.html("_");
 			target.addClass("punctuation")
@@ -197,7 +195,7 @@ Result.prototype.createWordwiseErrorInfo = function (target_id) {
 
 };
 
-Result.prototype.createMistakeDistributionInfo = function (target_id, type) {
+Result.prototype.createMistakeDistributionInfo = function (target_id, type, avg_data) {
 
 	/*
 		Calcs and displays Info about distribution of Error Type
@@ -212,7 +210,7 @@ Result.prototype.createMistakeDistributionInfo = function (target_id, type) {
 	/* PREPARE CHART */
 	var canvas = $("<canvas>").attr({
 		width: target_div.width(),
-		height: (type === "bar") ? 200 : 400
+		height: (type === "bar") ? 400 : 400
 	});
 	var context = canvas.get(0).getContext("2d");
 
@@ -220,7 +218,11 @@ Result.prototype.createMistakeDistributionInfo = function (target_id, type) {
   		labels: [],
   		datasets: [
 			{
-				label: "Error Type Distribution",
+				label: "this dictation",
+	            data: []
+			},
+			{
+				label: "average dictation",
 	            data: []
 			}
 		]
@@ -233,6 +235,11 @@ Result.prototype.createMistakeDistributionInfo = function (target_id, type) {
 		data["datasets"][0].highlightFill = "green";
 		data["datasets"][0].highlightStroke = "lightgreen";
 
+		data["datasets"][1].fillColor = "blue";
+		data["datasets"][1].strokeColor = "lightblue";
+		data["datasets"][1].highlightFill = "green";
+		data["datasets"][1].highlightStroke = "lightgreen";
+
 	} else if (type === "radar") {
 
 		data["datasets"][0].fillColor = "rgba(151,187,205,0.2)";
@@ -243,9 +250,13 @@ Result.prototype.createMistakeDistributionInfo = function (target_id, type) {
         data["datasets"][0].pointHighlightFill = "#fff";
         data["datasets"][0].pointHighlightStroke = "rgba(151,187,205,1)";
 
-	} else if (type === "pie") {
-
-		// TODO
+		data["datasets"][1].fillColor = "rgba(205, 213, 217, 0.2)";
+		data["datasets"][1].fillColor = "rgba(205, 213, 217, 0.2)";
+        data["datasets"][1].strokeColor = "rgba(178, 190, 196, 1)";
+        data["datasets"][1].pointColor = "rgba(178, 190, 196, 1)";
+        data["datasets"][1].pointStrokeColor = "#fff";
+        data["datasets"][1].pointHighlightFill = "#fff";
+        data["datasets"][1].pointHighlightStroke = "rgba(178, 190, 196, 1)";
 
 	}
 
@@ -260,6 +271,11 @@ Result.prototype.createMistakeDistributionInfo = function (target_id, type) {
 	delete error_count_map["M"];
 	delete error_count_map["M+"];
 	delete error_count_map["+M"];
+
+	console.log("AVG: ", avg_data);
+	delete avg_data["M"];
+	delete avg_data["M+"];
+	delete avg_data["+M"];
 
 	// map with errorshortcut mapping to className and label
 	var error_type_map = {
@@ -291,6 +307,13 @@ Result.prototype.createMistakeDistributionInfo = function (target_id, type) {
 		"word switch": "word-switch"
 	};
 
+	// equalize keys of avg and current dictation datasets
+	var equalized = equalizeKeys(error_count_map, avg_data, 0);
+	error_count_map = equalized[0];
+	avg_data = equalized[1];
+	console.log("EQUALIZED: ", equalized);
+
+
 	/* FILL DATA */
 
 	// get total amount of wrong chars for percentage
@@ -308,14 +331,15 @@ Result.prototype.createMistakeDistributionInfo = function (target_id, type) {
 		}
 
 		var label_pos = data["labels"].indexOf(error_label);
-		console.log(error_label + " -> " + label_pos);
 		if (label_pos === -1) {
 			// write into data object
 			data["labels"].push(error_label);
-			data["datasets"][0]["data"].push((type === "pie") ? ((error_count_map[error] / char_count) * 100) : error_count_map[error]);
+			data["datasets"][0]["data"].push(error_count_map[error]);
+			data["datasets"][1]["data"].push(avg_data[error]);
 		} else {
 			// add to already existing label
-			data["datasets"][0]["data"][label_pos] += (type === "pie") ? ((error_count_map[error] / char_count) * 100) : error_count_map[error];
+			data["datasets"][0]["data"][label_pos] += error_count_map[error];
+			data["datasets"][1]["data"][label_pos] += avg_data[error];
 		}
 	}
 
@@ -341,6 +365,11 @@ Result.prototype.createMistakeDistributionInfo = function (target_id, type) {
 				bar_chart.datasets[0].bars[index].strokeColor = tinycolor(label_color).lighten(10);
 				bar_chart.datasets[0].bars[index].highlightFill = tinycolor(label_color).lighten(15);
 				bar_chart.datasets[0].bars[index].highlightStroke = tinycolor(label_color).lighten(20);
+
+				bar_chart.datasets[1].bars[index].fillColor = tinycolor(label_color).desaturate(30).lighten(10);
+				bar_chart.datasets[1].bars[index].strokeColor = tinycolor(label_color).lighten(10).desaturate(30).lighten(10);
+				bar_chart.datasets[1].bars[index].highlightFill = tinycolor(label_color).lighten(15).desaturate(30).lighten(10);
+				bar_chart.datasets[1].bars[index].highlightStroke = tinycolor(label_color).lighten(20).desaturate(30).lighten(10);
 			}
 		}
 

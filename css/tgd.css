@@ -6462,7 +6462,7 @@ fieldset {
 
 .subtitle {
   color: #2a93cf;
-  font-size: 1.5em; }
+  font-size: 1.7em; }
 
 .title-small {
   text-transform: uppercase;
@@ -6501,7 +6501,7 @@ fieldset {
   font-style: italic; }
 
 .profile-information-title {
-  font-size: 1.5em;
+  font-size: 1.7em;
   color: #2a93cf; }
 
 .profile-information {
@@ -6522,6 +6522,19 @@ fieldset {
   -webkit-flex-wrap: wrap;
       -ms-flex-wrap: wrap;
           flex-wrap: wrap; }
+
+.wordwise-error-info {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between; }
+
+.dictation-spelling-row {
+  text-align: center; }
 
 .error-container {
   text-align: center;
@@ -6664,7 +6677,7 @@ fieldset {
           justify-content: space-between;
   margin-top: 40px;
   padding: 15px;
-  font-size: 1.5em;
+  font-size: 1.7em;
   border: 1px solid rgba(0, 0, 0, 0.2); }
   .dictation-overview-row.good {
     background-color: #85aa5c;
@@ -6675,7 +6688,7 @@ fieldset {
     background-color: #ad4747;
     color: #fff; }
   .dictation-overview-row .dict-corrects {
-    font-size: 1.8em; }
+    font-size: 2.04em; }
   .dictation-overview-row:hover {
     margin-left: 10px;
     margin-right: -10px;

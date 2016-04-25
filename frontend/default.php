@@ -99,8 +99,7 @@
 			<div class="container">
 
 				<?php
-
-				if ($usersystem->getResultCount() >= 3) {
+				if ($usersystem->getResultCount() >= 3 && !$usersystem->finishedSurvey()) {
 					echo '
 					<div class="text-center alert alert-success" role="alert">
 						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>

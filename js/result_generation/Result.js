@@ -434,20 +434,16 @@ Result.prototype.createCharwiseErrorInfo = function (target_id) {
 		if (word_error > 0 && input_word !== "" && word_info[6] === null) {
 
 			//container
-			var info_row = $("<div>").addClass('row row-spacing');
+			var info_row = $("<div>").addClass('dictation-spelling-row');
 
 			//content
-			var info_target_word = $("<div>").addClass('col-xs-5 col-sm-3');
-			var info_input_word = $("<div>").addClass('hidden-xs col-sm-3');
-			var info_pointer = $("<div>").addClass('hidden-xs col-sm-1');
-			var info_pointer2 = $("<div>").addClass('hidden-xs col-sm-1');;
- 			var info_spelling = $("<div>").addClass('charwise-word-wrapper col-xs-7 col-sm-4');
+			var info_target_word = $("<div>");
+			var info_input_word = $("<div>");
+ 			var info_spelling = $("<div>").addClass('charwise-word-wrapper');
 
 			//fill content
 			info_target_word.html(target_word);
 			info_input_word.html(input_word);
-			info_pointer.html('<i class="fa fa-arrow-right"></i>');
-			info_pointer2.html('<i class="fa fa-arrow-right"></i>');
 
 			// Basis has to be target, because on one target character there can be multiple linked input positions
 			for (var char = target_start-1; char <= target_end; char++) {
@@ -460,10 +456,7 @@ Result.prototype.createCharwiseErrorInfo = function (target_id) {
 			// sticking stuff together
 			info_row
 				.append(info_input_word)
-				.append(info_pointer)
-				.append(info_spelling)
-				.append(info_pointer2)
-				.append(info_target_word);
+				.append(info_spelling);
 
 			$(target_id).append(info_row);
 		}

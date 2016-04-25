@@ -75,17 +75,17 @@ class AlignmentPostProcessor():
             else:
                 if self.target[target_iter-1] == " ":  #white space match
                     previous_process = self.alignment[process_iter-1]
-                    pos = self.tagged_text[word_switch]["pos"]
+                    pos = self.tagged_text[word_count]["pos"]
                     if word_switch == 2:  #word_switch needs special care again for both words
                         start_process = ws
                         word_fault_sum += float(ws[2][2])/2
                         self.output_dict[ws[2][0]+target_split[0][1]] = [ws[2][0]+target_split[0][2]-1, self.target[ws[2][0]+target_split[0][1]:ws[2][0]+target_split[0][2]], self.input[ws[2][1]+input_split[1][1]:ws[2][1]+input_split[1][2]], ws[2][1]+input_split[1][1], ws[2][1]+input_split[1][2]-1, word_fault_sum, ws[2][0]+target_split[1][1]]
-                        pos = self.tagged_text[word_switch+1]["pos"] #change pos to pos of next word
+                        pos = self.tagged_text[word_count+1]["pos"] #change pos to pos of next word
                     elif word_switch == 1:
                         start_process = ws
                         word_fault_sum += float(ws[2][2])/2
                         self.output_dict[ws[2][0]+target_split[1][1]] = [ws[2][0]+target_split[1][2]-1, self.target[ws[2][0]+target_split[1][1]:ws[2][0]+target_split[1][2]], self.input[ws[2][1]+input_split[0][1]:ws[2][1]+input_split[0][2]], ws[2][1]+input_split[0][1], ws[2][1]+input_split[0][2]-1, word_fault_sum, ws[2][0]+target_split[0][1]]
-                        pos = self.tagged_text[word_switch-1]["pos"] #change pos to pos of previous word
+                        pos = self.tagged_text[word_count-1]["pos"] #change pos to pos of previous word
                     elif word_switch < 1: #non word_switch case
                         self.output_dict[start_process[2][0]] = [previous_process[0]-1, self.target[start_process[2][0]:previous_process[0]], self.input[start_process[2][1]:previous_process[1]], start_process[2][1], previous_process[1]-1, word_fault_sum, None]
                     if pos in self.pos_dict:
@@ -98,6 +98,7 @@ class AlignmentPostProcessor():
                         start_process = self.alignment[process_iter+1]
                     word_fault_sum = 0
                     number_of_errors = 0
+                    word_count += 1
 
         #last word
         self.output_dict[start_process[2][0]] = [self.alignment[-1][0]-1, self.target[start_process[2][0]:self.alignment[-1][0]], self.input[start_process[2][1]:self.alignment[-1][1]], start_process[2][1], self.alignment[-1][1]-1, word_fault_sum, None]

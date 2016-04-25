@@ -6,7 +6,7 @@ require_once __DIR__ . '/SqlConnector.php';
 
 class UserSystem
 {
-    /* 
+    /*
         The UserSystem is loaded at the begin of every request and provides session functionality
     */
     public $user_id;
@@ -15,7 +15,7 @@ class UserSystem
     public function __construct()
     {
         session_start();
-        
+
         //list of the columns in the database and therefore allowed keys
         self::$allowed = array(
         "username",
@@ -24,35 +24,35 @@ class UserSystem
         "mothertongue",
         "learninglength",
         "livingingerman");
-        
+
         $this->errors = new ErrorHandler(__CLASS__);
         $this->db = new SqlConnector();
     }
 
     public function setUserInformation($key, $value)
-    {   
+    {
         //you cannot set the username this way, and cannot set keys not in the database
         if ($key == "username" || (!in_array($key, self::$allowed)))
             return false;
-        
+
         //set the key for this session
         $_SESSION[$key] = $value;
-        
+
         //if no username is provided do not save the changed information in the db
         if (empty($_SESSION["username"]))
             return true;
-        
+
         //check if user exists in db
         $e = $this->db->query("SELECT null FROM users WHERE username = '".$this->db->esc($_SESSION["username"])."'");
         //if not exists: insert db
-        
+
         if (!$e->num_rows){
             $this->db->query("INSERT INTO users (username, ".$this->db->esc($key).") VALUES ('".$this->db->esc($_SESSION["username"])."','".$this->db->esc($value)."')");
-       
+
         }//else update db
         else
             $this->db->query("UPDATE users SET ".$this->db->esc($key)." = '".$this->db->esc($value)."' WHERE username = '".$this->db->esc($_SESSION["username"])."'");
-       
+
     }
 
     public function getUserInformation($key = false)
@@ -83,20 +83,29 @@ class UserSystem
          if (isset($_SESSION[$key]))
                 unset($_SESSION[$key]);
          }
-        
+
     }
-    
+
     public function getResultCount(){
         return empty($_SESSION["username"]) ? 0 : $this->db->query("SELECT id FROM results_v0 WHERE username = '".$this->db->esc($_SESSION["username"])."'")->num_rows;
 	}
-    
+
+    public function finishedSurvey(){
+        return $this->db->query("SELECT * FROM survey WHERE username = '".$this->db->esc($_SESSION["username"])."'")->num_rows;
+        if ($this->db->query("SELECT * FROM survey WHERE username = '".$this->db->esc($_SESSION["username"])."'")->num_rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
+	}
+
     public function setUser($username, $onlyLogin = false)
     {
         if (!$username)
             return false;
-        
-        
-        
+
+
+
         //select info from database and instatiate
         $e = $this->db->query("SELECT * FROM users WHERE username = '".$this->db->esc($username)."'");
         $r = array();
@@ -104,7 +113,7 @@ class UserSystem
             $r = $e->fetch_assoc();
 		else if ($onlyLogin)
 			return false;
-        
+
         foreach (self::$allowed as $key){
             if ($key == "username")
                 continue;
@@ -115,7 +124,7 @@ class UserSystem
         }
 		//set the username for the session
         $_SESSION["username"] = $username;
-        
+
     }
 
 }

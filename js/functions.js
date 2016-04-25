@@ -9,6 +9,26 @@ function countArrayDuplicates(array) {
     return counts;
 }
 
+function equalizeKeys(array_a, array_b, default_val) {
+    /*
+        adds all keys of a to b with value default and vice versa
+     */
+
+    for (var key_a in array_a) {
+        if (!array_b.hasOwnProperty(key_a)) {
+            array_b[key_a] = default_val;
+        }
+    }
+
+    for (var key_b in array_b) {
+        if (!array_a.hasOwnProperty(key_b)) {
+            array_a[key_b] = default_val;
+        }
+    }
+
+    return [array_a, array_b];
+}
+
 function toggleViews(to_view) {
 
     /*

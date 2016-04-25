@@ -1,5 +1,11 @@
 <div class="container main-container" id="dictation-list">
-
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="subtitle">
+				Your last dictations
+			</div>
+		</div>
+	</div>
 
 
 </div>

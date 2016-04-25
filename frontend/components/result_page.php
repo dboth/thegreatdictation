@@ -1,12 +1,12 @@
     <div class="row row-content row-spacing-lg" id="input-row">
         <div class="col-xs-12">
-            <div class="subtitle title-hline">What you've entered</div>
+            <div class="subtitle">What you've entered</div>
             <div class="info-container error-indication" id="input-info-container">
             </div>
         </div>
     </div>
 
-    <div class="row row-content row-spacing-lg" id="wordwise-legend">
+    <div class="row" id="wordwise-legend">
         <div class="col-xs-12 text-center">
             <div class="legend">
                 <div class="element missing-word">
@@ -24,7 +24,7 @@
 
     <div class="row row-content row-spacing-lg">
         <div class="col-xs-12 col-sm-8" id="errordistribution-row">
-            <div class="subtitle title-hline">Error Distribution (Character-wise)</div>
+            <div class="subtitle">Error Distribution (Character-wise)</div>
 
             <div id="error-distr-tablist">
                 <ul class="nav nav-tabs tablist-tiny" role="tablist">
@@ -74,7 +74,7 @@
         </div>
 
         <div class="col-xs-12 col-sm-4" id="score-row">
-            <div class="subtitle title-hline">Rating</div>
+            <div class="subtitle">Rating</div>
 
             <div class="row" id="score-info">
                 <div class="col-xs-12">
@@ -92,36 +92,16 @@
 
     <div class="row row-content row-spacing-lg" id="charwise-row">
         <div class="col-xs-12">
-            <div class="subtitle title-hline">Detailed character by character error info</div>
+            <div class="subtitle">Detailed character by character error info</div>
         </div>
-        <div class="col-xs-12" id="wordwise-error-info">
-            <div class="row text-info">
+        <div class="col-xs-12 wordwise-error-info row-spacing" id="wordwise-error-info">
 
-                <div class="hidden-xs col-sm-3">
-                    Your Spelling
-                </div>
-
-                <div class="hidden-xs col-sm-1">
-                </div>
-
-                <div class="col-xs-7 col-sm-4">
-                    Correction
-                </div>
-
-                <div class="hidden-xs col-sm-1">
-                </div>
-
-                <div class="col-xs-5 col-sm-3">
-                    Correct Spelling
-                </div>
-
-            </div>
         </div>
     </div>
 
     <div class="row row-content row-spacing-lg" id="performance-row">
         <div class="col-xs-12">
-            <div class="subtitle title-hline">Performance over time (word-wise)</div>
+            <div class="subtitle">Performance over time (word-wise)</div>
         </div>
         <div class="col-xs-12 chart" id="performance-over-time-chart"></div>
     </div>

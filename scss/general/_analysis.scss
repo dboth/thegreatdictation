@@ -6,6 +6,15 @@
     flex-wrap: wrap;
 }
 
+.wordwise-error-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.dictation-spelling-row {
+    text-align: center;
+}
+
 .error-container {
     text-align: center;
     vertical-align: top;

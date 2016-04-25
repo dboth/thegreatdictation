@@ -59,7 +59,7 @@ class AlignmentPostProcessor():
         ws = None
         word_count = 0 #for iteration through self.tagged_text
         number_of_errors = 0 #count number errors per word
-        for process_iter in range(len(self.alignment)):  #walk along until you find a whitespace in target
+        for process_iter in range(len(self.alignment)): #walk along until you find a whitespace in target
             process = self.alignment[process_iter]
             target_iter = process[0]
             word_fault_sum += process[2][2]
@@ -77,17 +77,17 @@ class AlignmentPostProcessor():
                     previous_process = self.alignment[process_iter-1]
                     pos = self.tagged_text[word_count]["pos"]
                     if word_switch == 2:  #word_switch needs special care again for both words
-                        start_process = ws
-                        word_fault_sum += float(ws[2][2])/2
-                        self.output_dict[ws[2][0]+target_split[0][1]] = [ws[2][0]+target_split[0][2]-1, self.target[ws[2][0]+target_split[0][1]:ws[2][0]+target_split[0][2]], self.input[ws[2][1]+input_split[1][1]:ws[2][1]+input_split[1][2]], ws[2][1]+input_split[1][1], ws[2][1]+input_split[1][2]-1, word_fault_sum, ws[2][0]+target_split[1][1]]
                         pos = self.tagged_text[word_count+1]["pos"] #change pos to pos of next word
-                    elif word_switch == 1:
                         start_process = ws
                         word_fault_sum += float(ws[2][2])/2
-                        self.output_dict[ws[2][0]+target_split[1][1]] = [ws[2][0]+target_split[1][2]-1, self.target[ws[2][0]+target_split[1][1]:ws[2][0]+target_split[1][2]], self.input[ws[2][1]+input_split[0][1]:ws[2][1]+input_split[0][2]], ws[2][1]+input_split[0][1], ws[2][1]+input_split[0][2]-1, word_fault_sum, ws[2][0]+target_split[0][1]]
+                        self.output_dict[ws[2][0]+target_split[0][1]] = [ws[2][0]+target_split[0][2]-1, self.target[ws[2][0]+target_split[0][1]:ws[2][0]+target_split[0][2]], self.input[ws[2][1]+input_split[1][1]:ws[2][1]+input_split[1][2]], ws[2][1]+input_split[1][1], ws[2][1]+input_split[1][2]-1, word_fault_sum, ws[2][0]+target_split[1][1], pos]
+                    elif word_switch == 1:
                         pos = self.tagged_text[word_count-1]["pos"] #change pos to pos of previous word
+                        start_process = ws
+                        word_fault_sum += float(ws[2][2])/2
+                        self.output_dict[ws[2][0]+target_split[1][1]] = [ws[2][0]+target_split[1][2]-1, self.target[ws[2][0]+target_split[1][1]:ws[2][0]+target_split[1][2]], self.input[ws[2][1]+input_split[0][1]:ws[2][1]+input_split[0][2]], ws[2][1]+input_split[0][1], ws[2][1]+input_split[0][2]-1, word_fault_sum, ws[2][0]+target_split[0][1], pos]
                     elif word_switch < 1: #non word_switch case
-                        self.output_dict[start_process[2][0]] = [previous_process[0]-1, self.target[start_process[2][0]:previous_process[0]], self.input[start_process[2][1]:previous_process[1]], start_process[2][1], previous_process[1]-1, word_fault_sum, None]
+                        self.output_dict[start_process[2][0]] = [previous_process[0]-1, self.target[start_process[2][0]:previous_process[0]], self.input[start_process[2][1]:previous_process[1]], start_process[2][1], previous_process[1]-1, word_fault_sum, None, pos]
                     if pos in self.pos_dict:
                         self.pos_dict[pos]["errors"] += number_of_errors
                         self.pos_dict[pos]["errors_weight"] += word_fault_sum
@@ -101,7 +101,8 @@ class AlignmentPostProcessor():
                     word_count += 1
 
         #last word
-        self.output_dict[start_process[2][0]] = [self.alignment[-1][0]-1, self.target[start_process[2][0]:self.alignment[-1][0]], self.input[start_process[2][1]:self.alignment[-1][1]], start_process[2][1], self.alignment[-1][1]-1, word_fault_sum, None]
+        pos = self.tagged_text[word_count]["pos"]
+        self.output_dict[start_process[2][0]] = [self.alignment[-1][0]-1, self.target[start_process[2][0]:self.alignment[-1][0]], self.input[start_process[2][1]:self.alignment[-1][1]], start_process[2][1], self.alignment[-1][1]-1, word_fault_sum, None, pos]
 
         return self.output_dict
 

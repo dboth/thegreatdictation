@@ -108,16 +108,16 @@ class AlignmentPostProcessor():
         total_points = 0
         for word in self.output_dict:
             bag = self.output_dict[word]
-            points = naturalZero((len(bag[1]) - bag[5]))
+            points = naturalZero((len(bag[1]) - bag[5]))/float(len(bag[1]))
             threshold = 0.5 # (len(bag[1])/float(2))/len(bag[1])
 
             if points < threshold or bag[5] == 0:
-                total_points += float(points)/len(bag[1])
+                total_points += points
             else:
                 print("thresholded")
                 total_points += threshold
 
-        score = round(((float(total_points)/words)**3) * 100, 2)
+        score = round(((float(total_points)/words)**2) * 100, 2)
 
         #1 >=95 A
         #1.3 >=90 A

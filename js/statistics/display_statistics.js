@@ -17,7 +17,9 @@ $(document).ready(function() {
 			var statistics_object = new Statistics(dictations);
 
 			var error_distr_data = statistics_object.prepareDataForAvgErrorDistribution();
-			var error_distr_radar = statistics_object.displayAvgErrorDistribution(error_distr_data, "#avg-error-distr", "radar");	
+			var error_distr_radar = statistics_object.displayAvgErrorDistribution(error_distr_data, "#avg-error-distr", "radar");
+
+			var score_stats = statistics_object.getScoreStatistics();
 
 		})
 		.fail(function() {

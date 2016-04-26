@@ -21,10 +21,18 @@
 
         <div class="col-xs-12 col-sm-6">
             <div class="subtitle">
-                Average Error Distribution
+                Performance
             </div>
 
-            <div class="row-spacing" id="avg-error-distr">
+            <div class="row-spacing text-center" id="avg-score">
+
+            </div>
+
+            <div class="row-spacing text-center" id="min-score">
+
+            </div>
+
+            <div class="row-spacing text-center" id="max-score">
 
             </div>
         </div>

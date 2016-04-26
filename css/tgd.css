@@ -6510,14 +6510,6 @@ fieldset {
   color: #19577a;
   font-style: italic; }
 
-.profile-information-title {
-  font-size: 1.7em;
-  color: #2a93cf; }
-
-.profile-information {
-  font-size: 2.5em;
-  color: #393939; }
-
 /* BOOTSTRAP */
 .progress-bar {
   -webkit-transition: none !important;
@@ -6716,3 +6708,30 @@ fieldset {
     margin-left: 10px;
     margin-right: -10px;
     cursor: pointer; }
+
+.profile-information-title {
+  font-size: 1.7em;
+  color: #2a93cf; }
+
+.profile-information {
+  font-size: 2.5em;
+  color: #393939; }
+
+.profile-picture {
+  background-color: #cccccc;
+  border-radius: 10px;
+  width: 300px;
+  height: 300px;
+  font-size: 150pt;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center; }

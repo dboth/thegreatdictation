@@ -9,6 +9,14 @@ function countArrayDuplicates(array) {
     return counts;
 }
 
+function sumArray(array) {
+    var total = 0;
+    $.each(array, function() {
+         total += this;
+    });
+    return total;
+}
+
 function equalizeKeys(array_a, array_b, default_val) {
     /*
         adds all keys of a to b with value default and vice versa

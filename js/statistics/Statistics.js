@@ -1,7 +1,10 @@
 function Statistics(dictations) {
 	this.dictations = dictations;
+	console.log(dictations);
 }
 
+
+// DATA PREPERATION
 Statistics.prototype.prepareDataForAvgErrorDistribution = function () {
 	var prepared_data = {};
 	var levenshteins = this.dictations.map(function(curr) {
@@ -32,6 +35,35 @@ Statistics.prototype.prepareDataForAvgErrorDistribution = function () {
 	return prepared_data;
 };
 
+Statistics.prototype.getScoreStatistics = function () {
+	var score_stats = {
+		avg: 0,
+		max: 0,
+		min: 0
+	};
+
+	var all_scores = [];
+	for (var dict in this.dictations) {
+		console.log(dict);
+		all_scores.push(this.dictations[dict]["score"]);
+	}
+
+	all_scores = all_scores.map(function(curr) {
+		return parseFloat(curr);
+	});
+
+	console.log(sumArray(all_scores));
+
+	score_stats["avg"] = sumArray(all_scores)/all_scores.length;
+	score_stats["max"] = Math.max.apply(null, all_scores);
+	score_stats["min"] = Math.min.apply(null, all_scores);
+
+	console.log(score_stats);
+	return score_stats;
+
+};
+
+// DISPLAYING
 Statistics.prototype.displayAvgErrorDistribution = function(avgdata, target_id, type) {
 	if (!type) {
 		type = "bar";

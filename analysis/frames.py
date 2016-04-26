@@ -13,3 +13,9 @@ class Debugger():
 		if (self.debug_switch):
 			for argument in args:
 				print(argument)
+
+def naturalZero(value):
+	if value <= 0:
+		return 0
+	else:
+		return value

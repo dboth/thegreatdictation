@@ -6,6 +6,7 @@ import Aligner
 from collections import namedtuple
 import time
 import pprint
+from frames import *
 
 
 class AlignmentPostProcessor():
@@ -72,7 +73,10 @@ class AlignmentPostProcessor():
                     word_fault_sum = 0
 
         #last word
-        self.output_dict[start_process[2][0]] = [self.alignment[-1][0]-1, self.target[start_process[2][0]:self.alignment[-1][0]], self.input[start_process[2][1]:self.alignment[-1][1]], start_process[2][1], self.alignment[-1][1]-1, word_fault_sum, None]
+        self.output_dict[start_process[2][0]] = [self.alignment[-1][0]-1, self.target[start_process[2][0]:self.alignment[-1][0]],
+                self.input[start_process[2][1]:self.alignment[-1][1]],
+                start_process[2][1], self.alignment[-1][1]-1,
+                word_fault_sum, None]
 
         return self.output_dict
 
@@ -82,21 +86,39 @@ class AlignmentPostProcessor():
         error_occ = 0   #wrong words
         correct_words = 0
         words = len(self.output_dict)
+        total_chars = 0
+
         for key in self.output_dict:
+            total_chars += len(self.output_dict[key][1])
             error_weight = self.output_dict[key][5]
-            print(error_weight)
             if error_weight != 0:
                 error_occ += 1
                 all_errors += error_weight
             else:
                 correct_words += 1
         #neg_score = (error_occ/float(words))*100
-        neg_score = (all_errors/float(words))
+        '''neg_score = (all_errors/float(words))
         if neg_score == 0:
             score = "Infinity"  #oder perfect oder was auch immer
         else:
             score = (1/neg_score)*10  # percent of rightness
-        #
+            '''
+
+        # SCORE
+        total_points = 0
+        for word in self.output_dict:
+            bag = self.output_dict[word]
+            points = naturalZero((len(bag[1]) - bag[5]))
+            threshold = 0.5 # (len(bag[1])/float(2))/len(bag[1])
+
+            if points < threshold or bag[5] == 0:
+                total_points += float(points)/len(bag[1])
+            else:
+                print("thresholded")
+                total_points += threshold
+
+        score = round(((float(total_points)/words)**3) * 100, 2)
+
         #1 >=95 A
         #1.3 >=90 A
         #1.7 >=85 B
@@ -123,5 +145,5 @@ if __name__ == "__main__":
 
     pprint.pprint(appro.convertToWordAlignment())
     #print(app.convertToWordAlignment())
-    #print(app.calcScore())
+    print(appro.calcScore())
     print("--- %s seconds ---" % (time.time() - start_time))

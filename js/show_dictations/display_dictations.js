@@ -45,11 +45,12 @@ $(document).ready(function() {
 						hidden: "hidden",
 						class: 'dict-output'
 					}).html(dict["output"]);
+					var chevron = '<i class="fa fa-chevron-right" aria-hidden="true"></i>';
 
 
 					row.append(col);
 					col.append(dor);
-					dor.append(dict_name, dict_corrects, dict_score, dict_id, dict_output);
+					dor.append(dict_name, dict_corrects, dict_score, dict_id, dict_output, chevron);
 
 					target_div.append(row);
 
@@ -58,7 +59,7 @@ $(document).ready(function() {
 
 			$(".dictation-overview-row").click(function(event) {
 				var id = $(this).find(".dict-id").html();
-				var result = JSON.parse($(this).find(".dict-output").html());
+				var dict_result = JSON.parse($(this).find(".dict-output").html());
 				var target = $("#dictation-showcase");
 				target.html("");
 
@@ -73,10 +74,12 @@ $(document).ready(function() {
 				back_button_row.append(back_button_col);
 				back_button_col.append(back_button);
 
+				console.log("OVERVIEW ROW: ", dict_result[0], dictations);
+
 				target.load("frontend/components/result_page.php", function(event) {
 					toggleViews("#dictation-showcase");
 					target.prepend(back_button_row);
-					createAnalysis(result);
+					createAnalysis(dict_result[0], dictations);
 
 					$("#back-to-list").click(function(event) {
 						toggleViews("#dictation-list");

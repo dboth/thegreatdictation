@@ -153,6 +153,7 @@ Result.prototype.createWordwiseErrorInfo = function (target_id) {
 		var input_word = word_info[2];
 		var target_word = word_info[1];
 		var word_error = word_info[5];
+		var word_switch_index = word_info[6];
 
 		var container = $("<div>").addClass('alignment-word-container');
 		var word_box = $("<div>");
@@ -161,6 +162,10 @@ Result.prototype.createWordwiseErrorInfo = function (target_id) {
 			word_box
 				.addClass("spelling missing-word")
 				.html(target_word);
+		} else if (word_switch_index) {
+			word_box
+				.addClass("spelling word-switch")
+				.html(words[word_switch_index][1]);
 		} else if (word_error >= 3) {
 			word_box
 				.addClass("spelling wrong")
@@ -291,7 +296,7 @@ Result.prototype.createMistakeDistributionInfo = function (target_id, type, avg_
 		"punct": "punctuation",
 		"punctfault_t": "punctuation",
 		"punctfault_i": "punctuation",
-		"sim_punct": "similar punctuation",
+		"sim_punct": "punctuation",
 
 		"word_switch": "word switch"
 	};
@@ -511,20 +516,15 @@ Result.prototype.createOverallScoreInfo = function (target_id) {
 	var ratio_display = $(target_id+" .ratio").html(correct_words + "/" + total_words);
 	var score_display = $(target_id+" .score").html("0");
 
+	console.log("SCORE: ", score);
 	var time = 100;
 	function add() {
 		if (cur_score < score) {
-			if (cur_score >= 100 && score === "Infinity") {
-				score_display.html(score);
-				clearInterval(score_int);
-			} else {
-				cur_score += 0.1;
-				cur_score = Math.round(cur_score *10)/10;
-				score_display.html(Math.round(cur_score*100)/100);
-				clearInterval(score_int);
-				time--;
-				score_int = setInterval(add, time);
-			}
+			cur_score += 1;
+			score_display.html(Math.round(cur_score));
+			clearInterval(score_int);
+			time--;
+			score_int = setInterval(add, time);
 		} else {
 			clearInterval(score_int);
 		}

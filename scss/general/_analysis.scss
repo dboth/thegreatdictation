@@ -9,10 +9,17 @@
 .wordwise-error-info {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .dictation-spelling-row {
     text-align: center;
+    margin: 10px 20px;
+    padding: 5px;
+
+    &:hover {
+        @include box-shadow-default;
+    }
 }
 
 .error-container {
@@ -131,6 +138,12 @@
             //border-color: $tgd-minor-mistake-color;
         }
 
+        &.word-switch {
+            background-color: $tgd-word-switch-color;
+            color: $tgd-font-contrast-color;
+            //border-color: $tgd-word-switch-color;
+        }
+
         &.correct {
             background-color: none;
             border: 0;
@@ -173,6 +186,12 @@
         background-color: $tgd-minor-mistake-color;
         color: $tgd-font-contrast-color;
         //border-color: $tgd-minor-mistake-color;
+    }
+
+    &.word-switch {
+        background-color: $tgd-word-switch-color;
+        color: $tgd-font-contrast-color;
+        //border-color: $tgd-word-switch-color;
     }
 
     &.correct {

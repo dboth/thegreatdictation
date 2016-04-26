@@ -115,7 +115,7 @@ class SqlConnector {
     }
 
     public function getAllDictationsForUser($username, $limit, $offset) {
-        $sql = "SELECT r.id as dict_id, t.id as text_id, t.name, r.score, r.correct_words, r.total_words, r.input, r.output FROM results_v0 as r, texts as t WHERE r.text_id = t.id AND r.username='".$username."' LIMIT ".strval($limit)." OFFSET ".strval($offset);
+        $sql = "SELECT r.id as dict_id, t.id as text_id, t.name, r.score, r.correct_words, r.total_words, r.input, r.output FROM results_v0 as r, texts as t WHERE r.text_id = t.id AND r.username='".$username."' ORDER BY r.time_inserted DESC LIMIT ".strval($limit)." OFFSET ".strval($offset);
 
         $result = $this->query($sql);
         if ($result) {

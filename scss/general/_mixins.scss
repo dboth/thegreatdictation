@@ -12,3 +12,7 @@
     @include left-right-margin;
     margin-top: $tgd-vertical-gap;
 }
+
+@mixin box-shadow-default {
+    box-shadow: 3px 3px 10px 0 $tgd-shadow-color;
+}

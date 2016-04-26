@@ -6436,23 +6436,33 @@ fieldset {
     margin: 10px 0 20px; }
 
 .tablist-tiny.nav-tabs {
-  border-bottom: 0; }
+  border: 0; }
 .tablist-tiny li {
   font-weight: bold; }
   .tablist-tiny li.active a {
     border: 0;
+    border-bottom: 5px solid transparent;
     color: #2a93cf; }
-    .tablist-tiny li.active a:hover, .tablist-tiny li.active a:focus, .tablist-tiny li.active a:visited, .tablist-tiny li.active a:active {
-      color: #19577a;
+    .tablist-tiny li.active a:active, .tablist-tiny li.active a:visited, .tablist-tiny li.active a:focus {
       border: 0;
+      color: #2a93cf; }
+    .tablist-tiny li.active a:hover {
+      color: #2a93cf;
+      border: 0;
+      border-bottom: 4px solid #df3f34;
       background-color: transparent; }
   .tablist-tiny li a {
     border: 0;
+    border-bottom: 5px solid transparent;
     border-radius: 0;
     color: #b3b3b3; }
-    .tablist-tiny li a:hover, .tablist-tiny li a:focus, .tablist-tiny li a:visited, .tablist-tiny li a:active {
-      color: gray;
+    .tablist-tiny li a:active, .tablist-tiny li a:visited, .tablist-tiny li a:focus {
       border: 0;
+      color: #2a93cf; }
+    .tablist-tiny li a:hover {
+      color: #2a93cf;
+      border: 0;
+      border-bottom: 4px solid #df3f34;
       background-color: transparent; }
 
 .title {
@@ -6531,10 +6541,17 @@ fieldset {
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
       -ms-flex-pack: justify;
-          justify-content: space-between; }
+          justify-content: space-between;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap; }
 
 .dictation-spelling-row {
-  text-align: center; }
+  text-align: center;
+  margin: 10px 20px;
+  padding: 5px; }
+  .dictation-spelling-row:hover {
+    box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.2); }
 
 .error-container {
   text-align: center;
@@ -6603,6 +6620,9 @@ fieldset {
     .legend .element.minor-mistake {
       background-color: #f6ba07;
       color: #fff; }
+    .legend .element.word-switch {
+      background-color: #c154b6;
+      color: #fff; }
     .legend .element.correct {
       background-color: none;
       border: 0; }
@@ -6639,6 +6659,9 @@ fieldset {
   .spelling.minor-mistake {
     background-color: #f6ba07;
     color: #fff; }
+  .spelling.word-switch {
+    background-color: #c154b6;
+    color: #fff; }
   .spelling.correct {
     background-color: inherit;
     padding: 0; }
@@ -6662,6 +6685,7 @@ fieldset {
   text-align: center; }
 
 .dictation-overview-row {
+  box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.2);
   height: 100px;
   display: -webkit-box;
   display: -webkit-flex;
@@ -6677,8 +6701,7 @@ fieldset {
           justify-content: space-between;
   margin-top: 40px;
   padding: 15px;
-  font-size: 1.7em;
-  border: 1px solid rgba(0, 0, 0, 0.2); }
+  font-size: 1.7em; }
   .dictation-overview-row.good {
     background-color: #85aa5c;
     color: #fff; }

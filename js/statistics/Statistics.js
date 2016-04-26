@@ -100,7 +100,7 @@ Statistics.prototype.displayAvgErrorDistribution = function(avgdata, target_id, 
 		"punct": "punctuation",
 		"punctfault_t": "punctuation",
 		"punctfault_i": "punctuation",
-		"sim_punct": "similar punctuation",
+		"sim_punct": "punctuation",
 
 		"word_switch": "word switch"
 	};

@@ -308,7 +308,7 @@ fieldset {
 
 .tablist-tiny {
     &.nav-tabs {
-        border-bottom: 0;
+        border: 0;
     }
 
     li {
@@ -317,11 +317,18 @@ fieldset {
         &.active {
             a {
                 border: 0;
+                border-bottom: 5px solid transparent;
                 color: $tgd-primary-color;
 
-                &:hover, &:focus, &:visited, &:active {
-                    color: darken($tgd-primary-color, 20);
+                &:active, &:visited, &:focus {
                     border: 0;
+                    color: $tgd-primary-color;
+                }
+
+                &:hover {
+                    color: $tgd-primary-color;
+                    border: 0;
+                    border-bottom: 4px solid $tgd-link-hover-underline-color;
                     background-color: transparent;
                 }
             }
@@ -329,12 +336,19 @@ fieldset {
 
         a {
             border: 0;
+            border-bottom: 5px solid transparent;
             border-radius: 0;
             color: $tgd-inactive-link-color;
 
-            &:hover, &:focus, &:visited, &:active {
-                color: darken($tgd-inactive-link-color, 20);
+            &:active, &:visited, &:focus {
                 border: 0;
+                color: $tgd-primary-color;
+            }
+
+            &:hover {
+                color: $tgd-primary-color;
+                border: 0;
+                border-bottom: 4px solid $tgd-link-hover-underline-color;
                 background-color: transparent;
             }
         }

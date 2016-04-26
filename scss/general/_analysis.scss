@@ -14,8 +14,8 @@
 
 .dictation-spelling-row {
     text-align: center;
-    margin: 10px 20px;
-    padding: 5px;
+    margin: 10px 20px 20px 0;
+    padding: 5px 5px 5px 0;
 
     &:hover {
         @include box-shadow-default;
@@ -212,14 +212,20 @@
 
     .score {
         font-weight: bold;
-        font-size: 2em;
+        font-size: 4em;
         color: $tgd-score-color;
     }
 
     .ratio {
         font-weight: bold;
-        font-size: 2em;
+        font-size: 4em;
         color: $tgd-ratio-color;
+    }
+
+    .description {
+        font-size: $tgd-font-size-description;
+        color: darkgrey;
+        float: left;
     }
 }
 

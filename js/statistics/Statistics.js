@@ -54,9 +54,9 @@ Statistics.prototype.getScoreStatistics = function () {
 
 	console.log(sumArray(all_scores));
 
-	score_stats["avg"] = sumArray(all_scores)/all_scores.length;
-	score_stats["max"] = Math.max.apply(null, all_scores);
-	score_stats["min"] = Math.min.apply(null, all_scores);
+	score_stats["avg"] = Math.round(sumArray(all_scores)/all_scores.length * 100)/100;
+	score_stats["max"] = Math.round(Math.max.apply(null, all_scores) * 100)/100;
+	score_stats["min"] = Math.round(Math.min.apply(null, all_scores) * 100)/100;
 
 	console.log(score_stats);
 	return score_stats;
@@ -204,4 +204,22 @@ Statistics.prototype.displayAvgErrorDistribution = function(avgdata, target_id, 
 
 		return bar_chart;
 	}
+};
+
+Statistics.prototype.displayScoreStatistics = function(score_stats, target_id) {
+	var target_div = $(target_id);
+
+	var avg_score_row = $("<div>").addClass("row");
+	var min_score_row = $("<div>").addClass("row");
+	var max_score_row = $("<div>").addClass("row");
+
+	var avg_score_col = $("<div>").addClass("col-xs-12 score-avg").html("average " + score_stats["avg"]);
+	var min_score_col = $("<div>").addClass("col-xs-12 score-min").html("min " + score_stats["min"]);
+	var max_score_col = $("<div>").addClass("col-xs-12 score-max").html("max " + score_stats["max"]);
+
+	avg_score_row.append(avg_score_col);
+	min_score_row.append(min_score_col);
+	max_score_row.append(max_score_col);
+
+	target_div.append(avg_score_row, min_score_row, max_score_row);
 };

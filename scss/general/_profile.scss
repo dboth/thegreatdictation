@@ -1,0 +1,20 @@
+.profile-information-title {
+    font-size: $tgd-font-size-subtitle;
+    color: $tgd-primary-color;
+}
+
+.profile-information {
+    font-size: $tgd-font-size-title;
+    color: $tgd-font-color;
+}
+
+.profile-picture {
+	background-color: lighten($tgd-inactive-link-color, 10);
+	border-radius: 10px;
+	width: 300px;
+	height: 300px;
+	font-size: 150pt;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

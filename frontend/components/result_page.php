@@ -1,6 +1,6 @@
-    <div class="row row-content row-spacing-lg" id="input-row">
+    <div class="row row-content" id="input-row">
         <div class="col-xs-12">
-            <div class="subtitle">What you've entered</div>
+            <div class="subtitle">What you've typed</div>
             <div class="info-container error-indication" id="input-info-container">
             </div>
         </div>
@@ -43,7 +43,7 @@
 
             <div id="error-distr-tablist">
 
-                <div class="tab-content row-spacing">
+                <div class="tab-content">
                     <div role="tabpanel" class="tab-pane" id="error-distr-radar-panel">
                         <div class="chart" id="error-distribution-chart-radar"></div>
                     </div>
@@ -89,12 +89,10 @@
 
             <div class="row" id="score-info">
                 <div class="col-xs-12">
-                    <label>Correct words</label>
                     <div class="ratio"></div>
                 </div>
 
                 <div class="col-xs-12">
-                    <label>Your score</label>
                     <div class="score"></div>
                 </div>
             </div>
@@ -105,7 +103,7 @@
         <div class="col-xs-12">
             <div class="subtitle">Detailed character by character error info</div>
         </div>
-        <div class="col-xs-12 wordwise-error-info row-spacing" id="wordwise-error-info">
+        <div class="col-xs-12 wordwise-error-info" id="wordwise-error-info">
 
         </div>
     </div>

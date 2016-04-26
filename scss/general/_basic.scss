@@ -30,6 +30,7 @@ body {
     width: 100%;
     margin: 0;
     z-index: 1;
+    height: 300px;
 
     .jumbotron-header {
         color: $tgd-font-contrast-color;
@@ -58,6 +59,9 @@ body {
     position: relative;
 
     #content {
+        border-top: 10px solid $tgd-primary-color;
+
+
         padding-top: $tgd-vertical-gap;
         top: $tgd-header-height + 12px;
         width: 100%;
@@ -82,7 +86,7 @@ body {
         position: absolute;
         width: 100%;
 
-        //border-top: 1px solid $tgd-primary-color;
+        border-top: 10px solid $tgd-primary-color;
         padding: 20px 0;
 
         font-size: $tgd-font-size+.2;
@@ -171,15 +175,17 @@ body {
 
         ul.dropdown-menu {
             padding: 5px 15px;
-            left: 50%;
-            right: auto;
-            text-align: center;
-            transform: translate(-50%, 0);
             text-align: center;
             background-color: $tgd-nav-color;
             margin-top: -1px;
             border: 0;
             font-size: $tgd-font-size-nav*.8;
+
+            @media (min-width: $screen-sm-min) {
+                transform: translate(-50%, 0);
+                left: 50%;
+                right: auto;
+            }
 
             a {
                 padding: 5px 0;
@@ -328,7 +334,7 @@ fieldset {
                 &:hover {
                     color: $tgd-primary-color;
                     border: 0;
-                    border-bottom: 4px solid $tgd-link-hover-underline-color;
+                    border-bottom: 5px solid $tgd-link-hover-underline-color;
                     background-color: transparent;
                 }
             }
@@ -348,7 +354,7 @@ fieldset {
             &:hover {
                 color: $tgd-primary-color;
                 border: 0;
-                border-bottom: 4px solid $tgd-link-hover-underline-color;
+                border-bottom: 5px solid $tgd-link-hover-underline-color;
                 background-color: transparent;
             }
         }

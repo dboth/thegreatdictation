@@ -371,10 +371,10 @@ Result.prototype.createMistakeDistributionInfo = function (target_id, type, avg_
 				bar_chart.datasets[0].bars[index].highlightFill = tinycolor(label_color).lighten(15);
 				bar_chart.datasets[0].bars[index].highlightStroke = tinycolor(label_color).lighten(20);
 
-				bar_chart.datasets[1].bars[index].fillColor = tinycolor(label_color).desaturate(30).lighten(10);
-				bar_chart.datasets[1].bars[index].strokeColor = tinycolor(label_color).lighten(10).desaturate(30).lighten(10);
-				bar_chart.datasets[1].bars[index].highlightFill = tinycolor(label_color).lighten(15).desaturate(30).lighten(10);
-				bar_chart.datasets[1].bars[index].highlightStroke = tinycolor(label_color).lighten(20).desaturate(30).lighten(10);
+				bar_chart.datasets[1].bars[index].fillColor = tinycolor(label_color).desaturate(50).lighten(30);
+				bar_chart.datasets[1].bars[index].strokeColor = tinycolor(label_color).lighten(30).desaturate(50).lighten(30);
+				bar_chart.datasets[1].bars[index].highlightFill = tinycolor(label_color).lighten(15).desaturate(50).lighten(30);
+				bar_chart.datasets[1].bars[index].highlightStroke = tinycolor(label_color).lighten(20).desaturate(50).lighten(30);
 			}
 		}
 

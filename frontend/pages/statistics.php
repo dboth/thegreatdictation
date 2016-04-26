@@ -19,22 +19,11 @@
             </div>
         </div>
 
-        <div class="col-xs-12 col-sm-6">
+        <div class="col-xs-12 col-sm-6" id="score-statistics">
             <div class="subtitle">
                 Performance
             </div>
 
-            <div class="row-spacing text-center" id="avg-score">
-
-            </div>
-
-            <div class="row-spacing text-center" id="min-score">
-
-            </div>
-
-            <div class="row-spacing text-center" id="max-score">
-
-            </div>
         </div>
     </div>
 

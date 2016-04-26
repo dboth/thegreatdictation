@@ -19,7 +19,8 @@ $(document).ready(function() {
 			var error_distr_data = statistics_object.prepareDataForAvgErrorDistribution();
 			var error_distr_radar = statistics_object.displayAvgErrorDistribution(error_distr_data, "#avg-error-distr", "radar");
 
-			var score_stats = statistics_object.getScoreStatistics();
+			var score_data = statistics_object.getScoreStatistics();
+			statistics_object.displayScoreStatistics(score_data, "#score-statistics");
 
 		})
 		.fail(function() {

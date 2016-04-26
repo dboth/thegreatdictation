@@ -207,28 +207,6 @@
     margin-top: 0;
 }
 
-// SCORE
-#score-info {
-
-    .score {
-        font-weight: bold;
-        font-size: 4em;
-        color: $tgd-score-color;
-    }
-
-    .ratio {
-        font-weight: bold;
-        font-size: 4em;
-        color: $tgd-ratio-color;
-    }
-
-    .description {
-        font-size: $tgd-font-size-description;
-        color: darkgrey;
-        float: left;
-    }
-}
-
 .huge-fonticon {
     font-size: 30em;
     text-align: center;

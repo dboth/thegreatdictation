@@ -213,9 +213,9 @@ Statistics.prototype.displayScoreStatistics = function(score_stats, target_id) {
 	var min_score_row = $("<div>").addClass("row");
 	var max_score_row = $("<div>").addClass("row");
 
-	var avg_score_col = $("<div>").addClass("col-xs-12 score-avg").html("average " + score_stats["avg"]);
-	var min_score_col = $("<div>").addClass("col-xs-12 score-min").html("min " + score_stats["min"]);
-	var max_score_col = $("<div>").addClass("col-xs-12 score-max").html("max " + score_stats["max"]);
+	var avg_score_col = $("<div>").addClass("col-xs-12 score-avg big-number-showcase").html("<span class='description'>average </span>" + score_stats["avg"]);
+	var min_score_col = $("<div>").addClass("col-xs-12 score-min big-number-showcase").html("<span class='description'>min </span>" + score_stats["min"]);
+	var max_score_col = $("<div>").addClass("col-xs-12 score-max big-number-showcase").html("<span class='description'>max </span>" + score_stats["max"]);
 
 	avg_score_row.append(avg_score_col);
 	min_score_row.append(min_score_col);

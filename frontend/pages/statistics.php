@@ -21,7 +21,7 @@
 
         <div class="col-xs-12 col-sm-6" id="score-statistics">
             <div class="subtitle">
-                Performance
+                Performance (Score)
             </div>
 
         </div>

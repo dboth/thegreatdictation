@@ -89,11 +89,11 @@
 
             <div class="row" id="score-info">
                 <div class="col-xs-12">
-                    <div class="ratio"></div>
+                    <div class="big-number-showcase ratio"></div>
                 </div>
 
                 <div class="col-xs-12">
-                    <div class="score"></div>
+                    <div class="big-number-showcase score"></div>
                 </div>
             </div>
         </div>

@@ -513,15 +513,16 @@ Result.prototype.createOverallScoreInfo = function (target_id) {
 	// DISPLAYING
 	var parent = $(target_id);
 
-	var ratio_display = $(target_id+" .ratio").html(correct_words + "/" + total_words);
+	var ratio_display = $(target_id+" .ratio").html(correct_words + "/" + total_words).append($("<span>").addClass("description").html(" correct words"));
 	var score_display = $(target_id+" .score").html("0");
 
+	var score_description = $("<span>").addClass('description').html(" points");
 	console.log("SCORE: ", score);
 	var time = 100;
 	function add() {
 		if (cur_score < score) {
 			cur_score += 1;
-			score_display.html(Math.round(cur_score));
+			score_display.html(Math.round(cur_score)).append(score_description);
 			clearInterval(score_int);
 			time--;
 			score_int = setInterval(add, time);

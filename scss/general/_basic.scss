@@ -361,6 +361,41 @@ fieldset {
     }
 }
 
+.big-number-showcase {
+
+    &.score-avg {
+    	color: $tgd-avg-color;
+    	font-size: $tgd-font-size-title;
+    }
+
+    &.score-min {
+    	color: $tgd-min-color;
+    	font-size: $tgd-font-size-title;
+    }
+
+    &.score-max {
+    	color: $tgd-max-color;
+    	font-size: $tgd-font-size-title;
+    }
+
+    &.score {
+        font-weight: bold;
+        font-size: 4em;
+        color: $tgd-score-color;
+    }
+
+    &.ratio {
+        font-weight: bold;
+        font-size: 4em;
+        color: $tgd-ratio-color;
+    }
+
+    .description {
+        font-size: 0.5em;
+        color: darkgrey;
+    }
+}
+
 // titles
 .title {
     font-size: $tgd-font-size-title;

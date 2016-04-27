@@ -10,6 +10,12 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+
+    &:after {
+        content: "";
+        flex: auto;
+    }
+
 }
 
 .dictation-spelling-row {

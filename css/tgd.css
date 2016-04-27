@@ -6562,6 +6562,12 @@ fieldset {
   -webkit-flex-wrap: wrap;
       -ms-flex-wrap: wrap;
           flex-wrap: wrap; }
+  .wordwise-error-info:after {
+    content: "";
+    -webkit-box-flex: 1;
+    -webkit-flex: auto;
+        -ms-flex: auto;
+            flex: auto; }
 
 .dictation-spelling-row {
   text-align: center;

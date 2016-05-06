@@ -5,9 +5,22 @@ Heidelberg University, Germany
 The Great Dictation
 ===================
 
-*Project plan*  
+*Final README / DOCUMENTATION*  
 Authors: Dominik Both, Tobias Göbel, Svenja Lohse, Tonio Weidler  
 Advisor: Magdalena Wolska  
+
+Link
+----
+http://dictator.cl.uni-heidelberg.de/  
+
+Requirements
+----
+- Server
+- PHP >= 5.3
+- Python 2 or 3
+- Apache user (normally www-data) able to execute Python scripts in code/analysis
+- MySQL database
+
 
 About the Task
 ------
@@ -21,7 +34,12 @@ Using auditive dictation and therefore listening comprehension plays a key role 
 Furthermore the students have greater motivation to continue learning because they can develop their listening skills and concentrate on internalising grammar rules instead of additional pressure of producing own text intonations while handling all the before mentioned processes in their heads *(Vandergrift,1999)*.  
 With dictation they do not only learn vocabulary, they also learn grammar while memorising meaning and relationship of words *(Alkire,2002)* and get some useful standard phrases. Afterwards they can review a list of their mistakes, get some advice for grammar rule repetition and keep track of their progress. *(Kazazoglu, 2012)*
 
-To that end we have to *filter, sort, group and analyse* the mistakes, consistently *refine our algorithm* with given data, find a way to give positive and *motivating result feedback*, on the one hand build the whole platform on a *solid, extensible database* and on the other hand make it *interesting and user friendly* in design and use.
+To that end we have to *filter, sort, group and analyse* the mistakes, consistently *refine our algorithm* with given data, find a way to give positive and *motivating result feedback*, on the one hand build the whole platform on a *solid, extensible database* and on the other hand make it *interesting and user friendly* in design and use.  
+
+Data
+----
+It is in the nature of our task that there is *no data* available upfront. Therefore we need to collect the data ourselves. To that end our system is designed to *collect data* while it *expands its features*.  
+To provide an incentive, the **version zero** already contains a small analysis that expands by using the data it collects.  
 
 System architecture and modules
 ----
@@ -32,17 +50,28 @@ The **backend** serves as the *main controller* of the application and functions
 
 This general model can be utilised for our application as well. However, we decided to bisect the backend to separate the **standard backend** - comprising *page generation* and *user administration system* - from the **analysis backend**, containing the *computational lingustic analysis* itself. Thus we can dispose of different programming languages for each section of the backend, allowing us to combine the time efficience of PHP in building web application backends and the effectivity of Python in linguistic analysis.
 
-In conclusion there are three components:
-* Frontend
+In conclusion there are three components:  
 * Management backend
 * Analysis backend
+* Frontend
 
-Data
+Management Backend
+---
+Blablabla....   
+  
+Analysis Backend
+---
+Bliblabla...   
+  
+Frontend
+---
+Blublibla...  
+  
+Result
 ----
-It is in the nature of our task that there is *no data* available upfront. Therefore we need to collect the data ourselves. To that end our system is designed to *collect data* while it *expands its features*.  
-To provide an incentive, the **version zero** already contains a small analysis that expands by using the data it collects.
-
-Schedule and concrete Distribution of Tasks
+hclvhsdjnj...   
+  
+Distribution of Tasks
 ----
 We divided the accrued tasks according to the special skills each of us brings in.
 
@@ -57,15 +86,6 @@ We divided the accrued tasks according to the special skills each of us brings i
 
 Although everybody participates in each section for minor tasks.
 
-
-**Schedule**:  
--> See a much more detailed version of the schedule in the folder *roadmap*  
-**01.12.15** v0 and project plan finished  
-**08.12.15** start of data collection  
-*...analysis features, result feedback, platform design, fancy stuff*   
-**02.02.16**  version with features finished, final presentation    
-ca.**12.03.16** final submission of code and documentation  
-
 Contacts
 ----
 
@@ -77,10 +97,3 @@ uni (--at--) dboth.de
 
 uni (--at--) tonioweidler.de
 
-Requirements (until now)
-----
-- Server
-- PHP >= 5.3
-- Python 2 or 3
-- Apache user (normally www-data) able to execute Python scripts in code/analysis
-- MySQL database

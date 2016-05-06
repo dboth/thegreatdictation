@@ -81,16 +81,13 @@ In conclusion there are three components:
 * Analysis backend
 * Frontend
 
-Management Backend
----
+**Management Backend**  
 Blablabla....   
   
-Analysis Backend
----
+**Analysis Backend**
 Bliblabla...   
   
-Frontend
----
+**Frontend**
 Blublibla...  
 
 Obstacles

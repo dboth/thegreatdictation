@@ -9,6 +9,32 @@ The Great Dictation
 Authors: Dominik Both, Tobias Göbel, Svenja Lohse, Tonio Weidler  
 Advisor: Magdalena Wolska  
 
+Distribution of Tasks
+----
+We divided the accrued tasks according to the special skills each of us brings in.
+
+**Main Responsibilities**:  
+*Dominik*: Backend development, database management
+
+*Tobias*: Analysing algorithms, kinds of mistakes  
+
+*Svenja*: Didatic background of dictation/listening comprehension and feedback/result (research)  
+
+*Tonio*: Frontend development, database management, project management
+
+Although everybody participates in each section for minor tasks.
+
+Contacts  
+----
+
+S.Lohse (--at--) stud.uni-heidelberg.de
+
+tobygoebel (--at--) web.de
+
+uni (--at--) dboth.de
+
+uni (--at--) tonioweidler.de
+
 Link
 ----
 http://dictator.cl.uni-heidelberg.de/  
@@ -70,30 +96,8 @@ Blublibla...
 Result
 ----
 hclvhsdjnj...   
-  
-Distribution of Tasks
+
+Literature
 ----
-We divided the accrued tasks according to the special skills each of us brings in.
-
-**Main Responsibilities**:  
-*Dominik*: Backend development, database management
-
-*Tobias*: Analysing algorithms, kinds of mistakes  
-
-*Svenja*: Didatic background of dictation/listening comprehension and feedback/result (research)  
-
-*Tonio*: Frontend development, database management, project management
-
-Although everybody participates in each section for minor tasks.
-
-Contacts
-----
-
-S.Lohse (--at--) stud.uni-heidelberg.de
-
-tobygoebel (--at--) web.de
-
-uni (--at--) dboth.de
-
-uni (--at--) tonioweidler.de
+dbldsbhljblh...  
 

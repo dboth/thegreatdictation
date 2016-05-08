@@ -28,7 +28,10 @@ class FaultPenalizer(object):
         self.matrix_field = namedtuple("Field", ["target", "input", "cost", "op"])
     
     
-    def plugInFaultValues(self):	#go through path and exchange weight values by fault values
+    def plugInFaultValues(self):
+        """
+        go through path and exchange weight values by fault values
+        """
         for field in self.path:
             if field[2].op =="+M":
                 self.final_path.append([field[0], field[1], (field[2][0], field[2][1], self.plusM, "+M")])

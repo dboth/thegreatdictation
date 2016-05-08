@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-#start_index des alternativen wortes für den word switch mitgeben. error verteilen auf beide wörter des word switch
-
 import Aligner
 from collections import namedtuple
 import time

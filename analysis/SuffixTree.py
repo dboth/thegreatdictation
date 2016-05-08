@@ -14,6 +14,9 @@ class SuffixTree(object):
         self.ghostsSet = set()
              
     def createTree(self):
+        """
+        creates a suffix tree using elements from the ukkonen algorithm
+        """
         ghosts = []
         string0 = self.string0
         string1 = self.string1

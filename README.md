@@ -69,10 +69,10 @@ To provide an incentive, the **version zero** already contains a small analysis 
 
 System architecture and modules
 ----
-With the former in mind the composition of said system has to be constructed to fullfil the needed requirements. 
+With the former in mind the composition of said system has to be constructed to fullfil the needed requirements.
 
 In web development an application is usually parted in two modules: The server sided *backend* and the client sided *frontend*.  
-The **backend** serves as the *main controller* of the application and functions as a *connector* between the database and the application. The **frontend** represents the *viewpoint of the user* and officiates as the *interface between human and computer*. 
+The **backend** serves as the *main controller* of the application and functions as a *connector* between the database and the application. The **frontend** represents the *viewpoint of the user* and officiates as the *interface between human and computer*.
 
 This general model can be utilised for our application as well. However, we decided to bisect the backend to separate the **standard backend** - comprising *page generation* and *user administration system* - from the **analysis backend**, containing the *computational lingustic analysis* itself. Thus we can dispose of different programming languages for each section of the backend, allowing us to combine the time efficience of PHP in building web application backends and the effectivity of Python in linguistic analysis.
 
@@ -81,14 +81,41 @@ In conclusion there are three components:
 * Analysis backend
 * Frontend
 
-**Management Backend**  
+**Management Backend**   
 Blablabla....   
-  
-**Analysis Backend**
+
+**Analysis Backend**  
 Bliblabla...   
-  
-**Frontend**
-Blublibla...  
+
+**Frontend**  
+The frontend determines, which informations it needs to receive from the backend to show the user what he wants to see. It also asks the user for information to send to the backend.
+To define, what the user sees in his browser, *HTML* and *CSS* (SASS as a preprocessor) are used to structure and style the content. Several Javascript scripts handle page events like actions by the user and process the data received from the backend to show it to the user in an appropriate and appealing way.
+*The Great Dictation* is usable on multiple plattforms including mobile devices and therefore fully responsible. This means it design dynamically adapts to the users screensize. We implemented this responsiveness via **Bootstrap**, a framework that consists of HTML, CSS and JS Components, providing a useful Grid Structure and several other functionalities. This framework was customized, such that it fits the project. With **jQuery** we included a common framework that simplifies many processes in JS. Charts are created with the help of **ChartJS**, one of the most famous libraries in this area. It not only displays the charts but also provides the user interactivity (tooltips).
+Pages are build by reusable components that get plugged into page layouts which themselves are loaded into the main template. This way we can reuse the same template for all pages and reuse components like the result in different pages. One of the main concerns of this projects frontend is how to display the results of the dictations. Apart from that it consists of scripts that manage the error messages that the user receives, register, login, feedback and evaluation forms and different pages that dynamically adjust to the users actions and data (e.g. the profile page, statistics page, etc.).
+
+The HTML/PHP pages generating the views are organized in a wrapper directory containing the templates in which pages can be plugged in, a subdirectory containing all pages (*frontend/pages/*) and one containing components that themselves get plugged into pages (*frontend/components/*). Those Components are reusable in different Pages.
+
+The JS Files are organized in a wrapper js/ folder that contains the following subdirectories:  
+
+| Name                 | Location              | Description                                                                                       |
+|----------------------|-----------------------|---------------------------------------------------------------------------------------------------|
+| Asynchronous Calls   | js/async_calls/       | Collection of Asynchronous Calls (via AJAX) to receive or save data without reloading the page.   |
+| Libraries            | js/libs/              | Directory for all JS-libraries used in the project.                                               |
+| Page Events          | js/page_events/       | JS Handler for specific pages handling events (e.g. buttons)                                      |
+| Result Generation    | js/result_generation/ | All Files concerning the processing of the analysis data and generation of the Result Page        |
+| Dictation List       | js/show_dictations/   | Files concerned with again showing past dictations and listing them                               |
+| Statistic Generation | js/statistics/        | All Files concerning the displaying and calculation of Statistics about an users past performance |
+
+The most important JS Modules are listed in the following table:
+
+| Name              | Location                                 | Description                                                                                                                                                                                                                                                                                                                                       |
+|-------------------|------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Result Class      | js/result_generation/Result.js           | Class, that takes the analysis data as an argument and contains several methods to display informations about the Dictation. Those methods are used to fill the result page.                                                                                                                                                                      |
+| Result Displaying | js/result_generation/display_analysis.js | Handles the Submit Button in the dictation page. Once clicked, it asynchronously sends the dictation text and additional informations to the analysis backend and receives back the analysed data. It then calls the function createAnalysis(...) which builds up the Result Page by using the methods provided in the Result Class (see above).  |
+| Error Handler     | js/error_handler.js                      | Contains two methods that allow to show the user information about an error by first identifying the error via an AJAX call to the Error Handler in the Backend and then processing and displaying this information to the user.                                                                                                                  |
+| General Functions | js/functions.js                          | A file containing functions used all over the project, sort of a mini library.                                                                                                                                                                                                                                                                    |
+|                   |                                          |                                                                                                                                                                                                                                                                                                                                                   |
+
 
 Obstacles
 ---
@@ -96,9 +123,15 @@ Obstacles
 
 Result
 ----
-hclvhsdjnj...   
+The data calculated by the backends analysis components is processed by the frontend to show the user informations and statistics about his errors and performance.  
+In the **What you've entered** Section the user gets presented the whole text as how he typed it in. Where he made mistakes the word is highlighted in a color representing the weight of the error.  
+The **Error Distribution** shows how the users characterwise mistakes are distributed over the different mistake groups. Those are created by categorizing the *Aligners* error types as follows: *correct, waste, missing, wrong, switched, capitalization, punctuation, similar punctuation* and *word switch*. This distribution can be either displayed as a radar chart or as a bar chart. The current dictation is compared to the users average values.   
+The **Rating** consists of the ratio of correct and total words in this dictation and a score for the dictation. The score is calculated as a value between 0 and 100 representing the *correctness* of the users input. It considers the weight of errors and the word lengths.  
+A **Detailed character by character error info** shows the words with mistakes again by exactly revealing where the mistakes were made and how to correct them.  
+The line chart under the section **Performance over time** shows how the errorweight of the levenshtein path develops over the text (word-wise).  
+All past dictations can be reviewed under *Your Dictations*, where the same informations will be showed again. Average values and statistics about all dictations can be looked up under *Statistics*.  
+
 
 Literature
 ----
 dbldsbhljblh...  
-

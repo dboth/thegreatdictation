@@ -6352,7 +6352,7 @@ body {
     margin-top: -1px;
     border: 0;
     font-size: 0.88em; }
-    @media (min-width: 768px) {
+    @media (min-width: 1200px) {
       .navbar .nav ul.dropdown-menu {
         -webkit-transform: translate(-50%, 0);
             -ms-transform: translate(-50%, 0);

@@ -181,7 +181,7 @@ body {
             border: 0;
             font-size: $tgd-font-size-nav*.8;
 
-            @media (min-width: $screen-sm-min) {
+            @media (min-width: $screen-lg-min) {
                 transform: translate(-50%, 0);
                 left: 50%;
                 right: auto;

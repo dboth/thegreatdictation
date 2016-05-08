@@ -25,10 +25,13 @@ class AlignmentPostProcessor():
 
         #WEIGHT
         self.word_switch = word_switch
+        self.max_error_per_word = 3
 
         #TAGGED TEXT
         self.tagged_text = tagged_text
-
+        for sub_dict in self.tagged_text: #remove punctuation items
+            if sub_dict["pos"] in ["$,", "$."]:
+                self.tagged_text.remove(sub_dict)
         #PROCESSED DATA
         self.matrix_field = namedtuple("Field", ["target", "input", "cost", "op"])
         self.word_alignment = self.convertToWordAlignment()
@@ -53,19 +56,22 @@ class AlignmentPostProcessor():
         """
 
         start_process = self.alignment[0]  #first process of current word
-        word_fault_sum = 0  #sum of error weights for all processes in a word
+        errors_weight = 0  #sum of error weights for all processes in a word
+        errors = 0 #count number errors per word
         word_switches = []
         word_switch = 0
         ws = None
         word_count = 0 #for iteration through self.tagged_text
-        number_of_errors = 0 #count number errors per word
+        already_counted = set()
         for process_iter in range(len(self.alignment)): #walk along until you find a whitespace in target
             process = self.alignment[process_iter]
+            if process[2][2] > 0 and not process[2][3] == "word_switch":
+                errors += 1
             target_iter = process[0]
-            word_fault_sum += process[2][2]
-            if word_fault_sum >0:
-                number_of_errors += 1
-
+            if not process[2][3] == "word_switch":
+                errors_weight += process[2][2]
+            if errors_weight > self.max_error_per_word:
+                errors_weight = 3
             if process[2][3] == "word_switch":
                 word_switch = 2  #one step for each word in word_switch
                 ws = process
@@ -73,39 +79,44 @@ class AlignmentPostProcessor():
                 target_split = Aligner.Aligner.indexSplit(self.target[process[2][0]:process[0]])
                 word_switches.append([process[2][0], process[2][0] + target_split[1][1]])   #first_word_target_start, first_word_input_start, second_word_target_start, second_word_input_start
             else:
-                if self.target[target_iter-1] == " ":  #white space match
+                if self.target[target_iter-1] == " ":  #white space match indicates new word
                     previous_process = self.alignment[process_iter-1]
                     pos = self.tagged_text[word_count]["pos"]
                     if word_switch == 2:  #word_switch needs special care again for both words
                         pos = self.tagged_text[word_count+1]["pos"] #change pos to pos of next word
                         start_process = ws
-                        word_fault_sum += float(ws[2][2])/2
-                        self.output_dict[ws[2][0]+target_split[0][1]] = [ws[2][0]+target_split[0][2]-1, self.target[ws[2][0]+target_split[0][1]:ws[2][0]+target_split[0][2]], self.input[ws[2][1]+input_split[1][1]:ws[2][1]+input_split[1][2]], ws[2][1]+input_split[1][1], ws[2][1]+input_split[1][2]-1, word_fault_sum, ws[2][0]+target_split[1][1], pos]
+                        errors_weight += float(ws[2][2])/2
+                        errors += 0.5
+                        self.output_dict[ws[2][0]+target_split[0][1]] = [ws[2][0]+target_split[0][2]-1, self.target[ws[2][0]+target_split[0][1]:ws[2][0]+target_split[0][2]], self.input[ws[2][1]+input_split[1][1]:ws[2][1]+input_split[1][2]], ws[2][1]+input_split[1][1], ws[2][1]+input_split[1][2]-1, errors_weight, ws[2][0]+target_split[1][1], pos]
                     elif word_switch == 1:
                         pos = self.tagged_text[word_count-1]["pos"] #change pos to pos of previous word
                         start_process = ws
-                        word_fault_sum += float(ws[2][2])/2
-                        self.output_dict[ws[2][0]+target_split[1][1]] = [ws[2][0]+target_split[1][2]-1, self.target[ws[2][0]+target_split[1][1]:ws[2][0]+target_split[1][2]], self.input[ws[2][1]+input_split[0][1]:ws[2][1]+input_split[0][2]], ws[2][1]+input_split[0][1], ws[2][1]+input_split[0][2]-1, word_fault_sum, ws[2][0]+target_split[0][1], pos]
+                        errors_weight += float(ws[2][2])/2
+                        errors += 0.5
+                        self.output_dict[ws[2][0]+target_split[1][1]] = [ws[2][0]+target_split[1][2]-1, self.target[ws[2][0]+target_split[1][1]:ws[2][0]+target_split[1][2]], self.input[ws[2][1]+input_split[0][1]:ws[2][1]+input_split[0][2]], ws[2][1]+input_split[0][1], ws[2][1]+input_split[0][2]-1, errors_weight, ws[2][0]+target_split[0][1], pos]
                     elif word_switch < 1: #non word_switch case
-                        self.output_dict[start_process[2][0]] = [previous_process[0]-1, self.target[start_process[2][0]:previous_process[0]], self.input[start_process[2][1]:previous_process[1]], start_process[2][1], previous_process[1]-1, word_fault_sum, None, pos]
-                    if pos in self.pos_dict:
-                        self.pos_dict[pos]["errors"] += number_of_errors
-                        self.pos_dict[pos]["errors_weight"] += word_fault_sum
+                        self.output_dict[start_process[2][0]] = [previous_process[0]-1, self.target[start_process[2][0]:previous_process[0]], self.input[start_process[2][1]:previous_process[1]], start_process[2][1], previous_process[1]-1, errors_weight, None, pos]
                     else:
-                        self.pos_dict[pos] = {"errors": number_of_errors, "errors_weight": word_fault_sum}
+                        print "wrong word_switch value"
+                    if pos in self.pos_dict:
+                        self.pos_dict[pos]["errors"] += errors
+                        self.pos_dict[pos]["errors_weight"] += errors_weight
+                    else:
+                        self.pos_dict[pos] = {"errors": errors, "errors_weight": errors_weight}
                     word_switch -= 1  #go to next step of word_switch process. if word_switch is smaller than 1, no word_switch process happens
                     if not target_iter == len(self.alignment):
                         start_process = self.alignment[process_iter+1]
-                    word_fault_sum = 0
-                    number_of_errors = 0
-                    word_count += 1
-
+                    errors_weight = 0
+                    errors = 0
+                    if not process[0] in already_counted:
+                        word_count += 1
+                    already_counted.add(process[0])
         #last word
         pos = self.tagged_text[word_count]["pos"]
-        self.output_dict[start_process[2][0]] = [self.alignment[-1][0]-1, self.target[start_process[2][0]:self.alignment[-1][0]], self.input[start_process[2][1]:self.alignment[-1][1]], start_process[2][1], self.alignment[-1][1]-1, word_fault_sum, None, pos]
-
+        self.output_dict[start_process[2][0]] = [self.alignment[-1][0]-1, self.target[start_process[2][0]:self.alignment[-1][0]], self.input[start_process[2][1]:self.alignment[-1][1]], start_process[2][1], self.alignment[-1][1]-1, errors_weight, None, pos]
+        #pprint.pprint(self.output_dict)
         return self.output_dict
-
+        
     def calcScore(self):
         error_weight = 0
         all_errors = 0
@@ -114,7 +125,7 @@ class AlignmentPostProcessor():
         words = len(self.output_dict)
         for key in self.output_dict:
             error_weight = self.output_dict[key][5]
-            print(error_weight)
+            #print(error_weight)
             if error_weight != 0:
                 error_occ += 1
                 all_errors += error_weight
@@ -144,14 +155,20 @@ class AlignmentPostProcessor():
 if __name__ == "__main__":
     start_time = time.time()
     #a = Aligner.Aligner(u"Liebe Tanja, kannst du bitte einkaufen? Ich habe heute Nachmittag keine Zeit und ich m\u00f6chte heute Abend kochen. Ich brauche noch Kartoffeln, Paprika, Tomaten und Zwiebeln. F\u00fcr das Fr\u00fchst\u00fcck brauchen wir Kaffee, Tee, Brot, Butter, Marmelade, K\u00e4se und Wurst. Kannst du auch Schokolade und Cola mitbringen? Vielen Dank! Liebe Gr\u00fc\u00dfe Mama", u"Liebe Tonia, kannewst du bitte einufen? Ich habe heute Nacmhittag keine Zeit und ich möchte heute Abend kochen. I ch brauche noch Kartoffeln, Paprika, Tomaten und Zwiebeln. das Für Frühstück brauchen Tee, Kaffee, Brot, ButterMarmelade, Käse und Wurst. Kwe annst du auch Schokolade und Coka mitbringen? Viele Dank! Liebe Grüße Mama")
+    
     target_string = "Liebe Tanja, kannst du bitte einkaufen? Ich habe heute Nachmittag keine Zeit und ich möchte heute Abend kochen. Ich brauche noch Kartoffeln, Paprika, Tomaten und Zwiebeln. Für das Frühstück brauchen wir Kaffee, Tee, Brot, Butter, Marmelade, Käse und Wurst. Kannst du auch Schokolade und Cola mitbringen? Vielen Dank! Liebe Grüße Mama"
     input_string = "Liebe Tonia, kannewst du bitte einufen? Ich habe heute Nacmhittag keine Zeit und ich möchte heute Abend kochen. I ch brauche noch Kartoffeln, Paprika, Tomaten und Zwiebeln. das Für Frühstück brauchen Tee, Kaffee, Brot, ButterMarmelade, Käse und Wurst. Kwe annst du auch Schokolade und Coka mitbringen? Viele Dank! Liebe Grüße Mama"
+    #target_string = "brauchen wir Kaffee, Tee,"
+    #input_string = "brauchen Tee, Kaffee,"
+    
     #app = AlignmentPostProcessor(a.finalize(), "ich bin ein elefant", "ich bin auch ein elefant", 1)
-    pre_result = Aligner.Aligner.preProcessStrings(target_string, input_string, 15, True)
+    pre_result = Aligner.Aligner.preProcessStrings(target_string, input_string, 30, True)
     result = Aligner.Aligner.getPathFromPreprocessedString(pre_result)
-    appro = AlignmentPostProcessor(result, target_string, input_string, 1)
+    tree_tagged = [{"lemma": "Liebe", "token": "Liebe", "pos": "NN"}, {"lemma": "Tanja", "token": "Tanja", "pos": "NE"}, {"lemma": ",", "token": ",", "pos": "$,"}, {"lemma": "k\u00f6nnen", "token": "kannst", "pos": "VMFIN"}, {"lemma": "du", "token": "du", "pos": "PPER"}, {"lemma": "bitte", "token": "bitte", "pos": "ADV"}, {"lemma": "einkaufen", "token": "einkaufen", "pos": "VVINF"}, {"lemma": "?", "token": "?", "pos": "$."}, {"lemma": "ich", "token": "Ich", "pos": "PPER"}, {"lemma": "haben", "token": "habe", "pos": "VAFIN"}, {"lemma": "heute", "token": "heute", "pos": "ADV"}, {"lemma": "nachmittag", "token": "Nachmittag", "pos": "ADV"}, {"lemma": "keine", "token": "keine", "pos": "PIAT"}, {"lemma": "Zeit", "token": "Zeit", "pos": "NN"}, {"lemma": "und", "token": "und", "pos": "KON"}, {"lemma": "ich", "token": "ich", "pos": "PPER"}, {"lemma": "m\u00f6gen", "token": "m\u00f6chte", "pos": "VMFIN"}, {"lemma": "heute", "token": "heute", "pos": "ADV"}, {"lemma": "abend", "token": "Abend", "pos": "ADV"}, {"lemma": "kochen", "token": "kochen", "pos": "VVINF"}, {"lemma": ".", "token": ".", "pos": "$."}, {"lemma": "ich", "token": "Ich", "pos": "PPER"}, {"lemma": "brauchen", "token": "brauche", "pos": "VVFIN"}, {"lemma": "noch", "token": "noch", "pos": "ADV"}, {"lemma": "Kartoffel", "token": "Kartoffeln", "pos": "NN"}, {"lemma": ",", "token": ",", "pos": "$,"}, {"lemma": "Paprika", "token": "Paprika", "pos": "NN"}, {"lemma": ",", "token": ",", "pos": "$,"}, {"lemma": "Tomate", "token": "Tomaten", "pos": "NN"}, {"lemma": "und", "token": "und", "pos": "KON"}, {"lemma": "Zwiebel", "token": "Zwiebeln", "pos": "NN"}, {"lemma": ".", "token": ".", "pos": "$."}, {"lemma": "f\u00fcr", "token": "F\u00fcr", "pos": "APPR"}, {"lemma": "die", "token": "das", "pos": "ART"}, {"lemma": "Fr\u00fchst\u00fcck", "token": "Fr\u00fchst\u00fcck", "pos": "NN"}, {"lemma": "brauchen", "token": "brauchen", "pos": "VVFIN"}, {"lemma": "wir", "token": "wir", "pos": "PPER"}, {"lemma": "Kaffee", "token": "Kaffee", "pos": "NN"}, {"lemma": ",", "token": ",", "pos": "$,"}, {"lemma": "Tee", "token": "Tee", "pos": "NN"}, {"lemma": ",", "token": ",", "pos": "$,"}, {"lemma": "Brot", "token": "Brot", "pos": "NN"}, {"lemma": ",", "token": ",", "pos": "$,"}, {"lemma": "Butter", "token": "Butter", "pos": "NN"}, {"lemma": ",", "token": ",", "pos": "$,"}, {"lemma": "Marmelade", "token": "Marmelade", "pos": "NN"}, {"lemma": ",", "token": ",", "pos": "$,"}, {"lemma": "K\u00e4se", "token": "K\u00e4se", "pos": "NN"}, {"lemma": "und", "token": "und", "pos": "KON"}, {"lemma": "Wurst", "token": "Wurst", "pos": "NN"}, {"lemma": ".", "token": ".", "pos": "$."}, {"lemma": "k\u00f6nnen", "token": "Kannst", "pos": "VMFIN"}, {"lemma": "du", "token": "du", "pos": "PPER"}, {"lemma": "auch", "token": "auch", "pos": "ADV"}, {"lemma": "Schokolade", "token": "Schokolade", "pos": "NN"}, {"lemma": "und", "token": "und", "pos": "KON"}, {"lemma": "Cola", "token": "Cola", "pos": "NN"}, {"lemma": "mitbringen", "token": "mitbringen", "pos": "VVINF"}, {"lemma": "?", "token": "?", "pos": "$."}, {"lemma": "viele", "token": "Vielen", "pos": "PIAT"}, {"lemma": "Dank", "token": "Dank", "pos": "NN"}, {"lemma": "!", "token": "!", "pos": "$."}, {"lemma": "lieb", "token": "Liebe", "pos": "ADJA"}, {"lemma": "Gru\u00df", "token": "Gr\u00fc\u00dfe", "pos": "NN"}, {"lemma": "Mama", "token": "Mama", "pos": "NN"}]
+    appro = AlignmentPostProcessor(result, target_string, input_string, tree_tagged, 1)
 
-    pprint.pprint(appro.convertToWordAlignment())
+    #pprint.pprint(appro.word_alignment)
+    pprint.pprint(appro.countErrorsByWordType())
     #print(app.convertToWordAlignment())
     #print(app.calcScore())
     print("--- %s seconds ---" % (time.time() - start_time))

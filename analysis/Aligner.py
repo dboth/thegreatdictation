@@ -5,6 +5,7 @@ from collections import namedtuple
 import frames
 import faultPenalizer
 import SuffixTree
+import pprint
 
 #alle ausgaben von input_str nach target_str. also z.b. target_str: "d", input_str: "da" -> deletion
 #punct_fault has to be smaller than deletion, insertion and substitution - else it will not be considered
@@ -190,9 +191,9 @@ class Aligner(object):
     def switchWords(self): #recognize switched words, even if there are further mistakes in them. switches input
         input_words = Aligner.indexSplit(self.input)
         target_words = Aligner.indexSplit(self.target)
-
         for input_iter in range(len(input_words)-1):
             for target_iter in range(len(target_words)-1):
+                #print input_words[input_iter+1][0] + " " + input_words[input_iter][0], "||", target_words[target_iter][0] + " " + target_words[target_iter+1][0]
                 switcher = Aligner(input_str=input_words[input_iter+1][0] + " " + input_words[input_iter][0], target_str=target_words[target_iter][0] + " " + target_words[target_iter+1][0], match=self.match, sub=self.sub+self.ws_penalty, insert=self.insert+self.ws_penalty, delete=self.delete+self.ws_penalty, switch=self.switch+self.ws_penalty, capitals=self.capitals, sim_punct=self.sim_punct, punct=self.punct, plusM=self.plusM, umlauts=self.umlauts, word_switch=self.word_switch, switcher=True)
                 switcher.finalize()
                 self.matrix[target_words[target_iter+1][2]][input_words[input_iter+1][2]].append(self.matrix_field(target_words[target_iter][1], input_words[input_iter][1], switcher.path[0][2][2]+self.word_switch, "word_switch"))
@@ -200,7 +201,7 @@ class Aligner(object):
         #first switcher: caveat changed Capitalization. only difference: switchedSentenceStart=True which triggers a 0 weight effect in applyCapitals
         if len(input_words)>1 and len(target_words)>1:
             if not (target_words[0][0] == "" or target_words[1][0] == "" or input_words[0][0] == "" or input_words[1][0] == ""): #this is for implications from preprocessed strings which may start or end with whitespace
-                switcher = Aligner(input_str=input_words[1][0] + " " + input_words[0][0], target_str=target_words[0][0] + " " + target_words[1][0], match=self.match, sub=self.sub+0.5, insert=self.insert+0.5, delete=self.delete+0.5, switch=self.switch+0.5, capitals=self.capitals, sim_punct=self.sim_punct, punct=self.punct, plusM=self.plusM, umlauts=self.umlauts, word_switch = self.word_switch, switcher=True, switched_sentence_start=True)
+                switcher = Aligner(input_str=input_words[1][0] + " " + input_words[0][0], target_str=target_words[0][0] + " " + target_words[1][0], match=self.match, sub=self.sub+0.1, insert=self.insert+0.1, delete=self.delete+0.1, switch=self.switch+0.1, capitals=self.capitals, sim_punct=self.sim_punct, punct=self.punct, plusM=self.plusM, umlauts=self.umlauts, word_switch = self.word_switch, switcher=True, switched_sentence_start=True)
                 switcher.finalize()
                 self.matrix[target_words[1][2]][input_words[1][2]].append(self.matrix_field(target_words[0][1], input_words[0][1], switcher.path[0][2][2]+self.word_switch, "word_switch"))
                 self.switched_words_bag[(target_words[1][2],input_words[1][2])] = switcher.path
@@ -255,7 +256,8 @@ class Aligner(object):
             self.switchWords()
         self.calculateMatrix()
         self.createPath()
-        self.rebuildPlusM()
+        if self.switcher == False:
+            self.rebuildPlusM()
         if self.switcher == False:
             p = faultPenalizer.FaultPenalizer(self.path)
             p.plugInFaultValues()
@@ -303,10 +305,16 @@ class Aligner(object):
         return final_path
 
 if __name__ == "__main__":
-    a = Aligner(u"Elefant", u"Eleafnt")  # Aligner(TARGET, INPUT)
+    #target_string = "Für das Frühstück brauchen wir Kaffee, Tee, Brot, Butter, Marmelade, Käse und Wurst. Kannst du auch Schokolade und Cola mitbringen? Vielen Dank! Liebe Grüße Mama"
+    #input_string = "das Für Frühstück brauchen Tee, Kaffee, Brot, ButterMarmelade, Käse und Wurst. Kwe annst du auch Schokolade und Coka mitbringen? Viele Dank! Liebe Grüße Mama"
+    target_string = "Liebe Tanja, kannst du bitte einkaufen? Ich habe heute Nachmittag keine Zeit und ich möchte heute Abend kochen. Ich brauche noch Kartoffeln, Paprika, Tomaten und Zwiebeln. Für das Frühstück brauchen wir Kaffee, Tee, Brot, Butter, Marmelade, Käse und Wurst. Kannst du auch Schokolade und Cola mitbringen? Vielen Dank! Liebe Grüße Mama"
+    input_string = "Liebe Tonia, kannewst du bitte einufen? Ich habe heute Nacmhittag keine Zeit und ich möchte heute Abend kochen. I ch brauche noch Kartoffeln, Paprika, Tomaten und Zwiebeln. das Für Frühstück brauchen Tee, Kaffee, Brot, ButterMarmelade, Käse und Wurst. Kwe annst du auch Schokolade und Coka mitbringen? Viele Dank! Liebe Grüße Mama"
+
+    
+    a = Aligner(target_string, input_string)  # Aligner(TARGET, INPUT)
     a.d.set_debug(True)
     #a.debug(a.finalize())
     print "\n"
-    pre_result = Aligner.preProcessStrings(u"Elefant", u"Eleafnt", 15, True)
+    pre_result = Aligner.preProcessStrings(target_string, input_string, 100, True)
     result = Aligner.getPathFromPreprocessedString(pre_result)
-    print result
+    pprint.pprint(result)

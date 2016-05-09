@@ -82,7 +82,16 @@ In conclusion there are three components:
 * Frontend
 
 **Management Backend**   
-Blablabla....   
+The management backend contains the following modules:
+
+| Name               | Location                  | Description                                                                                                                                                               |
+|--------------------|---------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Template generator | inc/TemplateGenerator.php | The CMS of our project. Creates the page out of the given parameters. Uses one template html file and n component html files. Those are combined and given to the client. |
+| User system        | inc/UserSystem.php        | The user system, saving the user data in cookies and database and allowing the management of user data.                                                                   |
+| Analysis connector | analysis/index.php        | The socket for the AJAX call to the Python analysis.                                                                                                                      |
+| SQL connector      | inc/SQLConnector.php      | The connector wrapper class around mysqli allowing an easier integration of our database.                                                                                 |
+| Error handler      | inc/ErrorHandler.php      | Error Handler and logger for PHP and also JS Errors, which call the class via AJAX.                                                                                       |
+| Translation Engine | inc/TranslationEngine.php | This class is only built in structure and prepared to be able to translate strings to multiple languages for the template generator.                                      |  
 
 **Analysis Backend**  
 The analysis is used to find the best alignment between target and input text. it contains several sub-algorithms listed below. In principle it consists of the alignment itself,

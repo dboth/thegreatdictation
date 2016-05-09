@@ -17,7 +17,7 @@
 
 			<div class="row">
 				<div class="col-xs-12 text-center title">
-					Help us Evaluating this Service
+					Help us evaluate this Service
 				</div>
 			</div>
 

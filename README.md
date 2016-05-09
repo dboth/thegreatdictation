@@ -136,10 +136,6 @@ The most important JS Modules are listed in the following table:
 |                   |                                          |                                                                                                                                                                                                                                                                                                                                                   |
 
 
-Obstacles
----
-,bdjskvv  
-
 Result
 ----
 The data calculated by the backends analysis components is processed by the frontend to show the user informations and statistics about his errors and performance.  
@@ -150,7 +146,22 @@ A **Detailed character by character error info** shows the words with mistakes a
 The line chart under the section **Performance over time** shows how the errorweight of the levenshtein path develops over the text (word-wise).  
 All past dictations can be reviewed under *Your Dictations*, where the same informations will be showed again. Average values and statistics about all dictations can be looked up under *Statistics*.  
 
-
-Literature
+The Future  
 ----
-dbldsbhljblh...  
+As further step the platform will be tested by language learners. Based on the data collected in this process the algorithms can be improved and errors can be categorized better.  
+Data about typical errors or error patterns leads to an improved feedback for the user that helps him to learn faster and keeps him motivated. The system could even choose fitting texts for the user depending on individual problems.  
+As soon as enough data is collected and the algorithm is optimized, further steps can include the extension of the platform with more features like achievement systems and more learning methods than dictation  
+
+Literature  
+----
+Alkire, Scott (2002): "Dictation as a Language Learning Device (TESL_TEFL)", 
+in: The Internet TESL Journal, Vol. VIII (3); San Jose, California, USA   
+
+Kazazoglu, Semin (2012): "Dictation as a language learning tool", 
+in: Procedia - Social and Behavioral Sciences 70, Elsevier Ltd.  
+
+Vandergrift, Larry (1999): "Facilitating second language listening comprehension: acquiring successful strategies", 
+in: ELT Journal, Vol. 53/3; Oxford University Press, Oxford, UK  
+
+Chan, Alexander (2007): "An Analysis of Pairwise Sequence Alignment Algorithm Complexities: Needleman-Wunsch, Smith-Waterman, FASTA, BLAST and Gapped BLAST"; Stanford University, Stanford, California, USA  
+
